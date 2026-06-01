@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — Build Menu</title>
+<style>
+  :root{
+    --ink:#0f1419; --paper:#f4f1ea; --card:#fffdf8; --line:#d9d2c4;
+    --accent:#1c5d4c; --accent2:#b4541f; --muted:#6b6256;
+    --easy:#2f7d54; --med:#b4801f; --hard:#a8351f;
+    --code-bg:#13201c; --code-ink:#dfeee6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
+    background:var(--paper); color:var(--ink); line-height:1.55;
+    -webkit-font-smoothing:antialiased; padding:0 0 80px;
+  }
+  header{
+    background:var(--ink); color:var(--paper); padding:42px 24px 34px;
+    border-bottom:5px solid var(--accent2);
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header .wrap{padding:0 24px}
+  .eyebrow{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+  h1{font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.01em}
+  header p{margin-top:12px;max-width:680px;color:#cfc8ba;font-size:16px}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:12px}
+  .legend span{display:flex;align-items:center;gap:7px;color:#cfc8ba}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .d-easy{background:var(--easy)} .d-med{background:var(--med)} .d-hard{background:var(--hard)}
+
+  .intro{margin:34px auto 8px;max-width:1080px;padding:0 24px}
+  .intro p{color:var(--muted);font-size:15px;max-width:760px}
+
+  .grid{max-width:1080px;margin:26px auto 0;padding:0 24px;display:grid;gap:26px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.03);
+  }
+  .card-head{padding:22px 26px 18px;border-bottom:1px solid var(--line);position:relative}
+  .num{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:13px;color:var(--accent2);font-weight:600}
+  .card-head h2{font-size:23px;margin:4px 0 6px;letter-spacing:-.01em}
+  .tagline{color:var(--muted);font-size:15px}
+  .badge{
+    position:absolute;top:22px;right:26px;font-family:'SF Mono',ui-monospace,Menlo,monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:20px;
+    color:#fff;font-weight:600;
+  }
+  .b-easy{background:var(--easy)} .b-med{background:var(--med)} .b-hard{background:var(--hard)}
+
+  .meta{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:0;border-bottom:1px solid var(--line)}
+  .meta>div{padding:16px 26px}
+  .meta>div:not(:last-child){border-right:1px solid var(--line)}
+  .meta h3{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+  .meta p{font-size:14.5px;color:var(--ink)}
+  .why{padding:16px 26px;border-bottom:1px solid var(--line);background:#faf7f0}
+  .why h3{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:7px}
+  .why p{font-size:14.5px;color:var(--ink)}
+
+  /* sort bar */
+  .sortbar{max-width:1080px;margin:22px auto 0;padding:0 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .sortbar .lbl{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .sortbar button{
+    font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em;
+    background:var(--card);border:1px solid var(--line);color:var(--ink);
+    padding:8px 15px;border-radius:20px;cursor:pointer;transition:all .15s;
+  }
+  .sortbar button:hover{border-color:var(--accent)}
+  .sortbar button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sortbar button .arrow{opacity:.6;margin-left:5px}
+
+  /* impact dots in meta */
+  .impact-dots{letter-spacing:2px;font-size:13px;color:var(--accent)}
+  .impact-dots .off{color:var(--line)}
+
+  /* collapsible steps */
+  .steps{padding:0}
+  .steps-toggle{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:18px 26px;display:flex;align-items:center;justify-content:space-between;
+    font-family:inherit;color:var(--ink);
+  }
+  .steps-toggle:hover{background:#faf7f0}
+  .steps-toggle h3{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0}
+  .chev{font-size:13px;color:var(--accent2);transition:transform .2s;font-family:'SF Mono',ui-monospace,Menlo,monospace}
+  .steps.open .chev{transform:rotate(90deg)}
+  .steps-body{display:none;padding:0 26px 24px}
+  .steps.open .steps-body{display:block}
+  .steps-body h4{display:none}
+  ol{list-style:none;counter-reset:step}
+  ol li{
+    counter-increment:step;position:relative;margin-bottom:10px;padding-left:0;
+  }
+  .step-row{display:flex;align-items:flex-start;gap:12px}
+  .step-n{
+    flex:0 0 26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);
+    font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:5px;
+  }
+  .step-body{flex:1}
+  .step-note{font-size:13px;color:var(--muted);margin:3px 0 6px}
+  code.cmd{
+    display:block;background:var(--code-bg);color:var(--code-ink);
+    font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:1.5;
+    padding:11px 14px;border-radius:7px;white-space:pre-wrap;word-break:break-word;
+    border-left:3px solid var(--accent);position:relative;cursor:pointer;transition:background .15s;
+  }
+  code.cmd:hover{background:#1a2b25}
+  .copyhint{position:absolute;top:8px;right:10px;font-size:10px;color:#6e8a7e;letter-spacing:.06em;text-transform:uppercase}
+  code.cmd.copied{border-left-color:var(--accent2)}
+  code.cmd.copied .copyhint{color:var(--accent2)}
+
+  footer{max-width:1080px;margin:40px auto 0;padding:0 24px;color:var(--muted);font-size:13px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){
+    .meta{grid-template-columns:1fr}
+    .meta>div:not(:last-child){border-right:none;border-bottom:1px solid var(--line)}
+    h1{font-size:27px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Claude Code · Live Build Session</div>
+    <h1>The Build Menu</h1>
+    <p>Eight things we can build together right now. Pick whatever's most useful to your world — each card shows the effort, where it goes next, and the exact steps.</p>
+    <div class="legend">
+      <span><i class="dot d-easy"></i> Quick win — a few minutes</span>
+      <span><i class="dot d-med"></i> Build — a short working session</span>
+      <span><i class="dot d-hard"></i> Advanced — the full picture</span>
+    </div>
+  </div>
+</header>
+
+<div class="intro">
+  <p>Each set of steps is typed straight into Claude Code. Pick a card and we'll build it together — click any command to copy it. Replace bracketed <em>[placeholders]</em> with live details as we go.</p>
+</div>
+
+<div class="sortbar">
+  <span class="lbl">Sort by</span>
+  <button data-sort="default" class="active">Recommended order</button>
+  <button data-sort="time">Time <span class="arrow">↑</span></button>
+  <button data-sort="diff">Difficulty <span class="arrow">↑</span></button>
+  <button data-sort="impact">Impact <span class="arrow">↓</span></button>
+</div>
+
+<main class="grid" id="grid"></main>
+
+<footer class="wrap">
+  Claude Code · build live in this session.
+</footer>
+
+<script>
+const BUILDS = [
+  {
+    n:"01", title:"Install skill-creator", diff:"easy", mins:5, impact:3,
+    tagline:"Pull Anthropic's official skill-creator and scaffold from it.",
+    time:"~5 min",
+    why:"Shows the platform is genuinely extensible — Anthropic ships first-party tooling you build on top of.",
+    expand:"Becomes the on-ramp to every other build: once skill-creator is in, building skills #2, #6, #7 is one command each.",
+    steps:[
+      {t:"Open Claude Code in a clean project folder.", c:"cd ~/pumacap-demo && claude"},
+      {t:"See what skills are available.", c:"What skills do I currently have available?"},
+      {t:"Install the official skill-creator skill.", c:"Install the skill-creator skill from Anthropic so I can author my own skills."},
+      {t:"Confirm it loaded.", c:"Confirm skill-creator is installed and show me what it does."},
+      {t:"Explain the skill format in plain English.", c:"Using skill-creator, explain in plain English what a SKILL.md file is and what the frontmatter does."},
+      {t:"See what makes a skill trigger reliably.", c:"What makes a skill description trigger reliably? Give me the rules skill-creator follows."},
+      {t:"Scaffold a throwaway skill to see the shape.", c:"Use skill-creator to scaffold a simple skill called 'hello-pumacap' that greets the user. Show me the files it creates."},
+      {t:"Read the generated SKILL.md.", c:"Show me the SKILL.md it generated and walk me through each section."},
+      {t:"Trigger the new skill to prove it works.", c:"Run the hello-pumacap skill."},
+      {t:"Close the loop on what just happened.", c:"Summarize what we just did: what skill-creator is, and how I'd use it to build a real skill for my firm."}
+    ]
+  },
+  {
+    n:"02", title:"Build a Skill From Scratch", diff:"easy", mins:9, impact:5,
+    tagline:"Co-author a compliance-memo summarizer end to end.",
+    time:"~8–10 min",
+    why:"Encodes a repeatable SOP once — like a compliance-memo summarizer — that your team reruns forever.",
+    expand:"Swap the domain and you have an earnings-call summarizer, an RFP responder, a due-diligence checklist runner — same skeleton, new SOP.",
+    steps:[
+      {t:"State the job.", c:"I want to build a reusable skill that takes a compliance memo or regulatory notice and returns a structured summary: key obligation, who it affects, deadline, and required action."},
+      {t:"Have it propose the structure first.", c:"Before writing anything, propose the SKILL.md structure for this. What's the trigger, the inputs, and the output format?"},
+      {t:"Lock the output format.", c:"Make the output a 4-field table: Obligation | Who's affected | Deadline | Required action. Nothing else."},
+      {t:"Generate the skill.", c:"Now create the skill. Call it 'compliance-summarizer' and write the SKILL.md."},
+      {t:"Review what it wrote.", c:"Walk me through the SKILL.md you just created, section by section."},
+      {t:"Run it on a real sample notice.", c:"Here is a sample FINRA notice: [paste sample]. Run the compliance-summarizer skill on it."},
+      {t:"Pressure-test the output.", c:"Now run it on a messier memo with two deadlines and see if it separates them correctly: [paste second sample]."},
+      {t:"Add a guardrail.", c:"Add a rule to the skill: if no deadline is stated, output 'NO DEADLINE STATED — verify manually' instead of guessing."},
+      {t:"Re-run to confirm the guardrail.", c:"Run it again on a memo with no deadline to confirm the guardrail fires."},
+      {t:"Frame the takeaway.", c:"Summarize what we built and how my compliance staff would use this every week."}
+    ]
+  },
+  {
+    n:"03", title:"Set Up Memory Files", diff:"easy", mins:6, impact:3,
+    tagline:"Stand up persistent memory and prove it survives across sessions.",
+    time:"~6 min",
+    why:"Turns institutional knowledge that lives in people's heads into something that persists across sessions.",
+    expand:"Grows into a full memory tree — one file per client, per strategy, per regulation — that every future agent reads automatically.",
+    steps:[
+      {t:"Explain the goal.", c:"I want to set up persistent memory so Claude remembers facts about my firm across sessions. Explain how memory works here first."},
+      {t:"Create the memory index.", c:"Create a MEMORY.md file and add a fact: 'PumaCap manages $1B+ AUM across [strategies], reports to [regulator].'"},
+      {t:"Add a structured fact file.", c:"Create a separate memory file for our largest client with three facts about their mandate and constraints."},
+      {t:"Link it from the index.", c:"Add a one-line pointer to that client file in MEMORY.md."},
+      {t:"Add a preference.", c:"Save a preference: 'Always format compliance summaries as a 4-field table.'"},
+      {t:"Show the structure.", c:"Show me the full memory directory and what's in each file."},
+      {t:"Quit and restart the session.", c:"/exit"},
+      {t:"Reopen Claude Code.", c:"claude"},
+      {t:"Test recall.", c:"What do you remember about PumaCap and our largest client?"},
+      {t:"Frame it.", c:"Summarize how this replaces tribal knowledge that today only lives in my staff's heads."}
+    ]
+  },
+  {
+    n:"04", title:"Stand Up a Pipeline", diff:"med", mins:10, impact:4,
+    tagline:"Wire a multi-phase workflow with state hand-off between steps.",
+    time:"~10 min",
+    why:"Mirrors a real back-office workflow — intake → review → approve — as an automated relay with hand-offs between steps.",
+    expand:"Each phase can become its own specialized agent; add validation gates, a state file, and a human approval step for regulated workflows.",
+    steps:[
+      {t:"Describe the workflow.", c:"I want a 3-phase pipeline: Phase 1 extracts key terms from a document, Phase 2 checks them against a rule, Phase 3 writes an action memo. Explain how to structure this."},
+      {t:"Create a shared state file.", c:"Create a pipeline-state.json that each phase reads from and writes to. Show me the schema."},
+      {t:"Build Phase 1.", c:"Build Phase 1: extract key terms from this document and write them to pipeline-state.json. Run it on: [paste sample]."},
+      {t:"Verify the hand-off.", c:"Show me what Phase 1 wrote to pipeline-state.json."},
+      {t:"Build Phase 2.", c:"Build Phase 2: read Phase 1's output from state, check each term against this rule [paste rule], write pass/fail back to state."},
+      {t:"Verify again.", c:"Show me the state file now — I want to see Phase 1 and Phase 2 data side by side."},
+      {t:"Build Phase 3.", c:"Build Phase 3: read the full state and write a one-paragraph action memo."},
+      {t:"Run the whole chain.", c:"Run all three phases in sequence on a fresh document: [paste]."},
+      {t:"Add a failure rule.", c:"Add this rule: if any phase can't complete, write status:failed to state and stop — never continue with partial data."},
+      {t:"Frame it.", c:"Summarize how this maps to a real back-office workflow at my firm and where I'd add a human approval gate."}
+    ]
+  },
+  {
+    n:"05", title:"Assemble an Agent Team", diff:"med", mins:12, impact:5,
+    tagline:"Show parent → subagent orchestration on one task.",
+    time:"~12 min",
+    why:"One person configures a team of specialized agents that run in parallel and report back — headcount you configure, not hire.",
+    expand:"Scale to specialized roles (analyst, compliance, ops), give each its own memory, and let the parent route work — an org chart in software.",
+    steps:[
+      {t:"Frame the concept.", c:"Explain the difference between one agent doing everything and a parent agent dispatching specialized subagents."},
+      {t:"Define the team.", c:"I want a parent agent that dispatches two subagents: a 'researcher' that gathers facts and a 'writer' that drafts a brief from them."},
+      {t:"Set the rules of engagement.", c:"The subagents run independently and report back to the parent. The parent assembles the final output. Set this up."},
+      {t:"Give the team a task.", c:"Task the team: research [a company or topic] and produce a one-page brief. Dispatch both subagents."},
+      {t:"Watch the dispatch.", c:"Show me what each subagent did independently before the parent combined them."},
+      {t:"Add a third role.", c:"Add a 'reviewer' subagent that checks the writer's draft for unsupported claims before the parent finalizes."},
+      {t:"Re-run with the reviewer.", c:"Run the full team again with the reviewer in the loop on: [topic]."},
+      {t:"Show the isolation point.", c:"Confirm that each subagent only saw what it was given, not the others' context. Why does that matter?"},
+      {t:"Tie to scale.", c:"How would I turn these into permanent roles — an analyst, a compliance checker, an ops agent — each with their own memory?"},
+      {t:"Frame it.", c:"Summarize how one person now operates like a team, and where this replaces a task I currently staff with people."}
+    ]
+  },
+  {
+    n:"06", title:"Compliance / Reg Doc Interrogator", diff:"med", mins:10, impact:5,
+    tagline:"Ingest a FINRA rule or Form ADV and answer structured questions against it.",
+    time:"~10 min",
+    why:"Loads a FINRA rule or Form ADV and answers precise compliance questions, grounded only in the document — no guessing.",
+    expand:"Point it at a whole rulebook folder; add citation-to-source so every answer links the clause; turn it into a daily 'what changed' monitor.",
+    steps:[
+      {t:"State the goal.", c:"I want to load a regulatory document and ask it precise compliance questions, getting answers grounded only in the document — no guessing."},
+      {t:"Load the document.", c:"Here is a FINRA rule / Form ADV section: [paste]. Read it and tell me what it covers."},
+      {t:"Set the no-hallucination rule.", c:"Rule: only answer from this document. If the answer isn't in it, say 'NOT ADDRESSED IN THIS DOCUMENT.' Confirm you understand."},
+      {t:"Ask a real supervisory question.", c:"Under this rule, what are the supervisory obligations and who is responsible?"},
+      {t:"Push for specifics.", c:"What exact recordkeeping and timing requirements does it impose? Quote the relevant language."},
+      {t:"Test the guardrail.", c:"What does this rule say about cryptocurrency custody?"},
+      {t:"Ask for a risk read.", c:"If my firm did [scenario], would this rule flag it? Walk through the reasoning from the text."},
+      {t:"Make it reusable as a skill.", c:"Turn this into a reusable 'reg-interrogator' skill so I can drop in any rule and ask questions the same way."},
+      {t:"Run the skill on a second doc.", c:"Run reg-interrogator on this second document: [paste]."},
+      {t:"Frame it.", c:"Summarize how my compliance team would use this and how many hours it compresses."}
+    ]
+  },
+  {
+    n:"07", title:"Market / Portfolio Analyst Agent", diff:"med", mins:10, impact:4,
+    tagline:"Pull a ticker or portfolio slice; return a data-driven, no-opinion brief.",
+    time:"~10 min",
+    why:"Produces a data-driven, no-opinion brief on a ticker or portfolio — an analyst-in-a-box that augments your team.",
+    expand:"Wire it to live data sources, add risk metrics, schedule it to run pre-market daily and write a brief to your inbox.",
+    steps:[
+      {t:"Set the mandate.", c:"I want an analyst agent that takes a ticker or portfolio and returns a structured brief: data-driven only, no opinions, no recommendations to buy or sell."},
+      {t:"Define the output.", c:"Output format: Snapshot | Key metrics | Notable changes | Risks | What the data does NOT tell us. Lock that structure."},
+      {t:"Feed it the data.", c:"Here is a sample portfolio / ticker data: [paste]. Run the analyst brief."},
+      {t:"Enforce no-opinion.", c:"Add a hard rule: never say buy, sell, hold, or 'attractive.' Only describe what the numbers show. Re-run."},
+      {t:"Ask it to flag gaps.", c:"In the 'what the data does NOT tell us' section, list what you'd need to give a fuller picture."},
+      {t:"Stress a second input.", c:"Run it on a more volatile position: [paste]. Confirm the structure holds."},
+      {t:"Make it a skill.", c:"Save this as a reusable 'analyst-brief' skill."},
+      {t:"Add a comparison mode.", c:"Extend the skill to compare two positions side by side on the same metrics."},
+      {t:"Run the comparison.", c:"Compare [A] vs [B] using the analyst-brief skill."},
+      {t:"Frame it.", c:"Summarize how this augments — not replaces — my analysts, and what it frees them to do."}
+    ]
+  },
+  {
+    n:"08", title:"Decision Arena", diff:"hard", mins:12, impact:5,
+    tagline:"Run a multi-agent debate on a real decision, then synthesize.",
+    time:"~12 min",
+    why:"A panel of agents argues a decision from different angles, then names the real tradeoff — orchestration, not a single opinion.",
+    expand:"Add domain-expert panelists (a CFA agent, a compliance agent, a risk agent); log every debate; build an institutional decision record over time.",
+    steps:[
+      {t:"Explain the format.", c:"I want to run a decision through a panel of agents that argue different angles, then a host who synthesizes the real tradeoff — not a single opinion. Explain how this works."},
+      {t:"Name the panel.", c:"Set up three panelists: a devil's-advocate (finds the failure mode), a data analyst (base rates and numbers only), and a systems-thinker (what this decision is part of)."},
+      {t:"Add the host.", c:"Add a host whose only job is to name the actual tradeoff the panel disagreed on — never to pick a side."},
+      {t:"Pose a real decision.", c:"Run the panel on: 'Should PumaCap [a real, non-sensitive decision]?'"},
+      {t:"Let each panelist speak.", c:"Have each panelist make its strongest independent argument before anyone responds."},
+      {t:"Force the clash.", c:"Now have them respond to each other's strongest point — where do they actually disagree?"},
+      {t:"Host synthesis.", c:"Host: what is the real tradeoff being chosen here, in one sentence?"},
+      {t:"Add forward actions.", c:"Add a closer that gives three concrete next moves — without recommending which side to pick."},
+      {t:"Save it as a skill.", c:"Save this whole arena as a reusable 'decision-arena' skill."},
+      {t:"Frame it.", c:"Summarize why a debate beats a single AI opinion for high-stakes calls, and where my firm makes decisions like this."}
+    ]
+  },
+  {
+    n:"09", title:"Final Boss — The Self-Driving Test Loop", diff:"hard", mins:25, impact:5,
+    tagline:"An agent owns the write-test → run → read-failure → fix → re-run loop on its own, until green.",
+    why:"The most mechanical thing a dev shop does ten times a day — handed to an agent. You review the green diff; the agent does the loop. That's the difference between a tool and a teammate.",
+    expand:"The pattern is the loop, not the language — swap `make test` for `dotnet test` and it works in a .NET/C# shop unchanged. Point it at your own codebase and it learns it.",
+    steps:[
+      {t:"Open the pre-built demo folder.", c:"cd ~/'Desktop/AI Work/Engagements/PumaCap/C++' && ls"},
+      {t:"Show the spec: a test file is the answer, written as code.", c:"Open tests/order_parser_test.cpp and explain it to me — it says an order line 'BUY 10 AAPL 250C @ 3.45' should parse into six fields."},
+      {t:"Show the code is still a stub.", c:"Open src/order_parser.cpp and confirm it currently ignores its input and returns a failed parse."},
+      {t:"Run the suite — watch it go RED.", c:"make test"},
+      {t:"Point out even the failures are information.", c:"Explain why some checks 'passed' on a stub that does nothing — what does that tell us?"},
+      {t:"Fire the agent in Mode A — and let it loop.", c:"Make the tests in tests/order_parser_test.cpp pass. The order line format is SIDE QTY SYMBOL STRIKE[C|P] @ PRICE. Edit src/order_parser.cpp only. Run make test, read the failures, fix the code, and re-run on your own until green. Max 6 iterations, then stop and tell me."},
+      {t:"Watch it read failures and fix without being asked.", c:"Narrate what you just did each iteration: which failing line you read, what you changed in the regex, and why."},
+      {t:"Confirm GREEN is real, not invented.", c:"Run make test one more time and show me the final GREEN count — 23/23."},
+      {t:"Mode B — harden it with edge cases you'd forget.", c:"Now point yourself at parse_order and 'harden this': write edge-case tests for empty string, lowercase side, missing price, bad option type, and whole-dollar premium. Compile and run them."},
+      {t:"Frame it + the bridge.", c:"Summarize: I never ran the compiler or read a failure — you owned the loop. Now explain how this same loop runs unchanged in a .NET shop with dotnet test, and how we'd point it at the parser my team actually maintains."}
+    ],
+    fallback:"Pre-built + pre-tested in Engagements/PumaCap/C++/. If the live loop stalls: `make solution` = instant GREEN. If the agent/network is down: paste src/order_parser.solution.cpp into order_parser.cpp → make test → GREEN. RED→GREEN transcript captured in sample-run.md."
+  },
+  {
+    n:"10", title:"Capstone — A Back-Office in a Box", diff:"hard", mins:30, impact:5,
+    tagline:"Wire everything together: an agent team + a data pipeline + embedded skills + memory into one back-office system.",
+    why:"This is the whole architecture compounding — intake to compliance check to analyst brief to sign-off, with persistent memory, run by agents you configure once. One person operating like a department.",
+    expand:"Add domain agents (risk, KYC, reconciliation), schedule the pipeline to run nightly, and give each agent its own memory — a back-office org chart that runs itself and leaves an audit trail.",
+    steps:[
+      {t:"State the system, not the task.", c:"I want to wire several pieces into one system: a multi-phase pipeline, a team of specialized agents, reusable skills, and persistent memory — a back-office workflow that runs end to end. Sketch the architecture first."},
+      {t:"Stand up the memory spine.", c:"Create a MEMORY.md plus a memory file holding our firm's key facts and the compliance rules this system must enforce."},
+      {t:"Build the embedded skills.", c:"Create two reusable skills: 'compliance-check' (flags a trade against our rules) and 'analyst-brief' (data-only summary). These will be called by the pipeline."},
+      {t:"Define the pipeline phases.", c:"Create a pipeline-state.json and a 4-phase pipeline: Phase 1 intake a trade, Phase 2 run compliance-check, Phase 3 run analyst-brief, Phase 4 write a sign-off memo. Show me the schema."},
+      {t:"Assign the agent team to the phases.", c:"Assign specialized subagents to the phases: an intake agent, a compliance agent, an analyst agent, and a reviewer that produces the final sign-off. The parent orchestrates and writes state."},
+      {t:"Run one item end to end.", c:"Run the full system on a sample trade: [paste a sample order]. Show me each phase writing to state and handing off."},
+      {t:"Inspect the audit trail.", c:"Show me pipeline-state.json after the run — I want to see every phase's input, output, and which agent produced it."},
+      {t:"Add a failure gate.", c:"Add a rule: if the compliance agent flags the trade, halt the pipeline and surface for human approval — never auto-sign-off a flagged trade."},
+      {t:"Prove the gate fires.", c:"Run it again on a trade that violates a rule and confirm it halts at the compliance gate instead of finishing."},
+      {t:"Frame the ROI.", c:"Summarize what we built as a back-office system: which roles it covers, where the human stays in the loop, and how it scales without adding headcount."}
+    ]
+  }
+];
+
+const grid = document.getElementById('grid');
+const diffLabel = {easy:'Quick win', med:'Build', hard:'Advanced'};
+const diffRank = {easy:0, med:1, hard:2};
+
+function impactDots(n){
+  let s='';
+  for(let i=1;i<=5;i++){ s += `<span class="${i<=n?'':'off'}">●</span>`; }
+  return `<span class="impact-dots" title="${n}/5">${s}</span>`;
+}
+const impactWord = {5:'Highest', 4:'High', 3:'Medium', 2:'Moderate', 1:'Low'};
+
+function render(list){
+  grid.innerHTML='';
+  list.forEach(b=>{
+    const card = document.createElement('section');
+    card.className='card';
+    card.innerHTML = `
+      <div class="card-head">
+        <div class="num">BUILD ${b.n}</div>
+        <span class="badge b-${b.diff}">${diffLabel[b.diff]}</span>
+        <h2>${b.title}</h2>
+        <div class="tagline">${b.tagline}</div>
+      </div>
+      <div class="meta">
+        <div><h3>Effort / Time</h3><p>${diffLabel[b.diff]} · ${b.time}</p></div>
+        <div><h3>Impact</h3><p>${impactDots(b.impact)} &nbsp;${impactWord[b.impact]}</p></div>
+        <div><h3>How it expands</h3><p>${b.expand}</p></div>
+      </div>
+      <div class="why"><h3>Why this matters</h3><p>${b.why}</p></div>
+      <div class="steps">
+        <button class="steps-toggle" type="button" aria-expanded="false">
+          <h3>10 copy-paste steps</h3>
+          <span class="chev">▶</span>
+        </button>
+        <div class="steps-body">
+          <ol>${b.steps.map((s,i)=>`
+            <li><div class="step-row">
+              <div class="step-n">${i+1}</div>
+              <div class="step-body">
+                <div class="step-note">${s.t}</div>
+                <code class="cmd" tabindex="0">${escapeHtml(s.c)}<span class="copyhint">copy</span></code>
+              </div>
+            </div></li>`).join('')}
+          </ol>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+const sorters = {
+  default: arr => arr.slice().sort((a,b)=> a.n.localeCompare(b.n)),
+  time:    arr => arr.slice().sort((a,b)=> a.mins - b.mins || a.n.localeCompare(b.n)),
+  diff:    arr => arr.slice().sort((a,b)=> diffRank[a.diff] - diffRank[b.diff] || a.mins - b.mins),
+  impact:  arr => arr.slice().sort((a,b)=> b.impact - a.impact || a.mins - b.mins)
+};
+
+render(sorters.default(BUILDS));
+
+document.querySelectorAll('.sortbar button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.sortbar button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    render(sorters[btn.dataset.sort](BUILDS));
+  });
+});
+
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// toggle step dropdowns + copy commands (event delegation, survives re-render)
+document.addEventListener('click', e=>{
+  const toggle = e.target.closest('.steps-toggle');
+  if(toggle){
+    const steps = toggle.closest('.steps');
+    const open = steps.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    return;
+  }
+  const code = e.target.closest('code.cmd');
+  if(!code) return;
+  const text = code.childNodes[0].textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    code.classList.add('copied');
+    const hint = code.querySelector('.copyhint');
+    const prev = hint.textContent; hint.textContent='copied ✓';
+    setTimeout(()=>{code.classList.remove('copied');hint.textContent=prev;},1400);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08090C">
+<title>Claude Code · A Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090C; --bg-2:#0C0E13; --panel:#10131A; --panel-2:#161A23;
+    --ink:#EEF1F6; --ink-soft:#A7AFBE; --ink-faint:#5C6473;
+    --neon:#7C5CFF; --neon-2:#A78BFA; --cyan:#36E0C8;
+    --hair:rgba(238,241,246,.10); --hair-2:rgba(238,241,246,.20);
+    --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;font-size:16.5px;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+  .beam{position:fixed;border-radius:50%;filter:blur(8px);pointer-events:none;z-index:0}
+  .beam1{width:55vw;height:55vw;background:radial-gradient(circle,var(--neon) 0%,transparent 66%);top:-20vw;right:-14vw;opacity:.5}
+  .beam2{width:46vw;height:46vw;background:radial-gradient(circle,var(--cyan) 0%,transparent 66%);bottom:-18vw;left:-16vw;opacity:.26}
+  .grid-dots{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(238,241,246,.08) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(ellipse 80% 70% at 50% 35%,#000 30%,transparent 100%)}
+
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  header{padding:84px 0 38px}
+  .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:11px;margin-bottom:22px}
+  .kick::before{content:"";width:26px;height:1px;background:var(--neon)}
+  h1{font-family:var(--serif);font-weight:600;letter-spacing:-.03em;line-height:.96;font-size:clamp(2.6rem,7vw,5rem)}
+  h1 .accent{background:linear-gradient(100deg,var(--neon-2),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{margin-top:20px;max-width:600px;color:var(--ink-soft);font-size:18px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;padding:14px 0 30px}
+  a.card{
+    display:block;text-decoration:none;color:inherit;position:relative;
+    background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
+    border:1px solid var(--hair);border-radius:18px;padding:26px 26px 24px;
+    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;overflow:hidden;
+  }
+  a.card:hover{transform:translateY(-4px);border-color:var(--hair-2);box-shadow:0 26px 60px -28px var(--neon)}
+  a.card::after{content:"→";position:absolute;top:24px;right:24px;font-family:var(--mono);color:var(--ink-faint);transition:color .22s,transform .22s}
+  a.card:hover::after{color:var(--neon-2);transform:translate(3px,-2px)}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--neon-2);margin-bottom:14px}
+  a.card h2{font-family:var(--serif);font-weight:600;font-size:25px;letter-spacing:-.02em;margin-bottom:8px}
+  a.card p{color:var(--ink-soft);font-size:14.5px;line-height:1.5}
+  .ord{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:16px}
+
+  /* the 3-part series gets a subtle cyan edge; tools get neon */
+  a.series-card{border-left:2px solid color-mix(in srgb,var(--cyan) 60%,transparent)}
+  a.tool-card{border-left:2px solid color-mix(in srgb,var(--neon) 60%,transparent)}
+
+  footer{padding:30px 0 70px;color:var(--ink-faint);font-family:var(--mono);font-size:12px;letter-spacing:.04em;border-top:1px solid var(--hair);margin-top:10px}
+  footer .priv{color:var(--ink-soft)}
+  @media(max-width:560px){header{padding:60px 0 28px} h1{font-size:2.4rem}}
+</style>
+</head>
+<body>
+<div class="beam beam1"></div>
+<div class="beam beam2"></div>
+<div class="grid-dots"></div>
+
+<div class="wrap">
+  <header>
+    <div class="kick">Claude Code · Field Guide</div>
+    <h1>What is <span class="accent">Claude Code</span>,<br>and how do you build with it?</h1>
+    <p class="lede">A short guided set — why it matters, how to get started, what an agentic workforce looks like, plus a one-page reference and a live build menu.</p>
+  </header>
+
+  <main class="cards">
+    <a class="card series-card" href="index.html">
+      <div class="ord">PART 01 · THE SERIES</div>
+      <div class="tag">Why</div>
+      <h2>Why Claude Code</h2>
+      <p>The case for configuring a capability once and reusing it — closer to hiring than to buying software.</p>
+    </a>
+
+    <a class="card series-card" href="how.html">
+      <div class="ord">PART 02 · THE SERIES</div>
+      <div class="tag">How</div>
+      <h2>How to Get Started</h2>
+      <p>Install it, run your first command, and learn the moves that take you past the basics.</p>
+    </a>
+
+    <a class="card series-card" href="business.html">
+      <div class="ord">PART 03 · THE SERIES</div>
+      <div class="tag">Technical</div>
+      <h2>Build an Agentic Workforce</h2>
+      <p>Skills, memory, pipelines, agent teams — the architecture behind a workforce you configure.</p>
+    </a>
+
+    <a class="card tool-card" href="cheatsheet.html">
+      <div class="ord">REFERENCE</div>
+      <div class="tag">One-pager</div>
+      <h2>The Cheat Sheet</h2>
+      <p>A dense, scannable reference for the commands and patterns worth keeping open.</p>
+    </a>
+
+    <a class="card tool-card" href="build-menu.html">
+      <div class="ord">LIVE SESSION</div>
+      <div class="tag">Build menu</div>
+      <h2>The Build Menu</h2>
+      <p>Ten things to build together right now — each with effort, impact, and copy-paste steps.</p>
+    </a>
+  </main>
+
+  <footer>
+    Prepared for our session · <span class="priv">private link — please don't share publicly</span>
+  </footer>
+</div>
+</body>
+</html>

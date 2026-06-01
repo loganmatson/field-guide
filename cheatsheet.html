@@ -1,0 +1,1886 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Claude Code">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a1814">
+<title>Claude Code · A Reference for PumaCap Interns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f2ead8;
+  --cream-dk: #e8dfc9;
+  --cream-darker: #d9cdb0;
+  --ink: #1a1814;
+  --ink-soft: #3a332c;
+  --ink-fade: #6b6155;
+  --ox: #6b1f1f;
+  --ox-soft: #8a2828;
+  --ox-pale: #f0d9d9;
+  --hair: rgba(26, 24, 20, 0.10);
+  --hair-strong: rgba(26, 24, 20, 0.22);
+  --bg: var(--cream);
+  --bg-card: #fbf7eb;
+  --bg-code: var(--cream-dk);
+  --fg: var(--ink);
+  --fg-soft: var(--ink-soft);
+  --fg-fade: var(--ink-fade);
+  --serif: 'IBM Plex Serif', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* VS Code dark colors (used in the sidebar replica regardless of page mode) */
+  --vsc-bg: #252526;
+  --vsc-fg: #cccccc;
+  --vsc-fade: #858585;
+  --vsc-hover: #2a2d2e;
+  --vsc-active: #094771;
+  --vsc-folder: #cccccc;
+  --vsc-md: #519aba;
+  --vsc-json: #cbcb41;
+  --vsc-py: #4584b6;
+  --vsc-muted: #6a6a6a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18130d;
+    --bg-card: #221c14;
+    --bg-code: #2a2218;
+    --fg: #f2ead8;
+    --fg-soft: #cfc4ad;
+    --fg-fade: #968a72;
+    --ox: #c45050;
+    --ox-soft: #d96565;
+    --ox-pale: #3a1c1c;
+    --hair: rgba(242,234,216,0.12);
+    --hair-strong: rgba(242,234,216,0.26);
+    --cream-dk: #2a2218;
+  }
+}
+* { box-sizing: border-box; font-style: normal !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 15.5px;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+em, i, .em { font-style: normal; font-weight: 500; color: var(--ox); }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--hair-strong);
+  backdrop-filter: blur(8px);
+}
+.topbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 24px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 18px;
+}
+.brand {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.brand .colon { color: var(--ox); }
+.brand-sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--fg-fade);
+  margin-top: 2px;
+  font-weight: 400;
+}
+.meta {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--fg-fade);
+  text-transform: uppercase;
+  text-align: right;
+}
+.meta .vol { color: var(--ox); font-weight: 600; }
+nav.tabs {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px 24px 0;
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs a {
+  flex-shrink: 0;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  padding: 8px 12px 12px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+nav.tabs a .num { color: var(--ox); margin-right: 5px; }
+nav.tabs a:hover { color: var(--fg); }
+nav.tabs a.active { color: var(--fg); border-bottom-color: var(--ox); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 22px 24px 8px;
+}
+section.panel { scroll-margin-top: 100px; padding-top: 14px; }
+section.panel + section.panel { border-top: 1px solid var(--hair); margin-top: 28px; padding-top: 28px; }
+
+h2.section-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.012em;
+  color: var(--fg);
+  margin: 0 0 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+h2.section-title .ord {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ox);
+}
+.section-kicker {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin: 0 0 10px;
+}
+.section-lede {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--fg-soft);
+  margin: 0 0 18px;
+  max-width: 780px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+.section-lede b { font-weight: 600; color: var(--ox); }
+
+/* ============================================================
+   CARDS — generic
+   ============================================================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.card-kicker {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ox);
+  margin-bottom: 4px;
+}
+.card-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 14.5px;
+  margin: 0 0 4px;
+  letter-spacing: -0.005em;
+}
+
+/* Top callout — "see the takeaways first" */
+.top-callout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--ox-pale);
+  border: 1px solid var(--ox);
+  border-radius: 3px;
+  padding: 12px 18px;
+  margin: 0 0 18px;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.top-callout:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(107,31,31,.14); }
+.top-callout-mark {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ox);
+  line-height: 1;
+}
+.top-callout-text {
+  font-family: var(--serif);
+  font-size: 15.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.top-callout-text b { color: var(--ox); font-weight: 700; }
+
+/* ============================================================
+   SETUP SECTION — install + folders + surfaces + thesis
+   ============================================================ */
+.setup-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+  /* thesis on the left (1.3fr), install on the right (1fr) */
+}
+@media (max-width: 920px) { .setup-grid { grid-template-columns: 1fr; } }
+
+.thesis {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-left: 3px solid var(--ox);
+  padding: 14px 16px;
+  border-radius: 3px;
+}
+.thesis .stamp {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ox);
+  margin-bottom: 6px;
+}
+.thesis p {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--fg);
+  margin: 0 0 6px;
+  letter-spacing: -0.005em;
+}
+.thesis p .em { color: var(--ox); font-weight: 600; }
+.thesis .body {
+  font-family: var(--serif);
+  font-size: 15.5px;
+  color: var(--fg-soft);
+  margin: 8px 0 0;
+  line-height: 1.45;
+}
+.thesis .sign {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--fg-fade);
+  margin-top: 8px;
+}
+
+.steps { display: flex; flex-direction: column; gap: 8px; }
+.step {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.step .n {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ox);
+  line-height: 1;
+  padding-top: 1px;
+  min-width: 18px;
+}
+.step .label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin-bottom: 4px;
+}
+.step .body {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--fg-soft);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* surfaces (terminal vs VS Code) */
+.surfaces {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 760px) { .surfaces { grid-template-columns: 1fr; } }
+.surface {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.surface h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 0 2px;
+}
+.surface .tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  margin-bottom: 6px;
+}
+.surface p {
+  font-family: var(--serif);
+  font-size: 15.5px;
+  color: var(--fg-soft);
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+.surface ul { margin: 4px 0 0; padding-left: 16px; }
+.surface li { font-size: 15px; color: var(--fg-soft); line-height: 1.4; padding: 1px 0; }
+.surface li b { color: var(--ox); font-weight: 600; }
+
+/* folder structure */
+.folders {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.folders h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 0 4px;
+}
+.folders .tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  margin-bottom: 8px;
+}
+.folder-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  align-items: baseline;
+}
+.folder-grid .path {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.folder-grid .what {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-soft);
+  line-height: 1.35;
+}
+.folder-grid .what b { color: var(--ox); font-weight: 600; }
+
+/* ============================================================
+   CODE BLOCKS — with click-to-copy
+   ============================================================ */
+.code {
+  position: relative;
+  background: var(--bg-code);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.45;
+  padding: 6px 42px 6px 10px;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--fg);
+}
+.code.inline { padding: 5px 42px 5px 9px; font-size: 13.5px; }
+.code .c { color: var(--fg-fade); }
+.code .k { color: var(--ox); font-weight: 500; }
+.code .s { color: var(--ink-soft); }
+@media (prefers-color-scheme: dark) {
+  .code .s { color: #d9c19a; }
+  .code .k { color: var(--ox-soft); }
+}
+.code .copy {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: transparent;
+  border: 1px solid var(--hair-strong);
+  color: var(--fg-fade);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.code .copy:hover { color: var(--ox); border-color: var(--ox); }
+.code .copy.done { color: var(--ox); border-color: var(--ox); background: var(--ox-pale); }
+
+/* ============================================================
+   PRIMITIVES (the 5 Layers)
+   ============================================================ */
+.primitives {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+.prim {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+.prim:hover { transform: translateY(-1px); border-color: var(--hair-strong); }
+.prim .ord {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ox);
+  margin-bottom: 1px;
+}
+.prim h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 15.5px;
+  margin: 0 0 4px;
+  letter-spacing: -0.005em;
+}
+.prim .filepath {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--fg-fade);
+  margin-bottom: 6px;
+  word-break: break-all;
+  line-height: 1.35;
+}
+.prim .def {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--fg-soft);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.prim .when {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg);
+  padding-top: 6px;
+  border-top: 1px dashed var(--hair);
+  line-height: 1.4;
+}
+.prim .when b {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Expandable detail inside a primitive card */
+.prim details {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--hair);
+}
+.prim details summary {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  cursor: pointer;
+  padding: 2px 0;
+  list-style: none;
+  user-select: none;
+}
+.prim details summary::-webkit-details-marker { display: none; }
+.prim details summary:hover { color: var(--ox-soft); }
+.prim details[open] summary { margin-bottom: 6px; }
+.prim details .expand-body {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-soft);
+  line-height: 1.45;
+  padding-top: 4px;
+}
+
+.primitives-flow {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--fg-fade);
+  text-align: center;
+  margin: 10px 0 4px;
+  padding: 8px 0;
+  border-top: 1px dashed var(--hair);
+  border-bottom: 1px dashed var(--hair);
+}
+.primitives-flow .arrow { color: var(--ox); padding: 0 6px; font-weight: 700; }
+
+/* ============================================================
+   RECIPES — with WHY / GOOD / BAD inline
+   ============================================================ */
+.recipes { display: flex; flex-direction: column; gap: 12px; }
+.recipe {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.recipe-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hair);
+}
+.recipe-num {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--ox);
+  line-height: 1;
+}
+.recipe-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 15.5px;
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.recipe-layer {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  background: var(--ox-pale);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.recipe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 920px) { .recipe-grid { grid-template-columns: 1fr; } }
+.recipe-teach { display: flex; flex-direction: column; gap: 8px; }
+.recipe-row {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.recipe-row .lbl {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  padding-top: 2px;
+}
+.recipe-row.bad .lbl { color: var(--fg-fade); }
+.recipe-row .txt {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--fg);
+  line-height: 1.45;
+}
+.recipe-row .txt b { color: var(--ox); font-weight: 600; }
+.recipe-row.bad .txt { color: var(--fg-soft); }
+.recipe-do { display: flex; flex-direction: column; gap: 6px; }
+.recipe-do .file-label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin-bottom: 2px;
+}
+.recipe-do .file-label .path { color: var(--fg); text-transform: none; font-family: var(--mono); font-size: 13px; letter-spacing: 0; font-weight: 500; }
+.recipe-do .then {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-soft);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.recipe-do .then b {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  margin-right: 6px;
+}
+.recipe-foot {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--hair);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tried {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg-fade);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  border: 1px solid var(--hair-strong);
+  padding: 4px 10px;
+  border-radius: 2px;
+  transition: all .15s;
+}
+.tried:hover { color: var(--ox); border-color: var(--ox); }
+.tried.done { color: var(--ox); border-color: var(--ox); background: var(--ox-pale); }
+.tried .box {
+  width: 10px; height: 10px; border: 1.5px solid currentColor; border-radius: 1px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px; line-height: 1;
+}
+.tried.done .box::after { content: "×"; font-family: var(--serif); font-size: 13.5px; font-weight: 700; }
+.recipe-uses {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--fg-fade);
+}
+.recipe-uses b { font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ox); margin-right: 5px; }
+
+/* ============================================================
+   REFERENCE
+   ============================================================ */
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 880px) { .ref-grid { grid-template-columns: 1fr; } }
+.ref-block {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.ref-block h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 0 2px;
+}
+.ref-block .kicker {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  margin-bottom: 8px;
+}
+table.commands { width: 100%; border-collapse: collapse; font-size: 15px; }
+table.commands th, table.commands td {
+  text-align: left;
+  padding: 5px 4px;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: top;
+}
+table.commands th {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+}
+table.commands td.cmd { font-family: var(--mono); font-size: 13.5px; color: var(--fg); white-space: nowrap; padding-right: 10px; }
+table.commands td.cmd code { background: var(--bg-code); padding: 1px 5px; border-radius: 2px; font-size: 13px; }
+table.commands td.desc { font-family: var(--sans); color: var(--fg-soft); font-size: 14px; }
+table.commands tr:last-child td { border-bottom: none; }
+
+.shortcuts { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 15px; }
+.shortcuts kbd {
+  font-family: var(--mono);
+  font-size: 13px;
+  background: var(--bg-code);
+  border: 1px solid var(--hair-strong);
+  padding: 2px 6px;
+  border-radius: 2px;
+  color: var(--fg);
+  white-space: nowrap;
+  align-self: center;
+  font-weight: 500;
+}
+.shortcuts .desc { font-family: var(--sans); color: var(--fg-soft); align-self: center; font-size: 14px; }
+
+.locations { font-family: var(--mono); font-size: 13.5px; line-height: 1.7; color: var(--fg-soft); }
+.locations .path { color: var(--fg); }
+.locations .lbl { color: var(--ox); font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-top: 4px; }
+
+/* ============================================================
+   MEMORY SECTION
+   ============================================================ */
+.mem-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+@media (max-width: 980px) { .mem-grid { grid-template-columns: 1fr; } }
+
+.scopes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+@media (max-width: 760px) { .scopes { grid-template-columns: 1fr; } }
+.scope {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+  border-top: 3px solid var(--ox);
+}
+.scope .scope-name {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--fg);
+  font-weight: 600;
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+.scope .scope-label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ox);
+  margin-bottom: 6px;
+}
+.scope .scope-body {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-soft);
+  line-height: 1.4;
+}
+
+.import-card {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.import-card h4 { font-family: var(--serif); font-weight: 700; font-size: 17px; margin: 0 0 6px; }
+.import-card p { font-family: var(--sans); font-size: 14px; color: var(--fg-soft); margin: 0 0 6px; line-height: 1.4; }
+
+.safety {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-left: 3px solid var(--ox);
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+.safety h4 { font-family: var(--serif); font-weight: 700; font-size: 17px; margin: 0 0 2px; }
+.safety .kicker { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ox); margin-bottom: 8px; }
+.safety .rule {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  padding: 5px 0;
+  border-top: 1px dashed var(--hair);
+  align-items: start;
+}
+.safety .rule:first-of-type { border-top: none; padding-top: 0; }
+.safety .rule .mark {
+  font-family: var(--mono);
+  font-size: 15.5px;
+  color: var(--ox);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.safety .rule .body { font-family: var(--sans); font-size: 14px; color: var(--fg); line-height: 1.4; }
+.safety .rule .body b { color: var(--ox); font-weight: 600; }
+.safety .rule .body .reason { color: var(--fg-fade); display: block; margin-top: 2px; font-size: 13.5px; }
+
+/* VS Code sidebar replica */
+.vscode {
+  background: var(--vsc-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: var(--vsc-fg);
+  user-select: none;
+}
+.vscode .titlebar {
+  background: #3c3c3c;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #cccccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.vscode .titlebar .dots { display: flex; gap: 6px; }
+.vscode .titlebar .dot { width: 11px; height: 11px; border-radius: 50%; background: #ff5f56; }
+.vscode .titlebar .dot:nth-child(2) { background: #ffbd2e; }
+.vscode .titlebar .dot:nth-child(3) { background: #27c93f; }
+.vscode .titlebar .name { color: #969696; font-size: 11px; font-weight: 500; }
+.vscode .explorer-header {
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--vsc-fade);
+  text-transform: uppercase;
+  border-bottom: 1px solid #1e1e1e;
+}
+.vscode .tree { padding: 4px 0 8px; }
+.vscode .row {
+  display: flex;
+  align-items: center;
+  padding: 1px 8px 1px 4px;
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: default;
+}
+.vscode .row:hover { background: var(--vsc-hover); }
+.vscode .row.active { background: var(--vsc-active); }
+.vscode .row.muted { color: var(--vsc-muted); }
+.vscode .chev {
+  width: 14px;
+  text-align: center;
+  color: var(--vsc-fade);
+  font-size: 10px;
+}
+.vscode .icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  vertical-align: -2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.vscode .icon.folder { background: linear-gradient(135deg, #c5a76d 0%, #a08651 100%); }
+.vscode .icon.folder-open { background: linear-gradient(135deg, #d4b878 0%, #a08651 100%); }
+.vscode .icon.md { background: var(--vsc-md); }
+.vscode .icon.json { background: var(--vsc-json); }
+.vscode .icon.py { background: var(--vsc-py); }
+.vscode .icon.txt { background: #9c9c9c; }
+.vscode .row .name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vscode .row .tag {
+  font-size: 10px;
+  color: var(--vsc-fade);
+  margin-left: 8px;
+}
+.vscode-caption {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--fg-fade);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+.vscode-caption b { color: var(--ox); font-weight: 600; }
+
+/* ============================================================
+   TAKEAWAYS — 10 cards
+   ============================================================ */
+.takeaways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 900px) { .takeaways { grid-template-columns: 1fr; } }
+.tk {
+  background: var(--bg-card);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 14px 16px;
+}
+.tk-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hair);
+  margin-bottom: 10px;
+}
+.tk-num {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--ox);
+  line-height: 1;
+}
+.tk-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.005em;
+  margin: 0;
+  line-height: 1.3;
+}
+.tk-row {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 14px;
+  padding: 9px 0;
+  align-items: start;
+}
+.tk-row + .tk-row { border-top: 1px dashed var(--hair); }
+.tk-row .lbl {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ox);
+  padding-top: 3px;
+}
+.tk-row .txt {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg);
+  line-height: 1.5;
+}
+.tk-row .txt b { color: var(--ox); font-weight: 600; }
+.tk-row.remember .txt {
+  color: var(--fg-soft);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.tk-row.remember .lbl { color: var(--fg-fade); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer.foot {
+  max-width: 1280px;
+  margin: 40px auto 20px;
+  padding: 14px 24px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-fade);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+footer.foot .mid {
+  font-family: var(--serif);
+  font-size: 15px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--fg-soft);
+  font-weight: 400;
+}
+
+/* tiny screens */
+@media (max-width: 640px) {
+  body { font-size: 15.5px; }
+  main { padding: 16px 14px; }
+  .topbar-inner { padding: 10px 14px 0; }
+  nav.tabs { padding: 8px 14px 0; }
+  h2.section-title { font-size: 22px; }
+  .thesis p { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div>
+      <div class="brand">Claude Code<span class="colon">:</span></div>
+      <div class="brand-sub">a working reference for the PumaCap summer intern class</div>
+    </div>
+    <div class="meta">Summer 2026 &nbsp;/&nbsp; <span class="vol">No. 01</span></div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <a href="#setup"     data-tab data-key="1"><span class="num">01</span>Setup</a>
+    <a href="#layers"    data-tab data-key="2"><span class="num">02</span>The 5 layers</a>
+    <a href="#recipes"   data-tab data-key="3"><span class="num">03</span>Recipes</a>
+    <a href="#ref"       data-tab data-key="4"><span class="num">04</span>Reference</a>
+    <a href="#memory"    data-tab data-key="5"><span class="num">05</span>Memory &amp; safety</a>
+    <a href="#takeaways" data-tab data-key="6"><span class="num">06</span>Takeaways</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============================================================
+     SECTION 01 — SETUP
+     ============================================================ -->
+<section class="panel" id="setup">
+  <p class="section-kicker">Section 01 &nbsp;·&nbsp; install · folders · surfaces · thesis</p>
+  <h2 class="section-title"><span class="ord">01</span>Setup</h2>
+  <p class="section-lede">You'll have Claude Code installed and running in your own terminal in under three minutes. Then we'll show you where things live, where to write them, and <b>why</b> a tool that reads your folder is worth keeping there.</p>
+
+  <a href="#takeaways" class="top-callout">
+    <span class="top-callout-mark">→</span>
+    <span class="top-callout-text"><b>Before you go anywhere,</b> jump to Section 06 — <b>Ten Takeaways</b> — at least once. It's the shortest path to getting real use out of this card.</span>
+  </a>
+
+  <div class="setup-grid">
+
+    <div class="thesis">
+      <div class="stamp">The thesis</div>
+      <p>Claude Code is the practice of taking the parts of your week that already have a shape — the routines, the checks, the briefs you write the same way every Monday — and turning them into <span class="em">named, repeatable instructions</span> a tool can run for you.</p>
+      <p class="body">That matters because the cost of doing the same thing by hand isn't the fifteen minutes a day — it's the cognitive drag of remembering to do it, the mistakes that creep in when you're tired, and the senior teammates who never get back the time you'd reclaim if it didn't fall on you.</p>
+      <p class="body">The work compounds: every skill you name is a permanent asset on your laptop, every skill you connect to a real system through MCP is a <span class="em">force multiplier</span>, and the version of you six months from now is built from the small workflows you bothered to write down today.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="n">i</div>
+        <div>
+          <div class="label">Install (Mac · Linux · WSL)</div>
+          <div class="code inline" data-copy>curl -fsSL https://claude.ai/install.sh | bash<button class="copy">copy</button></div>
+          <div class="body">One line. No node, no docker, no setup wizard. Windows users: <code style="font-family:var(--mono); font-size:11px;">winget install Anthropic.ClaudeCode</code>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">ii</div>
+        <div>
+          <div class="label">Launch inside a project folder</div>
+          <div class="code inline" data-copy>cd ~/your-project &amp;&amp; claude<button class="copy">copy</button></div>
+          <div class="body">Claude reads the folder you launch from. It already knows the codebase you're standing in — don't paste files, just point.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">iii</div>
+        <div>
+          <div class="label">Your first prompt — read, don't write</div>
+          <div class="code inline" data-copy>explain what this project does and how the pieces fit together<button class="copy">copy</button></div>
+          <div class="body">Resist the urge to ask it to code. Ask it to <span class="em">read</span>. The quality of every later prompt depends on Claude already having the lay of the land.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Surfaces: Terminal vs VS Code -->
+  <div class="surfaces">
+    <div class="surface">
+      <div class="tag">Surface A</div>
+      <h4>The terminal</h4>
+      <p>The original way to use Claude Code. Open Terminal (Mac) or Windows Terminal, navigate to your project, type <code style="font-family:var(--mono); font-size:11px;">claude</code>. Conversation lives in the terminal window — type prompts, see responses, hit Ctrl+C to interrupt.</p>
+      <ul>
+        <li><b>Best for</b> — quick tasks, scripting, running on a remote machine over SSH</li>
+        <li><b>Watch out for</b> — long conversations scroll off the screen; use <code style="font-family:var(--mono);font-size:11px;">/resume</code> to come back to a session</li>
+      </ul>
+    </div>
+    <div class="surface">
+      <div class="tag">Surface B</div>
+      <h4>The VS Code extension</h4>
+      <p>Install the Claude Code extension from the VS Code marketplace. Opens as a panel alongside your editor. Same Claude, same skills, same files — you just get a UI with diff previews, file-tree integration, and Cmd+Shift+P access.</p>
+      <ul>
+        <li><b>Best for</b> — building skills, editing files Claude proposes, reviewing diffs before accepting</li>
+        <li><b>Watch out for</b> — keyboard shortcuts differ slightly from the terminal; both call the same engine underneath</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Folder structure -->
+  <div class="folders">
+    <div class="tag">Where things live</div>
+    <h4>Project layout you'll grow into</h4>
+    <div class="folder-grid">
+      <div class="path">~/.claude/skills/&lt;name&gt;/SKILL.md</div>
+      <div class="what"><b>Personal skills.</b> Available in every project you open. Put cross-project workflows here.</div>
+
+      <div class="path">./.claude/skills/&lt;name&gt;/SKILL.md</div>
+      <div class="what"><b>Project skills.</b> Live inside the repo, shared with teammates via git. Use for project-specific workflows.</div>
+
+      <div class="path">~/.claude/CLAUDE.md</div>
+      <div class="what"><b>Personal standing instructions.</b> Conventions Claude applies to every project — your name, your style, your defaults.</div>
+
+      <div class="path">./CLAUDE.md</div>
+      <div class="what"><b>Project house rules.</b> Checked into git. Team-shared coding standards, libraries to use, what to never do.</div>
+
+      <div class="path">./CLAUDE.local.md</div>
+      <div class="what"><b>Personal overrides for this project.</b> Gitignored. Where you put your own preferences that shouldn't ship with the repo.</div>
+
+      <div class="path">./.claude/settings.json</div>
+      <div class="what"><b>Hooks, permissions, env vars.</b> Lifecycle automation lives here.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 02 — THE 5 LAYERS
+     ============================================================ -->
+<section class="panel" id="layers">
+  <p class="section-kicker">Section 02 &nbsp;·&nbsp; the mental model</p>
+  <h2 class="section-title"><span class="ord">02</span>The five layers</h2>
+  <p class="section-lede">Claude Code is not one thing. It's five layers that compose. Read top to bottom — each layer answers a question the previous one couldn't.</p>
+
+  <div class="primitives" id="primitives-grid"></div>
+
+  <div class="primitives-flow">
+    static instructions <span class="arrow">→</span> reusable templates <span class="arrow">→</span> lifecycle automation <span class="arrow">→</span> isolated delegation <span class="arrow">→</span> system integration
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 03 — RECIPES
+     ============================================================ -->
+<section class="panel" id="recipes">
+  <p class="section-kicker">Section 03 &nbsp;·&nbsp; one recipe per layer</p>
+  <h2 class="section-title"><span class="ord">03</span>Recipes</h2>
+  <p class="section-lede">Five worked examples. Each card teaches first — <b>why this matters</b>, a <b>good use</b>, a <b>bad use</b> — and then shows the code. Copy nothing on faith. Read the teaching first.</p>
+
+  <div class="recipes" id="recipes-list"></div>
+</section>
+
+<!-- ============================================================
+     SECTION 04 — REFERENCE
+     ============================================================ -->
+<section class="panel" id="ref">
+  <p class="section-kicker">Section 04 &nbsp;·&nbsp; lookups, shortcuts, paths</p>
+  <h2 class="section-title"><span class="ord">04</span>Reference</h2>
+  <p class="section-lede">What to type, what keys to hit, where files live. The part you come back to.</p>
+
+  <div class="ref-grid">
+
+    <div class="ref-block">
+      <div class="kicker">Built-in slash commands</div>
+      <h4>What ships with Claude Code</h4>
+      <table class="commands" id="commands-table">
+        <thead><tr><th>Type</th><th>What it does</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="ref-block" style="margin-bottom: 10px;">
+        <div class="kicker">Keyboard</div>
+        <h4>Terminal shortcuts that actually work</h4>
+        <div class="shortcuts" id="shortcuts-grid"></div>
+      </div>
+
+      <div class="ref-block">
+        <div class="kicker">File locations</div>
+        <h4>Paths to remember</h4>
+        <div class="locations">
+          <span class="lbl">your personal skills</span>
+          <span class="path">~/.claude/skills/&lt;name&gt;/SKILL.md</span><br>
+          <span class="lbl">project-only skills</span>
+          <span class="path">./.claude/skills/&lt;name&gt;/SKILL.md</span><br>
+          <span class="lbl">standing instructions</span>
+          <span class="path">./CLAUDE.md</span> &nbsp;·&nbsp; <span class="path">~/.claude/CLAUDE.md</span><br>
+          <span class="lbl">subagents</span>
+          <span class="path">./.claude/agents/&lt;name&gt;.md</span><br>
+          <span class="lbl">MCP server config</span>
+          <span class="path">./.claude/.mcp.json</span><br>
+          <span class="lbl">hooks &amp; settings</span>
+          <span class="path">./.claude/settings.json</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 05 — MEMORY & SAFETY
+     ============================================================ -->
+<section class="panel" id="memory">
+  <p class="section-kicker">Section 05 &nbsp;·&nbsp; what gets stored where · what stays on your laptop</p>
+  <h2 class="section-title"><span class="ord">05</span>Memory &amp; safety</h2>
+  <p class="section-lede">Claude Code reads files on your laptop. That's the whole architecture. Three things live in that read path — and each scope has a use, a constraint, and a trap.</p>
+
+  <div class="mem-grid">
+
+    <div>
+      <div class="scopes">
+        <div class="scope">
+          <div class="scope-label">Scope 1 · Project</div>
+          <div class="scope-name">./CLAUDE.md</div>
+          <div class="scope-body">Lives inside the repo. <b>Committed to git.</b> Shared with everyone on the team. Use for: coding standards, libraries, conventions, "never do X here." If you'd put it in a README, put it here.</div>
+        </div>
+        <div class="scope">
+          <div class="scope-label">Scope 2 · User</div>
+          <div class="scope-name">~/.claude/CLAUDE.md</div>
+          <div class="scope-body">Lives on your laptop. <b>Never shared.</b> Use for: your name, your preferred tone, defaults across every project, "I work in Eastern time." Personal, not project.</div>
+        </div>
+        <div class="scope">
+          <div class="scope-label">Scope 3 · Local</div>
+          <div class="scope-name">./CLAUDE.local.md</div>
+          <div class="scope-body">Inside the project but <b>gitignored.</b> Use for: your personal overrides on a shared project — paths only you have, debugging notes, the things you'd never put in the team's PR.</div>
+        </div>
+      </div>
+
+      <div class="import-card">
+        <h4>Importing one file from another</h4>
+        <p>CLAUDE.md can pull in any other markdown file using the <span class="em">@import</span> syntax. The contents land in Claude's context as if they were written inline. Use this to keep CLAUDE.md short and reference longer style guides separately.</p>
+        <div class="code" data-copy># House rules — pricing model
+
+All cash math uses Decimal, never float.
+Round per banker's rounding (ROUND_HALF_EVEN).
+
+See @docs/style-guide.md for the full convention set.
+See @docs/api-contracts.md before touching the trade API.<button class="copy">copy</button></div>
+      </div>
+
+      <div class="safety">
+        <div class="kicker">Compliance lens · what NOT to put in memory</div>
+        <h4>Treat CLAUDE.md like a Slack channel</h4>
+        <div class="rule">
+          <div class="mark">×</div>
+          <div class="body"><b>No API keys, passwords, or tokens.</b><span class="reason">Memory files are plain text on disk. Anything that ends up in CLAUDE.md gets read by Claude on every session — and ends up in your terminal logs.</span></div>
+        </div>
+        <div class="rule">
+          <div class="mark">×</div>
+          <div class="body"><b>No proprietary models, alpha signals, or position-level data.</b><span class="reason">If a teammate pulls the repo, they see your project CLAUDE.md. Don't bury your edge in a shared instruction file.</span></div>
+        </div>
+        <div class="rule">
+          <div class="mark">×</div>
+          <div class="body"><b>No client names, account numbers, or PII.</b><span class="reason">Same rule as Slack. If you wouldn't post it in #general, don't write it in CLAUDE.md. The compliance posture is identical.</span></div>
+        </div>
+        <div class="rule">
+          <div class="mark">×</div>
+          <div class="body"><b>No "for my eyes only" content in shared scopes.</b><span class="reason">Use CLAUDE.local.md for personal notes. The .local.md suffix is gitignored by default — anything you'd be embarrassed to share belongs there.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="vscode" aria-label="VS Code sidebar replica showing the .claude folder layout">
+        <div class="titlebar">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="name">your-project — Visual Studio Code</div>
+          <div style="width: 38px;"></div>
+        </div>
+        <div class="explorer-header">Explorer</div>
+        <div class="tree" id="vscode-tree"></div>
+      </div>
+      <p class="vscode-caption">A clean project layout. <b>.claude/</b> holds skills, agents, MCP config, and the project-side settings. <b>CLAUDE.md</b> and <b>CLAUDE.local.md</b> sit at the project root. The <b>.local</b> file is gitignored — that's where personal overrides go.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 06 — TAKEAWAYS
+     ============================================================ -->
+<section class="panel" id="takeaways">
+  <p class="section-kicker">Section 06 &nbsp;·&nbsp; ten things to carry into the rest of the summer</p>
+  <h2 class="section-title"><span class="ord">06</span>Ten takeaways</h2>
+  <p class="section-lede">If you only remember ten things from this card, remember these. Each one is structured the same way: the <b>point</b>, a <b>concrete example</b> you'll hit, <b>how to solve it</b>, and a one-line <b>way to remember it</b> when you're tired.</p>
+
+  <div class="takeaways" id="takeaways-grid"></div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span>Calibrated Density &nbsp;·&nbsp; vol. 01</span>
+  <span class="mid">A reference, not a manual &nbsp;·&nbsp; keep it on your desk</span>
+  <span>PumaCap Summer 2026</span>
+</footer>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const PRIMITIVES = [
+  { ord: "01", name: "CLAUDE.md",
+    filepath: "./CLAUDE.md  ·  ~/.claude/CLAUDE.md",
+    def: "A plain markdown file Claude reads at the start of every session. Treat it like a sticky note on your monitor — whatever you write there, Claude knows by heart. Your team conventions, your house rules, the things you'd otherwise have to re-explain every single morning. Three flavors: project (in the repo, team-shared), user (on your laptop, applies everywhere), and local (in the project but gitignored — your own overrides).",
+    when_label: "Use it when",
+    when: "you catch yourself explaining the same thing twice." },
+  { ord: "02", name: "Skills",
+    filepath: "~/.claude/skills/&lt;name&gt;/SKILL.md",
+    def: "A named, reusable instruction Claude follows when you trigger it — by typing /skill-name or by writing a prompt that matches its description. Skills let you take a task you do over and over and put it on rails: same inputs, same shape of output, same conventions every time. As you use a skill, you write reflections into it — what worked, what failed, what edge case it missed last time — and the skill gets sharper without you having to remember the lesson.",
+    when_label: "Use it when",
+    when: "a workflow repeats three times and you've named it in your head.",
+    expand_label: "Skills can call other skills →",
+    expand_body: "A /weekly-summary skill can fire /excel-audit, then /risk-memo, then draft the email. One named entry point, many named pieces underneath. Once you have three or four skills you trust, the next move is composing them — the orchestration becomes the workflow." },
+  { ord: "03", name: "Hooks",
+    filepath: "./.claude/settings.json",
+    def: "Little scripts that run for you automatically at specific moments — when you start a session, when Claude edits a file, when a tool gets called. You set them up once and then forget they exist. Think of hooks like the motion-sensor lights in your hallway: you don't flip a switch, they just turn on when something happens. The first hook everyone should add is one that runs at session start — something useful that greets you the moment you open Claude.",
+    when_label: "Use it when",
+    when: "you want something to happen every time, without having to ask." },
+  { ord: "04", name: "Agents",
+    filepath: "./.claude/agents/&lt;name&gt;.md",
+    def: "A specialist with its own isolated context and a narrowly scoped job. The power isn't in any single agent — it's in dispersing a complex task across several. A monthly performance brief might fan out into one agent that cleans the raw data, one that runs the stats, one that drafts the prose, and one that builds the PDF. If the prose comes back wrong, you fix one agent — not a 900-line monolith. Pieces stay editable, each agent's job stays small enough to actually do well, and you stay in control of the orchestration.",
+    when_label: "Use it when",
+    when: "the task is big enough that splitting it makes the parts easier to fix." },
+  { ord: "05", name: "MCP servers",
+    filepath: "./.claude/.mcp.json",
+    def: "External systems wired into Claude as tools. The Excel sheet you read every morning, the Gmail thread your PM started yesterday, the Slack channel where the desk posts intraday notes, the Postgres warehouse with positions, the Jira tickets you'd otherwise context-switch into — MCP turns each of them into something Claude can call directly. No copy-paste. No exports. No \"let me pull that up real quick.\" The skill on your laptop reaches into the systems your work actually lives in.",
+    when_label: "Use it when",
+    when: "the answer lives in a system Claude can't see yet." }
+];
+
+const RECIPES = [
+  {
+    num: "01", layer: "CLAUDE.md",
+    title: "Anchor the project's house rules",
+    why: "<b>CLAUDE.md kills the re-explaining tax.</b> Every time you tell Claude the same convention is a small cost — fifteen seconds, a minute, the exhaustion of typing the same thing for the tenth time. CLAUDE.md is where that tax goes to die. The file gets read on every session start, no prompting needed, no remembering.",
+    good: "<b>One paragraph of operational rules.</b> 'All cash math uses Decimal. Round per ROUND_HALF_EVEN. Tests use pytest with frozen time.' Concrete. Testable. Hard to misapply.",
+    bad: "<b>Vague guidance.</b> 'Be careful with floating point.' 'Write clean code.' 'Follow our conventions.' Claude can't operationalize this — it ends up as a polite suggestion you have to repeat anyway.",
+    file_label: "./CLAUDE.md",
+    file_path: "./CLAUDE.md",
+    file_lang: "markdown",
+    file_body: `# Pricing model — house rules
+
+- All cash and P&L math uses \`decimal.Decimal\`. Never float.
+- Round per banker's rounding (\`ROUND_HALF_EVEN\`).
+- Tickers are uppercased and validated against \`reference/tickers.csv\`.
+- Tests use \`pytest\` with frozen time from \`freezegun\`.
+
+See @docs/conventions.md for the full style guide.`,
+    cmd_label: "Then ask, in any session",
+    cmd: `add a function that computes daily P&L for a position`,
+    output: "Claude pulls in your rules, writes Decimal-first code, uses the right rounding, and references your conventions doc without being told.",
+    uses: "no command needed — Claude reads it on every session start"
+  },
+  {
+    num: "02", layer: "Skill",
+    title: "Build a /pretrade-check skill",
+    why: "<b>Naming a workflow turns it into one keystroke.</b> The same three checks every morning, the same comparison every Friday, the same email draft after every trade — naming the work turns three actions into one. The next time you reach for the calculator, you reach for the skill instead.",
+    good: "<b>One job, well-defined.</b> Check restricted list. Check size limits. Check sector concentration. Return PASS or FLAG with the specific reason. Skill stays under thirty lines. Ships, gets used, iterates.",
+    bad: "<b>A skill that does ten things.</b> /pretrade-check also places the order, files the compliance memo, and updates the desk dashboard. Now the skill is brittle, hard to test, and your teammates can't reuse the parts they need.",
+    file_label: "~/.claude/skills/pretrade-check/SKILL.md",
+    file_path: "~/.claude/skills/pretrade-check/SKILL.md",
+    file_lang: "yaml",
+    file_body: `---
+name: pretrade-check
+description: Run a pre-trade compliance check on a proposed order
+  — verifies restricted list, desk size limits, and sector
+  concentration. Returns PASS / FLAG with reasons.
+allowed-tools: Read, Bash
+---
+
+# Pre-trade compliance check
+
+For the proposed order in $ARGUMENTS:
+
+1. Read \`./compliance/restricted.csv\` — flag if ticker present.
+2. Check \`./limits/desk-sizing.json\` — flag if notional > 5% NAV.
+3. Read \`./positions/current.csv\` — compute sector exposure
+   after the order. Flag if > 25% in any GICS sector.
+
+Return a compact report:
+  PASS  —  reasons it cleared
+  FLAG  —  which check failed and by how much`,
+    cmd_label: "Then type, anytime",
+    cmd: `/pretrade-check buy 50000 NVDA at limit 880`,
+    output: "Claude reads the three files, runs the checks, returns one paragraph: either PASS with reasons it cleared, or FLAG with the specific number that breached.",
+    uses: "auto-fires on phrases like 'pretrade check this order' too"
+  },
+  {
+    num: "03", layer: "Hook",
+    title: "Greet me with today's calendar when I open Claude",
+    why: "<b>Hooks fire whether you remember or not.</b> That's the whole point. A hook removes a thing from your morning list — you don't have to remember to check your calendar before starting work, because the calendar shows up the moment you open Claude.",
+    good: "<b>A small script that runs at SessionStart and prints today's meetings.</b> Safe to skip, safe to fail. If the calendar API is down, you just don't see the greeting — nothing breaks. The hook adds context to your morning without ever blocking it.",
+    bad: "<b>A hook that sends emails, posts to Slack, or modifies external state.</b> Hooks should be invisible and forgiving. Anything that posts to a system should be a skill you fire on purpose — not a side effect you forgot you wired up six months ago.",
+    file_label: "./.claude/settings.json",
+    file_path: "./.claude/settings.json",
+    file_lang: "json",
+    file_body: `{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/morning-greeting.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}`,
+    cmd_label: "The script (one-liner)",
+    cmd: `echo "Today: $(gcal list --today)"`,
+    output: "Every time you launch Claude, the first line you see is your day. No /command needed, no clicking through another tab. The hook fires the moment the session starts.",
+    uses: "fires on the SessionStart lifecycle event — once per Claude launch"
+  },
+  {
+    num: "04", layer: "Agent",
+    title: "Dispatch a research-analyst agent",
+    why: "<b>Agents isolate big work so your main session stays sharp.</b> Some tasks flood your conversation with reading you'll never reuse — research, log review, scraping a hundred files. An agent does that work in its own context window and returns one clean summary, leaving your main session focused on what you actually own.",
+    good: "<b>Read-only research with a clear output shape.</b> Restricted tools (Read, WebFetch, WebSearch). Returns a one-page markdown brief to your main session. The agent's context dies when the task ends.",
+    bad: "<b>An agent with write access and a four-step pipeline.</b> Now you have two open processes with mutable state, two places to debug, and no clear ownership of the file the agent is editing. Pipeline work belongs in a skill that chains intentionally — not an agent given the keys.",
+    file_label: "./.claude/agents/research-analyst.md",
+    file_path: "./.claude/agents/research-analyst.md",
+    file_lang: "yaml",
+    file_body: `---
+name: research-analyst
+description: Build a structured one-page brief on a public company
+  — thesis, recent news, last 4 earnings, peers, key risks.
+  Read-only; returns a markdown summary.
+tools: [Read, WebFetch, WebSearch]
+model: sonnet
+---
+
+You are a buy-side research analyst preparing a one-pager
+for a portfolio manager. Output structure (always):
+
+# {{ticker}} — one-page brief
+## thesis (2–3 lines)
+## recent news (last 30 days, bulleted)
+## earnings recap (last 4 quarters, 1 line each)
+## comps (3–5 peers, 1 line each)
+## key risks (3 bullets)
+
+Cite sources. Flag anything you couldn't verify.`,
+    cmd_label: "Dispatch by description",
+    cmd: `analyze NVDA for the PM — use the research-analyst agent`,
+    output: "The agent opens in its own context window, does the reading there, and returns a clean markdown one-pager to your main conversation. Your session stays focused.",
+    uses: "isolated context · restricted to Read, WebFetch, WebSearch · Sonnet by default"
+  },
+  {
+    num: "05", layer: "MCP",
+    title: "Wire Claude to your positions database",
+    why: "<b>MCP turns Claude from a code generator into a research partner.</b> The data already exists in your systems — positions, P&L, news feeds, internal models. The value is in Claude reading it directly. No copy-paste, no exports, no Excel-as-go-between. MCP is the layer where the tool reaches into the world your work actually lives in.",
+    good: "<b>A read-only Postgres MCP server, scoped to one schema.</b> Credentials with SELECT only. Claude can answer 'positions down >5% this week' from real data. If the server fails, nothing destructive happens.",
+    bad: "<b>An MCP server with admin DB access.</b> Or worse: an MCP server whose tool descriptions return proprietary models verbatim in the response payload. MCP exposes whatever the server returns — assume anything reachable is loggable.",
+    file_label: "./.claude/.mcp.json",
+    file_path: "./.claude/.mcp.json",
+    file_lang: "json",
+    file_body: `{
+  "servers": {
+    "positions-db": {
+      "type": "postgres",
+      "host": "warehouse.internal",
+      "port": 5432,
+      "database": "trading",
+      "env": {
+        "PG_USER": "$PG_USER",
+        "PG_PASSWORD": "$PG_PASSWORD"
+      }
+    }
+  }
+}`,
+    cmd_label: "Add the server",
+    cmd: `/mcp     (then select positions-db, authenticate, done)`,
+    output: "Claude can now query the database directly. 'Which positions are down >5% this week' returns a real table pulled from the warehouse, not a copy-paste.",
+    uses: "no slash command afterward — Claude calls the DB like any tool"
+  }
+];
+
+const COMMANDS = [
+  { cmd: "/help",     desc: "List every command and skill available in this session." },
+  { cmd: "/clear",    desc: "Wipe the conversation context. Start fresh." },
+  { cmd: "/resume",   desc: "Re-open a previous session by name or ID." },
+  { cmd: "/model",    desc: "Switch model — haiku / sonnet / opus." },
+  { cmd: "/effort",   desc: "Adjust reasoning budget — low, medium, high, xhigh." },
+  { cmd: "/agents",   desc: "Manage subagents — create, edit, see what's running." },
+  { cmd: "/mcp",      desc: "Add or manage MCP servers — internal data, APIs, tools." },
+  { cmd: "/memory",   desc: "View or edit your CLAUDE.md, rules, and auto-memory files." },
+  { cmd: "/plan",     desc: "Plan mode — Claude proposes a plan before touching anything." },
+  { cmd: "/doctor",   desc: "Diagnose issues with your config, skills, or hooks." },
+  { cmd: "/cost",     desc: "Show token usage and cost for the current session." },
+  { cmd: "/init",     desc: "Scaffold a starter CLAUDE.md for the current project." },
+  { cmd: "/compact",  desc: "Summarize the conversation so far to free up context." },
+  { cmd: "/plugin",   desc: "Add or install a plugin marketplace (community skills)." }
+];
+
+const SHORTCUTS = [
+  { keys: "Tab",          desc: "Autocomplete a slash command or skill name." },
+  { keys: "Shift + Tab",  desc: "Cycle through permission modes." },
+  { keys: "↑ / ↓",        desc: "Step through previous prompts in the session." },
+  { keys: "Ctrl + C",     desc: "Interrupt Claude's current response." },
+  { keys: "Ctrl + D",     desc: "Exit Claude Code cleanly." },
+  { keys: "Enter",        desc: "Send the prompt. Shift+Enter for a newline." },
+  { keys: "Cmd + Shift + P", desc: "VS Code: open Claude Code in any project." }
+];
+
+// VS Code sidebar tree
+const VSCODE_TREE = [
+  { type: "folder", name: ".claude", expanded: true, icon: "folder-open", children: [
+    { type: "folder", name: "agents", expanded: false, icon: "folder", children: [] },
+    { type: "folder", name: "skills", expanded: true, icon: "folder-open", children: [
+      { type: "folder", name: "pretrade-check", expanded: true, icon: "folder-open", children: [
+        { type: "file", name: "SKILL.md", icon: "md" }
+      ]},
+      { type: "folder", name: "morning-brief", expanded: false, icon: "folder", children: [] },
+      { type: "folder", name: "excel-audit", expanded: false, icon: "folder", children: [] }
+    ]},
+    { type: "file", name: "settings.json", icon: "json", tag: "hooks live here" },
+    { type: "file", name: ".mcp.json", icon: "json" }
+  ]},
+  { type: "file", name: "CLAUDE.md", icon: "md", active: true, tag: "team-shared" },
+  { type: "file", name: "CLAUDE.local.md", icon: "md", muted: true, tag: "gitignored" },
+  { type: "folder", name: "src", expanded: false, icon: "folder", children: [] },
+  { type: "folder", name: "tests", expanded: false, icon: "folder", children: [] },
+  { type: "file", name: "README.md", icon: "md" }
+];
+
+const TAKEAWAYS = [
+  {
+    num: "01", title: "Trial and error compounds.",
+    point: "Your first skill won't be the right one. Your tenth will be. Anyone selling you a finished skill on day one is selling you confidence, not capability.",
+    example: "You build /morning-brief and version one dumps 800 lines of irrelevant CSV. Version two trims it. By version four it's part of your routine — and you barely remember version one.",
+    solve: "Ship the dumb version first. Use it for a week. The real specification emerges from the friction of actually using it.",
+    remember: "You're building muscle, not a finished product."
+  },
+  {
+    num: "02", title: "Guardrails beat repetition.",
+    point: "Every time you correct Claude the same way twice, that correction belongs in CLAUDE.md. Standing instructions are how a tool stops costing you the same fifteen seconds every session.",
+    example: "Claude keeps suggesting float for cash math. You correct it on Monday, Tuesday, Wednesday. By Friday you should have written 'use Decimal for all cash math' into CLAUDE.md.",
+    solve: "When you find yourself typing the same correction twice, stop. Open CLAUDE.md. Write the rule down. Move on.",
+    remember: "Guardrails get smarter; repetition wastes time."
+  },
+  {
+    num: "03", title: "Skills that audit make workspaces safe.",
+    point: "Build skills whose only job is to verify or log. Pair every action-skill (does something) with an audit-skill (checks it was done right). The audit is the seatbelt — you don't notice it until you need it.",
+    example: "You build /post-trade that updates a position file. Pair it with /post-trade-audit that re-reads the file and confirms the math reconciles to the broker confirmation.",
+    solve: "For every skill that writes, builds, posts, or sends — ask: 'what's the audit-skill that proves this worked?' Build both.",
+    remember: "The audit is the seatbelt. Always build it."
+  },
+  {
+    num: "04", title: "Fun names make skills sticky.",
+    point: "A skill called /buffett gets used more than /financial-reviewer-v3. Memorable beats descriptive. You can always read the description; you have to remember the name.",
+    example: "You build a morning-brief skill. You can call it /pre-market-summary (no one ever types it) or /coffee (you remember it before your first sip).",
+    solve: "When naming a new skill, pick the version that makes you smile. The description field can carry the technical accuracy.",
+    remember: "Names you remember are skills you actually use."
+  },
+  {
+    num: "05", title: "Borrow first, then make it yours.",
+    point: "The Claude Code community publishes skills as plugins. Install one from a marketplace. Read its SKILL.md. Then edit it to match how your team actually works.",
+    example: "Someone publishes a ui-ux-pro-max skill that wraps design rules. You install it (/plugin install …), read the SKILL.md, and tune the description to your firm's product vocabulary.",
+    solve: "Don't start from scratch. Find the closest existing skill. Fork it. Modify the description, the instructions, the example. Ship your version in fifteen minutes instead of two days.",
+    remember: "A library starts the day you stop writing from scratch."
+  },
+  {
+    num: "06", title: "External connections multiply value.",
+    point: "A skill is one thing. A skill connected to Excel, Slack, or Gmail through MCP is ten. The leverage is in the last mile — where Claude touches the systems your team already uses.",
+    example: "A /weekly-summary skill that reads from a Google Sheet, drafts the summary, and posts a draft to Gmail. Three systems, one command. The intern who built it left for the day at four.",
+    solve: "For every new skill, ask: 'what existing tool could this read from or write to via MCP?' If the answer is one — wire it. If the answer is two — wire one this week, the other next.",
+    remember: "Claude is most useful where it touches the tools you already touch."
+  },
+  {
+    num: "07", title: "Separate config from logic.",
+    point: "Thresholds, paths, account IDs, and conventions go in a config file. Skill instructions stay clean. When a number changes, you edit one place — not search across every skill you've written.",
+    example: "Your /pretrade-check skill flags any order >5% of NAV. Don't hardcode 5%. Put it in config.json under <code>limits.notional_pct</code>. Next time the desk raises the limit, you change one line.",
+    solve: "First thing you build alongside any non-trivial skill: its config. The skill reads from config; the config holds the dials.",
+    remember: "When a number changes, you should edit ONE place."
+  },
+  {
+    num: "08", title: "Verify before automating.",
+    point: "The first run of any new skill should check assumptions, not act. A skill that posts to Excel should first confirm the sheet has the columns it expects. Automation without verification is just propagation of error.",
+    example: "Your /log-paycheck skill expects 9 columns. The HR team adds a column in week three. Now every run silently writes to the wrong cells — and you don't know for a month.",
+    solve: "Build a Phase 0 verification step into every skill: read the destination, confirm the structure, halt if reality doesn't match the assumption.",
+    remember: "Automation without verification propagates errors at machine speed."
+  },
+  {
+    num: "09", title: "Log every non-trivial action.",
+    point: "Every write, every API call, every decision should leave a traceable event behind. Append-only event logs let you trace any wrong output back to the input that caused it. Provenance beats performance.",
+    example: "Your /post-trade skill writes a row to an Excel file. The row is wrong. With event logging, you grep the event_id from that row, find the source email it parsed, and fix the parser. Without it, you guess.",
+    solve: "Every skill that writes appends an event to a JSONL log: timestamp, run_id, what it did, what it read, where it wrote. One line per action. Never overwrite.",
+    remember: "When the output is wrong, you need to trace it. Provenance > performance."
+  },
+  {
+    num: "10", title: "Tier your autonomy.",
+    point: "Some actions a skill can take on its own (safe). Some it should surface before doing (risky). Some it should refuse entirely (dangerous). Decide which is which before the skill runs in production.",
+    example: "Pulling positions data from a read-only DB = autonomous. Sending an email to the PM = ask first. Submitting an actual trade = halt and require a human. Same skill family, three tiers.",
+    solve: "Before any new skill goes live, classify each of its actions: Tier 1 autonomous, Tier 2 surface-then-proceed, Tier 3 halt-and-escalate. Write the tier into the skill's documentation.",
+    remember: "Autonomy without judgment is just speed in the wrong direction."
+  }
+];
+
+// ============================================================
+// RENDER
+// ============================================================
+function el(html) {
+  const t = document.createElement("template");
+  t.innerHTML = html.trim();
+  return t.content.firstChild;
+}
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function highlight(code, lang) {
+  let h = escapeHtml(code);
+  if (lang === "yaml" || lang === "json") {
+    h = h.replace(/^(\s*)(#[^\n]*)/gm, '$1<span class="c">$2</span>');
+    h = h.replace(/^(\s*)([\w-]+):/gm, '$1<span class="k">$2</span>:');
+    h = h.replace(/("[\w-]+")(\s*:)/g, '<span class="k">$1</span>$2');
+  } else if (lang === "markdown") {
+    h = h.replace(/^(#+ [^\n]+)$/gm, '<span class="k">$1</span>');
+    h = h.replace(/^(- [^\n]+)$/gm, '<span class="s">$1</span>');
+    h = h.replace(/`([^`]+)`/g, '<span class="s">`$1`</span>');
+  }
+  return h;
+}
+
+function renderPrimitives() {
+  const grid = document.getElementById("primitives-grid");
+  PRIMITIVES.forEach(p => {
+    const expandHtml = p.expand_label ? `
+        <details>
+          <summary>${p.expand_label}</summary>
+          <div class="expand-body">${p.expand_body}</div>
+        </details>` : "";
+    grid.appendChild(el(`
+      <div class="prim">
+        <div class="ord">${p.ord}</div>
+        <h3>${p.name}</h3>
+        <div class="filepath">${p.filepath}</div>
+        <div class="def">${p.def}</div>
+        <div class="when"><b>${p.when_label}</b>${p.when}</div>${expandHtml}
+      </div>
+    `));
+  });
+}
+
+function renderRecipes() {
+  const list = document.getElementById("recipes-list");
+  RECIPES.forEach(r => {
+    const node = el(`
+      <article class="recipe" data-id="recipe-${r.num}">
+        <div class="recipe-head">
+          <div class="recipe-num">${r.num}</div>
+          <h3 class="recipe-title">${r.title}</h3>
+          <div class="recipe-layer">${r.layer}</div>
+        </div>
+
+        <div class="recipe-grid">
+          <div class="recipe-teach">
+            <div class="recipe-row"><span class="lbl">Why</span><span class="txt">${r.why}</span></div>
+            <div class="recipe-row"><span class="lbl">Good use</span><span class="txt">${r.good}</span></div>
+            <div class="recipe-row bad"><span class="lbl">Bad use</span><span class="txt">${r.bad}</span></div>
+          </div>
+
+          <div class="recipe-do">
+            <div class="file-label">${r.cmd_label === "Add the server" ? "Config" : "File"} <span class="path">${r.file_path}</span></div>
+            <div class="code" data-copy>${highlight(r.file_body, r.file_lang)}<button class="copy">copy</button></div>
+
+            <div class="file-label" style="margin-top: 4px;">${r.cmd_label}</div>
+            <div class="code inline" data-copy>${escapeHtml(r.cmd)}<button class="copy">copy</button></div>
+
+            <p class="then"><b>Then</b>${r.output}</p>
+          </div>
+        </div>
+
+        <div class="recipe-foot">
+          <button class="tried" data-tried="${r.num}"><span class="box"></span> I've tried this</button>
+          <div class="recipe-uses"><b>uses</b>${r.uses}</div>
+        </div>
+      </article>
+    `);
+    list.appendChild(node);
+  });
+
+  document.querySelectorAll(".tried").forEach(btn => {
+    const id = btn.dataset.tried;
+    if (localStorage.getItem("pumacap-tried-" + id) === "1") btn.classList.add("done");
+    btn.addEventListener("click", () => {
+      const isDone = btn.classList.toggle("done");
+      localStorage.setItem("pumacap-tried-" + id, isDone ? "1" : "0");
+    });
+  });
+}
+
+function renderCommands() {
+  const tbody = document.querySelector("#commands-table tbody");
+  COMMANDS.forEach(c => {
+    tbody.appendChild(el(`
+      <tr>
+        <td class="cmd"><code>${c.cmd}</code></td>
+        <td class="desc">${c.desc}</td>
+      </tr>
+    `));
+  });
+}
+
+function renderShortcuts() {
+  const grid = document.getElementById("shortcuts-grid");
+  SHORTCUTS.forEach(s => {
+    grid.appendChild(el(`<kbd>${s.keys}</kbd>`));
+    grid.appendChild(el(`<span class="desc">${s.desc}</span>`));
+  });
+}
+
+function renderVSCodeTree() {
+  const root = document.getElementById("vscode-tree");
+  function renderNode(node, depth) {
+    const indent = depth * 14;
+    const chev = node.type === "folder" ? (node.expanded ? "▾" : "▸") : "";
+    const iconClass = node.type === "folder"
+      ? (node.expanded ? "folder-open" : "folder")
+      : node.icon;
+    const cls = "row" + (node.active ? " active" : "") + (node.muted ? " muted" : "");
+    const tag = node.tag ? `<span class="tag">${node.tag}</span>` : "";
+    root.appendChild(el(`
+      <div class="${cls}" style="padding-left: ${4 + indent}px;">
+        <span class="chev">${chev}</span>
+        <span class="icon ${iconClass}"></span>
+        <span class="name">${node.name}</span>${tag}
+      </div>
+    `));
+    if (node.type === "folder" && node.expanded && node.children) {
+      node.children.forEach(c => renderNode(c, depth + 1));
+    }
+  }
+  VSCODE_TREE.forEach(n => renderNode(n, 0));
+}
+
+function renderTakeaways() {
+  const grid = document.getElementById("takeaways-grid");
+  TAKEAWAYS.forEach(t => {
+    grid.appendChild(el(`
+      <article class="tk">
+        <div class="tk-head">
+          <div class="tk-num">${t.num}</div>
+          <h3 class="tk-title">${t.title}</h3>
+        </div>
+        <div class="tk-row"><span class="lbl">Point</span><span class="txt">${t.point}</span></div>
+        <div class="tk-row"><span class="lbl">Example</span><span class="txt">${t.example}</span></div>
+        <div class="tk-row"><span class="lbl">Solve</span><span class="txt">${t.solve}</span></div>
+        <div class="tk-row remember"><span class="lbl">Remember</span><span class="txt">${t.remember}</span></div>
+      </article>
+    `));
+  });
+}
+
+// ============================================================
+// COPY BUTTONS
+// ============================================================
+function wireCopy() {
+  document.querySelectorAll(".code[data-copy]").forEach(block => {
+    const btn = block.querySelector(".copy");
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const clone = block.cloneNode(true);
+      clone.querySelector(".copy")?.remove();
+      const text = clone.textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.classList.add("done");
+        btn.textContent = "copied";
+        setTimeout(() => {
+          btn.classList.remove("done");
+          btn.textContent = "copy";
+        }, 1400);
+      }).catch(() => {
+        btn.textContent = "select+copy";
+        setTimeout(() => { btn.textContent = "copy"; }, 1800);
+      });
+    });
+  });
+}
+
+// ============================================================
+// TABS + KEYBOARD NAV
+// ============================================================
+function wireTabs() {
+  const tabs = document.querySelectorAll("nav.tabs a[data-tab]");
+  const sections = Array.from(tabs).map(t => document.querySelector(t.getAttribute("href")));
+  function setActive(id) {
+    tabs.forEach(t => t.classList.toggle("active", t.getAttribute("href") === "#" + id));
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id); });
+  }, { rootMargin: "-30% 0px -55% 0px", threshold: 0 });
+  sections.forEach(s => s && io.observe(s));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.target.matches("input, textarea")) return;
+    const tab = document.querySelector(`nav.tabs a[data-key="${e.key}"]`);
+    if (tab) {
+      e.preventDefault();
+      document.querySelector(tab.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+document.addEventListener("DOMContentLoaded", () => {
+  renderPrimitives();
+  renderRecipes();
+  renderCommands();
+  renderShortcuts();
+  renderVSCodeTree();
+  renderTakeaways();
+  wireCopy();
+  wireTabs();
+});
+</script>
+
+</body>
+</html>
