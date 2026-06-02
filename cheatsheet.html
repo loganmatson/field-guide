@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-title" content="Claude Code">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a1814">
-<title>Claude Code · A Reference for PumaCap Interns</title>
+<title>Claude Code · A Working Reference · PumaCap</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1067,7 +1067,7 @@ footer.foot .mid {
   <div class="topbar-inner">
     <div>
       <div class="brand">Claude Code<span class="colon">:</span></div>
-      <div class="brand-sub">a working reference for the PumaCap summer intern class</div>
+      <div class="brand-sub">a working reference for the PumaCap team</div>
     </div>
     <div class="meta">Summer 2026 &nbsp;/&nbsp; <span class="vol">No. 01</span></div>
   </div>
@@ -1298,6 +1298,23 @@ See @docs/style-guide.md for the full convention set.
 See @docs/api-contracts.md before touching the trade API.<button class="copy">copy</button></div>
       </div>
 
+      <div class="safety" style="margin-bottom: 10px; border-left-color: #2a5c45;">
+        <div class="kicker" style="color: #2a5c45;">Teams vs. Personal — the data-privacy line</div>
+        <h4>Where your data actually goes</h4>
+        <div class="rule" style="border-top: none; padding-top: 0;">
+          <div class="mark" style="color: #2a5c45;">✓</div>
+          <div class="body"><b>Claude for Enterprise / Teams</b> — prompts and files are not used to train models, not logged beyond your organization's boundary, and covered by Anthropic's data-processing agreements. Safe for internal analysis, client-adjacent workflows, and draft work.<span class="reason">Treat it like internal Slack: team-visible, not public, not training data.</span></div>
+        </div>
+        <div class="rule">
+          <div class="mark">×</div>
+          <div class="body"><b>Personal claude.ai accounts</b> — default consumer terms apply. Conversations may be reviewed for safety and model improvement. If someone on your team is using a personal account for work tasks, that's the exposure.<span class="reason">The fix is simple: make sure work happens inside the company's Teams environment, not a personal login.</span></div>
+        </div>
+        <div class="rule">
+          <div class="mark" style="color: #2a5c45;">✓</div>
+          <div class="body"><b>Claude Code (the CLI) with your Teams API key</b> — traffic routes through the same enterprise agreement. Skills, agents, and MCP servers running locally stay local; only the prompts you send hit the API, under the same org-level terms.<span class="reason">Bottom line: inside the Teams environment, use it like you use email. Outside it, treat it like the open web.</span></div>
+        </div>
+      </div>
+
       <div class="safety">
         <div class="kicker">Compliance lens · what NOT to put in memory</div>
         <h4>Treat CLAUDE.md like a Slack channel</h4>
@@ -1444,7 +1461,7 @@ Return a compact report:
   FLAG  —  which check failed and by how much`,
     cmd_label: "Then type, anytime",
     cmd: `/pretrade-check buy 50000 NVDA at limit 880`,
-    output: "Claude reads the three files, runs the checks, returns one paragraph: either PASS with reasons it cleared, or FLAG with the specific number that breached.",
+    output: "Claude reads the three files, runs the checks, returns one paragraph: either PASS with reasons it cleared, or FLAG with the specific number that breached. <b>Real example:</b> in a single session, three domain-specific skills were built and an agent team ran live analysis on a real document — from scratch, in under an hour.",
     uses: "auto-fires on phrases like 'pretrade check this order' too"
   },
   {
@@ -1507,7 +1524,7 @@ for a portfolio manager. Output structure (always):
 Cite sources. Flag anything you couldn't verify.`,
     cmd_label: "Dispatch by description",
     cmd: `analyze NVDA for the PM — use the research-analyst agent`,
-    output: "The agent opens in its own context window, does the reading there, and returns a clean markdown one-pager to your main conversation. Your session stays focused.",
+    output: "The agent opens in its own context window, does the reading there, and returns a clean markdown one-pager to your main conversation. Your session stays focused. <b>Real example:</b> an agent team was dispatched against a domain-specific HTML document — one agent read and extracted, another structured the output — returning a clean analysis brief without touching the main session.",
     uses: "isolated context · restricted to Read, WebFetch, WebSearch · Sonnet by default"
   },
   {
@@ -1592,8 +1609,8 @@ const TAKEAWAYS = [
   {
     num: "01", title: "Trial and error compounds.",
     point: "Your first skill won't be the right one. Your tenth will be. Anyone selling you a finished skill on day one is selling you confidence, not capability.",
-    example: "You build /morning-brief and version one dumps 800 lines of irrelevant CSV. Version two trims it. By version four it's part of your routine — and you barely remember version one.",
-    solve: "Ship the dumb version first. Use it for a week. The real specification emerges from the friction of actually using it.",
+    example: "Three domain-specific skills built in a single session, each one sharper than the last because the first run showed what was missing. By skill three, the output was clean enough to run on a live document in front of a stakeholder — not because the first version was good, but because you iterated fast enough that it didn't matter.",
+    solve: "Ship the dumb version first. Use it once. The real specification emerges from the friction of actually running it on real input.",
     remember: "You're building muscle, not a finished product."
   },
   {
