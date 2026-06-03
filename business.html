@@ -235,6 +235,36 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .role-inner .real{font-family:var(--mono);font-size:11px;color:var(--lime);background:var(--code-bg);border:1px solid var(--line);padding:8px 12px;border-radius:6px;display:inline-block}
 .workforce-note{margin-top:20px;padding:20px 22px;border:1px solid var(--line);border-left:3px solid var(--lime);background:rgba(125,243,138,.04);border-radius:0 8px 8px 0;font-size:1rem;color:var(--ink-soft)}.workforce-note b{color:var(--lime)}
 
+/* ====================== 03b SKILL BUILDER PROMPT ====================== */
+.sb-wrap{margin-top:36px;border:2px solid var(--red);border-radius:12px;background:rgba(255,107,91,.06);box-shadow:0 0 0 1px rgba(255,107,91,.15),0 0 48px -20px rgba(255,107,91,.3);overflow:hidden}
+.sb-teaser{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;user-select:none;transition:.18s}
+.sb-teaser:hover{background:rgba(255,107,91,.05)}
+.sb-badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#ff6b5b;background:rgba(255,107,91,.18);border:1px solid rgba(255,107,91,.4);padding:4px 10px;border-radius:4px;white-space:nowrap;flex:0 0 auto}
+.sb-teaser-text{flex:1;min-width:0}.sb-teaser-text b{font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:-.01em;color:var(--ink);display:block}.sb-teaser-text span{font-size:.84rem;color:var(--ink-soft);display:block;margin-top:2px}
+.sb-teaser-right{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.sb-copy-btn{font-family:var(--mono);font-size:11px;font-weight:600;padding:6px 14px;border-radius:6px;border:1px solid rgba(255,107,91,.5);background:rgba(255,107,91,.14);color:#ff6b5b;cursor:pointer;transition:.18s}
+.sb-copy-btn:hover{background:rgba(255,107,91,.28);border-color:var(--red)}
+.sb-copy-btn.copied{background:rgba(125,243,138,.15);border-color:var(--lime);color:var(--lime)}
+.sb-toggle{font-family:var(--mono);font-size:11px;color:var(--ink-faint);white-space:nowrap;transition:.18s;padding:6px 10px;border-radius:6px;border:1px solid var(--line-2)}
+.sb-wrap.open .sb-toggle{color:var(--red);border-color:rgba(255,107,91,.3)}
+.sb-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);border-top:0px solid transparent;transition:max-height .5s cubic-bezier(.4,0,.2,1),border-top-color .3s}
+.sb-wrap.open .sb-body{max-height:3200px;border-top:1px solid rgba(255,107,91,.2)}
+.sb-body-inner{padding:22px 26px 26px}
+.sb-lede{font-size:.93rem;color:var(--ink-soft);margin-bottom:22px;line-height:1.65;padding-bottom:18px;border-bottom:1px solid var(--line-2)}.sb-lede b{color:#ff6b5b}
+/* formatted prompt sections */
+.sb-section{margin-bottom:22px}
+.sb-section-title{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ff6b5b;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sb-section-title::before{content:"";display:inline-block;width:14px;height:1px;background:var(--red)}
+.sb-part-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.sb-part-list li{display:grid;grid-template-columns:auto 1fr;gap:12px;font-size:.9rem;line-height:1.58;color:var(--ink-soft)}
+.sb-part-list li .pn{font-family:var(--mono);font-weight:700;font-size:.8rem;color:#ff6b5b;min-width:28px;padding-top:1px}
+.sb-part-list li b{color:var(--ink)}.sb-part-list li i{color:var(--ink-faint);font-style:normal;font-size:.82rem;font-family:var(--mono)}
+.sb-plain-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.sb-plain-list li{display:flex;gap:10px;font-size:.9rem;color:var(--ink-soft);line-height:1.55}
+.sb-plain-list li::before{content:"—";color:var(--red);flex:0 0 auto;font-family:var(--mono)}
+.sb-plain-list li b{color:var(--ink)}
+.sb-divider{height:1px;background:var(--line-2);margin:18px 0}
+
 /* ====================== 04 BUILDER ====================== */
 .builder{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
 @media(max-width:880px){.builder{grid-template-columns:1fr}}
@@ -398,8 +428,8 @@ footer b{color:var(--lime-deep)}
   <div class="navright">
     <div class="uptime"><span class="dot"></span>uptime <b id="uptime">00:00:00</b></div>
     <div class="series">
-      <a href="index.html"><b>01</b><span>pitch</span></a>
-      <a href="how.html"><b>02</b><span>setup</span></a>
+      <a href="../index.html"><b>01</b><span>pitch</span></a>
+      <a href="../how.html"><b>02</b><span>setup</span></a>
       <a href="business.html" class="cur"><b>03</b><span>technical</span></a>
     </div>
   </div>
@@ -506,6 +536,67 @@ footer b{color:var(--lime-deep)}
         <p class="lede" data-anim="up">One <span class="inline-code">SKILL.md</span> in a folder. Tap each part for what it does. Then build one yourself in the next chapter.</p>
       </div>
       <div class="blocks" id="anatomy-list"></div>
+
+      <!-- SKILL BUILDER PROMPT -->
+      <div class="sb-wrap" id="sbWrap" data-anim="up">
+        <div class="sb-teaser" onclick="toggleSB()">
+          <span class="sb-badge">⚑ Skill Builder Prompt</span>
+          <div class="sb-teaser-text">
+            <b>Train Claude to build skills the right way. One paste, ten anatomy rules loaded.</b>
+            <span>Paste this into Claude Code. It interviews you — then writes the full SKILL.md.</span>
+          </div>
+          <div class="sb-teaser-right">
+            <button class="sb-copy-btn" id="sbCopyBtn" onclick="event.stopPropagation();copySkillBuilder()">Copy</button>
+            <span class="sb-toggle" id="sbToggle">Expand →</span>
+          </div>
+        </div>
+        <div class="sb-body" id="sbBody">
+          <div class="sb-body-inner">
+            <p class="sb-lede">This prompt loads the ten-part skill anatomy into Claude's context, then starts an interview. Claude asks what you want to automate, when it should trigger, what the edge cases are — then writes a complete <b>SKILL.md to <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/[name]/SKILL.md</code></b>. Every part from module 0x03 is covered.</p>
+
+            <div class="sb-section">
+              <div class="sb-section-title">Interview Phase — Claude asks first</div>
+              <ul class="sb-plain-list">
+                <li>What task do you want to automate?</li>
+                <li>When should this skill trigger — what phrases or context?</li>
+                <li>What does the output look like?</li>
+                <li>What should it <b>never</b> do? (hard limits)</li>
+                <li>What edge cases could break it?</li>
+              </ul>
+            </div>
+
+            <div class="sb-divider"></div>
+
+            <div class="sb-section">
+              <div class="sb-section-title">Ten Anatomy Parts — Claude builds all of these</div>
+              <ul class="sb-part-list">
+                <li><span class="pn">01</span><span><b>Name</b> <i>— the invoke handle</i><br>Kebab-case. Short. Pick it once — renaming means hunting every callout that references it.</span></li>
+                <li><span class="pn">02</span><span><b>Description</b> <i>— the trigger, the most important field</i><br>Claude reads this to decide when to fire, not the body. Too vague = never runs. Too greedy = fires on the wrong things. Pack it with real trigger phrases. Tune this first on misfires — almost never the body.</span></li>
+                <li><span class="pn">03</span><span><b>Gotchas</b> <i>— failures from live runs</i><br>Real problems seen in actual runs, written down so the next run avoids the trap. Leave blank now — fill in after the first run. "What went wrong" is distinct from "what's not allowed."</span></li>
+                <li><span class="pn">04</span><span><b>Guardrails</b> <i>— the won't-do list</i><br>Hard limits: "never touch the source file," "no network calls," "stay in this folder." Counterintuitively, more constraints = more autonomy. When the worst case is bounded, you can let it run unattended.</span></li>
+                <li><span class="pn">05</span><span><b>Embedded skills &amp; callouts</b> <i>— how skills compose</i><br>A skill can invoke other skills by name. State is shared through files, not imports — loose coupling. A recap can call an audit that calls a namer.</span></li>
+                <li><span class="pn">06</span><span><b>Memory allocation</b> <i>— how it spends the context window</i><br>Sub-files load only when the skill runs, not always. Subagents get fresh context. State passes by writing to disk, not stuffing the conversation. This is why an empire of 40+ skills doesn't collapse under its own weight.</span></li>
+                <li><span class="pn">07</span><span><b>Frontmatter controls</b> <i>— the switches above the body</i><br><code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">disable-model-invocation</code>: run only on explicit call. <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">user-invocable</code>: shows in the / menu. <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">argument-hint</code>: tells callers what overrides to pass.</span></li>
+                <li><span class="pn">08</span><span><b>Body / steps</b> <i>— the actual recipe</i><br>Numbered steps Claude follows in order. Specific beats vague: "read metrics.csv and note the totals" not "understand the data." Give Claude a way to verify each step before moving on.</span></li>
+                <li><span class="pn">09</span><span><b>Sub-files, scripts &amp; evals</b> <i>— everything else in the folder</i><br>Templates, configs, and reference docs live beside SKILL.md. Helper scripts handle deterministic steps that shouldn't be improvised. Eval suites verify the skill still works after an edit.</span></li>
+                <li><span class="pn">10</span><span><b>Versioning &amp; iteration</b> <i>— how it gets better</i><br>When triggering misfires, edit the description first. Track eval scores to prove an edit helped. A maintenance skill audits the whole set for drift — without a janitor, an empire rots in months.</span></li>
+              </ul>
+            </div>
+
+            <div class="sb-divider"></div>
+
+            <div class="sb-section">
+              <div class="sb-section-title">After the interview</div>
+              <ul class="sb-plain-list">
+                <li>Writes the completed SKILL.md to <b>~/.claude/skills/[name]/SKILL.md</b></li>
+                <li>Confirms the path so you can open and review it</li>
+                <li>Asks one topic at a time — adapts depth to how technical you are</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div></section>
 
     <!-- 04 BUILDER -->
@@ -672,8 +763,8 @@ footer b{color:var(--lime-deep)}
       <div class="statline" data-anim="up"><span class="modid">// loop back</span></div>
       <h2 class="h2" data-anim="up" style="margin-top:6px">Loop back <span class="accent-c">to the start.</span></h2>
       <div class="next-grid">
-        <a class="ncard" data-anim="up" href="index.html"><span class="np">part 01 · the pitch</span><h3>Why it's worth it</h3><p>The mental model, the leverage curve, the business case. Send this to the skeptic.</p><span class="go">Open Part 1 →</span></a>
-        <a class="ncard" data-anim="up" href="how.html"><span class="np">part 02 · setup</span><h3>Get it running</h3><p>Account, install, the .claude/ folders, your first CLAUDE.md. The foundation.</p><span class="go">Open Part 2 →</span></a>
+        <a class="ncard" data-anim="up" href="../index.html"><span class="np">part 01 · the pitch</span><h3>Why it's worth it</h3><p>The mental model, the leverage curve, the business case. Send this to the skeptic.</p><span class="go">Open Part 1 →</span></a>
+        <a class="ncard" data-anim="up" href="../how.html"><span class="np">part 02 · setup</span><h3>Get it running</h3><p>Account, install, the .claude/ folders, your first CLAUDE.md. The foundation.</p><span class="go">Open Part 2 →</span></a>
       </div>
     </div></section>
 
@@ -685,6 +776,22 @@ footer b{color:var(--lime-deep)}
 <script>
 "use strict";
 function el(id){return document.getElementById(id);}
+var SKILL_BUILDER_PROMPT="You are a skill builder for Claude Code. Use this guide to interview the user and then build their skill:\n\n## Your job\nInterview the user first — ask one topic at a time. Do not write the skill until you have answers to all interview questions. After the interview, write a complete SKILL.md covering all ten anatomy parts below. Save it to ~/.claude/skills/[name]/SKILL.md and confirm the path.\n\n## Interview questions — ask these before writing anything\n1. What task do you want to automate? Describe it in plain language.\n2. When should this skill trigger? What phrases would a user type, or what context would it appear in?\n3. What does the output look like? A file? A report? A chat response?\n4. What should it never do? List hard limits.\n5. What edge cases could break it? Empty inputs, bad data, unusual situations?\n\nAdapt your language to how technical the user's answers are. If they're non-technical, explain each part in plain English before asking about it.\n\n## Ten anatomy parts — produce all of these in the SKILL.md\n\n### 1. Name\nKebab-case identifier. Short — two words max. This is how the user and other skills invoke it. Pick it once: renaming later means hunting every callout. Put it in the YAML frontmatter as: name: skill-name\n\n### 2. Description (most important field)\nClaude reads this to decide WHEN to fire the skill — not the body. The body is what it does; the description is whether it ever runs. Too vague = never triggers. Too greedy = fires on the wrong things. Pack it with real trigger phrases and an explicit 'use this when...' sentence. When a skill misbehaves, tune this first — almost never the body. Put it in the YAML frontmatter.\n\n### 3. Gotchas\nReal failures from live runs — a wrong path, a broken write, an edge case — written down so the next run avoids the trap. Leave blank at first with a comment: '# Fill in after your first run.' These are distinct from guardrails: 'what went wrong' vs 'what's not allowed.' A mature skill's gotchas section is its scar tissue.\n\n### 4. Guardrails\nHard limits — the won't-do list. Examples: 'Never edit the raw source file', 'Only write inside /reports/', 'No network calls.' Counterintuitively, more constraints = more autonomy. When the worst case is bounded, you can let the skill run unattended.\n\n### 5. Embedded skills and callouts\nA skill can invoke other skills by name. Reference them with their skill name. Skills share state through files, not imports — loose coupling. Document which skills this one calls and what it expects back.\n\n### 6. Memory allocation\nSub-files (templates, configs, reference docs) live beside SKILL.md and load only when the skill runs — the index stays lean. State passes by writing to disk, not stuffing the conversation. Note any sub-files this skill needs alongside SKILL.md.\n\n### 7. Frontmatter controls\nOptional switches in the YAML frontmatter:\n- disable-model-invocation: true — run only when explicitly called, never auto-triggered\n- user-invocable: true — shows in the / command menu\n- argument-hint: 'description' — tells callers what override arguments to pass\n\n### 8. Body / steps\nNumbered steps Claude follows in order once the skill fires. Specific beats vague. Bad: 'Understand the context.' Good: 'Read the file at X and note the totals in column C.' Give Claude a way to verify each step before moving on. Include phases, decision logic, and checklists.\n\n### 9. Sub-files, scripts and evals\nDocument any files that live beside SKILL.md: templates, config files, helper scripts, eval suites. Helper scripts handle deterministic steps that shouldn't be improvised. Eval suites verify the skill still works after an edit.\n\n### 10. Versioning and iteration\nNote that when triggering misfires, the description should be tuned first — almost never the body. Track eval scores to prove edits help. A maintenance skill that audits the whole skill set for drift is what keeps the empire healthy over time.\n\n## After writing the skill\nSave to ~/.claude/skills/[name]/SKILL.md. Confirm the path to the user. Offer to run a quick test.";
+
+function copySkillBuilder(){
+  var btn=document.getElementById('sbCopyBtn');
+  navigator.clipboard.writeText(SKILL_BUILDER_PROMPT).then(function(){
+    btn.textContent='Copied ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2200);
+  });
+}
+function toggleSB(){
+  var wrap=document.getElementById('sbWrap');
+  var tog=document.getElementById('sbToggle');
+  var open=wrap.classList.toggle('open');
+  tog.textContent=open?'Collapse ↑':'Expand →';
+}
+
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var hasGSAP=window.gsap&&window.ScrollTrigger;
 var SV=function(p,sz){sz=sz||22;return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';};
