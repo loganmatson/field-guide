@@ -537,60 +537,52 @@ footer b{color:var(--lime-deep)}
       </div>
       <div class="blocks" id="anatomy-list"></div>
 
-      <!-- SKILL BUILDER PROMPT -->
+      <!-- SKILL BUILDER -->
       <div class="sb-wrap" id="sbWrap" data-anim="up">
         <div class="sb-teaser" onclick="toggleSB()">
-          <span class="sb-badge">⚑ Skill Builder Prompt</span>
+          <span class="sb-badge">⚑ /skill-builder</span>
           <div class="sb-teaser-text">
-            <b>Train Claude to build skills the right way. One paste, ten anatomy rules loaded.</b>
-            <span>Paste this into Claude Code. It interviews you — then writes the full SKILL.md.</span>
+            <b>A skill that builds skills. Install it once — it interviews you, then writes every future skill.</b>
+            <span>Covers all ten anatomy parts. Writes the file. Works exactly like tony-stark, built for beginners.</span>
           </div>
           <div class="sb-teaser-right">
-            <button class="sb-copy-btn" id="sbCopyBtn" onclick="event.stopPropagation();copySkillBuilder()">Copy</button>
-            <span class="sb-toggle" id="sbToggle">Expand →</span>
+            <button class="sb-copy-btn" id="sbCopyBtn" onclick="event.stopPropagation();copySkillBuilder()">Copy install</button>
+            <span class="sb-toggle" id="sbToggle">How it works →</span>
           </div>
         </div>
         <div class="sb-body" id="sbBody">
           <div class="sb-body-inner">
-            <p class="sb-lede">This prompt loads the ten-part skill anatomy into Claude's context, then starts an interview. Claude asks what you want to automate, when it should trigger, what the edge cases are — then writes a complete <b>SKILL.md to <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/[name]/SKILL.md</code></b>. Every part from module 0x03 is covered.</p>
+            <p class="sb-lede">Install the skill once. After that, just say <b>"build me a skill for X"</b> and Claude runs the interview, applies all ten anatomy rules, and writes <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/[name]/SKILL.md</code> — you never touch a file by hand.</p>
 
             <div class="sb-section">
-              <div class="sb-section-title">Interview Phase — Claude asks first</div>
+              <div class="sb-section-title">Install — one command</div>
               <ul class="sb-plain-list">
-                <li>What task do you want to automate?</li>
-                <li>When should this skill trigger — what phrases or context?</li>
-                <li>What does the output look like?</li>
-                <li>What should it <b>never</b> do? (hard limits)</li>
-                <li>What edge cases could break it?</li>
+                <li>Copy the install command and run it in your terminal</li>
+                <li>Or: paste the SKILL.md content directly into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">~/.claude/skills/skill-builder/SKILL.md</code></li>
+                <li>Once installed, Claude will find it automatically — no further setup</li>
               </ul>
             </div>
 
             <div class="sb-divider"></div>
 
             <div class="sb-section">
-              <div class="sb-section-title">Ten Anatomy Parts — Claude builds all of these</div>
+              <div class="sb-section-title">What happens when you invoke it</div>
               <ul class="sb-part-list">
-                <li><span class="pn">01</span><span><b>Name</b> <i>— the invoke handle</i><br>Kebab-case. Short. Pick it once — renaming means hunting every callout that references it.</span></li>
-                <li><span class="pn">02</span><span><b>Description</b> <i>— the trigger, the most important field</i><br>Claude reads this to decide when to fire, not the body. Too vague = never runs. Too greedy = fires on the wrong things. Pack it with real trigger phrases. Tune this first on misfires — almost never the body.</span></li>
-                <li><span class="pn">03</span><span><b>Gotchas</b> <i>— failures from live runs</i><br>Real problems seen in actual runs, written down so the next run avoids the trap. Leave blank now — fill in after the first run. "What went wrong" is distinct from "what's not allowed."</span></li>
-                <li><span class="pn">04</span><span><b>Guardrails</b> <i>— the won't-do list</i><br>Hard limits: "never touch the source file," "no network calls," "stay in this folder." Counterintuitively, more constraints = more autonomy. When the worst case is bounded, you can let it run unattended.</span></li>
-                <li><span class="pn">05</span><span><b>Embedded skills &amp; callouts</b> <i>— how skills compose</i><br>A skill can invoke other skills by name. State is shared through files, not imports — loose coupling. A recap can call an audit that calls a namer.</span></li>
-                <li><span class="pn">06</span><span><b>Memory allocation</b> <i>— how it spends the context window</i><br>Sub-files load only when the skill runs, not always. Subagents get fresh context. State passes by writing to disk, not stuffing the conversation. This is why an empire of 40+ skills doesn't collapse under its own weight.</span></li>
-                <li><span class="pn">07</span><span><b>Frontmatter controls</b> <i>— the switches above the body</i><br><code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">disable-model-invocation</code>: run only on explicit call. <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">user-invocable</code>: shows in the / menu. <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">argument-hint</code>: tells callers what overrides to pass.</span></li>
-                <li><span class="pn">08</span><span><b>Body / steps</b> <i>— the actual recipe</i><br>Numbered steps Claude follows in order. Specific beats vague: "read metrics.csv and note the totals" not "understand the data." Give Claude a way to verify each step before moving on.</span></li>
-                <li><span class="pn">09</span><span><b>Sub-files, scripts &amp; evals</b> <i>— everything else in the folder</i><br>Templates, configs, and reference docs live beside SKILL.md. Helper scripts handle deterministic steps that shouldn't be improvised. Eval suites verify the skill still works after an edit.</span></li>
-                <li><span class="pn">10</span><span><b>Versioning &amp; iteration</b> <i>— how it gets better</i><br>When triggering misfires, edit the description first. Track eval scores to prove an edit helped. A maintenance skill audits the whole set for drift — without a janitor, an empire rots in months.</span></li>
+                <li><span class="pn">01</span><span><b>Claude interviews you first</b> — asks 5 questions, one at a time: what to automate, when to trigger, what the output looks like, hard limits, edge cases. Adapts language to how technical you are.</span></li>
+                <li><span class="pn">02</span><span><b>Then it builds all ten anatomy parts</b> — name, description, gotchas, guardrails, embedded skills, memory allocation, frontmatter controls, steps, sub-files, versioning. Nothing skipped.</span></li>
+                <li><span class="pn">03</span><span><b>Writes the file to disk</b> — saves to <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">~/.claude/skills/[name]/SKILL.md</code>, confirms the path, shows you the exact phrase to invoke it.</span></li>
               </ul>
             </div>
 
             <div class="sb-divider"></div>
 
             <div class="sb-section">
-              <div class="sb-section-title">After the interview</div>
+              <div class="sb-section-title">Invoke it by saying any of these</div>
               <ul class="sb-plain-list">
-                <li>Writes the completed SKILL.md to <b>~/.claude/skills/[name]/SKILL.md</b></li>
-                <li>Confirms the path so you can open and review it</li>
-                <li>Asks one topic at a time — adapts depth to how technical you are</li>
+                <li><b>"build me a skill for X"</b></li>
+                <li><b>"I want to automate Y"</b></li>
+                <li><b>"make a skill that does Z"</b></li>
+                <li><b>"/skill-builder"</b></li>
               </ul>
             </div>
 
@@ -776,13 +768,13 @@ footer b{color:var(--lime-deep)}
 <script>
 "use strict";
 function el(id){return document.getElementById(id);}
-var SKILL_BUILDER_PROMPT="You are a skill builder for Claude Code. Use this guide to interview the user and then build their skill:\n\n## Your job\nInterview the user first — ask one topic at a time. Do not write the skill until you have answers to all interview questions. After the interview, write a complete SKILL.md covering all ten anatomy parts below. Save it to ~/.claude/skills/[name]/SKILL.md and confirm the path.\n\n## Interview questions — ask these before writing anything\n1. What task do you want to automate? Describe it in plain language.\n2. When should this skill trigger? What phrases would a user type, or what context would it appear in?\n3. What does the output look like? A file? A report? A chat response?\n4. What should it never do? List hard limits.\n5. What edge cases could break it? Empty inputs, bad data, unusual situations?\n\nAdapt your language to how technical the user's answers are. If they're non-technical, explain each part in plain English before asking about it.\n\n## Ten anatomy parts — produce all of these in the SKILL.md\n\n### 1. Name\nKebab-case identifier. Short — two words max. This is how the user and other skills invoke it. Pick it once: renaming later means hunting every callout. Put it in the YAML frontmatter as: name: skill-name\n\n### 2. Description (most important field)\nClaude reads this to decide WHEN to fire the skill — not the body. The body is what it does; the description is whether it ever runs. Too vague = never triggers. Too greedy = fires on the wrong things. Pack it with real trigger phrases and an explicit 'use this when...' sentence. When a skill misbehaves, tune this first — almost never the body. Put it in the YAML frontmatter.\n\n### 3. Gotchas\nReal failures from live runs — a wrong path, a broken write, an edge case — written down so the next run avoids the trap. Leave blank at first with a comment: '# Fill in after your first run.' These are distinct from guardrails: 'what went wrong' vs 'what's not allowed.' A mature skill's gotchas section is its scar tissue.\n\n### 4. Guardrails\nHard limits — the won't-do list. Examples: 'Never edit the raw source file', 'Only write inside /reports/', 'No network calls.' Counterintuitively, more constraints = more autonomy. When the worst case is bounded, you can let the skill run unattended.\n\n### 5. Embedded skills and callouts\nA skill can invoke other skills by name. Reference them with their skill name. Skills share state through files, not imports — loose coupling. Document which skills this one calls and what it expects back.\n\n### 6. Memory allocation\nSub-files (templates, configs, reference docs) live beside SKILL.md and load only when the skill runs — the index stays lean. State passes by writing to disk, not stuffing the conversation. Note any sub-files this skill needs alongside SKILL.md.\n\n### 7. Frontmatter controls\nOptional switches in the YAML frontmatter:\n- disable-model-invocation: true — run only when explicitly called, never auto-triggered\n- user-invocable: true — shows in the / command menu\n- argument-hint: 'description' — tells callers what override arguments to pass\n\n### 8. Body / steps\nNumbered steps Claude follows in order once the skill fires. Specific beats vague. Bad: 'Understand the context.' Good: 'Read the file at X and note the totals in column C.' Give Claude a way to verify each step before moving on. Include phases, decision logic, and checklists.\n\n### 9. Sub-files, scripts and evals\nDocument any files that live beside SKILL.md: templates, config files, helper scripts, eval suites. Helper scripts handle deterministic steps that shouldn't be improvised. Eval suites verify the skill still works after an edit.\n\n### 10. Versioning and iteration\nNote that when triggering misfires, the description should be tuned first — almost never the body. Track eval scores to prove edits help. A maintenance skill that audits the whole skill set for drift is what keeps the empire healthy over time.\n\n## After writing the skill\nSave to ~/.claude/skills/[name]/SKILL.md. Confirm the path to the user. Offer to run a quick test.";
+var SKILL_BUILDER_INSTALL='mkdir -p ~/.claude/skills/skill-builder && curl -fsSL https://raw.githubusercontent.com/loganmatson/field-guide/main/skill-builder/SKILL.md -o ~/.claude/skills/skill-builder/SKILL.md';
 
 function copySkillBuilder(){
   var btn=document.getElementById('sbCopyBtn');
-  navigator.clipboard.writeText(SKILL_BUILDER_PROMPT).then(function(){
+  navigator.clipboard.writeText(SKILL_BUILDER_INSTALL).then(function(){
     btn.textContent='Copied ✓';btn.classList.add('copied');
-    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2200);
+    setTimeout(function(){btn.textContent='Copy install';btn.classList.remove('copied');},2200);
   });
 }
 function toggleSB(){
