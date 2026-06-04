@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Skill Guide">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Team Skills Field Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6ecd6;
+  --paper-2:#efe1c2;
+  --ink:#3a2a1c;
+  --ink-soft:#6a5440;
+  --orange:#e8702a;
+  --orange-deep:#c9531a;
+  --teal:#2f8f86;
+  --teal-deep:#1f6a63;
+  --mustard:#e0a72e;
+  --brick:#bb4430;
+  --sky:#7bb6c7;
+  --line:#3a2a1c;
+  --card:#fffaf0;
+  --shadow:6px 6px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#241c14;
+    --paper-2:#2c2117;
+    --ink:#f3e7d0;
+    --ink-soft:#c5b196;
+    --card:#312418;
+    --line:#f3e7d0;
+    --shadow:6px 6px 0 #000;
+    --shadow-sm:3px 3px 0 #000;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.62;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(var(--ink) 0.6px, transparent 0.6px);
+  background-size:18px 18px;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;opacity:.6;
+}
+
+/* ---------- LAYOUT ---------- */
+.shell{display:grid;grid-template-columns:268px 1fr;max-width:1240px;margin:0 auto;gap:0;}
+.rail{
+  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+  padding:26px 20px 40px;border-right:3px solid var(--line);
+  background:var(--paper-2);
+}
+.content{padding:0 clamp(20px,4vw,56px) 120px;min-width:0;}
+
+/* ---------- RAIL ---------- */
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.brand h1{font-family:'Fredoka';font-weight:700;font-size:1.18rem;line-height:1.05;letter-spacing:-.01em}
+.brand .sub{font-size:.72rem;color:var(--ink-soft);font-weight:500;text-transform:uppercase;letter-spacing:.13em}
+.track-toggle{display:flex;gap:6px;margin:20px 0 8px;background:var(--card);border:2.5px solid var(--line);border-radius:13px;padding:5px;box-shadow:var(--shadow-sm)}
+.track-toggle button{
+  flex:1;font-family:'Fredoka';font-weight:600;font-size:.82rem;padding:8px 4px;border:none;border-radius:8px;
+  background:transparent;color:var(--ink);cursor:pointer;transition:.18s;
+}
+.track-toggle button.on{background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+.track-toggle button.on.lead{background:var(--teal)}
+.rail-note{font-size:.72rem;color:var(--ink-soft);margin:0 2px 18px;line-height:1.4}
+.nav-group{margin-top:14px}
+.nav-group .gl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-soft);font-weight:700;margin:0 0 7px 4px}
+.nav a{
+  display:flex;gap:9px;align-items:flex-start;text-decoration:none;color:var(--ink);
+  font-size:.86rem;padding:7px 9px;border-radius:9px;margin-bottom:2px;font-weight:500;transition:.15s;line-height:1.25;
+}
+.nav a:hover{background:var(--card)}
+.nav a .num{
+  flex:none;width:21px;height:21px;border-radius:50%;background:var(--ink);color:var(--paper);
+  font-family:'JetBrains Mono';font-size:.7rem;font-weight:600;display:grid;place-items:center;margin-top:1px;
+}
+.nav a.lead .num{background:var(--teal-deep)}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;margin:30px 0 18px;padding:34px 30px 30px;
+  background:var(--orange);color:#fff5e6;border:3.5px solid var(--line);border-radius:24px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:var(--mustard);opacity:.4}
+.hero .kick{font-family:'JetBrains Mono';font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;opacity:.92;margin-bottom:10px;position:relative}
+.hero h2{font-family:'Fredoka';font-weight:700;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.02;letter-spacing:-.02em;position:relative;text-shadow:3px 3px 0 var(--orange-deep)}
+.hero p{margin-top:14px;font-size:1.02rem;max-width:54ch;position:relative;opacity:.97}
+.hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative}
+.hero .badges span{background:#fff5e6;color:var(--orange-deep);font-weight:700;font-size:.76rem;padding:5px 11px;border-radius:30px;border:2px solid var(--line)}
+
+/* mascot */
+.mascot{flex:none}
+
+/* ---------- SECTIONS ---------- */
+section{scroll-margin-top:18px;margin-top:46px}
+.sec-head{display:flex;align-items:center;gap:13px;margin-bottom:8px}
+.sec-head .chip{
+  flex:none;font-family:'Fredoka';font-weight:700;font-size:.95rem;color:#fff;background:var(--ink);
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;box-shadow:var(--shadow-sm);
+}
+.sec-head .chip.lead{background:var(--teal-deep)}
+.sec-head .chip.orange{background:var(--orange-deep)}
+h3.sec-title{font-family:'Fredoka';font-weight:700;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.015em;line-height:1.08}
+.lede{color:var(--ink-soft);font-size:1.02rem;margin:4px 0 20px;max-width:64ch}
+
+.step{
+  background:var(--card);border:3px solid var(--line);border-radius:var(--radius);
+  padding:22px 22px 20px;margin-bottom:20px;box-shadow:var(--shadow-sm);position:relative;
+}
+.step h4{font-family:'Fredoka';font-weight:600;font-size:1.18rem;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.step h4 .dot{flex:none;width:13px;height:13px;border-radius:50%;background:var(--orange);border:2px solid var(--line)}
+.step h4 .dot.teal{background:var(--teal)}
+.step p{margin-bottom:11px}
+.step p:last-child{margin-bottom:0}
+.step ul{margin:4px 0 12px;padding-left:0;list-style:none}
+.step ul li{position:relative;padding-left:26px;margin-bottom:7px}
+.step ul li::before{content:"";position:absolute;left:4px;top:9px;width:9px;height:9px;background:var(--teal);border:2px solid var(--line);border-radius:2px;transform:rotate(45deg)}
+
+/* ---------- CODE ---------- */
+.code{
+  position:relative;background:#241c14;border:2.5px solid var(--line);border-radius:12px;
+  margin:12px 0 14px;box-shadow:var(--shadow-sm);
+}
+@media (prefers-color-scheme: dark){.code{background:#15100a}}
+.code .bar{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-bottom:1.5px solid #4a3a28}
+.code .bar .where{font-family:'JetBrains Mono';font-size:.68rem;color:#e0a72e;letter-spacing:.05em}
+.code .bar .dots{display:flex;gap:5px}
+.code .bar .dots i{width:9px;height:9px;border-radius:50%;display:block}
+.code pre{margin:0;padding:13px 14px;overflow-x:auto}
+.code code{font-family:'JetBrains Mono';font-size:.83rem;color:#f4ead8;line-height:1.7;white-space:pre}
+.code .cp{
+  position:absolute;top:6px;right:10px;font-family:'Fredoka';font-weight:600;font-size:.72rem;
+  background:var(--mustard);color:var(--ink);border:2px solid #241c14;border-radius:7px;padding:3px 9px;cursor:pointer;transition:.15s;z-index:2;
+}
+.code .cp:hover{transform:translateY(-1px)}
+.code .cp.done{background:var(--teal);color:#fff}
+
+/* ---------- CALLOUTS ---------- */
+.call{border:3px solid var(--line);border-radius:14px;padding:15px 17px 14px;margin:14px 0;display:flex;gap:13px;box-shadow:var(--shadow-sm)}
+.call .ico{flex:none;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-family:'Fredoka';font-weight:700;color:#fff;font-size:1.1rem}
+.call .body{min-width:0}
+.call .body strong{font-family:'Fredoka';font-weight:600;display:block;margin-bottom:2px;font-size:1rem}
+.call .body p{margin:0;font-size:.94rem;line-height:1.5}
+.call.swap{background:#fdf4dd}.call.swap .ico{background:var(--mustard);color:var(--ink)}
+.call.dont{background:#f9e3dd}.call.dont .ico{background:var(--brick)}
+.call.warn{background:#fdeede}.call.warn .ico{background:var(--orange)}
+.call.tip{background:#e3f1ee}.call.tip .ico{background:var(--teal)}
+@media (prefers-color-scheme: dark){
+  .call.swap{background:#34281790}.call.dont{background:#3a221c90}.call.warn{background:#352314}.call.tip{background:#1d2e2b90}
+}
+
+/* ---------- MENTAL MODEL ---------- */
+.twin{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin:18px 0}
+.twin .box{background:var(--card);border:3px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow-sm)}
+.twin .box h5{font-family:'Fredoka';font-weight:600;font-size:1.05rem;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.twin .box .tag{font-family:'JetBrains Mono';font-size:.66rem;background:var(--ink);color:var(--paper);padding:2px 7px;border-radius:20px;letter-spacing:.05em}
+.twin .box p{font-size:.9rem;margin:0;color:var(--ink-soft)}
+.twin .arrow{font-family:'Fredoka';font-weight:700;font-size:1.5rem;color:var(--orange);text-align:center;line-height:1}
+
+/* ---------- ANALOGY PANEL ---------- */
+.analogy{
+  background:linear-gradient(135deg,var(--sky),var(--teal));color:#fff;border:3.5px solid var(--line);
+  border-radius:20px;padding:24px;margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.analogy::before{content:"";position:absolute;left:-30px;bottom:-30px;width:130px;height:130px;border-radius:50%;background:#ffffff22}
+.analogy h5{font-family:'Fredoka';font-weight:700;font-size:1.25rem;margin-bottom:8px;position:relative}
+.analogy p{position:relative;font-size:.98rem;margin-bottom:10px;opacity:.98}
+.analogy p:last-child{margin-bottom:0}
+.analogy .pin{display:inline-block;background:#fff;color:var(--teal-deep);font-weight:700;border-radius:7px;padding:1px 8px;border:2px solid var(--line);font-size:.9rem}
+
+/* ---------- TROUBLE TABLE ---------- */
+.trouble{display:grid;gap:14px;margin-top:8px}
+.trouble .row{background:var(--card);border:3px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow-sm)}
+.trouble .err{font-family:'JetBrains Mono';font-weight:600;color:var(--ink);font-size:.92rem;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+.trouble .err .x{flex:none;width:20px;height:20px;background:var(--brick);color:#fff;border-radius:50%;display:grid;place-items:center;font-family:'Fredoka';font-size:.8rem;border:2px solid var(--line)}
+.trouble .why{font-size:.92rem;margin-bottom:6px}
+.trouble .fix{font-size:.92rem;background:#e3f1ee;border-left:4px solid var(--teal);padding:8px 11px;border-radius:0 8px 8px 0}
+@media (prefers-color-scheme:dark){.trouble .fix{background:#1d2e2b90}}
+.trouble .fix b{font-family:'Fredoka';font-weight:600}
+
+/* ---------- DIVIDER ---------- */
+.wave{height:26px;margin:40px 0 6px;background:
+  repeating-linear-gradient(135deg,var(--orange) 0 14px,var(--mustard) 14px 28px);
+  border:2.5px solid var(--line);border-radius:30px;box-shadow:var(--shadow-sm)}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px dashed var(--line);font-family:'JetBrains Mono';font-size:.78rem;color:var(--ink-soft)}
+
+.track-block{display:none}
+.track-block.show{display:block}
+
+/* mobile */
+.menu-btn{display:none}
+@media (max-width:880px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;z-index:50;width:280px;transform:translateX(-100%);transition:.25s;box-shadow:8px 0 0 #0003}
+  .rail.open{transform:none}
+  .menu-btn{display:flex;align-items:center;gap:8px;position:fixed;bottom:18px;right:18px;z-index:60;
+    font-family:'Fredoka';font-weight:600;background:var(--orange);color:#fff;border:3px solid var(--line);
+    border-radius:30px;padding:11px 18px;box-shadow:var(--shadow);cursor:pointer;font-size:.9rem}
+  .twin{grid-template-columns:1fr}.twin .arrow{transform:rotate(90deg)}
+  .content{padding:0 18px 110px}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- ============ RAIL ============ -->
+  <aside class="rail" id="rail">
+    <div class="brand">
+      <svg class="mascot" width="42" height="42" viewBox="0 0 48 48" fill="none">
+        <rect x="6" y="20" width="36" height="22" rx="6" fill="#e8702a" stroke="#3a2a1c" stroke-width="2.5"/>
+        <path d="M9 20 Q24 6 39 20" fill="#e0a72e" stroke="#3a2a1c" stroke-width="2.5"/>
+        <rect x="20" y="14" width="8" height="8" rx="2" fill="#fffaf0" stroke="#3a2a1c" stroke-width="2"/>
+        <circle cx="17" cy="30" r="3" fill="#3a2a1c"/><circle cx="31" cy="30" r="3" fill="#3a2a1c"/>
+        <path d="M18 36 Q24 40 30 36" stroke="#3a2a1c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>Skills Field Manual</h1>
+        <div class="sub">Team Setup Guide</div>
+      </div>
+    </div>
+
+    <div class="track-toggle">
+      <button id="tb-analyst" class="on" onclick="setTrack('analyst')">Analyst</button>
+      <button id="tb-lead" class="lead" onclick="setTrack('lead')">Lead / Admin</button>
+    </div>
+    <p class="rail-note">Most of the team follows the <b>Analyst</b> track. The person setting things up reads the <b>Lead</b> track.</p>
+
+    <div class="nav" id="nav-analyst">
+      <div class="nav-group">
+        <div class="gl">Start here</div>
+        <a href="#model"><span class="num">·</span><span>How sharing actually works</span></a>
+      </div>
+      <div class="nav-group">
+        <div class="gl">Analyst journey</div>
+        <a href="#a1"><span class="num">1</span><span>Install Claude Code</span></a>
+        <a href="#a2"><span class="num">2</span><span>Sign in to your team account</span></a>
+        <a href="#a3"><span class="num">3</span><span>The skills folder, done safely</span></a>
+        <a href="#a4"><span class="num">4</span><span>Connect to the team library</span></a>
+        <a href="#a5"><span class="num">5</span><span>Share a skill back</span></a>
+      </div>
+      <div class="nav-group">
+        <div class="gl">When things go sideways</div>
+        <a href="#edit"><span class="num">·</span><span>Fix a skill yourself</span></a>
+        <a href="#gov"><span class="num">·</span><span>Who can change what</span></a>
+        <a href="#trouble"><span class="num">·</span><span>Troubleshooting</span></a>
+      </div>
+    </div>
+
+    <div class="nav" id="nav-lead" style="display:none">
+      <div class="nav-group">
+        <div class="gl">Start here</div>
+        <a class="lead" href="#model"><span class="num">·</span><span>How sharing actually works</span></a>
+      </div>
+      <div class="nav-group">
+        <div class="gl">Lead / Admin track</div>
+        <a class="lead" href="#l1"><span class="num">1</span><span>Invite the team to the plan</span></a>
+        <a class="lead" href="#l2"><span class="num">2</span><span>Build the team library repo</span></a>
+        <a class="lead" href="#l3"><span class="num">3</span><span>Give the team access</span></a>
+        <a class="lead" href="#l4"><span class="num">4</span><span>Curate the duplicate skills</span></a>
+        <a class="lead" href="#l5"><span class="num">5</span><span>Publish &amp; push updates</span></a>
+      </div>
+      <div class="nav-group">
+        <div class="gl">Shared reading</div>
+        <a class="lead" href="#gov"><span class="num">·</span><span>Who can change what</span></a>
+        <a class="lead" href="#trouble"><span class="num">·</span><span>Troubleshooting</span></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+    <div class="hero">
+      <div class="kick">For the Puma Capital team · Windows edition</div>
+      <h2>One team, one shared box of skills.</h2>
+      <p>This manual walks you through getting Claude Code running, plugging into your team's shared skill library, and sharing your own work back. No prior coding needed. Copy, paste, done.</p>
+      <div class="badges"><span>Windows only</span><span>Copy-paste ready</span><span>~20 min setup</span></div>
+    </div>
+
+    <div class="call warn">
+      <div class="ico">!</div>
+      <div class="body"><strong>This guide is written for Windows.</strong><p>Every command below assumes a Windows PC using PowerShell. If anyone is on a Mac, the ideas are identical but a few commands differ, so check with your lead before following the install steps.</p></div>
+    </div>
+
+    <!-- ===== MENTAL MODEL ===== -->
+    <section id="model">
+      <div class="sec-head"><div class="chip orange">★</div><h3 class="sec-title">How sharing actually works</h3></div>
+      <p class="lede">Read this first. If you understand these three ideas, nothing later will surprise you.</p>
+
+      <div class="twin">
+        <div class="box">
+          <h5><span class="tag">THE LIBRARY</span></h5>
+          <p>One shared place online (a GitHub repo) that holds the team's official skills. This is the single source of truth.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="box">
+          <h5><span class="tag">YOUR COPY</span></h5>
+          <p>When you install a skill, a copy lands on your own PC. You run that copy. It can drift from the library if you edit it.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <h4><span class="dot"></span>Three ideas to keep in your pocket</h4>
+        <ul>
+          <li><b>There are always two copies of a skill</b> — the official one in the library, and the one installed on your machine.</li>
+          <li><b>You share files, never access</b> — the library hands out skill files. It does not hand out your logins. Everyone signs in as themselves.</li>
+          <li><b>"Pushed" is not "received"</b> — when the lead updates a skill, you only get it after you run the update command. Nothing arrives automatically.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ANALYST TRACK -->
+    <!-- ============================================================ -->
+    <div class="track-block show" id="block-analyst">
+
+      <div class="wave"></div>
+      <p style="font-family:'Fredoka';font-weight:600;font-size:1.05rem"><span style="color:var(--orange-deep)">Analyst track</span> · the five steps everyone follows</p>
+
+      <!-- A1 -->
+      <section id="a1">
+        <div class="sec-head"><div class="chip">1</div><h3 class="sec-title">Install Claude Code</h3></div>
+        <p class="lede">First we put the tool on your PC, then we add it to VS Code so you can use it while you work.</p>
+
+        <div class="step">
+          <h4><span class="dot"></span>Install the tool itself</h4>
+          <p>Open the <b>Start menu</b>, type <code style="font-family:'JetBrains Mono';font-size:.85rem">PowerShell</code>, and open it. Paste this one line and press Enter.</p>
+          <div class="code"><div class="bar"><span class="where">PowerShell</span><span class="dots"><i style="background:#bb4430"></i><i style="background:#e0a72e"></i><i style="background:#2f8f86"></i></span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>irm https://claude.ai/install.ps1 | iex</code></pre></div>
+          <p>That's it. No need to install anything else first.</p>
+        </div>
+
+        <div class="call tip">
+          <div class="ico">✓</div>
+          <div class="body"><strong>Prefer clicking to typing?</strong><p>You can instead run <code style="font-family:'JetBrains Mono';font-size:.82rem">winget install Anthropic.ClaudeCode</code> in PowerShell, which is Windows' built-in app installer. Either route gives you the same tool.</p></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Recommended: install Git for Windows</h4>
+          <p>Git is the engine behind the shared library. Installing it lets Claude Code work at full power instead of falling back to a limited mode. Download it from the official site and click through the installer with the default options.</p>
+          <div class="code"><div class="bar"><span class="where">Download page</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>https://git-scm.com/download/win</code></pre></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot"></span>Add it to VS Code</h4>
+          <p>VS Code is the workspace where you'll actually use Claude Code. If you don't have it yet, install it first.</p>
+          <ul>
+            <li>Download VS Code from <code style="font-family:'JetBrains Mono';font-size:.82rem">https://code.visualstudio.com</code> and install it.</li>
+            <li>Open VS Code, click the <b>Extensions</b> icon on the left sidebar (the four little squares).</li>
+            <li>Search <b>Claude Code</b>, find the one published by Anthropic, and click Install.</li>
+          </ul>
+          <p>You now have Claude Code living right inside your editor.</p>
+        </div>
+      </section>
+
+      <!-- A2 -->
+      <section id="a2">
+        <div class="sec-head"><div class="chip">2</div><h3 class="sec-title">Sign in to your team account</h3></div>
+        <p class="lede">Your access is personal. The library shares skill files with everyone, but each person signs in with their own account.</p>
+
+        <div class="step">
+          <h4><span class="dot"></span>Open Claude Code and log in</h4>
+          <ul>
+            <li>In VS Code, open the Command Palette with <code style="font-family:'JetBrains Mono';font-size:.82rem">Ctrl + Shift + P</code>.</li>
+            <li>Type <b>Claude Code</b> and pick the option to open it.</li>
+            <li>A browser window opens. Sign in with the Claude account your lead invited you to, then come back to VS Code.</li>
+          </ul>
+        </div>
+
+        <div class="call warn">
+          <div class="ico">!</div>
+          <div class="body"><strong>Didn't get an invite yet?</strong><p>You need a seat on the team plan before this step will work. If sign-in says you have no access, message your lead, who handles invites in step 1 of the Lead track.</p></div>
+        </div>
+      </section>
+
+      <!-- A3 -->
+      <section id="a3">
+        <div class="sec-head"><div class="chip">3</div><h3 class="sec-title">The skills folder, done safely</h3></div>
+        <p class="lede">This is the step people get wrong most. Skills have one correct home on your PC. Put them anywhere else and Claude Code simply won't see them.</p>
+
+        <div class="analogy">
+          <h5>Think of it like one labeled shelf in your house</h5>
+          <p>Claude only ever looks in <span class="pin">one shelf</span> for your personal skills. That shelf is a folder named <span class="pin">.claude</span> inside your user folder. Every skill is a small box that sits on that shelf.</p>
+          <p>If you build a beautiful skill but set the box down on the kitchen counter instead of the shelf, Claude walks right past it. It isn't broken, it's just in a place Claude never checks. The whole trick is putting every box on the same shelf the team agreed on.</p>
+          <p>Keep your shelf tidy and matching the team's, and your tools and theirs stay in sync. Scatter boxes around the house, and things quietly go missing.</p>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot"></span>Where the shelf lives on Windows</h4>
+          <p>Your personal skills live here, where <code style="font-family:'JetBrains Mono';font-size:.82rem">&lt;you&gt;</code> is your Windows username.</p>
+          <div class="code"><div class="bar"><span class="where">Folder path</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>C:\Users\&lt;you&gt;\.claude\skills\</code></pre></div>
+          <p>Inside that <code style="font-family:'JetBrains Mono';font-size:.82rem">skills</code> folder, each skill is its own little folder with a file named <code style="font-family:'JetBrains Mono';font-size:.82rem">SKILL.md</code> inside it.</p>
+          <div class="code"><div class="bar"><span class="where">What one skill looks like</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>.claude\
+  skills\
+    interview\
+      SKILL.md
+    darth-vader\
+      SKILL.md</code></pre></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Can't see the .claude folder?</h4>
+          <p>Folders that start with a dot are hidden by Windows. To reveal them, open File Explorer, click <b>View</b> at the top, then <b>Show</b>, then turn on <b>Hidden items</b>. The <code style="font-family:'JetBrains Mono';font-size:.82rem">.claude</code> folder will appear.</p>
+          <p>A shortcut: paste <code style="font-family:'JetBrains Mono';font-size:.82rem">%USERPROFILE%\.claude</code> straight into the File Explorer address bar and press Enter to jump there.</p>
+        </div>
+
+        <div class="call dont">
+          <div class="ico">✕</div>
+          <div class="body"><strong>Don't invent your own folders.</strong><p>Making a new "Skills" folder on your Desktop or inside Documents feels organized, but Claude never looks there. Boxes off the shelf are invisible. Always use the one path above.</p></div>
+        </div>
+      </section>
+
+      <!-- A4 -->
+      <section id="a4">
+        <div class="sec-head"><div class="chip">4</div><h3 class="sec-title">Connect to the team library</h3></div>
+        <p class="lede">Now you point Claude Code at the team's shared library and pull in the official skills. Your lead will give you the real library name to use in place of the placeholder.</p>
+
+        <div class="call swap">
+          <div class="ico">✎</div>
+          <div class="body"><strong>Swap this in.</strong><p>Everywhere you see <code style="font-family:'JetBrains Mono';font-size:.82rem">your-org/team-skills</code>, replace it with the real name your lead gives you, for example <code style="font-family:'JetBrains Mono';font-size:.82rem">pumacap/team-skills</code>.</p></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot"></span>First, get access to the library</h4>
+          <p>The library is a private repo, so Claude Code needs to know it's you. Run this once in PowerShell and follow the browser prompts.</p>
+          <div class="code"><div class="bar"><span class="where">PowerShell · run once</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>gh auth login</code></pre></div>
+          <p>If <code style="font-family:'JetBrains Mono';font-size:.82rem">gh</code> isn't installed, grab it from <code style="font-family:'JetBrains Mono';font-size:.82rem">https://cli.github.com</code>, then run the line above.</p>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot"></span>Add the library and install its skills</h4>
+          <p>Run these two lines inside Claude Code (in the Claude Code chat box in VS Code, not in PowerShell).</p>
+          <div class="code"><div class="bar"><span class="where">Inside Claude Code</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>/plugin marketplace add your-org/team-skills
+/plugin install core-toolkit@team-skills</code></pre></div>
+          <p>The shared skills now show up in your skill menu when you type <code style="font-family:'JetBrains Mono';font-size:.82rem">/</code>. You're connected.</p>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Getting updates later</h4>
+          <p>When your lead improves a skill, you don't get it automatically. Run this when they tell you there's an update.</p>
+          <div class="code"><div class="bar"><span class="where">Inside Claude Code</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>/plugin marketplace update team-skills</code></pre></div>
+        </div>
+      </section>
+
+      <!-- A5 -->
+      <section id="a5">
+        <div class="sec-head"><div class="chip">5</div><h3 class="sec-title">Share a skill back</h3></div>
+        <p class="lede">Built something useful? Great. On this team, you propose it and the lead publishes it to the library. That keeps one clean, official version for everyone.</p>
+
+        <div class="step">
+          <h4><span class="dot"></span>How to propose your skill</h4>
+          <ul>
+            <li>Find your skill folder on the shelf: <code style="font-family:'JetBrains Mono';font-size:.82rem">C:\Users\&lt;you&gt;\.claude\skills\your-skill\</code>.</li>
+            <li>Open <code style="font-family:'JetBrains Mono';font-size:.82rem">SKILL.md</code> and read it once for anything private, then send the whole folder to your lead.</li>
+            <li>Tell your lead in one line what it does and when it should fire. They review it and add it to the library.</li>
+          </ul>
+          <p>Once it's published, the rest of the team picks it up with the same update command from step 4.</p>
+        </div>
+
+        <div class="call dont">
+          <div class="ico">✕</div>
+          <div class="body"><strong>Scrub before you send.</strong><p>Skills sometimes pick up private notes, client names, or hard-coded paths from your PC. Read through it and remove anything personal before it goes to the shared library, even a private one.</p></div>
+        </div>
+
+        <div class="call warn">
+          <div class="ico">!</div>
+          <div class="body"><strong>A SKILL.md only has a few real settings.</strong><p>At the top of the file, the only official settings are <code style="font-family:'JetBrains Mono';font-size:.82rem">name</code>, <code style="font-family:'JetBrains Mono';font-size:.82rem">description</code>, <code style="font-family:'JetBrains Mono';font-size:.82rem">disable-model-invocation</code>, and <code style="font-family:'JetBrains Mono';font-size:.82rem">user-invocable</code>. If you see invented ones like a <code style="font-family:'JetBrains Mono';font-size:.82rem">triggers</code> list, delete them, since Claude decides when to use a skill from its <code style="font-family:'JetBrains Mono';font-size:.82rem">description</code>.</p></div>
+        </div>
+      </section>
+
+    </div><!-- /analyst block -->
+
+    <!-- ============================================================ -->
+    <!-- LEAD TRACK -->
+    <!-- ============================================================ -->
+    <div class="track-block" id="block-lead">
+
+      <div class="wave" style="background:repeating-linear-gradient(135deg,var(--teal) 0 14px,var(--sky) 14px 28px)"></div>
+      <p style="font-family:'Fredoka';font-weight:600;font-size:1.05rem"><span style="color:var(--teal-deep)">Lead / Admin track</span> · you set the library up once for everyone</p>
+
+      <!-- L1 -->
+      <section id="l1">
+        <div class="sec-head"><div class="chip lead">1</div><h3 class="sec-title">Invite the team to the plan</h3></div>
+        <p class="lede">Before anyone can sign in, they need a seat. This is the one step that happens on the website, not in code.</p>
+        <div class="step">
+          <h4><span class="dot teal"></span>Add each person</h4>
+          <ul>
+            <li>Open your team's admin settings on the Claude website.</li>
+            <li>Invite each analyst by email so they each get their own seat.</li>
+            <li>Without a seat, their sign-in in Analyst step 2 will fail, so do this first.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- L2 -->
+      <section id="l2">
+        <div class="sec-head"><div class="chip lead">2</div><h3 class="sec-title">Build the team library repo</h3></div>
+        <p class="lede">The library is a GitHub repo with a specific shape. Get the shape right and Claude Code can install from it.</p>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Create the folder structure</h4>
+          <p>Run these in PowerShell to make the library's skeleton.</p>
+          <div class="code"><div class="bar"><span class="where">PowerShell</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>mkdir team-skills
+cd team-skills
+mkdir .claude-plugin
+mkdir plugins\core-toolkit\skills</code></pre></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Add the library's table of contents</h4>
+          <p>Create a file at <code style="font-family:'JetBrains Mono';font-size:.82rem">.claude-plugin\marketplace.json</code> with this inside. It lists what's in the library.</p>
+          <div class="code"><div class="bar"><span class="where">.claude-plugin\marketplace.json</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>{
+  "name": "team-skills",
+  "owner": { "name": "Your Team" },
+  "plugins": [
+    {
+      "name": "core-toolkit",
+      "description": "Standard skills everyone uses",
+      "version": "1.0.0",
+      "source": "./plugins/core-toolkit"
+    }
+  ]
+}</code></pre></div>
+        </div>
+
+        <div class="call warn">
+          <div class="ico">!</div>
+          <div class="body"><strong>Only the table of contents goes in .claude-plugin.</strong><p>The skills themselves live in <code style="font-family:'JetBrains Mono';font-size:.82rem">plugins\core-toolkit\skills\</code>, not inside <code style="font-family:'JetBrains Mono';font-size:.82rem">.claude-plugin</code>. Putting skill folders in the wrong place is the most common setup mistake.</p></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>What the finished library looks like</h4>
+          <div class="code"><div class="bar"><span class="where">Library layout</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>team-skills\
+  .claude-plugin\
+    marketplace.json
+  plugins\
+    core-toolkit\
+      skills\
+        interview\
+          SKILL.md
+        darth-vader\
+          SKILL.md</code></pre></div>
+        </div>
+      </section>
+
+      <!-- L3 -->
+      <section id="l3">
+        <div class="sec-head"><div class="chip lead">3</div><h3 class="sec-title">Give the team access</h3></div>
+        <p class="lede">Push the library to GitHub as a private repo, then add each analyst so they can reach it.</p>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Push it private</h4>
+          <div class="code"><div class="bar"><span class="where">PowerShell · inside team-skills</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>git init
+git add .
+git commit -m "Initial team skills library"
+gh repo create your-org/team-skills --private --source=. --push</code></pre></div>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Add each analyst as a collaborator</h4>
+          <p>A private repo is invisible to people you haven't added. Run this for each person, swapping in their GitHub username.</p>
+          <div class="code"><div class="bar"><span class="where">PowerShell</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>gh repo edit your-org/team-skills --add-collaborator their-username</code></pre></div>
+        </div>
+
+        <div class="call dont">
+          <div class="ico">✕</div>
+          <div class="body"><strong>Skip this and step 4 silently fails.</strong><p>If an analyst isn't a collaborator, their <code style="font-family:'JetBrains Mono';font-size:.82rem">/plugin marketplace add</code> returns "not found" with no clear reason. This is the number-one support ticket, so add everyone up front.</p></div>
+        </div>
+      </section>
+
+      <!-- L4 -->
+      <section id="l4">
+        <div class="sec-head"><div class="chip lead">4</div><h3 class="sec-title">Curate the duplicate skills</h3></div>
+        <p class="lede">Right now several analysts each built their own version of the same skills, like interview, tony-stark, and darth-vader. Your job is to turn each pile of near-duplicates into one official version.</p>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>For each duplicated skill</h4>
+          <ul>
+            <li>Collect everyone's version of that skill into one place.</li>
+            <li>Read them side by side and pick the strongest one, or merge the best parts into a single file.</li>
+            <li>Strip anything personal, any client names, and any hard-coded paths like <code style="font-family:'JetBrains Mono';font-size:.82rem">C:\Users\someone\...</code> that would break on other PCs.</li>
+            <li>Drop the winning version into <code style="font-family:'JetBrains Mono';font-size:.82rem">plugins\core-toolkit\skills\</code> as the one true copy.</li>
+          </ul>
+          <p>From now on, that single version is what the whole team installs. The private one-off copies retire.</p>
+        </div>
+
+        <div class="call tip">
+          <div class="ico">✓</div>
+          <div class="body"><strong>This is the moment drift stops.</strong><p>Once a skill has one official home, "whose version is right" stops being a question. Everyone installs the same one and improvements flow through you.</p></div>
+        </div>
+      </section>
+
+      <!-- L5 -->
+      <section id="l5">
+        <div class="sec-head"><div class="chip lead">5</div><h3 class="sec-title">Publish and push updates</h3></div>
+        <p class="lede">Publishing a change is just saving it to the library and telling the team to pull it. Review analyst submissions the same way.</p>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Ship a change</h4>
+          <div class="code"><div class="bar"><span class="where">PowerShell · inside team-skills</span></div><button class="cp" onclick="cp(this)">Copy</button><pre><code>git add .
+git commit -m "Update interview skill"
+git push</code></pre></div>
+          <p>Then post one line to the team: run <code style="font-family:'JetBrains Mono';font-size:.82rem">/plugin marketplace update team-skills</code>. Until they do, they're still on the old version.</p>
+        </div>
+
+        <div class="step">
+          <h4><span class="dot teal"></span>Reviewing what analysts send you</h4>
+          <ul>
+            <li>An analyst hands you a skill folder from Analyst step 5.</li>
+            <li>Read the <code style="font-family:'JetBrains Mono';font-size:.82rem">SKILL.md</code>: check it's clean, has no invented settings, and no machine-specific paths.</li>
+            <li>If it's good, drop it into the skills folder, commit, push, and announce the update.</li>
+          </ul>
+        </div>
+      </section>
+
+    </div><!-- /lead block -->
+
+    <!-- ============================================================ -->
+    <!-- SHARED SECTIONS -->
+    <!-- ============================================================ -->
+
+    <div class="wave"></div>
+
+    <!-- EDIT -->
+    <section id="edit">
+      <div class="sec-head"><div class="chip orange">✎</div><h3 class="sec-title">Fix a skill yourself, fast</h3></div>
+      <p class="lede">A skill keeps tripping over the same thing? You can patch your own copy in seconds to unblock yourself, then send the real fix to your lead.</p>
+
+      <div class="step">
+        <h4><span class="dot"></span>Edit your local copy in VS Code</h4>
+        <ul>
+          <li>In VS Code, choose <b>File</b>, then <b>Open Folder</b>, and open <code style="font-family:'JetBrains Mono';font-size:.82rem">C:\Users\&lt;you&gt;\.claude\skills</code>.</li>
+          <li>Find the skill's folder and click its <code style="font-family:'JetBrains Mono';font-size:.82rem">SKILL.md</code> to open it.</li>
+          <li>Make your edit, then save with <code style="font-family:'JetBrains Mono';font-size:.82rem">Ctrl + S</code>. The change is live right away on your machine.</li>
+        </ul>
+      </div>
+
+      <div class="call warn">
+        <div class="ico">!</div>
+        <div class="body"><strong>A local fix only fixes your copy.</strong><p>Editing your machine's copy unblocks you, but everyone else still has the old broken version. If the fix is worth keeping, send it to your lead so it reaches the whole team.</p></div>
+      </div>
+    </section>
+
+    <!-- GOVERNANCE -->
+    <section id="gov">
+      <div class="sec-head"><div class="chip orange">⚖</div><h3 class="sec-title">Who can change what</h3></div>
+      <p class="lede">Anyone can change their own copy. Only the lead changes the official library copy. That split is what keeps a shared skill from quietly breaking for the whole team.</p>
+
+      <div class="twin">
+        <div class="box">
+          <h5><span class="tag">YOU, LOCALLY</span></h5>
+          <p>Edit your installed copy anytime to unblock yourself. It affects only you and is meant to be temporary.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="box">
+          <h5><span class="tag">LEAD, OFFICIALLY</span></h5>
+          <p>Takes your fix, reviews it, and publishes it to the library so everyone gets it on the next update.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <h4><span class="dot"></span>The recurring-problem loop</h4>
+        <ul>
+          <li><b>Unblock now</b> — patch your local copy so you can keep working.</li>
+          <li><b>Send it up</b> — give the same fix to your lead with a one-line note on what kept failing.</li>
+          <li><b>Team pulls it</b> — the lead publishes, posts the update line, and everyone runs the update.</li>
+        </ul>
+        <p>If something fails over and over, don't just patch the symptom. Tell your lead the pattern so the official skill gets made sturdier for everyone.</p>
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section id="trouble">
+      <div class="sec-head"><div class="chip orange">⚑</div><h3 class="sec-title">Troubleshooting</h3></div>
+      <p class="lede">The three things that actually go wrong, and the exact fix for each.</p>
+
+      <div class="trouble">
+        <div class="row">
+          <div class="err"><span class="x">✕</span>"Marketplace not found" when adding the library</div>
+          <p class="why"><b>Why:</b> you either haven't run <code style="font-family:'JetBrains Mono';font-size:.82rem">gh auth login</code> yet, or your lead hasn't added you as a collaborator on the private repo.</p>
+          <div class="fix"><b>Fix:</b> run <code style="font-family:'JetBrains Mono';font-size:.82rem">gh auth login</code> first. Still stuck? Ask your lead to confirm you're a collaborator on the repo, then try the add command again.</div>
+        </div>
+
+        <div class="row">
+          <div class="err"><span class="x">✕</span>A skill works for one person but fails for another</div>
+          <p class="why"><b>Why:</b> the skill usually has a hard-coded path from someone's PC like <code style="font-family:'JetBrains Mono';font-size:.82rem">C:\Users\jane\...</code>, or it needs a connection that person set up and you didn't, such as Google or Slack.</p>
+          <div class="fix"><b>Fix:</b> open the <code style="font-family:'JetBrains Mono';font-size:.82rem">SKILL.md</code> and remove machine-specific paths so it works for everyone. Share the skill, never the personal login behind it.</div>
+        </div>
+
+        <div class="row">
+          <div class="err"><span class="x">✕</span>A teammate is running an old version of a skill</div>
+          <p class="why"><b>Why:</b> installing takes a snapshot. A push to the library does not reach anyone until they pull it.</p>
+          <div class="fix"><b>Fix:</b> have them run <code style="font-family:'JetBrains Mono';font-size:.82rem">/plugin marketplace update team-skills</code> inside Claude Code. Remember, "pushed" is not "received" until they update.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Skills Field Manual · built for the Puma Capital team · Windows edition<br>
+      Replace <code style="font-family:'JetBrains Mono';font-size:.74rem">your-org/team-skills</code> with your real library name throughout.
+    </footer>
+  </main>
+</div>
+
+<button class="menu-btn" onclick="toggleRail()">☰ Steps</button>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+function setTrack(which){
+  var isA = which === 'analyst';
+  document.getElementById('block-analyst').classList.toggle('show', isA);
+  document.getElementById('block-lead').classList.toggle('show', !isA);
+  document.getElementById('nav-analyst').style.display = isA ? '' : 'none';
+  document.getElementById('nav-lead').style.display = isA ? 'none' : '';
+  document.getElementById('tb-analyst').classList.toggle('on', isA);
+  document.getElementById('tb-lead').classList.toggle('on', !isA);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// copy buttons — inert, no network
+function cp(btn){
+  try{
+    var code = btn.parentElement.querySelector('code').innerText;
+    navigator.clipboard.writeText(code);
+    var old = btn.innerText;
+    btn.innerText = 'Copied';
+    btn.classList.add('done');
+    setTimeout(function(){ btn.innerText = old; btn.classList.remove('done'); }, 1400);
+  }catch(e){ console.error(e); }
+}
+
+function toggleRail(){ document.getElementById('rail').classList.toggle('open'); }
+
+// close rail after clicking a nav link on mobile
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.nav a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.innerWidth <= 880){ document.getElementById('rail').classList.remove('open'); }
+    });
+  });
+});
+</script>
+</body>
+</html>
