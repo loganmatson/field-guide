@@ -652,8 +652,8 @@ footer b{color:var(--lime-deep)}
     <section class="module" id="anatomy"><div class="wrap">
       <div class="mod-head">
         <div class="statline" data-anim="up"><span class="modid">module <b>0x02</b></span><span class="statchip"><span class="sd"></span>anatomy</span></div>
-        <h2 class="h2" data-anim="up">A skill is a file — <span class="accent">with ten moving parts.</span></h2>
-        <p class="lede" data-anim="up">One <span class="inline-code">SKILL.md</span> in a folder. Tap each part for what it does. Then build one yourself in the next chapter.</p>
+        <h2 class="h2" data-anim="up">A skill is a <span class="accent">folder</span> — not just a file.</h2>
+        <p class="lede" data-anim="up">A common misconception: skills are "just markdown files." They're actually folders — scripts, references, assets, memory logs — and <span class="inline-code">SKILL.md</span> is the entry point that tells Claude what's inside. Tap each part for what it does. Then build one yourself in the next chapter.</p>
       </div>
       <div class="blocks" id="anatomy-list"></div>
 
@@ -696,7 +696,7 @@ footer b{color:var(--lime-deep)}
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">description</div>
-                  <div class="aa-text">The <em>trigger</em> — this field tells Claude <b>when</b> to use the skill. It's the most important line you'll write.</div>
+                  <div class="aa-text">The <em>trigger</em> — the most important line you'll write. Claude scans every description at session start to decide "is there a skill for this?" Write it for that scan, not for a human reading docs: pack in the exact phrases a user might say, even if it reads over-explained.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">body / instructions</div>
@@ -704,7 +704,7 @@ footer b{color:var(--lime-deep)}
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">gotchas</div>
-                  <div class="aa-text">The <b>sticky note from the last person who ran it</b> — failure modes caught in the wild, not in theory.</div>
+                  <div class="aa-text">The <b>sticky note from the last person who ran it</b> — the highest-signal content in any skill. Not theory: specific failure modes caught in production. <em>"The <code style="font-family:var(--mono);font-size:.8em">subscriptions</code> table is append-only — the row you want is the highest version, not the most recent <code style="font-family:var(--mono);font-size:.8em">created_at</code>."</em> Build it up over time as Claude hits new edges.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">guardrails</div>
@@ -712,7 +712,7 @@ footer b{color:var(--lime-deep)}
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">sub-files / scripts</div>
-                  <div class="aa-text">The <b>tool belt</b> — helpers the skill calls so the main file stays lean and the logic stays sharp.</div>
+                  <div class="aa-text">The <b>tool belt</b> — and the whole folder is context engineering. Split detailed references into <code style="font-family:var(--mono);font-size:.8em">references/api.md</code>, helper functions into <code style="font-family:var(--mono);font-size:.8em">scripts/</code>, output templates into <code style="font-family:var(--mono);font-size:.8em">assets/</code>. Tell Claude what files exist and it reads them at the right moment — progressive disclosure built into the file system.</div>
                 </div>
               </div>
             </div>
