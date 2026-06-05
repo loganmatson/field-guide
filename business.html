@@ -689,32 +689,6 @@ footer b{color:var(--lime-deep)}
                 <li><span class="pn">10</span><span><b>Versioning &amp; iteration</b> <i>— how it gets better over time</i><br>tony-stark runs multiple iterations in numbered directories (<code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-1/</code>, <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-2/</code>…) so regressions are visible. The viewer shows previous iteration output side-by-side. It keeps going until feedback is empty or no meaningful progress is being made. Description optimization runs last — after the skill itself is solid.</span></li>
               </ul>
 
-              <div class="anatomy-analogy" data-anim="up">
-                <div class="aa-row">
-                  <div class="aa-label">name</div>
-                  <div class="aa-text">The <b>job title on the door</b> — Claude finds skills by this handle, so make it short and searchable.</div>
-                </div>
-                <div class="aa-row">
-                  <div class="aa-label">description</div>
-                  <div class="aa-text">The <em>trigger</em> — the most important line you'll write. Claude scans every description at session start to decide "is there a skill for this?" Write it for that scan, not for a human reading docs: pack in the exact phrases a user might say, even if it reads over-explained.</div>
-                </div>
-                <div class="aa-row">
-                  <div class="aa-label">body / instructions</div>
-                  <div class="aa-text">The <b>recipe</b> — imperative steps with the <em>why</em> behind each one, so Claude can adapt at the edges.</div>
-                </div>
-                <div class="aa-row">
-                  <div class="aa-label">gotchas</div>
-                  <div class="aa-text">The <b>sticky note from the last person who ran it</b> — the highest-signal content in any skill. Not theory: specific failure modes caught in production. <em>"The <code style="font-family:var(--mono);font-size:.8em">subscriptions</code> table is append-only — the row you want is the highest version, not the most recent <code style="font-family:var(--mono);font-size:.8em">created_at</code>."</em> Build it up over time as Claude hits new edges.</div>
-                </div>
-                <div class="aa-row">
-                  <div class="aa-label">guardrails</div>
-                  <div class="aa-text">The <em>fence</em> — what this skill is <b>explicitly not allowed to do</b>, no matter what the user asks.</div>
-                </div>
-                <div class="aa-row">
-                  <div class="aa-label">sub-files / scripts</div>
-                  <div class="aa-text">The <b>tool belt</b> — and the whole folder is context engineering. Split detailed references into <code style="font-family:var(--mono);font-size:.8em">references/api.md</code>, helper functions into <code style="font-family:var(--mono);font-size:.8em">scripts/</code>, output templates into <code style="font-family:var(--mono);font-size:.8em">assets/</code>. Tell Claude what files exist and it reads them at the right moment — progressive disclosure built into the file system.</div>
-                </div>
-              </div>
             </div>
 
             <div class="sb-divider"></div>
