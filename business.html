@@ -369,6 +369,16 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .analogy-divider{display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:1.1rem;color:var(--ink-faint)}
 @media(max-width:760px){.analogy-divider{padding:2px 0}}
 
+/* anatomy analogy block */
+.anatomy-analogy{margin:22px 0 6px;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);overflow:hidden}
+.aa-row{display:grid;grid-template-columns:180px 1fr;gap:0;border-bottom:1px solid var(--line-2);align-items:stretch}
+.aa-row:last-child{border-bottom:none}
+.aa-label{padding:18px 22px;background:rgba(0,0,0,.18);display:flex;align-items:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--lime);font-weight:600;border-right:1px solid var(--line-2)}
+.aa-text{padding:18px 24px;font-family:var(--disp);font-size:1.32rem;color:var(--ink);line-height:1.45;display:flex;align-items:center}
+.aa-text b{color:var(--cyan)}
+.aa-text em{color:var(--lime);font-style:normal;font-weight:600}
+@media(max-width:680px){.aa-row{grid-template-columns:1fr}.aa-label{border-right:none;border-bottom:1px solid var(--line-2);padding:12px 16px}.aa-text{font-size:1.1rem;padding:14px 16px}}
+
 /* learning feedback note */
 .learn-feedback-note{margin-top:14px;padding:15px 18px;border:1px solid rgba(91,233,224,.16);border-left:3px solid var(--cyan);background:rgba(91,233,224,.045);border-radius:0 8px 8px 0;font-size:.96rem;color:var(--ink-soft);line-height:1.55}.learn-feedback-note b{color:var(--cyan)}.learn-feedback-note em{color:var(--ink);font-style:italic}
 
@@ -565,11 +575,11 @@ footer b{color:var(--lime-deep)}
   <aside class="rail">
     <div class="rail-head">// course.modules</div>
     <div class="rail-meter">
-      <div class="rm-top"><span>progress</span><span><b id="railSeen">0</b>/10</span></div>
+      <div class="rm-top"><span>progress</span><span><b id="railSeen">0</b>/11</span></div>
       <div class="rm-bar"><span id="railFill"></span></div>
     </div>
     <ul class="proclist" id="proclist"></ul>
-    <div class="rail-foot"><b>$</b> 10 modules loaded<br><b>≈</b> 18 min runtime<br><b>state</b> ready ▮</div>
+    <div class="rail-foot"><b>$</b> 11 modules loaded<br><b>≈</b> 20 min runtime<br><b>state</b> ready ▮</div>
   </aside>
 
   <main class="content">
@@ -584,7 +594,7 @@ footer b{color:var(--lime-deep)}
           <p class="lede big" data-anim="up">Start with one task you repeat by hand. End with a system that plans, writes, audits itself, and remembers — the way this whole empire was built. This part is a course: work top to bottom and you'll know how to build it yourself.</p>
           <div class="hero-cta" data-anim="up"><a class="btn btn-pri" href="#path">▶ Start the course</a><a class="btn btn-ghost" href="#start">Your first hour</a></div>
           <div class="hero-meta" data-anim="up">
-            <div><b>10</b>modules</div>
+            <div><b>11</b>modules</div>
             <div><b>40+</b>skills mapped</div>
             <div><b>5</b>agents wired</div>
             <div><b>1</b>command runs it</div>
@@ -678,6 +688,33 @@ footer b{color:var(--lime-deep)}
                 <li><span class="pn">09</span><span><b>Sub-files, scripts &amp; evals</b> <i>— everything else in the folder</i><br>tony-stark saves test cases to <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">evals/evals.json</code>, runs with/without-skill pairs in parallel, grades with a dedicated <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">agents/grader.md</code> subagent, and aggregates into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">benchmark.json</code>. Results open in an eval viewer — a browser UI where you click through outputs and leave feedback before any changes are made to the skill.</span></li>
                 <li><span class="pn">10</span><span><b>Versioning &amp; iteration</b> <i>— how it gets better over time</i><br>tony-stark runs multiple iterations in numbered directories (<code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-1/</code>, <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-2/</code>…) so regressions are visible. The viewer shows previous iteration output side-by-side. It keeps going until feedback is empty or no meaningful progress is being made. Description optimization runs last — after the skill itself is solid.</span></li>
               </ul>
+
+              <div class="anatomy-analogy" data-anim="up">
+                <div class="aa-row">
+                  <div class="aa-label">name</div>
+                  <div class="aa-text">The <b>job title on the door</b> — Claude finds skills by this handle, so make it short and searchable.</div>
+                </div>
+                <div class="aa-row">
+                  <div class="aa-label">description</div>
+                  <div class="aa-text">The <em>trigger</em> — this field tells Claude <b>when</b> to use the skill. It's the most important line you'll write.</div>
+                </div>
+                <div class="aa-row">
+                  <div class="aa-label">body / instructions</div>
+                  <div class="aa-text">The <b>recipe</b> — imperative steps with the <em>why</em> behind each one, so Claude can adapt at the edges.</div>
+                </div>
+                <div class="aa-row">
+                  <div class="aa-label">gotchas</div>
+                  <div class="aa-text">The <b>sticky note from the last person who ran it</b> — failure modes caught in the wild, not in theory.</div>
+                </div>
+                <div class="aa-row">
+                  <div class="aa-label">guardrails</div>
+                  <div class="aa-text">The <em>fence</em> — what this skill is <b>explicitly not allowed to do</b>, no matter what the user asks.</div>
+                </div>
+                <div class="aa-row">
+                  <div class="aa-label">sub-files / scripts</div>
+                  <div class="aa-text">The <b>tool belt</b> — helpers the skill calls so the main file stays lean and the logic stays sharp.</div>
+                </div>
+              </div>
             </div>
 
             <div class="sb-divider"></div>
@@ -913,6 +950,158 @@ When asked to audit an existing skill, read it fully, then check:
 - Instructions explain why, not just what
 
 Fix issues directly, then report what changed.</pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- INTERVIEW SKILL -->
+    <section class="module" id="interview-skill"><div class="wrap">
+      <div class="mod-head" data-anim="up">
+        <div class="statline"><span class="modid">before you build</span><span class="statchip"><span class="sd"></span>spec it first</span></div>
+        <h2 class="h2">Before tony-stark builds, <span class="accent">/interview specs.</span></h2>
+        <p class="lede">Drop this skill in first. It asks questions until it's 99% confident it understands the full scope — then writes a SPEC.md so tony-stark has a clear target. Bad specs cost 50K tokens to restart.</p>
+      </div>
+
+      <div class="sb-wrap" id="interviewWrap" data-anim="up">
+        <div class="sb-teaser" onclick="toggleInterview()">
+          <span class="sb-badge">⚑ /interview</span>
+          <div class="sb-teaser-text">
+            <b>The spec skill. Runs before any build — interviews you, then writes the requirements file.</b>
+            <span>Minimum 10 questions. Writes SPEC.md to the right folder. Asks where before it writes.</span>
+          </div>
+          <div class="sb-teaser-right">
+            <button class="sb-copy-btn" id="intCopyBtn" onclick="event.stopPropagation();copyInterview()">Copy install</button>
+            <span class="sb-toggle" id="intToggle">How it works →</span>
+          </div>
+        </div>
+        <div class="sb-body" id="intBody">
+          <div class="sb-body-inner">
+            <p class="sb-lede">Install this before tony-stark. Say <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">/interview [what you want to build]</code> — it interviews you, then writes a SPEC.md. Open a fresh session and run tony-stark against it.</p>
+
+            <div class="sb-section">
+              <div class="sb-section-title">The workflow</div>
+              <ul class="sb-part-list">
+                <li><span class="pn">01</span><span><b>/interview [topic]</b> <i>— trigger it</i><br>Say "interview me about X" or "/interview [feature name]". It acknowledges and starts asking — core behavior, scope, edge cases, constraints, success criteria.</span></li>
+                <li><span class="pn">02</span><span><b>10+ questions, 99% confidence</b> <i>— the bar</i><br>It tracks confidence internally after each round. It won't write the spec until it hits 99%. If it's not there after 10 questions, it keeps asking — it'll tell you "I need a few more."</span></li>
+                <li><span class="pn">03</span><span><b>It asks where to save</b> <i>— no guessing</i><br>Before writing, it surfaces the 2–3 most likely paths based on what you discussed (Bob build, Health agent, Finances, etc.) and confirms before writing. You can also type a custom path.</span></li>
+                <li><span class="pn">04</span><span><b>SPEC.md written to disk</b> <i>— then it stops</i><br>It writes the spec and closes out. No building during the interview — that's the rule. Open a fresh session and run tony-stark: it'll find the spec and build against it.</span></li>
+              </ul>
+            </div>
+
+            <div class="sb-divider"></div>
+
+            <div class="sb-section">
+              <div class="sb-section-title">Full SKILL.md — copy and install</div>
+              <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:14px;line-height:1.6">Drop this into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">~/.claude/skills/interview/SKILL.md</code>. Then say "/interview [what you want to build]."</p>
+              <div style="position:relative">
+                <button class="sb-copy-btn" id="intRawCopyBtn" onclick="copyInterviewRaw()" style="position:absolute;top:10px;right:10px;z-index:2">Copy SKILL.md</button>
+                <pre id="interviewRaw" style="background:var(--code-bg);border:1px solid rgba(255,107,91,.2);border-radius:8px;padding:18px;font-family:var(--mono);font-size:11px;line-height:1.75;color:var(--code-fg);overflow-x:auto;overflow-y:auto;max-height:420px;margin:0;white-space:pre">---
+name: interview
+description: >
+  Spec-driven interview before any new build or agent. Asks clarifying questions using
+  AskUserQuestion, then writes a complete SPEC.md. Use before every new Bob build, new agent,
+  or major feature. Trigger phrases: "interview me", "spec this out", "let's plan [X]",
+  "/interview [feature]". Also trigger proactively when the user says "build [X]", "new agent",
+  "new skill", or launches a skill builder without having run /interview first in this session.
+---
+
+## What This Skill Does
+
+Before building anything non-trivial, interview the user to uncover requirements, edge cases,
+and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution happens in a fresh session.
+
+---
+
+## Instructions
+
+1. **Acknowledge the topic**
+   Say: "Let's spec this out before building. I'll ask questions until we've covered everything — then I'll write the spec."
+
+2. **Interview using AskUserQuestion**
+   Ask questions across these dimensions until you reach 99% confidence — minimum 10 questions, no maximum:
+   - **Core behavior**: What does this do? What's the primary user action?
+   - **Technical scope**: What files/systems does it touch? Any existing patterns to follow?
+   - **UI/UX** (if relevant): Layout, interactions, mobile vs desktop, dark mode?
+   - **Data**: What goes in? What comes out? Any persistence needed?
+   - **Edge cases**: What breaks it? What's the failure mode?
+   - **Tradeoffs**: Speed vs accuracy? Simplicity vs power?
+   - **Constraints**: Token budget? Must avoid certain approaches? Dependencies?
+   - **Success criteria**: How do we know it's done? What does "working" look like?
+
+   Keep questions tight — 1–2 at a time max. Use multiSelect when options are non-exclusive.
+
+   **Confidence tracking:** After each round, internally assess your confidence (0–100%).
+   Do NOT write the spec until you hit 99%.
+
+3. **Confirm coverage**
+   After 10+ questions and 99% confidence reached, state: "Confidence: 99% — ready to write the spec."
+   Then ask: "Anything else I should know before I write it?"
+
+4. **Confirm output location**
+   Before writing anything, use AskUserQuestion to ask where the spec should be saved.
+   Infer 2–3 likely paths from context and present them as options (plus Other):
+
+   Default candidates:
+   - Bob builds → Bob The Builder/[Project Name]/SPEC.md
+   - Health agents → Personal/Health/[subfolder]/SPEC.md
+   - Classwork/Extra project → Extra/Classwork/[subfolder]/SPEC.md
+   - Finances project → Personal/Finances/[subfolder]/SPEC.md
+   - General → current working directory SPEC.md
+
+   Only offer the 2–3 that match the project type. Write the spec to exactly that path.
+
+5. **Write SPEC.md**
+   Always write a SPEC.md, even for smaller builds. Capture design preferences so downstream
+   skills don't have to re-ask.
+
+   Format:
+   # Spec: [Feature Name]
+
+   ## Goal
+   One sentence: what this builds and why.
+
+   ## Behavior
+   - Bullet list of what it does
+
+   ## Technical Scope
+   - Files/systems touched
+   - Patterns to follow (with file paths)
+
+   ## UI/UX (if applicable)
+   - Layout, interactions, style standard
+
+   ## Data
+   - Inputs, outputs, persistence
+
+   ## Edge Cases
+   - Known failure modes and how to handle them
+
+   ## Constraints
+   - Hard limits, things to avoid
+
+   ## Success Criteria
+   - How to verify it's working
+
+6. **Security flag**
+   If the build involves HTML files, external APIs, user data, filesystem writes, or shell execution:
+   Add a ## Security section listing key risks.
+
+7. **Close out**
+   Say: "Spec written to [path]. Start a fresh session and run /[skill] or describe the build."
+
+---
+
+## Rules
+- NEVER start building during the interview — spec only
+- NEVER skip the spec write — even if the user says "just go"
+- NEVER write the SPEC.md until confidence is explicitly at 99%
+- Minimum 10 questions or until 99% confidence, whichever comes later
+- Write SPEC.md ONCE — after ALL questions are answered
+- ALWAYS write the SPEC.md to disk and confirm the path</pre>
               </div>
             </div>
 
@@ -1199,6 +1388,30 @@ function toggleSB(){
   var open=wrap.classList.toggle('open');
   tog.textContent=open?'Collapse ↑':'Expand →';
 }
+function toggleInterview(){
+  var wrap=document.getElementById('interviewWrap');
+  var tog=document.getElementById('intToggle');
+  var open=wrap.classList.toggle('open');
+  tog.textContent=open?'Collapse ↑':'How it works →';
+}
+function copyInterview(){
+  var btn=document.getElementById('intCopyBtn');
+  var raw=document.getElementById('interviewRaw');
+  var text=raw?raw.innerText||raw.textContent:'';
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent='Copied ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy install';btn.classList.remove('copied');},2200);
+  });
+}
+function copyInterviewRaw(){
+  var btn=document.getElementById('intRawCopyBtn');
+  var raw=document.getElementById('interviewRaw');
+  var text=raw?raw.innerText||raw.textContent:'';
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent='Copied ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy SKILL.md';btn.classList.remove('copied');},2200);
+  });
+}
 
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var hasGSAP=window.gsap&&window.ScrollTrigger;
@@ -1266,6 +1479,7 @@ var TEN=[
 
 var CH=[
  {id:'path',n:'0x00',t:'start_here'},{id:'blocks',n:'0x01',t:'building_blocks'},{id:'anatomy',n:'0x02',t:'anatomy'},
+ {id:'interview-skill',n:'→',t:'spec_first'},
  {id:'kinds',n:'0x03',t:'skill_roles'},{id:'api',n:'0x04',t:'integrations'},{id:'agents',n:'0x05',t:'skills_vs_agents'},
  {id:'loop',n:'0x06',t:'agentic_loop'},{id:'replace',n:'0x07',t:'what_it_replaces'},{id:'pitfalls',n:'0x08',t:'pitfalls'},
  {id:'habits',n:'0x09',t:'takeaways'}
