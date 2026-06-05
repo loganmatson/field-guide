@@ -67,9 +67,9 @@ nav .row{display:flex;align-items:center;justify-content:space-between;height:58
 .glass{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border:1px solid var(--hair);border-radius:20px;backdrop-filter:blur(6px)}
 
 /* ===== HERO - camera zoom-through portal ===== */
-#hero{position:relative;height:100svh;overflow:hidden;perspective:1000px;z-index:5}
+#hero{position:relative;height:100svh;overflow:hidden;perspective:1000px;z-index:5;display:flex;align-items:center;justify-content:center;padding-top:58px}
 .hero-stack{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d}
-.hero-copy{position:absolute;top:calc(50% + 58px);left:50%;transform:translate(-50%,-50%);z-index:6;text-align:center;padding:0 24px;width:min(100vw,1000px);max-width:1000px;transform-origin:center center;will-change:transform,opacity}
+.hero-copy{position:relative;z-index:6;text-align:center;padding:0 24px;width:min(100vw,1000px);max-width:1000px;transform-origin:center center;will-change:transform,opacity}
 .hero-copy .kick{justify-content:center;margin-bottom:22px}
 #heroTitle{font-family:var(--serif);font-weight:600;font-size:clamp(3rem,11vw,9rem);line-height:.88;letter-spacing:-.04em;margin-bottom:24px}
 #heroTitle .ln{display:block;overflow:hidden}
@@ -588,7 +588,7 @@ if(hasGSAP&&!reduce){
   gsap.registerPlugin(ScrollTrigger);
 
   /* GSAP owns the hero-copy transform so centering survives the scrub */
-  gsap.set('#heroCopy',{xPercent:-50,yPercent:-50,left:'50%',top:'calc(50% + 58px)'});
+  /* heroCopy is flex-centered — no positional override needed */
 
   /* hero title words rise in (inner children only - wrapper is untouched, so no jitter) */
   gsap.set('#heroTitle .w',{yPercent:120,rotate:6,opacity:0});
