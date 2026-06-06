@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B1026">
+<title>Set Up Claude Code · A Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1026; --bg-2:#0E1430; --card:#141B3C; --card-2:#1A2249;
+    --ink:#EAEEFF; --ink-soft:#A7B0D8; --ink-faint:#6B76A8;
+    --indigo:#7C8CFF; --indigo-deep:#5B6BFF; --violet:#B08CFF;
+    --mint:#5CF2C8; --mint-deep:#1FD3A3; --lime:#B8FF5C; --cyan:#4FE0F5;
+    --warn:#FF8A6B; --warn-deep:#FF6B47;
+    --hair:rgba(234,238,255,.10); --hair-2:rgba(234,238,255,.2);
+    --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+    --shadow:0 22px 54px -26px rgba(91,107,255,.7);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{font-family:var(--sans);background:radial-gradient(ellipse 130% 70% at 50% -8%,var(--bg-2),var(--bg));color:var(--ink);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;min-height:100vh}
+  .blob{position:fixed;border-radius:50%;filter:blur(14px);pointer-events:none;z-index:0;opacity:.4}
+  .blob1{width:44vw;height:44vw;background:radial-gradient(circle,var(--indigo) 0%,transparent 66%);top:-16vw;right:-12vw;opacity:.32}
+  .blob2{width:36vw;height:36vw;background:radial-gradient(circle,var(--mint) 0%,transparent 70%);bottom:-12vw;left:-14vw;opacity:.14}
+  .grid-dots{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(234,238,255,.06) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 30%,transparent 100%)}
+
+  nav.fg{position:sticky;top:0;z-index:50;background:rgba(11,16,38,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:13px 24px}
+  nav.fg .home{font-weight:600;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+  nav.fg .home .dot{width:9px;height:9px;border-radius:50%;background:var(--mint)}
+  nav.fg .sep{flex:1}
+  nav.fg a.link{color:var(--ink-soft);text-decoration:none;transition:color .18s}
+  nav.fg a.link:hover{color:var(--mint)}
+
+  .shell{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:228px 1fr;gap:38px;align-items:start}
+
+  aside.toc{position:sticky;top:70px;align-self:start;padding-top:36px}
+  aside.toc .tochead{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+  aside.toc a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink-soft);font-size:13.5px;padding:8px 10px;border-radius:10px;border-left:2px solid transparent;transition:background .16s,color .16s,border-color .16s;line-height:1.25}
+  aside.toc a .pn{font-family:var(--mono);font-size:11px;color:var(--ink-faint);width:18px;flex-shrink:0}
+  aside.toc a:hover{background:rgba(124,140,255,.1);color:var(--ink)}
+  aside.toc a.active{background:rgba(124,140,255,.16);color:var(--indigo);border-left-color:var(--indigo);font-weight:600}
+  aside.toc a.active .pn{color:var(--indigo)}
+
+  main{min-width:0;padding:36px 0 80px}
+  .backlink{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--mint);font-family:var(--mono);font-size:12.5px;margin-bottom:22px;transition:gap .18s}
+  .backlink:hover{gap:11px}
+
+  header.hero{margin-bottom:14px}
+  .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);margin-bottom:14px;font-weight:500}
+  h1{font-family:var(--serif);font-weight:600;letter-spacing:-.025em;line-height:1.02;font-size:clamp(2.2rem,5.5vw,3.4rem)}
+  h1 .accent{background:linear-gradient(100deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{margin-top:16px;max-width:620px;color:var(--ink-soft);font-size:18.5px}
+
+  .intro-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0 10px}
+  .icard{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:20px}
+  .icard .ih{font-family:var(--serif);font-weight:600;font-size:18px;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .icard p{color:var(--ink-soft);font-size:14.5px}
+
+  .analogy{background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--hair);border-left:5px solid var(--indigo);border-radius:16px;padding:20px 22px;margin:22px 0;display:flex;gap:16px;align-items:flex-start}
+  .analogy .ae{font-size:34px;line-height:1;flex-shrink:0}
+  .analogy .at{font-size:15.5px;color:var(--ink)}
+  .analogy .at b{color:var(--indigo)}
+
+  .section{background:var(--card);border:1px solid var(--hair);border-radius:22px;margin:18px 0;padding:26px 26px 24px;scroll-margin-top:80px}
+  .section .stag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:6px}
+  .section h2{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.018em;margin-bottom:6px}
+  .section .lead{color:var(--ink-soft);font-size:15.5px;margin-bottom:8px}
+
+  .step{margin:18px 0}
+  .step .sh{font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:10px;margin-bottom:5px}
+  .step .sh .sb{font-family:var(--mono);font-size:12px;background:rgba(124,140,255,.18);color:var(--indigo);padding:2px 9px;border-radius:7px;flex-shrink:0}
+  .step p{color:var(--ink-soft);font-size:15.5px}
+  .path{font-family:var(--mono);font-size:13px;background:var(--bg-2);color:var(--cyan);padding:2px 7px;border-radius:6px;border:1px solid var(--hair)}
+  ul.clean{list-style:none;margin:8px 0;display:grid;gap:7px}
+  ul.clean li{position:relative;padding-left:24px;color:var(--ink-soft);font-size:15px}
+  ul.clean li::before{content:"›";position:absolute;left:6px;color:var(--mint);font-weight:700}
+
+  /* command reveal */
+  .reveal{margin:13px 0}
+  .reveal-btn{background:rgba(92,242,200,.12);border:1px solid rgba(92,242,200,.34);color:var(--mint);font-family:var(--mono);font-weight:500;font-size:13px;padding:9px 15px;border-radius:11px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:background .16s,transform .14s}
+  .reveal-btn:hover{background:rgba(92,242,200,.2);transform:translateY(-1px)}
+  .reveal-btn .rc{transition:transform .26s}
+  .reveal.open .reveal-btn .rc{transform:rotate(90deg)}
+  .reveal-body{max-height:0;overflow:hidden;transition:max-height .36s ease}
+  .reveal.open .reveal-body{max-height:400px}
+
+  /* terminal */
+  .term{position:relative;background:#070B1C;border-radius:13px;margin:11px 0 0;overflow:hidden;border:1px solid rgba(124,140,255,.22);background-image:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(124,140,255,.025) 2px,rgba(124,140,255,.025) 3px)}
+  .term .bar{display:flex;align-items:center;gap:7px;padding:9px 13px;border-bottom:1px solid rgba(124,140,255,.16)}
+  .term .bar .d{width:10px;height:10px;border-radius:50%}
+  .term .bar .r{background:#FF5F57}.term .bar .y{background:#FEBC2E}.term .bar .g{background:#28C840}
+  .term .bar .ttl{margin-left:8px;font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+  .term pre{margin:0;padding:15px 16px;font-family:var(--mono);font-size:13px;color:#D6E0FF;overflow-x:auto;line-height:1.65}
+  .term pre .pr{color:var(--mint)}
+  .term pre .cm{color:var(--ink-faint)}
+  .term .copy{position:absolute;top:8px;right:10px;background:rgba(124,140,255,.16);border:1px solid rgba(124,140,255,.3);color:var(--indigo);font-family:var(--mono);font-size:11px;padding:5px 11px;border-radius:8px;cursor:pointer;transition:background .16s;z-index:2}
+  .term .copy:hover{background:rgba(124,140,255,.3)}
+  .term .copy.done{background:var(--mint-deep);color:#04140F;border-color:var(--mint-deep)}
+
+  /* what just happened */
+  .whap{margin:11px 0}
+  .whap-btn{background:none;border:none;color:var(--cyan);font-family:var(--mono);font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+  .whap-btn .wc{transition:transform .26s}
+  .whap.open .wc{transform:rotate(90deg)}
+  .whap-body{max-height:0;overflow:hidden;transition:max-height .34s ease}
+  .whap.open .whap-body{max-height:320px}
+  .whap-body .inner{margin-top:9px;font-size:14.5px;color:var(--ink-soft);background:rgba(79,224,245,.07);border:1px solid rgba(79,224,245,.18);border-radius:12px;padding:13px 15px}
+
+  /* tip */
+  .tip{margin:14px 0}
+  .tip-btn{background:linear-gradient(180deg,rgba(184,255,92,.14),rgba(184,255,92,.07));border:1px solid rgba(184,255,92,.35);color:var(--lime);font-family:var(--sans);font-weight:600;font-size:13.5px;padding:8px 14px;border-radius:99px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:transform .14s}
+  .tip-btn:hover{transform:translateY(-1px)}
+  .tip-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .tip.open .tip-body{max-height:240px}
+  .tip-body .inner{margin-top:9px;background:rgba(184,255,92,.06);border:1px dashed rgba(184,255,92,.32);border-radius:12px;padding:13px 15px;font-size:14.5px;color:var(--ink)}
+
+  /* common mistake */
+  .oops{background:rgba(255,107,71,.08);border:1px solid rgba(255,107,71,.3);border-left:4px solid var(--warn);border-radius:13px;padding:14px 17px;margin:14px 0;display:flex;gap:13px;align-items:flex-start}
+  .oops .oe{font-size:22px;flex-shrink:0;line-height:1.2}
+  .oops .ot{font-size:14.5px;color:var(--ink)}
+  .oops .ot b{color:var(--warn)}
+
+  /* flowchart */
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:18px 0;justify-content:center}
+  .flow .node{background:var(--card-2);border:1px solid var(--hair-2);border-radius:14px;padding:14px 16px;text-align:center;min-width:128px;flex:1}
+  .flow .node .ne{font-size:24px;display:block;margin-bottom:6px}
+  .flow .node .nt{font-size:13px;font-weight:600;line-height:1.25}
+  .flow .node .nd{font-size:11.5px;color:var(--ink-faint);margin-top:3px}
+  .flow .arrow{display:flex;align-items:center;justify-content:center;color:var(--indigo);font-size:22px;padding:0 6px}
+  .flow .node.you{border-color:var(--mint);box-shadow:0 0 0 2px rgba(92,242,200,.2)}
+  @media(max-width:680px){
+    .flow{flex-direction:column}
+    .flow .arrow{transform:rotate(90deg);padding:4px 0}
+  }
+
+  .section-h{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.02em;margin:46px 0 6px;display:flex;align-items:center;gap:11px}
+  .section-sub{color:var(--ink-soft);margin-bottom:18px;font-size:16px}
+
+  /* FAQ */
+  .faq{background:var(--card);border:1px solid var(--hair);border-radius:16px;margin:11px 0;overflow:hidden}
+  .faq-q{display:flex;align-items:center;gap:12px;padding:17px 20px;cursor:pointer;font-weight:600;font-size:16px;user-select:none}
+  .faq-q .qm{font-size:20px;flex-shrink:0}
+  .faq-q .fc{margin-left:auto;color:var(--ink-faint);transition:transform .26s;font-family:var(--mono)}
+  .faq.open .fc{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .34s ease}
+  .faq.open .faq-a{max-height:360px}
+  .faq-a .inner{padding:0 20px 18px;color:var(--ink-soft);font-size:15px}
+
+  /* checklist */
+  .checklist{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--hair);border-radius:22px;padding:26px 26px 22px;margin-top:18px;box-shadow:var(--shadow)}
+  .checklist h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:4px}
+  .checklist .cp{color:var(--ink-soft);font-size:15px;margin-bottom:18px}
+  .check{display:flex;align-items:center;gap:14px;padding:13px 15px;border:2px solid var(--hair);border-radius:14px;margin:9px 0;cursor:pointer;transition:border-color .18s,background .18s;user-select:none}
+  .check:hover{border-color:var(--indigo)}
+  .check .box{width:26px;height:26px;border-radius:8px;border:2px solid var(--hair-2);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#04140F;font-weight:800;font-size:15px;transition:background .18s,border-color .18s,transform .18s}
+  .check .ctxt{font-size:15.5px;font-weight:500;transition:color .18s}
+  .check.done{border-color:var(--mint);background:rgba(92,242,200,.08)}
+  .check.done .box{background:var(--mint);border-color:var(--mint);transform:scale(1.05)}
+  .check.done .ctxt{color:var(--ink-faint);text-decoration:line-through}
+  .done-banner{margin-top:18px;text-align:center;font-family:var(--serif);font-size:20px;color:var(--mint);opacity:0;max-height:0;overflow:hidden;transition:opacity .4s,max-height .4s}
+  .done-banner.show{opacity:1;max-height:80px}
+
+  footer{max-width:1180px;margin:0 auto;padding:30px 24px;color:var(--ink-faint);font-family:var(--mono);font-size:12px;text-align:center;border-top:1px solid var(--hair)}
+
+  @media(max-width:880px){
+    .shell{grid-template-columns:1fr}
+    aside.toc{position:static;padding-top:0;margin-top:8px}
+    aside.toc .toclist{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+    aside.toc a{white-space:nowrap}
+    aside.toc a.active{border-left-color:transparent;border-bottom:2px solid var(--indigo)}
+    .intro-cards{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){ main{padding:24px 0 60px} .section{padding:22px 18px} }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="grid-dots"></div>
+
+<nav class="fg">
+  <a class="home" href="home.html"><span class="dot"></span>Field Guide</a>
+  <span class="sep"></span>
+  <a class="link" href="quiz.html">Quiz</a>
+  <a class="link" href="cowork.html">CoWork</a>
+  <a class="link" href="cheatsheet.html">Cheat Sheet</a>
+  <a class="link" href="build-menu.html">Build Menu</a>
+</nav>
+
+<div class="shell">
+  <aside class="toc">
+    <div class="tochead">Your Setup Path</div>
+    <div class="toclist" id="toclist">
+      <a href="#what" class="active"><span class="pn">·</span>What is Claude Code?</a>
+      <a href="#install"><span class="pn">1</span>Install the CLI</a>
+      <a href="#vscode"><span class="pn">2</span>VS Code extension</a>
+      <a href="#first"><span class="pn">3</span>First project</a>
+      <a href="#github"><span class="pn">4</span>GitHub integration</a>
+      <a href="#team"><span class="pn">5</span>Run it on a team</a>
+      <a href="#faq"><span class="pn">·</span>FAQ</a>
+      <a href="#checklist"><span class="pn">✓</span>You're set up</a>
+    </div>
+  </aside>
+
+  <main>
+    <a class="backlink" href="quiz.html">← Not sure this is your path? Take the quiz</a>
+
+    <header class="hero" id="what">
+      <div class="kick">Part 02 · Developer Setup</div>
+      <h1>Set up <span class="accent">Claude Code</span></h1>
+      <p class="lede">Claude that lives in your codebase — installs in the terminal, plugs into VS Code and GitHub, and writes and runs real code. This guide takes you from zero to your first accepted change.</p>
+    </header>
+
+    <div class="analogy">
+      <div class="ae">🧑‍💻</div>
+      <div class="at">Think of Claude Code as <b>a senior developer who lives inside your codebase.</b> You describe what you want; they read every relevant file, write the code, run it, and hand you a diff to approve — like a teammate who already read the whole repo before you asked.</div>
+    </div>
+
+    <div class="intro-cards">
+      <div class="icard">
+        <div class="ih">💬 Claude.ai</div>
+        <p>You paste code in, copy answers out. No file access, no terminal, no awareness of your project.</p>
+      </div>
+      <div class="icard">
+        <div class="ih">⚡ Claude Code (this guide)</div>
+        <p>Runs in your terminal and VS Code. Reads your files, edits them, runs commands, and knows your git history — all with your approval.</p>
+      </div>
+    </div>
+
+    <!-- INSTALL -->
+    <section class="section" id="install">
+      <div class="stag">Step 1</div>
+      <h2>Install the Claude Code CLI</h2>
+      <p class="lead">Two small things first, then one command. Reveal each command when you're ready to run it.</p>
+
+      <div class="step">
+        <div class="sh"><span class="sb">1.1</span> Make sure you have Node.js</div>
+        <p>Claude Code installs through <b>npm</b>, which comes with Node.js. Check if you already have it:</p>
+        <div class="reveal">
+          <button class="reveal-btn" type="button"><span class="rc">›</span> Show command — check Node</button>
+          <div class="reveal-body">
+            <div class="term">
+              <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">terminal</span><button class="copy" type="button">Copy</button></div>
+              <pre><span class="pr">$</span> node --version</pre>
+            </div>
+          </div>
+        </div>
+        <div class="whap">
+          <button class="whap-btn" type="button"><span class="wc">›</span> What just happened?</button>
+          <div class="whap-body"><div class="inner">If you see a version number like <span class="path">v20.x.x</span>, you're set. If you see "command not found," install Node.js from <span class="path">nodejs.org</span> (pick the LTS version) and run the check again.</div></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="sh"><span class="sb">1.2</span> Install Claude Code</div>
+        <p>One command installs it everywhere on your machine:</p>
+        <div class="reveal">
+          <button class="reveal-btn" type="button"><span class="rc">›</span> Show command — install</button>
+          <div class="reveal-body">
+            <div class="term">
+              <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">terminal</span><button class="copy" type="button">Copy</button></div>
+              <pre><span class="pr">$</span> npm install -g @anthropic-ai/claude-code</pre>
+            </div>
+          </div>
+        </div>
+        <div class="whap">
+          <button class="whap-btn" type="button"><span class="wc">›</span> What just happened?</button>
+          <div class="whap-body"><div class="inner">The <span class="path">-g</span> means "global" — it installs Claude Code once, for use in any folder on your computer. After this you can type <span class="path">claude</span> from anywhere.</div></div>
+        </div>
+        <div class="oops">
+          <div class="oe">⚠️</div>
+          <div class="ot"><b>Common mistake:</b> closing the terminal before the install finishes. It can take a minute. Wait until you get your prompt (<span class="path">$</span>) back before moving on.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="sh"><span class="sb">1.3</span> Connect your account</div>
+        <p>Get an API key from <span class="path">console.anthropic.com</span> → API Keys → Create Key. Then start Claude Code — it'll walk you through signing in the first time:</p>
+        <div class="reveal">
+          <button class="reveal-btn" type="button"><span class="rc">›</span> Show command — start it</button>
+          <div class="reveal-body">
+            <div class="term">
+              <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">terminal</span><button class="copy" type="button">Copy</button></div>
+              <pre><span class="pr">$</span> claude</pre>
+            </div>
+          </div>
+        </div>
+        <div class="tip">
+          <button class="tip-btn" type="button">💡 Tip — paste your key just once</button>
+          <div class="tip-body"><div class="inner">Set <span class="path">ANTHROPIC_API_KEY</span> in your shell profile (<span class="path">~/.zshrc</span> on Mac) and you'll never have to paste it again — every new terminal picks it up automatically.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VSCODE -->
+    <section class="section" id="vscode">
+      <div class="stag">Step 2</div>
+      <h2>Add the VS Code extension</h2>
+      <p class="lead">The terminal is the engine. The VS Code extension is the dashboard — same Claude, friendlier view.</p>
+      <div class="step">
+        <div class="sh"><span class="sb">2.1</span> Install from the marketplace</div>
+        <p>In VS Code, open Extensions (the squares icon in the left bar), search <b>"Claude Code"</b>, and click Install. A Claude panel appears in your sidebar.</p>
+      </div>
+      <div class="step">
+        <div class="sh"><span class="sb">2.2</span> Open a project folder</div>
+        <p><span class="path">File → Open Folder</span> → pick the project you want to work on. Claude Code now sees every file in that folder and can read, edit, and run things — always showing you a diff before it changes anything.</p>
+      </div>
+      <div class="analogy" style="margin:14px 0 0">
+        <div class="ae">🖥️</div>
+        <div class="at">Terminal vs. extension is like <b>command line vs. control panel.</b> Same power underneath — the extension just gives you buttons, inline diffs, and clickable file links instead of typing everything.</div>
+      </div>
+      <div class="tip">
+        <button class="tip-btn" type="button">💡 Tip — which should I use?</button>
+        <div class="tip-body"><div class="inner">Use the VS Code extension while you're learning — the inline diffs make it obvious what Claude is doing. Drop to the terminal for long-running tasks and when you're working over SSH on a remote machine.</div></div>
+      </div>
+    </section>
+
+    <!-- FIRST PROJECT -->
+    <section class="section" id="first">
+      <div class="stag">Step 3</div>
+      <h2>Your first project, end to end</h2>
+      <p class="lead">The whole loop: ask → review → approve. Here's how one task actually flows.</p>
+      <ul class="clean">
+        <li><b>Describe the task</b> in plain English — "Add a dark-mode toggle to the settings page."</li>
+        <li><b>Claude reads</b> the relevant files on its own and proposes the change.</li>
+        <li><b>You review the diff</b> — green is added, red is removed, just like code review.</li>
+        <li><b>Approve or reject.</b> Nothing touches your files until you say yes.</li>
+        <li><b>Claude can run it</b> — tests, the dev server — and fix what breaks, again with your approval.</li>
+      </ul>
+      <div class="analogy" style="margin:14px 0">
+        <div class="ae">👀</div>
+        <div class="at">Reviewing Claude's diff is like <b>code review with a coworker who already read the whole repo.</b> You're not writing — you're approving. The judgment stays yours; the typing doesn't.</div>
+      </div>
+      <div class="oops">
+        <div class="oe">⚠️</div>
+        <div class="ot"><b>Common mistake:</b> approving a big diff without reading it. Start small. Read every diff for your first few tasks until you trust the pattern — then you can move faster.</div>
+      </div>
+    </section>
+
+    <!-- GITHUB -->
+    <section class="section" id="github">
+      <div class="stag">Step 4 · The big one</div>
+      <h2>GitHub integration</h2>
+      <p class="lead">This is where Claude Code goes from "handy" to "part of the team." It reads your history, works in branches, and reviews pull requests.</p>
+
+      <div class="flow">
+        <div class="node"><span class="ne">📁</span><span class="nt">Your repo</span><span class="nd">local + GitHub</span></div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="ne">🔎</span><span class="nt">Claude reads</span><span class="nd">files + git history</span></div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="ne">✏️</span><span class="nt">Suggests change</span><span class="nd">on a branch</span></div>
+        <div class="arrow">→</div>
+        <div class="node you"><span class="ne">✅</span><span class="nt">You approve</span><span class="nd">review the diff</span></div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="ne">🚀</span><span class="nt">Commit / PR</span><span class="nd">pushed to GitHub</span></div>
+      </div>
+
+      <div class="step">
+        <div class="sh"><span class="sb">4.1</span> Make sure your repo is a git repo</div>
+        <p>If you cloned it from GitHub, it already is. If not, initialize it once:</p>
+        <div class="reveal">
+          <button class="reveal-btn" type="button"><span class="rc">›</span> Show command — init git</button>
+          <div class="reveal-body">
+            <div class="term">
+              <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">terminal</span><button class="copy" type="button">Copy</button></div>
+              <pre><span class="pr">$</span> git init
+<span class="pr">$</span> git remote add origin https://github.com/you/your-repo.git</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="sh"><span class="sb">4.2</span> Let Claude work in branches</div>
+        <p>Ask Claude to make a change and it can create a branch, commit its work, and push — so your main branch stays clean. You review the branch before merging, exactly like a teammate's PR.</p>
+        <div class="whap">
+          <button class="whap-btn" type="button"><span class="wc">›</span> Why branches matter here</button>
+          <div class="whap-body"><div class="inner">Branches keep experiments off your main code. Claude does its work in a side branch; if you like it, you merge; if not, you delete the branch and nothing's lost. It's a safety net built into how git already works.</div></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="sh"><span class="sb">4.3</span> Code review on pull requests</div>
+        <p>Connect Claude Code to GitHub and it can review open PRs — leaving inline comments on specific lines, catching bugs, and suggesting fixes. It reads the surrounding code and git history, so its comments are about <i>your</i> codebase, not generic advice.</p>
+        <div class="tip">
+          <button class="tip-btn" type="button">💡 Tip — start with review, not writing</button>
+          <div class="tip-body"><div class="inner">The lowest-risk way to introduce Claude Code to a team is as a PR reviewer. It never merges anything — it just comments. Everyone gets value immediately, and trust builds before you let it write code directly.</div></div>
+        </div>
+        <div class="oops">
+          <div class="oe">⚠️</div>
+          <div class="ot"><b>Common mistake:</b> giving Claude access to a repo without committing your current work first. Commit or stash what you have before a big task, so you always have a clean point to roll back to.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section" id="team">
+      <div class="stag">Step 5</div>
+      <h2>Run Claude Code on a team</h2>
+      <p class="lead">The trick to a team setup: everyone inherits the same instructions automatically, straight from the repo.</p>
+      <div class="step">
+        <div class="sh"><span class="sb">5.1</span> Add a shared <span class="path">CLAUDE.md</span></div>
+        <p>Drop a <span class="path">CLAUDE.md</span> file in the root of your repo. Claude Code reads it automatically on every run. Put your conventions, architecture notes, and do/don't rules in it — and because it's committed to the repo, <b>every teammate gets the same setup for free.</b></p>
+        <div class="term">
+          <button class="copy" type="button">Copy</button>
+          <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">CLAUDE.md</span></div>
+          <pre><span class="cm"># Project conventions</span>
+- Use TypeScript, no `any`
+- Tests live next to the file, named *.test.ts
+- Never edit /generated — it's auto-built
+- Ask before adding a new dependency</pre>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sh"><span class="sb">5.2</span> Folder-level instructions</div>
+        <p>You can add a <span class="path">CLAUDE.md</span> inside specific folders too — handy for a monorepo where each package has its own rules. Claude reads the closest one to whatever it's working on.</p>
+      </div>
+      <div class="analogy" style="margin:14px 0 0">
+        <div class="ae">📋</div>
+        <div class="at">A committed <span class="path">CLAUDE.md</span> is your team's <b>shared playbook.</b> New hire clones the repo and their Claude already knows the house style — no onboarding doc to read, no tribal knowledge to absorb.</div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <h2 class="section-h" id="faq">🙋 Questions you'll have</h2>
+    <p class="section-sub">Tap any question.</p>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">🔎</span> Does Claude see my whole codebase? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">It can read files in the folder you opened, but it pulls in what's relevant to the task rather than uploading everything blindly. You stay in control of which folder it's pointed at, and you can scope it further with config.</div></div>
+    </div>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">✋</span> What if it edits something I didn't want? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">Every change is shown as a diff you approve before it's applied — nothing is silent. And because you work in git, you can always undo: <span class="path">git checkout .</span> reverts unwanted edits, and branches keep experiments off your main code.</div></div>
+    </div>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">👥</span> Can multiple devs use it on the same repo? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">Yes — that's the point of the committed <span class="path">CLAUDE.md</span>. Everyone runs their own Claude Code locally, but they all inherit the same project instructions from the repo, so the team works to one consistent standard.</div></div>
+    </div>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">🔐</span> Is my code sent to Anthropic? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">Relevant code is sent to the model to answer your request, the same way any AI coding tool works. On business plans your code isn't used to train models, and there are admin controls for teams. For exact terms, point to Anthropic's data-handling docs — and check whether your org wants the business/enterprise tier for tighter guarantees.</div></div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <h2 class="section-h" id="checklist">✓ You're set up</h2>
+    <p class="section-sub">Tick each one as you go. Five greens means you're ready to build.</p>
+    <div class="checklist">
+      <h3>Launch checklist</h3>
+      <p class="cp">From install to your first GitHub-connected change.</p>
+      <div class="check" data-k="1"><div class="box">✓</div><div class="ctxt">Claude Code CLI is installed (<span class="path">claude</span> runs)</div></div>
+      <div class="check" data-k="2"><div class="box">✓</div><div class="ctxt">My API key is connected (saved in my shell profile)</div></div>
+      <div class="check" data-k="3"><div class="box">✓</div><div class="ctxt">The VS Code extension is installed and a folder is open</div></div>
+      <div class="check" data-k="4"><div class="box">✓</div><div class="ctxt">I've run my first task and approved a diff</div></div>
+      <div class="check" data-k="5"><div class="box">✓</div><div class="ctxt">My GitHub repo is connected (and has a CLAUDE.md if it's a team)</div></div>
+      <div class="done-banner" id="doneBanner">🎉 You're live. Go describe your first real task.</div>
+    </div>
+  </main>
+</div>
+
+<footer>A Field Guide · an unlisted companion to our session</footer>
+
+<script>
+document.querySelectorAll('.reveal-btn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
+document.querySelectorAll('.whap-btn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
+document.querySelectorAll('.tip-btn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
+document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('open')));
+
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pre = btn.closest('.term').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(() => {
+      const old = btn.textContent;
+      btn.textContent = 'Copied ✓'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1600);
+    });
+  });
+});
+
+const banner = document.getElementById('doneBanner');
+const checks = document.querySelectorAll('.check');
+checks.forEach(c => c.addEventListener('click', () => {
+  c.classList.toggle('done');
+  banner.classList.toggle('show', [...checks].every(x => x.classList.contains('done')));
+}));
+
+const tocLinks = [...document.querySelectorAll('aside.toc a')];
+const targets = tocLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){
+      const id = '#' + e.target.id;
+      tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+targets.forEach(t => spy.observe(t));
+</script>
+</body>
+</html>

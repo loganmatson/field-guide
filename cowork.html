@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#EAF7F3">
+<title>Set Up Claude CoWork for Your Team · A Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EAF7F3; --bg-2:#DCF0EA; --card:#FFFFFF;
+    --ink:#15302B; --ink-soft:#4F6E66; --ink-faint:#8AA39B;
+    --teal:#1FA98F; --teal-deep:#137A66; --seafoam:#6FD3BB;
+    --coral:#FF7A59; --coral-deep:#E85A3A; --amber:#FFB23E;
+    --hair:rgba(21,48,43,.10); --hair-2:rgba(21,48,43,.16);
+    --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+    --shadow:0 18px 46px -24px rgba(19,122,102,.5);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{font-family:var(--sans);background:radial-gradient(ellipse 130% 70% at 50% -8%,var(--bg-2),var(--bg));color:var(--ink);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;min-height:100vh}
+  .blob{position:fixed;border-radius:50%;filter:blur(12px);pointer-events:none;z-index:0;opacity:.35}
+  .blob1{width:42vw;height:42vw;background:radial-gradient(circle,var(--seafoam) 0%,transparent 68%);top:-16vw;right:-12vw}
+  .blob2{width:34vw;height:34vw;background:radial-gradient(circle,var(--coral) 0%,transparent 70%);bottom:-12vw;left:-14vw;opacity:.16}
+
+  /* shared nav */
+  nav.fg{position:sticky;top:0;z-index:50;background:rgba(234,247,243,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:13px 24px}
+  nav.fg .home{font-weight:600;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+  nav.fg .home .dot{width:9px;height:9px;border-radius:50%;background:var(--teal)}
+  nav.fg .sep{flex:1}
+  nav.fg a.link{color:var(--ink-soft);text-decoration:none;transition:color .18s}
+  nav.fg a.link:hover{color:var(--teal-deep)}
+
+  .shell{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:228px 1fr;gap:38px;align-items:start}
+
+  /* sticky sidebar */
+  aside.toc{position:sticky;top:70px;align-self:start;padding-top:36px}
+  aside.toc .tochead{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+  aside.toc a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink-soft);font-size:13.5px;padding:8px 10px;border-radius:10px;border-left:2px solid transparent;transition:background .16s,color .16s,border-color .16s;line-height:1.25}
+  aside.toc a .pn{font-family:var(--mono);font-size:11px;color:var(--ink-faint);width:18px;flex-shrink:0}
+  aside.toc a:hover{background:rgba(31,169,143,.08);color:var(--ink)}
+  aside.toc a.active{background:rgba(31,169,143,.13);color:var(--teal-deep);border-left-color:var(--teal);font-weight:600}
+  aside.toc a.active .pn{color:var(--teal)}
+
+  main{min-width:0;padding:36px 0 80px}
+  .backlink{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--teal-deep);font-family:var(--mono);font-size:12.5px;margin-bottom:22px;transition:gap .18s}
+  .backlink:hover{gap:11px}
+
+  header.hero{margin-bottom:14px}
+  .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:14px;font-weight:500}
+  h1{font-family:var(--serif);font-weight:600;letter-spacing:-.025em;line-height:1.02;font-size:clamp(2.2rem,5.5vw,3.4rem)}
+  h1 .accent{color:var(--teal-deep)}
+  .lede{margin-top:16px;max-width:620px;color:var(--ink-soft);font-size:18.5px}
+
+  .intro-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0 10px}
+  .icard{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:20px}
+  .icard .ih{font-family:var(--serif);font-weight:600;font-size:18px;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+  .icard p{color:var(--ink-soft);font-size:14.5px}
+
+  /* analogy spotlight */
+  .analogy{background:linear-gradient(135deg,#fff,#F0FBF7);border:1px solid var(--hair);border-left:5px solid var(--teal);border-radius:16px;padding:20px 22px;margin:22px 0;display:flex;gap:16px;align-items:flex-start}
+  .analogy .ae{font-size:34px;line-height:1;flex-shrink:0}
+  .analogy .at{font-size:15.5px;color:var(--ink)}
+  .analogy .at b{color:var(--teal-deep)}
+
+  /* phase blocks */
+  .phase{background:var(--card);border:1px solid var(--hair);border-radius:22px;margin:18px 0;overflow:hidden;box-shadow:0 2px 0 rgba(21,48,43,.02);scroll-margin-top:80px}
+  .phase-head{display:flex;align-items:center;gap:16px;padding:22px 24px;cursor:pointer;user-select:none;transition:background .16s}
+  .phase-head:hover{background:rgba(31,169,143,.04)}
+  .phase-num{font-family:var(--serif);font-weight:700;font-size:30px;color:#fff;background:linear-gradient(160deg,var(--seafoam),var(--teal));width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 8px 20px -10px var(--teal)}
+  .phase-meta{flex:1;min-width:0}
+  .phase-meta .pl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:3px}
+  .phase-meta h2{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.015em;line-height:1.12}
+  .phase-meta .sum{color:var(--ink-soft);font-size:14px;margin-top:3px}
+  .chev{font-family:var(--mono);color:var(--ink-faint);font-size:20px;transition:transform .28s;flex-shrink:0}
+  .phase.open .chev{transform:rotate(90deg)}
+  .phase-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .phase.open .phase-body{max-height:4000px}
+  .phase-inner{padding:4px 24px 26px;border-top:1px solid var(--hair)}
+
+  .step{margin:18px 0}
+  .step .sh{font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:10px;margin-bottom:5px}
+  .step .sh .sb{font-family:var(--mono);font-size:12px;background:rgba(31,169,143,.14);color:var(--teal-deep);padding:2px 9px;border-radius:7px;flex-shrink:0}
+  .step p{color:var(--ink-soft);font-size:15.5px}
+  .step .path{font-family:var(--mono);font-size:13px;background:var(--bg-2);color:var(--teal-deep);padding:2px 7px;border-radius:6px;white-space:nowrap}
+  ul.clean{list-style:none;margin:8px 0;display:grid;gap:7px}
+  ul.clean li{position:relative;padding-left:24px;color:var(--ink-soft);font-size:15px}
+  ul.clean li::before{content:"›";position:absolute;left:6px;color:var(--teal);font-weight:700}
+
+  /* tip pill */
+  .tip{margin:14px 0}
+  .tip-btn{background:linear-gradient(180deg,#FFF6EC,#FFEFD9);border:1px solid color-mix(in srgb,var(--amber) 50%,transparent);color:var(--coral-deep);font-family:var(--sans);font-weight:600;font-size:13.5px;padding:8px 14px;border-radius:99px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:transform .14s}
+  .tip-btn:hover{transform:translateY(-1px)}
+  .tip-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .tip.open .tip-body{max-height:240px}
+  .tip-body .inner{margin-top:9px;background:#FFF8EF;border:1px dashed color-mix(in srgb,var(--amber) 60%,transparent);border-radius:12px;padding:13px 15px;font-size:14.5px;color:var(--ink)}
+
+  /* why toggle */
+  .why{margin-top:14px;border-top:1px dashed var(--hair);padding-top:12px}
+  .why-btn{background:none;border:none;color:var(--teal-deep);font-family:var(--mono);font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;letter-spacing:.02em}
+  .why-btn .wc{transition:transform .26s}
+  .why.open .wc{transform:rotate(90deg)}
+  .why-body{max-height:0;overflow:hidden;transition:max-height .34s ease}
+  .why.open .why-body{max-height:320px}
+  .why-body .inner{margin-top:9px;font-size:14.5px;color:var(--ink-soft);background:rgba(31,169,143,.06);border-radius:12px;padding:13px 15px}
+
+  /* code block + copy */
+  .code{position:relative;background:#0F1F1B;border-radius:14px;margin:14px 0;overflow:hidden;border:1px solid rgba(111,211,187,.2)}
+  .code pre{margin:0;padding:18px 18px;font-family:var(--mono);font-size:13px;color:#C8F2E6;overflow-x:auto;line-height:1.6}
+  .code .copy{position:absolute;top:10px;right:10px;background:rgba(111,211,187,.14);border:1px solid rgba(111,211,187,.3);color:#9FE9D3;font-family:var(--mono);font-size:11px;padding:5px 11px;border-radius:8px;cursor:pointer;transition:background .16s}
+  .code .copy:hover{background:rgba(111,211,187,.26)}
+  .code .copy.done{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+  /* plan table */
+  .plan-table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--hair)}
+  .plan-table th,.plan-table td{text-align:left;padding:12px 15px;font-size:14.5px;border-bottom:1px solid var(--hair)}
+  .plan-table th{background:rgba(31,169,143,.1);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-deep)}
+  .plan-table tr:last-child td{border-bottom:none}
+  .plan-table td:first-child{font-weight:600;color:var(--ink)}
+
+  /* FAQ */
+  .section-h{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.02em;margin:46px 0 6px;display:flex;align-items:center;gap:11px}
+  .section-sub{color:var(--ink-soft);margin-bottom:18px;font-size:16px}
+  .faq{background:var(--card);border:1px solid var(--hair);border-radius:16px;margin:11px 0;overflow:hidden}
+  .faq-q{display:flex;align-items:center;gap:12px;padding:17px 20px;cursor:pointer;font-weight:600;font-size:16px;user-select:none}
+  .faq-q .qm{font-size:20px;flex-shrink:0}
+  .faq-q .fc{margin-left:auto;color:var(--ink-faint);transition:transform .26s;font-family:var(--mono)}
+  .faq.open .fc{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .34s ease}
+  .faq.open .faq-a{max-height:360px}
+  .faq-a .inner{padding:0 20px 18px;color:var(--ink-soft);font-size:15px}
+
+  /* checklist */
+  .checklist{background:linear-gradient(160deg,#fff,#F2FBF8);border:1px solid var(--hair);border-radius:22px;padding:26px 26px 22px;margin-top:18px;box-shadow:var(--shadow)}
+  .checklist h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:4px}
+  .checklist .cp{color:var(--ink-soft);font-size:15px;margin-bottom:18px}
+  .check{display:flex;align-items:center;gap:14px;padding:13px 15px;border:2px solid var(--hair);border-radius:14px;margin:9px 0;cursor:pointer;transition:border-color .18s,background .18s;user-select:none}
+  .check:hover{border-color:var(--seafoam)}
+  .check .box{width:26px;height:26px;border-radius:8px;border:2px solid var(--hair-2);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;transition:background .18s,border-color .18s,transform .18s}
+  .check .ctxt{font-size:15.5px;font-weight:500;transition:color .18s}
+  .check.done{border-color:var(--teal);background:rgba(31,169,143,.07)}
+  .check.done .box{background:var(--teal);border-color:var(--teal);transform:scale(1.05)}
+  .check.done .ctxt{color:var(--ink-faint);text-decoration:line-through}
+  .done-banner{margin-top:18px;text-align:center;font-family:var(--serif);font-size:20px;color:var(--teal-deep);opacity:0;max-height:0;overflow:hidden;transition:opacity .4s,max-height .4s}
+  .done-banner.show{opacity:1;max-height:80px}
+
+  footer{max-width:1180px;margin:0 auto;padding:30px 24px;color:var(--ink-faint);font-family:var(--mono);font-size:12px;text-align:center;border-top:1px solid var(--hair)}
+
+  @media(max-width:880px){
+    .shell{grid-template-columns:1fr}
+    aside.toc{position:static;padding-top:0;margin-top:8px}
+    aside.toc .toclist{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+    aside.toc a{white-space:nowrap}
+    aside.toc a.active{border-left-color:transparent;border-bottom:2px solid var(--teal)}
+    .intro-cards{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    main{padding:24px 0 60px}
+    .phase-inner{padding:4px 18px 22px}
+  }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<nav class="fg">
+  <a class="home" href="home.html"><span class="dot"></span>Field Guide</a>
+  <span class="sep"></span>
+  <a class="link" href="quiz.html">Quiz</a>
+  <a class="link" href="claude-code.html">Claude Code</a>
+  <a class="link" href="cheatsheet.html">Cheat Sheet</a>
+  <a class="link" href="build-menu.html">Build Menu</a>
+</nav>
+
+<div class="shell">
+  <aside class="toc">
+    <div class="tochead">Your Setup Path</div>
+    <div class="toclist" id="toclist">
+      <a href="#what" class="active"><span class="pn">·</span>What is CoWork?</a>
+      <a href="#plan"><span class="pn">·</span>Pick your plan</a>
+      <a href="#p1"><span class="pn">1</span>Admin foundation</a>
+      <a href="#p2"><span class="pn">2</span>Invite your team</a>
+      <a href="#p3"><span class="pn">3</span>Turn on skills</a>
+      <a href="#p4"><span class="pn">4</span>Shared project</a>
+      <a href="#p5"><span class="pn">5</span>Lock the guardrails</a>
+      <a href="#p6"><span class="pn">6</span>Memory</a>
+      <a href="#p7"><span class="pn">7</span>Connect tools</a>
+      <a href="#faq"><span class="pn">·</span>FAQ</a>
+      <a href="#checklist"><span class="pn">✓</span>You're set up</a>
+    </div>
+  </aside>
+
+  <main>
+    <a class="backlink" href="quiz.html">← Not sure this is your path? Take the quiz</a>
+
+    <header class="hero" id="what">
+      <div class="kick">Part 02 · Team Workspace</div>
+      <h1>Set up <span class="accent">Claude CoWork</span> for your team</h1>
+      <p class="lede">A start-to-finish guide for getting your whole team on Claude — shared skills, shared knowledge, and admin controls. No code, no terminal. Just click through, top to bottom.</p>
+    </header>
+
+    <div class="analogy">
+      <div class="ae">🏢</div>
+      <div class="at">Think of CoWork as a <b>shared office in software form.</b> One room, your whole team inside, and a brilliant assistant (Claude) at every desk — already briefed on how your company works, with the same playbook open in front of everyone.</div>
+    </div>
+
+    <div class="intro-cards">
+      <div class="icard">
+        <div class="ih">💬 Just Claude.ai</div>
+        <p>Personal chat. Great for one person. Nothing is shared — every teammate starts from scratch.</p>
+      </div>
+      <div class="icard">
+        <div class="ih">🏢 CoWork (this guide)</div>
+        <p>A team workspace. Shared knowledge, shared skills in everyone's <span class="path">/</span> menu, and admin controls so you know exactly what it can do.</p>
+      </div>
+    </div>
+
+    <!-- PICK YOUR PLAN -->
+    <h2 class="section-h" id="plan">💳 Pick your plan</h2>
+    <p class="section-sub">Two plans support team workspaces. Here's the short version — full pricing lives on Anthropic's site.</p>
+    <table class="plan-table">
+      <tr><th>&nbsp;</th><th>Team</th><th>Enterprise</th></tr>
+      <tr><td>Best for</td><td>Small to mid teams (5+ seats)</td><td>Large orgs with IT + compliance needs</td></tr>
+      <tr><td>Shared skills &amp; projects</td><td>✓</td><td>✓</td></tr>
+      <tr><td>Admin controls</td><td>✓ Core</td><td>✓ Granular roles</td></tr>
+      <tr><td>SSO &amp; domain capture</td><td>Basic</td><td>✓ Full</td></tr>
+      <tr><td>Audit &amp; data controls</td><td>Standard</td><td>✓ Advanced</td></tr>
+    </table>
+    <div class="tip">
+      <button class="tip-btn" type="button">💡 Tip — which one?</button>
+      <div class="tip-body"><div class="inner">If you can name everyone on the team by heart, start with <b>Team</b>. Move to <b>Enterprise</b> when you need single sign-on, role-based permissions, or your security team wants an audit trail. You can upgrade later without losing anything.</div></div>
+    </div>
+
+    <!-- PHASES -->
+    <h2 class="section-h">🗺️ The setup, one level at a time</h2>
+    <p class="section-sub">Seven phases, in order. Each one builds on the last. Click any phase to open it — skim the summaries first, then drill into the one you're on.</p>
+
+    <!-- PHASE 1 -->
+    <section class="phase open" id="p1">
+      <div class="phase-head">
+        <div class="phase-num">1</div>
+        <div class="phase-meta">
+          <div class="pl">Level 1</div>
+          <h2>Admin Console Foundation</h2>
+          <div class="sum">Confirm you're the admin and your Team plan is live.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="step">
+          <div class="sh"><span class="sb">1.1</span> Confirm you're the admin</div>
+          <p>Log into <b>claude.ai</b> → click your profile photo (top right) → <span class="path">Settings → Organization</span>. If you see an <b>Admin</b> section in the left nav, you're the admin.</p>
+          <div class="tip">
+            <button class="tip-btn" type="button">💡 Tip — no Admin section?</button>
+            <div class="tip-body"><div class="inner">You're probably not the account owner yet. Ask whoever first created the Claude account to grant you admin access — or reach out to support.claude.com. Nothing else in this guide works until you're an admin.</div></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">1.2</span> Confirm the Team plan is active</div>
+          <p><span class="path">Settings → Billing</span> → your plan should read "Team." If it says "Pro" or individual, upgrade via <span class="path">Billing → Upgrade → Team</span> (minimum 5 seats).</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">1.3</span> Set up SSO / domain capture <span style="font-weight:500;color:var(--ink-faint);font-size:13px">(recommended)</span></div>
+          <p><span class="path">Settings → Security → Domain Capture</span>. Enter your company email domain (e.g. <span class="path">yourcompany.com</span>). Anyone who signs up with that domain gets auto-joined — no shadow accounts. If you use Google Workspace or Microsoft 365, enable <b>SSO</b> here too.</p>
+        </div>
+        <div class="why">
+          <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
+          <div class="why-body"><div class="inner">Domain capture is the difference between a tidy org and a mess. Without it, people sign up with personal emails, create their own little orgs, and your team data scatters. Capture the domain once and everyone lands in the same place automatically.</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- PHASE 2 -->
+    <section class="phase" id="p2">
+      <div class="phase-head">
+        <div class="phase-num">2</div>
+        <div class="phase-meta">
+          <div class="pl">Level 2</div>
+          <h2>Invite Your Team</h2>
+          <div class="sum">Send invites, assign seats, set spending caps.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="step">
+          <div class="sh"><span class="sb">2.1</span> Invite members</div>
+          <p><span class="path">Settings → Members → Invite Members</span>. Enter each person's work email — they get an invite link. Assign seats:</p>
+          <ul class="clean">
+            <li><b>Standard seat</b> — CoWork, Chat, Projects, Skills. Enough for most teams.</li>
+            <li><b>Premium seat</b> — higher usage limits + priority access, for heavy daily users.</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">2.2</span> Set spending caps <span style="font-weight:500;color:var(--ink-faint);font-size:13px">(optional)</span></div>
+          <p><span class="path">Settings → Billing → Spending Controls</span>. Set a per-user cap so one heavy user can't burn the team budget. Default is pooled org-wide usage.</p>
+        </div>
+        <div class="analogy" style="margin:14px 0 0">
+          <div class="ae">🪑</div>
+          <div class="at">Seats are like <b>desks in your office.</b> Standard desks suit almost everyone; a few power users get the corner office (Premium). Count your desks before the team arrives so nobody's left standing.</div>
+        </div>
+        <div class="why">
+          <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
+          <div class="why-body"><div class="inner">Inviting people is what turns a personal account into a team. But the seat and cap choices here are also your budget guardrails — set them now and you never get a surprise bill later.</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- PHASE 3 -->
+    <section class="phase" id="p3">
+      <div class="phase-head">
+        <div class="phase-num">3</div>
+        <div class="phase-meta">
+          <div class="pl">Level 3</div>
+          <h2>Turn On Skills, Org-Wide</h2>
+          <div class="sum">Unlock the / menu and push ready-made skills to everyone.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="step">
+          <div class="sh"><span class="sb">3.1</span> Turn skills on</div>
+          <p><span class="path">Settings → Organization → Skills</span> → toggle <b>Enable Skills for Organization → On</b>. This unlocks the <span class="path">/</span> menu for everyone. Without it, the <span class="path">/</span> shortcut does nothing.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">3.2</span> Two ways skills reach people</div>
+          <ul class="clean">
+            <li><b>Path A — they build their own.</b> Fine for power users, risky for a team.</li>
+            <li><b>Path B — you push from the top.</b> You upload a skill once; it appears in every member's <span class="path">/</span> menu automatically. <b>This is your path.</b></li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">3.3</span> Create skills with the built-in Skill Creator</div>
+          <p>Open the desktop app → <b>CoWork</b> tab → type <span class="path">/</span> → pick <b>Skill Creator</b>. It runs a guided interview and writes the whole skill for you. Then make it visible: <span class="path">Settings → Organization → Skills → Visible to Organization → On</span>.</p>
+          <div class="tip">
+            <button class="tip-btn" type="button">💡 Tip — first two skills to build</button>
+            <div class="tip-body"><div class="inner"><b>Document Review</b> — flags important language and asks before drawing conclusions. <b>Drafting Assistant</b> — proposes wording for you to approve, never sends anything on its own. Both are safe, high-value starters that show the team what "good" looks like.</div></div>
+          </div>
+        </div>
+        <div class="analogy" style="margin:14px 0 0">
+          <div class="ae">📲</div>
+          <div class="at">Pushing skills top-down is like <b>IT installing the same app on every company laptop.</b> Nobody hunts for it, nobody installs the wrong version — it's just there in everyone's menu on day one.</div>
+        </div>
+        <div class="why">
+          <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
+          <div class="why-body"><div class="inner">Skills are where a generic assistant becomes <i>your team's</i> assistant. Pushing them top-down means everyone gets the same vetted, tested workflows — no rogue prompts, no "it works on my machine."</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- PHASE 4 -->
+    <section class="phase" id="p4">
+      <div class="phase-head">
+        <div class="phase-num">4</div>
+        <div class="phase-meta">
+          <div class="pl">Level 4</div>
+          <h2>Create the Shared Project</h2>
+          <div class="sum">One shared “briefcase” every teammate's session reads from.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="analogy" style="margin:0 0 16px">
+          <div class="ae">💼</div>
+          <div class="at">A Project is a <b>shared briefcase.</b> Drop in your policies, templates, and reference docs once — and every teammate's Claude opens that same briefcase before it answers a single question.</div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">4.1</span> Create it</div>
+          <p>Main Claude interface (not Settings) → left sidebar → <span class="path">Projects → New Project</span>. Name it clearly, e.g. <span class="path">Compliance Workflows 2026</span>.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">4.2</span> Add Project Knowledge</div>
+          <p>Inside the project → <span class="path">Project Knowledge → Add Documents</span>. Upload your manuals, templates, and a short <span class="path">context.md</span> you write yourself — 1–2 pages on what the team does and what Claude should always know.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">4.3</span> Add custom instructions</div>
+          <p>Inside the project → <span class="path">Customize Claude</span> → write standing rules. For example:</p>
+          <div class="code">
+            <button class="copy" type="button">Copy</button>
+            <pre>You are assisting our team.
+Always ask before suggesting interpretations.
+Never finalize anything without flagging it for human review.
+Default to Ask mode — propose actions, don't execute them.
+Cite your sources.</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">4.4</span> Share it with the team</div>
+          <p>Inside the project → <span class="path">Settings (gear) → Visibility</span> → change <b>Personal → Shared with Team</b>. Now everyone sees it in their sidebar and inherits the knowledge + instructions automatically.</p>
+        </div>
+        <div class="why">
+          <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
+          <div class="why-body"><div class="inner">This is the heart of a team setup. Without a shared project, every person is teaching Claude from zero. With it, the newest hire's Claude is as well-briefed as the founder's — instantly.</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- PHASE 5 -->
+    <section class="phase" id="p5">
+      <div class="phase-head">
+        <div class="phase-num">5</div>
+        <div class="phase-meta">
+          <div class="pl">Level 5</div>
+          <h2>Lock the Guardrails</h2>
+          <div class="sum">Enforce “Ask mode” so nothing happens without approval.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="step">
+          <div class="sh"><span class="sb">5.1</span> Enforce Ask mode</div>
+          <p>This small config file turns off "Auto mode" for everyone and stops them re-enabling it. It goes on each employee's machine as <span class="path">managed-mcp.json</span>:</p>
+          <div class="code">
+            <button class="copy" type="button">Copy</button>
+            <pre>{
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "disableAutoMode": "disable"
+  }
+}</pre>
+          </div>
+          <ul class="clean">
+            <li><b>Best:</b> push it via your MDM (Intune, Jamf, etc.) to <span class="path">%APPDATA%\Claude\managed-mcp.json</span>. Fully enforced.</li>
+            <li><b>No MDM?</b> Have each person create the file manually, or forward this section to your IT contact.</li>
+          </ul>
+          <div class="tip">
+            <button class="tip-btn" type="button">💡 Tip — what these two lines do</button>
+            <div class="tip-body"><div class="inner"><b>disableBypassPermissionsMode</b> means employees can't switch off the approval prompts. <b>disableAutoMode</b> grays out Auto mode entirely — Ask mode becomes the only option. Together: nothing happens on your data without a human clicking "approve."</div></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">5.2</span> Verify on one machine first</div>
+          <p>Before rolling out to everyone, check on a single machine: skill menu shows your skills, Auto mode is grayed out, shared project is visible. All good? Roll it out.</p>
+        </div>
+        <div class="analogy" style="margin:14px 0 0">
+          <div class="ae">🔑</div>
+          <div class="at">Think of this like the <b>key on a forklift.</b> The machine is powerful and useful — but it only moves when a trained operator turns the key. Ask mode is that key.</div>
+        </div>
+        <div class="why">
+          <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
+          <div class="why-body"><div class="inner">This is the line that lets you say "we use AI" <i>and</i> "we know exactly what it does, and we can prove it." For any team handling sensitive data, that sentence is the whole point.</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- PHASE 6 -->
+    <section class="phase" id="p6">
+      <div class="phase-head">
+        <div class="phase-num">6</div>
+        <div class="phase-meta">
+          <div class="pl">Level 6</div>
+          <h2>Memory</h2>
+          <div class="sum">Each person turns on memory + sets a permanent profile once.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="step">
+          <div class="sh"><span class="sb">6.1</span> Individual memory (each person, once)</div>
+          <p><span class="path">Settings → Capabilities → Memory → On</span>. Claude builds a running summary of each person — role, preferences, how they like to work — carried across every session.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">6.2</span> Global Instructions (each person, once)</div>
+          <p><span class="path">Settings → CoWork → Global Instructions</span>. A permanent anchor loaded before every session. Run this short interview with each teammate, then paste the filled-in template:</p>
+          <div class="code">
+            <button class="copy" type="button">Copy</button>
+            <pre>I am a [role] at [company].
+I primarily work with [document types].
+Never [the thing] without checking with me first.
+Format responses as [bullets / short / paragraphs].
+Always flag [legal/regulatory language] for human review.
+When drafting, assume the audience is [who].
+Always present options before taking action.</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">6.3</span> Project memory (automatic)</div>
+          <p>Nothing to set up. Claude builds shared memory inside each project as the team uses it. After a few weeks, the project remembers common questions and recurring workflows — visible to everyone.</p>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- PHASE 7 -->
+    <section class="phase" id="p7">
+      <div class="phase-head">
+        <div class="phase-num">7</div>
+        <div class="phase-meta">
+          <div class="pl">Level 7</div>
+          <h2>Connect Your Tools</h2>
+          <div class="sum">Wire in Drive, Gmail, Slack, and more — when you're ready.</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="phase-body"><div class="phase-inner">
+        <div class="step">
+          <div class="sh"><span class="sb">7.1</span> Add connectors</div>
+          <p><span class="path">Settings → Integrations</span> → connect what your team actually uses:</p>
+          <ul class="clean">
+            <li><b>Google Drive</b> — Claude reads Drive docs directly</li>
+            <li><b>Gmail</b> — pull email context into CoWork</li>
+            <li><b>Google Calendar</b> — scheduling context</li>
+            <li><b>Slack</b> — conversation context</li>
+            <li><b>Microsoft 365</b> — SharePoint, Outlook, Teams</li>
+          </ul>
+          <p>These are enabled org-wide; each person authorizes their own account on first use.</p>
+        </div>
+        <div class="tip">
+          <button class="tip-btn" type="button">💡 Tip — don't connect everything at once</button>
+          <div class="tip-body"><div class="inner">Start with the one tool the team lives in (usually Drive or Slack). Get comfortable, then add more. Every connector you add is a door — open them deliberately, one at a time.</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- FAQ -->
+    <h2 class="section-h" id="faq">🙋 Questions you'll get asked</h2>
+    <p class="section-sub">Tap any question. These are the ones every team raises on day one.</p>
+
+    <div class="faq">
+      <div class="faq-q"><span class="qm">🔒</span> Can Anthropic see our data? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">Your team's conversations and uploaded files are used to power your workspace, not to train models, on Team and Enterprise plans. Files you upload to a Project live in your workspace. For the exact, current terms, point your security team to Anthropic's data-handling and trust documentation — and on Enterprise you get the strongest controls (SSO, retention settings, audit).</div></div>
+    </div>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">🗂️</span> What if someone uses the wrong tab? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">This is exactly why Phase 5 matters. With Ask mode enforced, even if someone wanders into the wrong mode, nothing executes without an approval click. For teams that should never touch code, you keep them in CoWork and the guardrails do the rest.</div></div>
+    </div>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">📄</span> What happens to documents we upload? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">They live in your workspace's Project Knowledge, scoped to whoever the Project is shared with. Build team artifacts <i>inside</i> the shared Project — that's the only path to proper team sharing with access scoping. A file in a personal session isn't shareable until it's moved into the shared Project.</div></div>
+    </div>
+    <div class="faq">
+      <div class="faq-q"><span class="qm">🤝</span> Do employees have to use this? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">That's a culture call, not a technical one. The smoothest rollouts make it opt-in with one or two genuinely useful skills first, then let word of mouth do the work. Forcing it tends to backfire; showing one person saving an hour a week tends to spread on its own.</div></div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <h2 class="section-h" id="checklist">✓ You're set up</h2>
+    <p class="section-sub">Tick each one as you finish. When all five are green, your team is live.</p>
+    <div class="checklist">
+      <h3>Launch checklist</h3>
+      <p class="cp">Five things stand between you and a running team workspace.</p>
+      <div class="check" data-k="1"><div class="box">✓</div><div class="ctxt">I'm confirmed as admin and the Team plan is active</div></div>
+      <div class="check" data-k="2"><div class="box">✓</div><div class="ctxt">My team is invited and seats are assigned</div></div>
+      <div class="check" data-k="3"><div class="box">✓</div><div class="ctxt">Skills are on and my first skills are pushed to everyone</div></div>
+      <div class="check" data-k="4"><div class="box">✓</div><div class="ctxt">The shared Project is created and shared with the team</div></div>
+      <div class="check" data-k="5"><div class="box">✓</div><div class="ctxt">Ask mode is enforced and verified on one machine</div></div>
+      <div class="done-banner" id="doneBanner">🎉 That's it — your team workspace is live. Nice work.</div>
+    </div>
+  </main>
+</div>
+
+<footer>A Field Guide · an unlisted companion to our session</footer>
+
+<script>
+/* ---- collapsibles: phases, tips, why, faq ---- */
+document.querySelectorAll('.phase-head').forEach(h => {
+  h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+});
+document.querySelectorAll('.tip-btn').forEach(b => {
+  b.addEventListener('click', () => b.parentElement.classList.toggle('open'));
+});
+document.querySelectorAll('.why-btn').forEach(b => {
+  b.addEventListener('click', () => b.parentElement.classList.toggle('open'));
+});
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+/* ---- copy buttons ---- */
+document.querySelectorAll('.code .copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pre = btn.parentElement.querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent).then(() => {
+      const old = btn.textContent;
+      btn.textContent = 'Copied ✓'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1600);
+    });
+  });
+});
+
+/* ---- interactive checklist ---- */
+const banner = document.getElementById('doneBanner');
+const checks = document.querySelectorAll('.check');
+checks.forEach(c => {
+  c.addEventListener('click', () => {
+    c.classList.toggle('done');
+    const allDone = [...checks].every(x => x.classList.contains('done'));
+    banner.classList.toggle('show', allDone);
+  });
+});
+
+/* ---- scrollspy for sidebar ---- */
+const tocLinks = [...document.querySelectorAll('aside.toc a')];
+const targets = tocLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){
+      const id = '#' + e.target.id;
+      tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+targets.forEach(t => spy.observe(t));
+
+/* open the phase when its sidebar link is clicked */
+tocLinks.forEach(a => {
+  a.addEventListener('click', () => {
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el && el.classList.contains('phase')) el.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
