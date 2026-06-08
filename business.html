@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#08090B">
-<title>Build an Agentic Workforce — Claude Code Field Guide (Part 3)</title>
+<title>Build an Agentic Workforce: Claude Code Field Guide (Part 3)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 /* after the intro: rail collapses to a thin status spine, content recenters into the reclaimed space */
 body.railslim .shell{grid-template-columns:var(--rail-thin) minmax(0,1fr)}
 
-/* command rail — live process monitor */
+/* command rail - live process monitor */
 .rail{position:sticky;top:52px;align-self:start;height:calc(100vh - 52px);border-right:1px solid var(--line-2);padding:22px 0 22px 22px;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:14px;transition:padding .5s cubic-bezier(.4,0,.2,1)}
 @media(max-width:1080px){.rail{display:none}}
 
@@ -131,7 +131,7 @@ body.railslim .rail-head,body.railslim .rail-foot{transition:opacity .25s}
 /* once the rail is slim, content reclaims the freed space and stays centered in the page */
 body.railslim .wrap{max-width:1240px}
 body.railslim .wrap.wide{max-width:1400px}
-/* hero keeps the full rail — it should not recenter even if class toggles before it scrolls out */
+/* hero keeps the full rail - it should not recenter even if class toggles before it scrolls out */
 #hero .wrap{margin:0}
 .module{padding:clamp(64px,9vh,116px) 0;border-bottom:1px solid var(--line-2);position:relative;scroll-margin-top:64px}
 .module:last-of-type{border-bottom:none}
@@ -168,7 +168,7 @@ body.railslim .wrap.wide{max-width:1400px}
 .hero-meta{display:flex;gap:22px;margin-top:30px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);flex-wrap:wrap}
 .hero-meta div b{color:var(--cyan);display:block;font-size:18px;font-weight:500;margin-bottom:2px}
 
-/* hero viz — glowing live node graph */
+/* hero viz - glowing live node graph */
 .hviz{position:relative;width:100%;max-width:540px;margin-left:auto;aspect-ratio:1/.96}
 @media(max-width:980px){.hviz{margin:0 auto;max-width:460px}}
 .hviz svg{width:100%;height:100%;overflow:visible}
@@ -184,7 +184,7 @@ body.railslim .wrap.wide{max-width:1400px}
 .hv-node .sub{font-size:8.5px;fill:var(--ink-faint)}
 .hv-cap{font-family:var(--mono);font-size:9.5px;fill:var(--ink-faint);text-anchor:middle;letter-spacing:.1em;text-transform:uppercase}
 
-/* ====================== 00 PATH — scrolling arrow path ====================== */
+/* ====================== 00 PATH - scrolling arrow path ====================== */
 .apath{display:flex;align-items:flex-start;gap:0;position:relative;padding:8px 0}
 .apath .anode{flex:1 1 0;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:2;padding:0 8px}
 .apath .acirc{width:62px;height:62px;border-radius:50%;background:var(--panel);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--ink-faint);margin-bottom:18px;transition:.45s cubic-bezier(.34,1.4,.6,1);position:relative}
@@ -209,7 +209,7 @@ body.railslim .wrap.wide{max-width:1400px}
   .apath .aconn{width:62px;height:34px;transform:rotate(90deg)}
 }
 
-/* ====================== ACCORDIONS — expanding log groups ====================== */
+/* ====================== ACCORDIONS - expanding log groups ====================== */
 .blocks{display:flex;flex-direction:column;gap:9px}
 .block{border:1px solid var(--line-2);border-radius:8px;background:var(--panel);overflow:hidden;transition:.2s}
 .block:hover{border-color:var(--line-3)}
@@ -236,7 +236,7 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .linkrow{display:flex;flex-direction:column;gap:8px;margin-top:13px}
 .linkrow a{font-family:var(--mono);font-size:12px;color:var(--cyan);text-decoration:none;display:flex;gap:8px;align-items:center}.linkrow a:hover{text-decoration:underline}.linkrow a span{color:var(--ink-faint)}
 
-/* ====================== 02 ROLES — process cards ====================== */
+/* ====================== 02 ROLES - process cards ====================== */
 .roles{display:grid;grid-template-columns:1fr 1fr;gap:11px}@media(max-width:760px){.roles{grid-template-columns:1fr}}
 .role-card{border:1px solid var(--line-2);border-radius:8px;background:var(--panel);overflow:hidden;transition:.2s;cursor:pointer}
 .role-card:hover{border-color:var(--line-3)}
@@ -278,7 +278,7 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .sb-part-list li b{color:var(--ink)}.sb-part-list li i{color:var(--ink-faint);font-style:normal;font-size:.82rem;font-family:var(--mono)}
 .sb-plain-list{list-style:none;display:flex;flex-direction:column;gap:6px}
 .sb-plain-list li{display:flex;gap:10px;font-size:.9rem;color:var(--ink-soft);line-height:1.55}
-.sb-plain-list li::before{content:"—";color:var(--red);flex:0 0 auto;font-family:var(--mono)}
+.sb-plain-list li::before{content:"·";color:var(--red);flex:0 0 auto;font-family:var(--mono)}
 .sb-plain-list li b{color:var(--ink)}
 .sb-divider{height:1px;background:var(--line-2);margin:18px 0}
 
@@ -413,7 +413,7 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .lbar{height:7px;border-radius:100px;background:var(--panel-2);border:1px solid var(--line-2);overflow:hidden}.lbar span{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--lime-deep),var(--lime));box-shadow:0 0 10px var(--lime-glow);transition:width .6s cubic-bezier(.34,1.4,.6,1)}
 .lcall{font-size:.92rem;color:var(--ink-soft);line-height:1.5}.lcall b{color:var(--ink)}
 
-/* ====================== 07 LOOP — orbital diagram ====================== */
+/* ====================== 07 LOOP - orbital diagram ====================== */
 #loop{position:relative;overflow:hidden}
 #loop .lglow{position:absolute;width:60vw;height:60vw;max-width:760px;max-height:760px;top:50%;left:8%;transform:translateY(-50%);background:radial-gradient(circle,rgba(125,243,138,.10),transparent 60%);filter:blur(30px);pointer-events:none}
 .loop-wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(34px,5vw,72px);align-items:center;position:relative;z-index:2}@media(max-width:880px){.loop-wrap{grid-template-columns:1fr;gap:32px}}
@@ -492,7 +492,7 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .tier .eg span::before{content:"e.g. ";color:var(--ink-faint)}
 .safenote{margin-top:20px;padding:18px 22px;border:1px solid rgba(91,233,224,.16);border-left:3px solid var(--cyan);background:rgba(91,233,224,.04);border-radius:0 8px 8px 0;font-size:.94rem;color:var(--ink-soft)}.safenote b{color:var(--cyan)}
 
-/* ====================== 10 SYSTEM — lit circuit pipeline ====================== */
+/* ====================== 10 SYSTEM - lit circuit pipeline ====================== */
 #system{position:relative;overflow:hidden}
 .sys{border:1px solid var(--line-2);border-radius:14px;background:linear-gradient(160deg,var(--panel),var(--bg-2));padding:clamp(24px,3.4vw,40px);margin-bottom:22px;position:relative;overflow:hidden;box-shadow:0 0 80px -50px var(--lime-glow)}
 .sys::before{content:"$ optimize-week";position:absolute;top:18px;right:24px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.04em}
@@ -548,7 +548,7 @@ footer b{color:var(--lime-deep)}
 .gsap-off [data-anim]{opacity:1!important;transform:none!important}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;scroll-behavior:auto!important}html{scroll-behavior:auto}}
 
-/* ====================== 0x04 AGENTS — step ladder ====================== */
+/* ====================== 0x04 AGENTS - step ladder ====================== */
 .aladder{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:28px 0 8px;align-items:end}
 @media(max-width:900px){.aladder{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.aladder{grid-template-columns:1fr}}
@@ -564,7 +564,7 @@ footer b{color:var(--lime-deep)}
 .arung.warn h4 .wm{color:var(--red)}
 .aladder-base{height:2px;background:linear-gradient(90deg,var(--lime-deep),var(--cyan));opacity:.4;margin-bottom:18px;box-shadow:0 0 14px var(--lime-glow)}
 
-/* ====================== AGENTS — live 7-agent team ====================== */
+/* ====================== AGENTS - live 7-agent team ====================== */
 .ateam{margin:30px 0 6px;border:1px solid var(--line-2);border-radius:10px;background:var(--code-bg);overflow:hidden}
 .ateam-head{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line-2);background:var(--panel)}
 .ateam-dots{display:flex;gap:6px}.ateam-dots i{width:10px;height:10px;border-radius:50%;background:var(--ink-dim);display:block}.ateam-dots i:nth-child(1){background:#FF6B5B}.ateam-dots i:nth-child(2){background:#F2C14E}.ateam-dots i:nth-child(3){background:var(--lime)}
@@ -602,7 +602,7 @@ footer b{color:var(--lime-deep)}
 .arail.out li::before{content:"✓";position:absolute;left:0;color:var(--lime);font-size:.78rem}
 .arail li b{color:var(--ink)}
 
-/* ====================== 0x05 LOOP — linear compounding flow ====================== */
+/* ====================== 0x05 LOOP - linear compounding flow ====================== */
 .lflow{display:flex;align-items:stretch;gap:0;margin:24px 0 6px;overflow-x:auto;padding-bottom:6px}
 .lf-step{flex:1 1 0;min-width:140px;padding:16px 15px;background:var(--panel);border:1px solid var(--line-2);border-radius:8px;position:relative}
 .lf-arrow{flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:30px;color:var(--lime);font-family:var(--mono);font-size:16px}
@@ -625,7 +625,7 @@ footer b{color:var(--lime-deep)}
 .compound-note{margin-top:16px;padding:13px 16px;border-radius:8px;background:rgba(91,233,224,.05);border:1px solid rgba(91,233,224,.18);font-size:.9rem;color:var(--ink-soft);line-height:1.6}
 .compound-note b{color:var(--cyan)}
 
-/* ====================== 0x06 REPLACE — daily-worker cards ====================== */
+/* ====================== 0x06 REPLACE - daily-worker cards ====================== */
 .dwgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 8px}
 @media(max-width:720px){.dwgrid{grid-template-columns:1fr}}
 .dwcard{padding:18px 18px 16px;border:1px solid var(--line-2);border-radius:10px;background:var(--panel);transition:.2s;position:relative;overflow:hidden}
@@ -666,11 +666,11 @@ footer b{color:var(--lime-deep)}
   <aside class="rail">
     <div class="rail-head">// course.modules</div>
     <div class="rail-meter">
-      <div class="rm-top"><span>progress</span><span><b id="railSeen">0</b>/10</span></div>
+      <div class="rm-top"><span>progress</span><span><b id="railSeen">0</b>/9</span></div>
       <div class="rm-bar"><span id="railFill"></span></div>
     </div>
     <ul class="proclist" id="proclist"></ul>
-    <div class="rail-foot"><b>$</b> 10 modules loaded<br><b>≈</b> 18 min runtime<br><b>state</b> ready ▮</div>
+    <div class="rail-foot"><b>$</b> 9 modules loaded<br><b>≈</b> 16 min runtime<br><b>state</b> ready ▮</div>
   </aside>
 
   <main class="content">
@@ -682,7 +682,7 @@ footer b{color:var(--lime-deep)}
         <div>
           <div class="boot" data-anim="up"><span class="ok">●</span> booting agentic-workforce.course <span class="ok">✓ ready</span></div>
           <h1 id="heroTitle">Build an <span class="gl">agentic</span><br>workforce.</h1>
-          <p class="lede big" data-anim="up">Start with one task you repeat by hand. End with a system that plans, writes, audits itself, and remembers — the way this whole empire was built. This part is a course: work top to bottom and you'll know how to build it yourself.</p>
+          <p class="lede big" data-anim="up">Start with one task you repeat by hand. End with a system that plans, writes, audits itself, and remembers: the way this whole empire was built. This part is a course: work top to bottom and you'll know how to build it yourself.</p>
           <div class="hero-cta" data-anim="up"><a class="btn btn-pri" href="#path">▶ Start the course</a><a class="btn btn-ghost" href="#start">Your first hour</a></div>
           <div class="hero-meta" data-anim="up">
             <div><b>11</b>modules</div>
@@ -716,10 +716,10 @@ footer b{color:var(--lime-deep)}
       <div class="mod-head">
         <div class="statline" data-anim="up"><span class="modid">module <b>0x00</b></span><span class="statchip"><span class="sd"></span>reference</span></div>
         <h2 class="h2" data-anim="up">The path, <span class="accent">in four moves.</span></h2>
-        <p class="lede" data-anim="up">This isn't a feature list — it's a route. Four moves take you from one repeated task to a system that runs itself.</p>
+        <p class="lede" data-anim="up">This isn't a feature list: it's a route. Four moves take you from one repeated task to a system that runs itself.</p>
       </div>
       <div class="apath" id="apath" data-anim="up">
-        <div class="anode" data-an="0"><div class="acirc">1</div><div class="atxt"><div class="apn">move_01</div><h4>Learn the pieces</h4><p>Six building blocks and the anatomy of a skill — the vocabulary everything else uses.</p></div></div>
+        <div class="anode" data-an="0"><div class="acirc">1</div><div class="atxt"><div class="apn">move_01</div><h4>Learn the pieces</h4><p>Six building blocks and the anatomy of a skill: the vocabulary everything else uses.</p></div></div>
         <div class="aconn" data-ac="0"><div class="afill"></div><span class="aarr">▸</span></div>
         <div class="anode" data-an="1"><div class="acirc">2</div><div class="atxt"><div class="apn">move_02</div><h4>Build one skill</h4><p>Turn a single repeated task into a named, reusable skill you trigger by name.</p></div></div>
         <div class="aconn" data-ac="1"><div class="afill"></div><span class="aarr">▸</span></div>
@@ -743,8 +743,8 @@ footer b{color:var(--lime-deep)}
     <section class="module" id="anatomy"><div class="wrap">
       <div class="mod-head">
         <div class="statline" data-anim="up"><span class="modid">module <b>0x02</b></span><span class="statchip"><span class="sd"></span>anatomy</span></div>
-        <h2 class="h2" data-anim="up">A skill is a <span class="accent">folder</span> — not just a file.</h2>
-        <p class="lede" data-anim="up">A common misconception: skills are "just markdown files." They're actually folders — scripts, references, assets, memory logs — and <span class="inline-code">SKILL.md</span> is the entry point that tells Claude what's inside. Tap each part for what it does. Then build one yourself in the next chapter.</p>
+        <h2 class="h2" data-anim="up">A skill is a <span class="accent">folder</span>: not just a file.</h2>
+        <p class="lede" data-anim="up">A common misconception: skills are "just markdown files." They're actually folders (scripts, references, assets, memory logs) and <span class="inline-code">SKILL.md</span> is the entry point that tells Claude what's inside. Tap each part for what it does. Then build one yourself in the next chapter.</p>
       </div>
       <div class="blocks" id="anatomy-list"></div>
 
@@ -753,7 +753,7 @@ footer b{color:var(--lime-deep)}
         <div class="sb-teaser" onclick="toggleSB()">
           <span class="sb-badge">⚑ copy a real skill</span>
           <div class="sb-teaser-text">
-            <b>Don't start from a blank file — copy a complete, working skill and learn from it.</b>
+            <b>Don't start from a blank file: copy a complete, working skill and learn from it.</b>
             <span>Maps all ten anatomy parts to a real SKILL.md you can install and run today.</span>
           </div>
           <div class="sb-teaser-right">
@@ -763,47 +763,47 @@ footer b{color:var(--lime-deep)}
         </div>
         <div class="sb-body" id="sbBody">
           <div class="sb-body-inner">
-            <p class="sb-lede">The fastest way to understand a skill is to read a complete one. Below is a real, working <b>skill-creator</b> SKILL.md — with the <b>ten anatomy parts</b> mapped explicitly to what each section of the file is doing. Copy it, drop it into <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/tony-stark/SKILL.md</code>, then say "build me a skill for X" and watch the ten parts work in practice.</p>
+            <p class="sb-lede">The fastest way to understand a skill is to read a complete one. Below is a real, working <b>skill-creator</b> SKILL.md, with the <b>ten anatomy parts</b> mapped explicitly to what each section of the file is doing. Copy it, drop it into <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/tony-stark/SKILL.md</code>, then say "build me a skill for X" and watch the ten parts work in practice.</p>
 
             <div class="sb-section">
-              <div class="sb-section-title">The 10 anatomy parts — mapped to a real SKILL.md</div>
+              <div class="sb-section-title">The 10 anatomy parts: mapped to a real SKILL.md</div>
               <ul class="sb-part-list">
-                <li><span class="pn">01</span><span><b>Name</b> <i>— the skill's identity</i><br>tony-stark captures the name during "Capture Intent" — it's the first question. Defaults to the folder name if unset. Kebab-case, stable. Every other skill that references this one uses this handle, so it asks before writing anything.</span></li>
-                <li><span class="pn">02</span><span><b>Description</b> <i>— the trigger, the most important field</i><br>tony-stark writes descriptions that are deliberately "pushy" — packed with trigger phrases and explicit "use this when…" sentences. It knows Claude undertriggers by default, so it overcorrects: <em>"Make sure to use this skill whenever the user mentions X, even if they don't explicitly ask for it."</em> When a skill misbehaves, it tunes this first.</span></li>
-                <li><span class="pn">03</span><span><b>Gotchas</b> <i>— failure modes learned the hard way</i><br>After running test cases, tony-stark reads transcripts — not just final outputs — to catch repeated failures. Any pattern that caused bad output becomes a gotcha. It also runs a grader subagent that checks assertions programmatically, so gotchas are evidence-based, not guesses.</span></li>
-                <li><span class="pn">04</span><span><b>Guardrails</b> <i>— what it must and won't do</i><br>tony-stark captures hard limits during the interview: scope, files it must never touch, actions that are out of bounds. It also applies a "Principle of Lack of Surprise" — the skill's behavior must match its description with no hidden side effects. These go in the body as explicit constraints, not assumed.</span></li>
-                <li><span class="pn">05</span><span><b>Embedded skills &amp; callouts</b> <i>— how skills compose</i><br>If repeated work shows up across test runs — the same helper script written three times independently — tony-stark bundles it. Scripts go in <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">scripts/</code>, references in <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">references/</code>. The SKILL.md tells Claude when to call them. This is how skills stay lean while getting more powerful over time.</span></li>
-                <li><span class="pn">06</span><span><b>Memory allocation</b> <i>— how it spends the context window</i><br>tony-stark uses a three-level loading system: metadata (name + description, always in context), SKILL.md body (in context when triggered, target under 500 lines), and bundled resources (loaded only when needed). Subagents get fresh context — eval runs happen in isolation so noise from the main session can't corrupt results.</span></li>
-                <li><span class="pn">07</span><span><b>Frontmatter controls</b> <i>— the switches above the body</i><br>tony-stark sets <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">disable-model-invocation: true</code> on skills with side effects (writes, API calls, costs). It runs a description optimization loop — <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">scripts/run_loop.py</code> — that tests triggering accuracy and proposes improved descriptions. The model used in the loop matches the model in your session so results are realistic.</span></li>
-                <li><span class="pn">08</span><span><b>The body / instructions</b> <i>— the actual recipe</i><br>tony-stark writes steps in imperative form, explains the <em>why</em> behind each instruction, and avoids rigid MUST/NEVER language in favor of reasoning the model can apply to edge cases. It writes a draft, steps back, and revises with fresh eyes. Steps that are vague or produce repeated improvised work get bundled into scripts.</span></li>
-                <li><span class="pn">09</span><span><b>Sub-files, scripts &amp; evals</b> <i>— everything else in the folder</i><br>tony-stark saves test cases to <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">evals/evals.json</code>, runs with/without-skill pairs in parallel, grades with a dedicated <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">agents/grader.md</code> subagent, and aggregates into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">benchmark.json</code>. Results open in an eval viewer — a browser UI where you click through outputs and leave feedback before any changes are made to the skill.</span></li>
-                <li><span class="pn">10</span><span><b>Versioning &amp; iteration</b> <i>— how it gets better over time</i><br>tony-stark runs multiple iterations in numbered directories (<code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-1/</code>, <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-2/</code>…) so regressions are visible. The viewer shows previous iteration output side-by-side. It keeps going until feedback is empty or no meaningful progress is being made. Description optimization runs last — after the skill itself is solid.</span></li>
+                <li><span class="pn">01</span><span><b>Name</b> <i>(the skill's identity)</i><br>tony-stark captures the name during "Capture Intent": it's the first question. Defaults to the folder name if unset. Kebab-case, stable. Every other skill that references this one uses this handle, so it asks before writing anything.</span></li>
+                <li><span class="pn">02</span><span><b>Description</b> <i>(the trigger, the most important field)</i><br>tony-stark writes descriptions that are deliberately "pushy": packed with trigger phrases and explicit "use this when…" sentences. It knows Claude undertriggers by default, so it overcorrects: <em>"Make sure to use this skill whenever the user mentions X, even if they don't explicitly ask for it."</em> When a skill misbehaves, it tunes this first.</span></li>
+                <li><span class="pn">03</span><span><b>Gotchas</b> <i>(failure modes learned the hard way)</i><br>After running test cases, tony-stark reads transcripts (not just final outputs) to catch repeated failures. Any pattern that caused bad output becomes a gotcha. It also runs a grader subagent that checks assertions programmatically, so gotchas are evidence-based, not guesses.</span></li>
+                <li><span class="pn">04</span><span><b>Guardrails</b> <i>(what it must and won't do)</i><br>tony-stark captures hard limits during the interview: scope, files it must never touch, actions that are out of bounds. It also applies a "Principle of Lack of Surprise": the skill's behavior must match its description with no hidden side effects. These go in the body as explicit constraints, not assumed.</span></li>
+                <li><span class="pn">05</span><span><b>Embedded skills &amp; callouts</b> <i>(how skills compose)</i><br>If repeated work shows up across test runs (the same helper script written three times independently) tony-stark bundles it. Scripts go in <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">scripts/</code>, references in <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">references/</code>. The SKILL.md tells Claude when to call them. This is how skills stay lean while getting more powerful over time.</span></li>
+                <li><span class="pn">06</span><span><b>Memory allocation</b> <i>(how it spends the context window)</i><br>tony-stark uses a three-level loading system: metadata (name + description, always in context), SKILL.md body (in context when triggered, target under 500 lines), and bundled resources (loaded only when needed). Subagents get fresh context: eval runs happen in isolation so noise from the main session can't corrupt results.</span></li>
+                <li><span class="pn">07</span><span><b>Frontmatter controls</b> <i>(the switches above the body)</i><br>tony-stark sets <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">disable-model-invocation: true</code> on skills with side effects (writes, API calls, costs). It runs a description optimization loop; <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">scripts/run_loop.py</code>; that tests triggering accuracy and proposes improved descriptions. The model used in the loop matches the model in your session so results are realistic.</span></li>
+                <li><span class="pn">08</span><span><b>The body / instructions</b> <i>(the actual recipe)</i><br>tony-stark writes steps in imperative form, explains the <em>why</em> behind each instruction, and avoids rigid MUST/NEVER language in favor of reasoning the model can apply to edge cases. It writes a draft, steps back, and revises with fresh eyes. Steps that are vague or produce repeated improvised work get bundled into scripts.</span></li>
+                <li><span class="pn">09</span><span><b>Sub-files, scripts &amp; evals</b> <i>(everything else in the folder)</i><br>tony-stark saves test cases to <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">evals/evals.json</code>, runs with/without-skill pairs in parallel, grades with a dedicated <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">agents/grader.md</code> subagent, and aggregates into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">benchmark.json</code>. Results open in an eval viewer: a browser UI where you click through outputs and leave feedback before any changes are made to the skill.</span></li>
+                <li><span class="pn">10</span><span><b>Versioning &amp; iteration</b> <i>(how it gets better over time)</i><br>tony-stark runs multiple iterations in numbered directories (<code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-1/</code>, <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">iteration-2/</code>…) so regressions are visible. The viewer shows previous iteration output side-by-side. It keeps going until feedback is empty or no meaningful progress is being made. Description optimization runs last: after the skill itself is solid.</span></li>
               </ul>
 
               <div class="anatomy-analogy" data-anim="up">
                 <div class="aa-row">
                   <div class="aa-label">name</div>
-                  <div class="aa-text">The <b>job title on the door</b> — Claude finds skills by this handle, so make it short and searchable.</div>
+                  <div class="aa-text">The <b>job title on the door</b>: Claude finds skills by this handle, so make it short and searchable.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">description</div>
-                  <div class="aa-text">The <em>trigger</em> — the most important line you'll write. Claude scans every description at session start to decide "is there a skill for this?" Write it for that scan, not for a human reading docs: pack in the exact phrases a user might say, even if it reads over-explained.</div>
+                  <div class="aa-text">The <em>trigger</em>: the most important line you'll write. Claude scans every description at session start to decide "is there a skill for this?" Write it for that scan, not for a human reading docs: pack in the exact phrases a user might say, even if it reads over-explained.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">body / instructions</div>
-                  <div class="aa-text">The <b>recipe</b> — imperative steps with the <em>why</em> behind each one, so Claude can adapt at the edges.</div>
+                  <div class="aa-text">The <b>recipe</b>: imperative steps with the <em>why</em> behind each one, so Claude can adapt at the edges.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">gotchas</div>
-                  <div class="aa-text">The <b>sticky note from the last person who ran it</b> — the highest-signal content in any skill. Not theory: specific failure modes caught in production. <em>"The <code style="font-family:var(--mono);font-size:.8em">subscriptions</code> table is append-only — the row you want is the highest version, not the most recent <code style="font-family:var(--mono);font-size:.8em">created_at</code>."</em> Build it up over time as Claude hits new edges.</div>
+                  <div class="aa-text">The <b>sticky note from the last person who ran it</b>: the highest-signal content in any skill. Not theory: specific failure modes caught in production. <em>"The <code style="font-family:var(--mono);font-size:.8em">subscriptions</code> table is append-only: the row you want is the highest version, not the most recent <code style="font-family:var(--mono);font-size:.8em">created_at</code>."</em> Build it up over time as Claude hits new edges.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">guardrails</div>
-                  <div class="aa-text">The <em>fence</em> — what this skill is <b>explicitly not allowed to do</b>, no matter what the user asks.</div>
+                  <div class="aa-text">The <em>fence</em>: what this skill is <b>explicitly not allowed to do</b>, no matter what the user asks.</div>
                 </div>
                 <div class="aa-row">
                   <div class="aa-label">sub-files / scripts</div>
-                  <div class="aa-text">The <b>tool belt</b> — and the whole folder is context engineering. Split detailed references into <code style="font-family:var(--mono);font-size:.8em">references/api.md</code>, helper functions into <code style="font-family:var(--mono);font-size:.8em">scripts/</code>, output templates into <code style="font-family:var(--mono);font-size:.8em">assets/</code>. Tell Claude what files exist and it reads them at the right moment — progressive disclosure built into the file system.</div>
+                  <div class="aa-text">The <b>tool belt</b>. And the whole folder is context engineering. Split detailed references into <code style="font-family:var(--mono);font-size:.8em">references/api.md</code>, helper functions into <code style="font-family:var(--mono);font-size:.8em">scripts/</code>, output templates into <code style="font-family:var(--mono);font-size:.8em">assets/</code>. Tell Claude what files exist and it reads them at the right moment: progressive disclosure built into the file system.</div>
                 </div>
               </div>
             </div>
@@ -811,13 +811,13 @@ footer b{color:var(--lime-deep)}
             <div class="sb-divider"></div>
 
             <div class="sb-section">
-              <div class="sb-section-title">Full SKILL.md — copy and install</div>
-              <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:14px;line-height:1.6">The copy button grabs <b>both</b> — the 10 anatomy frameworks above <i>and</i> the full SKILL.md below. Drop the SKILL.md into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">~/.claude/skills/tony-stark/SKILL.md</code>. Then say "build me a skill for X" — Claude will find it automatically.</p>
+              <div class="sb-section-title">Full SKILL.md: copy and install</div>
+              <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:14px;line-height:1.6">The copy button grabs <b>both</b>: the 10 anatomy frameworks above <i>and</i> the full SKILL.md below. Drop the SKILL.md into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">~/.claude/skills/tony-stark/SKILL.md</code>. Then say "build me a skill for X": Claude will find it automatically.</p>
               <div style="position:relative">
                 <button class="sb-copy-btn" id="sbRawCopyBtn" onclick="copyTonyStark()" style="position:absolute;top:10px;right:10px;z-index:2">Copy 10 steps + SKILL.md</button>
                 <pre id="tonyStarkRaw" style="background:var(--code-bg);border:1px solid rgba(255,107,91,.2);border-radius:8px;padding:18px;font-family:var(--mono);font-size:11px;line-height:1.75;color:var(--code-fg);overflow-x:auto;overflow-y:auto;max-height:420px;margin:0;white-space:pre">---
 name: tony-stark
-description: Create new skills, modify and improve existing skills, audit skill quality, and measure skill performance. Use this skill whenever someone wants to create a skill from scratch, update or optimize an existing skill, audit an existing skill for quality issues, run evals to test a skill, benchmark skill performance, or optimize a skill's description for better triggering accuracy. Make sure to use this skill whenever the user mentions creating skills, improving skills, testing skills, skill quality, skill audits, or skill descriptions — even if they don't explicitly ask for "tony-stark" (formerly "skill-creator-pro").
+description: Create new skills, modify and improve existing skills, audit skill quality, and measure skill performance. Use this skill whenever someone wants to create a skill from scratch, update or optimize an existing skill, audit an existing skill for quality issues, run evals to test a skill, benchmark skill performance, or optimize a skill's description for better triggering accuracy. Make sure to use this skill whenever the user mentions creating skills, improving skills, testing skills, skill quality, skill audits, or skill descriptions; even if they don't explicitly ask for "tony-stark" (formerly "skill-creator-pro").
 ---
 
 # Skill Creator
@@ -863,7 +863,7 @@ It's OK to briefly explain terms if you're in doubt, and feel free to clarify te
 
 ### Capture Intent
 
-Start by understanding the user's intent. The current conversation might already contain a workflow the user wants to capture (e.g., they say "turn this into a skill"). If so, extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed. The user may need to fill the gaps, and should confirm before proceeding to the next step.
+Start by understanding the user's intent. The current conversation might already contain a workflow the user wants to capture (e.g., they say "turn this into a skill"). If so, extract answers from the conversation history first: the tools used, the sequence of steps, corrections the user made, input/output formats observed. The user may need to fill the gaps, and should confirm before proceeding to the next step.
 
 1. What should this skill enable Claude to do?
 2. When should this skill trigger? (what user phrases/contexts)
@@ -957,21 +957,21 @@ Try to explain to the model why things are important in lieu of heavy-handed mus
 
 ### Test Cases
 
-After writing the skill draft, come up with 2-3 realistic test prompts — the kind of thing a real user would actually say. Share them with the user: "Here are a few test cases I'd like to try. Do these look right, or do you want to add more?" Then run them.
+After writing the skill draft, come up with 2-3 realistic test prompts: the kind of thing a real user would actually say. Share them with the user: "Here are a few test cases I'd like to try. Do these look right, or do you want to add more?" Then run them.
 
-Save test cases to `evals/evals.json`. Don't write assertions yet — just the prompts. You'll draft assertions in the next step while the runs are in progress.
+Save test cases to `evals/evals.json`. Don't write assertions yet: just the prompts. You'll draft assertions in the next step while the runs are in progress.
 
 ---
 
 ## Running and evaluating test cases
 
-This section is one continuous sequence — don't stop partway through. Do NOT use `/skill-test` or any other testing skill.
+This section is one continuous sequence: don't stop partway through. Do NOT use `/skill-test` or any other testing skill.
 
-Put results in `&lt;skill-name&gt;-workspace/` as a sibling to the skill directory. Within the workspace, organize results by iteration (`iteration-1/`, `iteration-2/`, etc.) and within that, each test case gets a directory (`eval-0/`, `eval-1/`, etc.). Don't create all of this upfront — just create directories as you go.
+Put results in `&lt;skill-name&gt;-workspace/` as a sibling to the skill directory. Within the workspace, organize results by iteration (`iteration-1/`, `iteration-2/`, etc.) and within that, each test case gets a directory (`eval-0/`, `eval-1/`, etc.). Don't create all of this upfront: just create directories as you go.
 
 ### Step 1: Spawn all runs (with-skill AND baseline) in the same turn
 
-For each test case, spawn two subagents in the same turn — one with the skill, one without. Launch everything at once so it all finishes around the same time.
+For each test case, spawn two subagents in the same turn: one with the skill, one without. Launch everything at once so it all finishes around the same time.
 
 ### Step 2: While runs are in progress, draft assertions
 
@@ -993,9 +993,9 @@ When the user tells you they're done, read `feedback.json`. Empty feedback means
 
 ## Improving the skill
 
-1. **Generalize from the feedback.** Don't make overfitty changes — try different metaphors or patterns if something is stubborn.
+1. **Generalize from the feedback.** Don't make overfitty changes: try different metaphors or patterns if something is stubborn.
 2. **Keep the prompt lean.** Remove things that aren't pulling their weight. Read transcripts, not just final outputs.
-3. **Explain the why.** Avoid ALWAYS/NEVER in all caps. Reframe as reasoning the model can apply — that's more powerful than rigid rules.
+3. **Explain the why.** Avoid ALWAYS/NEVER in all caps. Reframe as reasoning the model can apply; that's more powerful than rigid rules.
 4. **Look for repeated work across test cases.** If subagents all wrote the same helper script, bundle it in `scripts/`.
 
 Keep iterating until the user is happy, feedback is all empty, or you're not making meaningful progress.
@@ -1026,7 +1026,7 @@ When asked to audit an existing skill, read it fully, then check:
 **Frontmatter**
 - name matches directory name
 - description uses natural trigger keywords, specific enough to avoid false fires
-- description is "pushy" — includes contexts where skill should activate without explicit naming
+- description is "pushy"; includes contexts where skill should activate without explicit naming
 - disable-model-invocation: true is set if skill has side effects
 
 **Content**
@@ -1057,7 +1057,7 @@ Fix issues directly, then report what changed.</pre>
         <p class="lede" data-anim="up">A skill can write, review other skills, capture knowledge, or make a call. Tap a role to see what it teaches and a real one that proves it.</p>
       </div>
       <div class="roles" id="roles"></div>
-      <div class="workforce-note" data-anim="up"><b>The point ·</b> none of these is an isolated tool. A writer's output gets audited, the auditor's findings get saved to memory, and a decision skill arbitrates. Wire them together and you've built an <b>agentic workforce</b> — not a chatbot.</div>
+      <div class="workforce-note" data-anim="up"><b>The point ·</b> none of these is an isolated tool. A writer's output gets audited, the auditor's findings get saved to memory, and a decision skill arbitrates. Wire them together and you've built an <b>agentic workforce</b>: not a chatbot.</div>
     </div></section>
 
     <!-- INTERVIEW SKILL -->
@@ -1065,14 +1065,14 @@ Fix issues directly, then report what changed.</pre>
       <div class="mod-head" data-anim="up">
         <div class="statline"><span class="modid">before you build</span><span class="statchip"><span class="sd"></span>spec it first</span></div>
         <h2 class="h2">The one skill to install <span class="accent">before all the others.</span></h2>
-        <p class="lede"><b>Why this matters more than any single build:</b> the most expensive mistake in this whole system is building the wrong thing well. <span class="inline-code">/interview</span> stops that — it refuses to write a line until it has asked enough questions to be 99% sure it understands what you actually want, then writes a <span class="inline-code">SPEC.md</span> the builder follows exactly. One vague spec can burn <b>50K tokens</b> on a rebuild. One good spec makes every skill downstream cheaper, faster, and right the first time. Copy it, install it, and run it before you build anything.</p>
+        <p class="lede"><b>Why this matters more than any single build:</b> the most expensive mistake in this whole system is building the wrong thing well. <span class="inline-code">/interview</span> stops that; it refuses to write a line until it has asked enough questions to be 99% sure it understands what you actually want, then writes a <span class="inline-code">SPEC.md</span> the builder follows exactly. One vague spec can burn <b>50K tokens</b> on a rebuild. One good spec makes every skill downstream cheaper, faster, and right the first time. Copy it, install it, and run it before you build anything.</p>
       </div>
 
       <div class="sb-wrap" id="interviewWrap" data-anim="up">
         <div class="sb-teaser" onclick="toggleInterview()">
           <span class="sb-badge">⚑ /interview</span>
           <div class="sb-teaser-text">
-            <b>The spec skill. Runs before any build — interviews you, then writes the requirements file.</b>
+            <b>The spec skill. Runs before any build; interviews you, then writes the requirements file.</b>
             <span>Minimum 10 questions. Writes SPEC.md to the right folder. Asks where before it writes.</span>
           </div>
           <div class="sb-teaser-right">
@@ -1082,22 +1082,22 @@ Fix issues directly, then report what changed.</pre>
         </div>
         <div class="sb-body" id="intBody">
           <div class="sb-body-inner">
-            <p class="sb-lede"><b>Two steps, two minutes.</b> ① Hit <b>Copy install</b> above and paste the one line into your terminal — it downloads the skill into <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/interview/</code>. ② In any project, type <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">/interview [what you want to build]</code>. That's it — it takes over, asks until it's sure, and hands the next skill a finished spec. No config, no setup.</p>
+            <p class="sb-lede"><b>Two steps, two minutes.</b> ① Hit <b>Copy install</b> above and paste the one line into your terminal; it downloads the skill into <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">~/.claude/skills/interview/</code>. ② In any project, type <code style="font-family:var(--mono);font-size:.82rem;color:var(--cyan)">/interview [what you want to build]</code>. That's it; it takes over, asks until it's sure, and hands the next skill a finished spec. No config, no setup.</p>
 
             <div class="sb-section">
               <div class="sb-section-title">The workflow</div>
               <ul class="sb-part-list">
-                <li><span class="pn">01</span><span><b>/interview [topic]</b> <i>— trigger it</i><br>Say "interview me about X" or "/interview [feature name]". It acknowledges and starts asking — core behavior, scope, edge cases, constraints, success criteria.</span></li>
-                <li><span class="pn">02</span><span><b>10+ questions, 99% confidence</b> <i>— the bar</i><br>It tracks confidence internally after each round. It won't write the spec until it hits 99%. If it's not there after 10 questions, it keeps asking — it'll tell you "I need a few more."</span></li>
-                <li><span class="pn">03</span><span><b>It asks where to save</b> <i>— no guessing</i><br>Before writing, it surfaces the 2–3 most likely paths based on what you discussed (Bob build, Health agent, Finances, etc.) and confirms before writing. You can also type a custom path.</span></li>
-                <li><span class="pn">04</span><span><b>SPEC.md written to disk</b> <i>— then it stops</i><br>It writes the spec and closes out. No building during the interview — that's the rule. Open a fresh session and run tony-stark: it'll find the spec and build against it.</span></li>
+                <li><span class="pn">01</span><span><b>/interview [topic]</b> <i>(trigger it)</i><br>Say "interview me about X" or "/interview [feature name]". It acknowledges and starts asking: core behavior, scope, edge cases, constraints, success criteria.</span></li>
+                <li><span class="pn">02</span><span><b>10+ questions, 99% confidence</b> <i>(the bar)</i><br>It tracks confidence internally after each round. It won't write the spec until it hits 99%. If it's not there after 10 questions, it keeps asking; it'll tell you "I need a few more."</span></li>
+                <li><span class="pn">03</span><span><b>It asks where to save</b> <i>(no guessing)</i><br>Before writing, it surfaces the 2–3 most likely paths based on what you discussed (Bob build, Health agent, Finances, etc.) and confirms before writing. You can also type a custom path.</span></li>
+                <li><span class="pn">04</span><span><b>SPEC.md written to disk</b> <i>(then it stops)</i><br>It writes the spec and closes out. No building during the interview; that's the rule. Open a fresh session and run tony-stark: it'll find the spec and build against it.</span></li>
               </ul>
             </div>
 
             <div class="sb-divider"></div>
 
             <div class="sb-section">
-              <div class="sb-section-title">Full SKILL.md — copy and install</div>
+              <div class="sb-section-title">Full SKILL.md: copy and install</div>
               <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:14px;line-height:1.6">Drop this into <code style="font-family:var(--mono);font-size:.8rem;color:var(--cyan)">~/.claude/skills/interview/SKILL.md</code>. Then say "/interview [what you want to build]."</p>
               <div style="position:relative">
                 <button class="sb-copy-btn" id="intRawCopyBtn" onclick="copyInterviewRaw()" style="position:absolute;top:10px;right:10px;z-index:2">Copy SKILL.md</button>
@@ -1114,17 +1114,17 @@ description: >
 ## What This Skill Does
 
 Before building anything non-trivial, interview the user to uncover requirements, edge cases,
-and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution happens in a fresh session.
+and tradeoffs. Write the findings to a SPEC.md file. Then stop; execution happens in a fresh session.
 
 ---
 
 ## Instructions
 
 1. **Acknowledge the topic**
-   Say: "Let's spec this out before building. I'll ask questions until we've covered everything — then I'll write the spec."
+   Say: "Let's spec this out before building. I'll ask questions until we've covered everything: then I'll write the spec."
 
 2. **Interview using AskUserQuestion**
-   Ask questions across these dimensions until you reach 99% confidence — minimum 10 questions, no maximum:
+   Ask questions across these dimensions until you reach 99% confidence: minimum 10 questions, no maximum:
    - **Core behavior**: What does this do? What's the primary user action?
    - **Technical scope**: What files/systems does it touch? Any existing patterns to follow?
    - **UI/UX** (if relevant): Layout, interactions, mobile vs desktop, dark mode?
@@ -1134,13 +1134,13 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
    - **Constraints**: Token budget? Must avoid certain approaches? Dependencies?
    - **Success criteria**: How do we know it's done? What does "working" look like?
 
-   Keep questions tight — 1–2 at a time max. Use multiSelect when options are non-exclusive.
+   Keep questions tight; 1–2 at a time max. Use multiSelect when options are non-exclusive.
 
    **Confidence tracking:** After each round, internally assess your confidence (0–100%).
    Do NOT write the spec until you hit 99%.
 
 3. **Confirm coverage**
-   After 10+ questions and 99% confidence reached, state: "Confidence: 99% — ready to write the spec."
+   After 10+ questions and 99% confidence reached, state: "Confidence: 99%; ready to write the spec."
    Then ask: "Anything else I should know before I write it?"
 
 4. **Confirm output location**
@@ -1198,11 +1198,11 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
 ---
 
 ## Rules
-- NEVER start building during the interview — spec only
-- NEVER skip the spec write — even if the user says "just go"
+- NEVER start building during the interview; spec only
+- NEVER skip the spec write; even if the user says "just go"
 - NEVER write the SPEC.md until confidence is explicitly at 99%
 - Minimum 10 questions or until 99% confidence, whichever comes later
-- Write SPEC.md ONCE — after ALL questions are answered
+- Write SPEC.md ONCE: after ALL questions are answered
 - ALWAYS write the SPEC.md to disk and confirm the path</pre>
               </div>
             </div>
@@ -1217,12 +1217,12 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
       <div class="mod-head">
         <div class="statline" data-anim="up"><span class="modid">module <b>0x04</b></span><span class="statchip"><span class="sd"></span>agents</span></div>
         <h2 class="h2" data-anim="up">When a skill <span class="accent">starts deciding.</span></h2>
-        <p class="lede" data-anim="up">The most common question: what's the difference between a skill and an agent? Here it is — then what becomes possible once you cross the line.</p>
+        <p class="lede" data-anim="up">The most common question: what's the difference between a skill and an agent? Here it is, then what becomes possible once you cross the line.</p>
       </div>
       <div class="vs" data-anim="up">
-        <div class="vs-card"><div class="vl">a skill</div><h4>You trigger it</h4><p>A named workflow with a memory of how to run. You invoke it — by name or by description — and it does the same job the same way every time. It waits for you.</p><div class="tag">workflow → skill</div></div>
-        <div class="arrow">— add autonomy →</div>
-        <div class="vs-card agent"><div class="vl">an agent</div><h4>It decides for itself</h4><p>A skill that makes its own calls and dispatches other skills — runs in a loop, in parallel, on a schedule, without you in the chair. It acts, checks its work, and keeps going until done.</p><div class="tag">agent → pipeline</div></div>
+        <div class="vs-card"><div class="vl">a skill</div><h4>You trigger it</h4><p>A named workflow with a memory of how to run. You invoke it (by name or by description) and it does the same job the same way every time. It waits for you.</p><div class="tag">workflow → skill</div></div>
+        <div class="arrow">add autonomy →</div>
+        <div class="vs-card agent"><div class="vl">an agent</div><h4>It decides for itself</h4><p>A skill that makes its own calls and dispatches other skills; runs in a loop, in parallel, on a schedule, without you in the chair. It acts, checks its work, and keeps going until done.</p><div class="tag">agent → pipeline</div></div>
       </div>
 
       <!-- the analogy -->
@@ -1234,15 +1234,15 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
         <div class="analogy-divider">vs</div>
         <div class="analogy-item analogy-item-agent">
           <div class="analogy-label">an agent is like…</div>
-          <div class="analogy-text">telling someone <b>"get me the best flight to Chicago by Thursday."</b> You gave them the outcome. They figure out how — search, compare, book, confirm. You just review the itinerary.</div>
+          <div class="analogy-text">telling someone <b>"get me the best flight to Chicago by Thursday."</b> You gave them the outcome. They figure out how; search, compare, book, confirm. You just review the itinerary.</div>
         </div>
       </div>
 
-      <p class="lede" data-anim="up" style="margin-bottom:8px">The payoff agents unlock — they get sharper the more they run:</p>
+      <p class="lede" data-anim="up" style="margin-bottom:8px">The payoff agents unlock; they get sharper the more they run:</p>
       <div class="trio trio-solo">
-        <div class="tcard tcard-wide" data-anim="up"><div class="tic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></div><div class="role">learning over time</div><h3>It gets sharper the more it runs</h3><p class="ex">An agent reads your own accumulated data and makes a call — and each run, with more history, makes a more informed one. Toggle the runs to see it get more confident.</p>
+        <div class="tcard tcard-wide" data-anim="up"><div class="tic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></div><div class="role">learning over time</div><h3>It gets sharper the more it runs</h3><p class="ex">An agent reads your own accumulated data and makes a call. And each run, with more history, makes a more informed one. Toggle the runs to see it get more confident.</p>
           <div class="learnwrap"><div class="runs" id="runs"></div><div class="lpanel" id="lpanel"></div></div>
-          <div class="learn-feedback-note">Every run, you can give it <b>feedback</b> and save it to <b>memory</b> — so it gets sharper at <em>your</em> specific situation, not just in general. That's the difference between a tool and a teammate.</div>
+          <div class="learn-feedback-note">Every run, you can give it <b>feedback</b> and save it to <b>memory</b>. So it gets sharper at <em>your</em> specific situation, not just in general. That's the difference between a tool and a teammate.</div>
           <div class="pay" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Why it matters ·</b> most tools answer the same way forever. This one builds a model of <b>you</b> and compounds accuracy.</span></div>
         </div>
       </div>
@@ -1257,9 +1257,9 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
               <li>The steps are the same every time</li>
               <li>You want predictable, consistent output</li>
               <li>You want to stay in control of the path</li>
-              <li>Token cost matters — skills are light</li>
+              <li>Token cost matters: skills are light</li>
             </ul>
-            <div class="use-when-token">Token cost: <strong>low</strong> — just the SKILL.md loaded into context</div>
+            <div class="use-when-token">Token cost: <strong>low</strong> (just the SKILL.md loaded into context)</div>
           </div>
           <div class="use-when-vs">or</div>
           <div class="use-when-card use-when-agent">
@@ -1270,148 +1270,113 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
               <li>You want it to loop until the job is actually done</li>
               <li>You'll trade more tokens for more autonomy</li>
             </ul>
-            <div class="use-when-token">Token cost: <strong>higher</strong> — full loop, tool calls, sometimes subagents</div>
+            <div class="use-when-token">Token cost: <strong>higher</strong>; full loop, tool calls, sometimes subagents</div>
           </div>
         </div>
         <div class="use-when-core">The core difference: <b>giving it a script</b> vs <b>telling it what to produce.</b></div>
       </div>
 
       <!-- AGENTS: the six things to know, as a step ladder -->
-      <p class="lede" data-anim="up" style="margin:30px 0 0">Six things to know before you let one run — climbing from how they work to where they bite:</p>
+      <p class="lede" data-anim="up" style="margin:30px 0 0">Six things to know before you let one run; climbing from how they work to where they bite:</p>
       <div class="aladder-base" data-anim="up" style="margin-top:18px"></div>
       <div class="aladder" data-anim="up">
-        <div class="arung"><div class="arn">01 · how</div><h4>It runs a loop</h4><p>Perceive → decide → act → verify, over and over, calling tools and reading results until the job is actually done — no human turn between steps.</p></div>
+        <div class="arung"><div class="arn">01 · how</div><h4>It runs a loop</h4><p>Perceive → decide → act → verify, over and over, calling tools and reading results until the job is actually done: no human turn between steps.</p></div>
         <div class="arung"><div class="arn">02 · how</div><h4>It dispatches subagents</h4><p>The lead agent splits the work and hands pieces to specialist subagents, each in its own fresh context, then collects what they return.</p></div>
         <div class="arung"><div class="arn">03 · why</div><h4>Parallelism is the unlock</h4><p>Seven roles working at once, each isolated, beats one context trying to hold everything. This is the leap from a chatbot to a workforce.</p></div>
-        <div class="arung"><div class="arn">04 · why</div><h4>It compounds</h4><p>Give feedback, save it to memory, and every run starts smarter than the last — it builds a model of <em>your</em> situation, not a generic one.</p></div>
+        <div class="arung"><div class="arn">04 · why</div><h4>It compounds</h4><p>Give feedback, save it to memory, and every run starts smarter than the last; it builds a model of <em>your</em> situation, not a generic one.</p></div>
         <div class="arung warn"><div class="arn">05 · careful</div><h4><span class="wm">⚠</span> Cost &amp; drift</h4><p>A 7-agent run can burn 100K+ tokens. Without tight roles and a token budget, agents wander, repeat work, and quietly produce confident garbage.</p></div>
-        <div class="arung warn"><div class="arn">06 · careful</div><h4><span class="wm">⚠</span> Autonomy needs rails</h4><p>An agent that can act can act wrongly. Scope what it touches, gate risky steps, and make every output a reviewable diff — guardrails are not optional.</p></div>
+        <div class="arung warn"><div class="arn">06 · careful</div><h4><span class="wm">⚠</span> Autonomy needs rails</h4><p>An agent that can act can act wrongly. Scope what it touches, gate risky steps, and make every output a reviewable diff; guardrails are not optional.</p></div>
       </div>
 
       <!-- AGENTS: live 7-agent team template -->
-      <p class="lede" data-anim="up" style="margin:34px 0 0">A live team — one orchestrator, a researcher, five role-specialist subagents, and a synthesizer. This is the actual shape of a real agent run:</p>
+      <p class="lede" data-anim="up" style="margin:34px 0 0">A live team: one orchestrator, a researcher, five role-specialist subagents, and a synthesizer. This is the actual shape of a real agent run:</p>
       <div class="ateam" data-anim="up">
         <div class="ateam-head"><span class="ateam-dots"><i></i><i></i><i></i></span><span class="ateam-title">agent · <b>market-brief</b> · 7-agent team</span></div>
         <div class="ateam-body">
-          <div class="ateam-goal"><span class="gk">desired_outcome:</span> <span class="gv">"a decision-ready brief on whether to enter Market X — sourced, balanced, one page."</span></div>
+          <div class="ateam-goal"><span class="gk">desired_outcome:</span> <span class="gv">"a decision-ready brief on whether to enter Market X; sourced, balanced, one page."</span></div>
           <p class="ateam-sub"># you give it the outcome. it figures out the how.</p>
 
-          <div class="ateam-orch"><span class="obadge">ORCHESTRATOR</span><span class="otext"><b>Lead agent</b> — reads the goal, plans the roles, dispatches the six below in parallel, then waits and assembles. Holds the budget and the rails.</span></div>
+          <div class="ateam-orch"><span class="obadge">ORCHESTRATOR</span><span class="otext"><b>Lead agent</b>: reads the goal, plans the roles, dispatches the six below in parallel, then waits and assembles. Holds the budget and the rails.</span></div>
           <div class="ateam-fan">▾ dispatches ▾</div>
 
           <div class="ateam-grid">
             <div class="acard"><div class="acn"><span class="dot"></span>agent_01 · research</div><h5>Researcher</h5><p>Searches sources, pulls primary data, captures citations. Feeds raw evidence to everyone downstream.</p><div class="amodel">model · sonnet · web + fetch</div></div>
-            <div class="acard"><div class="acn"><span class="dot"></span>agent_02 · bull</div><h5>Bull-case analyst</h5><p>Builds the strongest argument <em>for</em> entering — TAM, momentum, tailwinds.</p><div class="amodel">model · sonnet · isolated ctx</div></div>
-            <div class="acard"><div class="acn"><span class="dot"></span>agent_03 · bear</div><h5>Bear-case analyst</h5><p>Builds the strongest argument <em>against</em> — risks, incumbents, failure modes.</p><div class="amodel">model · sonnet · isolated ctx</div></div>
+            <div class="acard"><div class="acn"><span class="dot"></span>agent_02 · bull</div><h5>Bull-case analyst</h5><p>Builds the strongest argument <em>for</em> entering; TAM, momentum, tailwinds.</p><div class="amodel">model · sonnet · isolated ctx</div></div>
+            <div class="acard"><div class="acn"><span class="dot"></span>agent_03 · bear</div><h5>Bear-case analyst</h5><p>Builds the strongest argument <em>against</em>; risks, incumbents, failure modes.</p><div class="amodel">model · sonnet · isolated ctx</div></div>
             <div class="acard"><div class="acn"><span class="dot"></span>agent_04 · numbers</div><h5>Quant</h5><p>Runs the unit economics and base rates. Refuses to assert a number it can't source.</p><div class="amodel">model · sonnet · data tools</div></div>
-            <div class="acard"><div class="acn"><span class="dot"></span>agent_05 · redteam</div><h5>Red-teamer</h5><p>Stress-tests both cases — hunts the silent assumption that breaks the thesis.</p><div class="amodel">model · opus · adversarial</div></div>
+            <div class="acard"><div class="acn"><span class="dot"></span>agent_05 · redteam</div><h5>Red-teamer</h5><p>Stress-tests both cases: hunts the silent assumption that breaks the thesis.</p><div class="amodel">model · opus · adversarial</div></div>
             <div class="acard"><div class="acn"><span class="dot"></span>agent_06 · fact-check</div><h5>Verifier</h5><p>Re-checks every claim against the researcher's citations. Flags anything unsourced.</p><div class="amodel">model · haiku · cheap pass</div></div>
             <div class="acard synth"><div class="acn"><span class="dot"></span>agent_07 · synthesis</div><h5>Synthesizer → final brief</h5><p>Reads all six outputs, resolves the disagreement into the actual tradeoff, and writes the one-page brief with a clear recommendation. The only agent that writes the deliverable.</p><div class="amodel">model · opus · writes output</div></div>
           </div>
 
           <div class="ateam-rails">
             <div class="arail guard"><div class="arl">guardrails</div><ul>
-              <li>Token budget capped — <b>halt at 120K</b>, never silently overrun</li>
+              <li>Token budget capped; <b>halt at 120K</b>, never silently overrun</li>
               <li>No claim ships <b>without a citation</b> the verifier confirmed</li>
-              <li>Read-only research — <b>never sends, buys, or commits</b> anything</li>
-              <li>On any subagent failure: <b>retry once, then surface</b> — never fake the result</li>
+              <li>Read-only research; <b>never sends, buys, or commits</b> anything</li>
+              <li>On any subagent failure: <b>retry once, then surface</b>; never fake the result</li>
             </ul></div>
             <div class="arail out"><div class="arl">desired outcome</div><ul>
-              <li>One page, <b>balanced</b> — bull and bear both represented</li>
+              <li>One page, <b>balanced</b>; bull and bear both represented</li>
               <li>A <b>clear recommendation</b> with the tradeoff stated plainly</li>
               <li>Every number <b>sourced</b>; every assumption named</li>
-              <li>Delivered as a <b>reviewable draft</b> — you approve before it's used</li>
+              <li>Delivered as a <b>reviewable draft</b>; you approve before it's used</li>
             </ul></div>
           </div>
         </div>
       </div>
-      <div class="why g" data-anim="up" style="margin-top:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Real example ·</b> this is exactly how the whoop-report and family-feud skills run — one orchestrator fans out role-specialist subagents in parallel, each in fresh context, and a final agent synthesizes. Cheap models do the grunt work, the expensive model does the judgment.</span></div>
+      <div class="why g" data-anim="up" style="margin-top:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Real example ·</b> this is exactly how the whoop-report and family-feud skills run: one orchestrator fans out role-specialist subagents in parallel, each in fresh context, and a final agent synthesizes. Cheap models do the grunt work, the expensive model does the judgment.</span></div>
     </div></section>
 
-    <!-- 05 LOOP -->
-    <section class="module" id="loop"><div class="lglow"></div><div class="wrap">
-      <div class="mod-head" data-anim="up">
-        <div class="statline"><span class="modid">module <b>0x05</b></span><span class="statchip"><span class="sd"></span>compounding</span></div>
-        <h2 class="h2" style="margin:6px 0 14px">It gets <span class="accent">better every time it runs.</span></h2>
-        <p class="lede">A chatbot starts from zero on every question. An agent doesn't. Each run, it reads the result of the last one — your feedback, what worked, what didn't — and folds it into memory. Follow one task across four weeks and watch the line move.</p>
-      </div>
-
-      <!-- the linear run: one pass, start to finish -->
-      <p class="lede" data-anim="up" style="margin-bottom:6px">One run, start to finish — and the step that makes the next run smarter:</p>
-      <div class="lflow" data-anim="up">
-        <div class="lf-step"><div class="lfn">step_01</div><h4>Perceive</h4><p>Reads the task <em>and</em> everything memory remembers from last time.</p></div>
-        <div class="lf-arrow">▸</div>
-        <div class="lf-step"><div class="lfn">step_02</div><h4>Decide</h4><p>Plans the move — informed by what worked and what you corrected before.</p></div>
-        <div class="lf-arrow">▸</div>
-        <div class="lf-step"><div class="lfn">step_03</div><h4>Act</h4><p>Does the work, calling whatever tools the job needs.</p></div>
-        <div class="lf-arrow">▸</div>
-        <div class="lf-step"><div class="lfn">step_04</div><h4>Verify</h4><p>Checks its own output against the goal before handing it to you.</p></div>
-        <div class="lf-arrow">▸</div>
-        <div class="lf-step mem"><div class="lfn">step_05 · the key step</div><h4>Save to memory</h4><p>Your feedback + what it learned get written down — so the <em>next</em> run starts here, not at zero.</p></div>
-      </div>
-
-      <!-- the compounding strip: same task, four runs, accuracy climbs -->
-      <div class="compound-strip" data-anim="up">
-        <div class="cs-head"># same task · same agent · four weeks of <b>feedback + memory</b> compounding</div>
-        <div class="cs-rows">
-          <div class="cs-row"><span class="cs-run">run 01</span><span class="cs-what">Generic first pass. You correct three things — it <b>saves all three</b>.</span><span class="cs-bar"><i style="width:55%"></i></span><span class="cs-acc">55%</span></div>
-          <div class="cs-row"><span class="cs-run">run 02</span><span class="cs-what">Skips the three mistakes from last week. You fix <b>one tone issue</b>.</span><span class="cs-bar"><i style="width:72%"></i></span><span class="cs-acc">72%</span></div>
-          <div class="cs-row"><span class="cs-run">run 03</span><span class="cs-what">Voice now matches. It pre-empts an edge case <b>from memory</b>.</span><span class="cs-bar"><i style="width:88%"></i></span><span class="cs-acc">88%</span></div>
-          <div class="cs-row"><span class="cs-run">run 04</span><span class="cs-what">You approve with no edits. It now knows <b>your</b> situation, not a generic one.</span><span class="cs-bar"><i style="width:97%"></i></span><span class="cs-acc">97%</span></div>
-        </div>
-      </div>
-      <div class="compound-note" data-anim="up"><b>This is the whole difference.</b> Most tools answer the same way forever — run 04 is identical to run 01. An agent with <b>memory</b> and a <b>feedback loop</b> compounds: every correction you give is permanent, every run starts ahead of the last, and the gap between "a tool" and "a teammate" is exactly this line.</div>
-    </div></section>
-
-    <!-- 06 REPLACE -->
+    <!-- 05 REPLACE -->
     <section class="module" id="replace"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x06</b></span><span class="statchip"><span class="sd"></span>the invisible workload</span></div>
-        <h2 class="h2" data-anim="up">The work you don't even <em class="it-em">notice</em> — <span class="accent">until an agent absorbs it.</span></h2>
-        <p class="it-def" data-anim="up">Not the obvious chores. The <b>invisible workload</b> — the context-switching, the manual reconciling, the "I'll get to it" tasks that quietly eat a day. Here's what a healthy agent ecosystem takes off a working person's plate, done well.</p>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x05</b></span><span class="statchip"><span class="sd"></span>the invisible workload</span></div>
+        <h2 class="h2" data-anim="up">The work you don't even <em class="it-em">notice</em>; <span class="accent">until an agent absorbs it.</span></h2>
+        <p class="it-def" data-anim="up">Not the obvious chores. The <b>invisible workload</b>: the context-switching, the manual reconciling, the "I'll get to it" tasks that quietly eat a day. Here's what a healthy agent ecosystem takes off a working person's plate, done well.</p>
       </div>
       <div class="dwgrid" data-anim="up">
         <div class="dwcard">
           <div class="dwtag">the friday tax</div>
           <h4>The weekly report you rebuild from scratch</h4>
           <div class="dwbody">Every week you re-pull the same numbers, re-format the same deck, re-write the same summary. An agent runs a <span class="tc">scheduled pipeline</span>: it queries the source, <span class="tt">diffs</span> against last week from <span class="tt">memory</span>, drafts the narrative in your voice, and stops at a <span class="tc">reviewable draft</span>.</div>
-          <div class="dwwin"><b>You stop noticing it exists</b> — it's done before you sit down, waiting for one approval.</div>
+          <div class="dwwin"><b>You stop noticing it exists</b>: it's done before you sit down, waiting for one approval.</div>
         </div>
         <div class="dwcard">
           <div class="dwtag">death by inbox</div>
           <h4>The triage that fragments your morning</h4>
-          <div class="dwbody">Forty threads, five that actually matter, and you read all forty to find them. An agent with an <span class="tc">MCP</span> connection to your inbox applies a <span class="tt">classifier</span>, surfaces the five with a one-line summary each, drafts replies to the routine ones, and <span class="tt">labels</span> the rest — every send gated as a <span class="tc">tier-2</span> action you confirm.</div>
-          <div class="dwwin"><b>The context-switching disappears</b> — you decide, you don't dig.</div>
+          <div class="dwbody">Forty threads, five that actually matter, and you read all forty to find them. An agent with an <span class="tc">MCP</span> connection to your inbox applies a <span class="tt">classifier</span>, surfaces the five with a one-line summary each, drafts replies to the routine ones, and <span class="tt">labels</span> the rest: every send gated as a <span class="tc">tier-2</span> action you confirm.</div>
+          <div class="dwwin"><b>The context-switching disappears</b>; you decide, you don't dig.</div>
         </div>
         <div class="dwcard">
           <div class="dwtag">the reconcile</div>
           <h4>The cross-system matching nobody schedules</h4>
-          <div class="dwbody">Card feed vs bank vs receipts vs the sheet — the manual reconcile you keep putting off until it's a mess. An agent runs the <span class="tt">cross-channel dedup</span>, flags the <span class="tt">ambiguous</span> cases for you instead of guessing, and writes each match back with a <span class="tc">provenance ID</span> so every number is traceable.</div>
-          <div class="dwwin"><b>The dread evaporates</b> — the reconcile is current, not a quarterly panic.</div>
+          <div class="dwbody">Card feed vs bank vs receipts vs the sheet: the manual reconcile you keep putting off until it's a mess. An agent runs the <span class="tt">cross-channel dedup</span>, flags the <span class="tt">ambiguous</span> cases for you instead of guessing, and writes each match back with a <span class="tc">provenance ID</span> so every number is traceable.</div>
+          <div class="dwwin"><b>The dread evaporates</b>: the reconcile is current, not a quarterly panic.</div>
         </div>
         <div class="dwcard">
           <div class="dwtag">the knowledge tax</div>
           <h4>The thing only you remember how to do</h4>
-          <div class="dwbody">The fiddly multi-step process you redo every few weeks and re-figure-out every time. Capture it once as a <span class="tc">skill</span> — the steps, the <span class="tt">gotchas</span>, the edge cases — and it runs the same way forever, for you or a new hire, with <span class="tt">guardrails</span> on what it's allowed to touch.</div>
-          <div class="dwwin"><b>The tribal knowledge stops living in your head</b> — it lives in a file that runs itself.</div>
+          <div class="dwbody">The fiddly multi-step process you redo every few weeks and re-figure-out every time. Capture it once as a <span class="tc">skill</span> (the steps, the <span class="tt">gotchas</span>, the edge cases) and it runs the same way forever, for you or a new hire, with <span class="tt">guardrails</span> on what it's allowed to touch.</div>
+          <div class="dwwin"><b>The tribal knowledge stops living in your head</b>; it lives in a file that runs itself.</div>
         </div>
       </div>
-      <p class="lede" data-anim="up" style="margin:26px 0 8px">What never moves off your plate — and the rails that keep the rest safe:</p>
+      <p class="lede" data-anim="up" style="margin:26px 0 8px">What never moves off your plate. And the rails that keep the rest safe:</p>
       <p class="lede" data-anim="up" style="margin:26px 0 8px">The rails that make autonomy safe:</p>
       <div class="tiers">
-        <div class="tier" data-anim="up" style="--tc:#7DF38A"><div class="tlab">tier 1 · autonomous</div><h4>Just do it</h4><p>Reversible, low-stakes, in-scope work runs without asking — reading files, drafting, generating a report.</p><div class="eg"><span>"summarize this folder"</span><span>"draft the weekly report"</span></div></div>
-        <div class="tier" data-anim="up" style="--tc:#5BE9E0"><div class="tlab">tier 2 · surface first</div><h4>Ask, then act</h4><p>Anything touching shared ground stops and shows you the plan first — pushing code, sending a message, deploying.</p><div class="eg"><span>"open the PR"</span><span>"post this to Slack"</span></div></div>
-        <div class="tier" data-anim="up" style="--tc:#FF6B5B"><div class="tlab">tier 3 · halt</div><h4>Stop &amp; escalate</h4><p>Auth failures, corrupt state, anything out of its lane — it stops fully and reports. No improvising.</p><div class="eg"><span>"a login expired"</span><span>"corrupt pipeline state found"</span></div></div>
+        <div class="tier" data-anim="up" style="--tc:#7DF38A"><div class="tlab">tier 1 · autonomous</div><h4>Just do it</h4><p>Reversible, low-stakes, in-scope work runs without asking; reading files, drafting, generating a report.</p><div class="eg"><span>"summarize this folder"</span><span>"draft the weekly report"</span></div></div>
+        <div class="tier" data-anim="up" style="--tc:#5BE9E0"><div class="tlab">tier 2 · surface first</div><h4>Ask, then act</h4><p>Anything touching shared ground stops and shows you the plan first; pushing code, sending a message, deploying.</p><div class="eg"><span>"open the PR"</span><span>"post this to Slack"</span></div></div>
+        <div class="tier" data-anim="up" style="--tc:#FF6B5B"><div class="tlab">tier 3 · halt</div><h4>Stop &amp; escalate</h4><p>Auth failures, corrupt state, anything out of its lane; it stops fully and reports. No improvising.</p><div class="eg"><span>"a login expired"</span><span>"corrupt pipeline state found"</span></div></div>
       </div>
-      <div class="safenote" data-anim="up"><b>"Is this safe for our code &amp; data?"</b> — You scope what it can touch (plan mode keeps it read-only until you approve, permission modes limit the surface), every edit is a reviewable diff, and risky actions can be gated by a hook. Secrets stay in your environment, not the conversation. You set the autonomy per action.</div>
+      <div class="safenote" data-anim="up"><b>"Is this safe for our code &amp; data?"</b> You scope what it can touch (plan mode keeps it read-only until you approve, permission modes limit the surface), every edit is a reviewable diff, and risky actions can be gated by a hook. Secrets stay in your environment, not the conversation. You set the autonomy per action.</div>
     </div></section>
 
     <!-- 08 PITFALLS -->
     <section class="module" id="pitfalls"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x07</b></span><span class="statchip"><span class="sd"></span>pitfalls · fixes</span></div>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x06</b></span><span class="statchip"><span class="sd"></span>pitfalls · fixes</span></div>
         <h2 class="h2" data-anim="up">Every mistake has <span class="accent">a fix. Often a skill.</span></h2>
-        <p class="lede" data-anim="up">The hard-won lessons. Tap any pitfall to drop down the fix — and notice how many fixes are skills you can build yourself.</p>
+        <p class="lede" data-anim="up">The hard-won lessons. Tap any pitfall to drop down the fix. And notice how many fixes are skills you can build yourself.</p>
       </div>
       <div class="blocks" id="pitfalls-list"></div>
     </div></section>
@@ -1419,7 +1384,7 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
     <!-- 09 THE TEN -->
     <section class="module" id="habits"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x08</b></span><span class="statchip"><span class="sd"></span>takeaways</span></div>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x07</b></span><span class="statchip"><span class="sd"></span>takeaways</span></div>
         <h2 class="h2" data-anim="up">If you remember <span class="accent">ten things.</span></h2>
         <p class="lede" data-anim="up">The whole field guide, compressed to the ten that actually change how you work. Each one: the point, and the line to remember it by.</p>
       </div>
@@ -1430,11 +1395,11 @@ and tradeoffs. Write the findings to a SPEC.md file. Then stop — execution hap
         <div class="statline" data-anim="up"><span class="modid">exec <b>./first_hour</b></span><span class="statchip"><span class="sd"></span>your move</span></div>
         <h2 class="h2" data-anim="up" style="margin-bottom:20px">Stop reading. <span class="accent">Start building.</span></h2>
         <div class="firsthr" data-anim="up">
-          <div class="fstep"><div class="fn">1</div><div><b>Teach it your project</b> <span>—</span> <code>/init</code> <span>writes a starter CLAUDE.md.</span></div></div>
-          <div class="fstep"><div class="fn">2</div><div><b>Build one skill</b> <span>— take the one task you repeat most and assemble it, like in module 0x04.</span></div></div>
-          <div class="fstep"><div class="fn">3</div><div><b>Run it</b> <span>— trigger it by name. That's the loop, end to end. Now do it again.</span></div></div>
+          <div class="fstep"><div class="fn">1</div><div><b>Teach it your project</b> <span>-</span> <code>/init</code> <span>writes a starter CLAUDE.md.</span></div></div>
+          <div class="fstep"><div class="fn">2</div><div><b>Build one skill</b> <span>: take the one task you repeat most and assemble it, like in module 0x04.</span></div></div>
+          <div class="fstep"><div class="fn">3</div><div><b>Run it</b> <span>- trigger it by name. That's the loop, end to end. Now do it again.</span></div></div>
         </div>
-        <div class="cta" data-anim="up"><h3>Want help standing this up for your team?</h3><p>Bring one workflow your people repeat every week — we'll turn it into a skill that runs itself, then build the substrate that makes the next one cheaper.</p><a class="btn btn-dark" href="mailto:lpmats09@gmail.com?subject=Claude%20Code%20for%20our%20team">Start a conversation →</a></div>
+        <div class="cta" data-anim="up"><h3>Want help standing this up for your team?</h3><p>Bring one workflow your people repeat every week; we'll turn it into a skill that runs itself, then build the substrate that makes the next one cheaper.</p><a class="btn btn-dark" href="mailto:lpmats09@gmail.com?subject=Claude%20Code%20for%20our%20team">Start a conversation →</a></div>
       </div>
     </div></section>
 
@@ -1480,7 +1445,7 @@ function copyTonyStark(){
     var text=(clone.innerText||clone.textContent).replace(/\s+/g,' ').trim();
     steps+=num+'. '+text+'\n\n';
   });
-  var combined='## The 10 Anatomy Frameworks — how tony-stark handles each\n\n'+steps+'---\n\n## Full SKILL.md\n\n'+raw;
+  var combined='## The 10 Anatomy Frameworks: how tony-stark handles each\n\n'+steps+'---\n\n## Full SKILL.md\n\n'+raw;
   navigator.clipboard.writeText(combined).then(function(){
     btn.textContent='Copied ✓';btn.classList.add('copied');
     setTimeout(function(){btn.textContent='Copy SKILL.md';btn.classList.remove('copied');},2200);
@@ -1523,61 +1488,61 @@ var SV=function(p,sz){sz=sz||22;return '<svg width="'+sz+'" height="'+sz+'" view
 var IC={slash:'<line x1="7" y1="20" x2="17" y2="4"/>',layers:'<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/>',zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',plug:'<path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-10 0z"/><path d="M12 16v6"/>',brain:'<path d="M12 5a3 3 0 0 0-6 0v1a3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 0z"/><path d="M12 5a3 3 0 0 1 6 0v1a3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 0z"/>',pen:'<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',save:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>',scale:'<line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l3 6a3 3 0 0 1-6 0z"/>'};
 
 var BLOCKS=[
- {ic:'slash',t:'Slash commands',s:'Type / to run a saved action',plain:'Commands starting with "/". Built-ins control the session; custom ones encode a workflow the whole team runs by name.',tech:'Built-ins: /model, /compact, /mcp. Custom = a markdown file at .claude/commands/name.md — check it in, the team gets /name.',code:'<span class="c"># .claude/commands/pre-pr.md</span>\nRun the linter, then the unit tests.\nSummarize what changed and flag anything risky.\n\n<span class="c"># then, anywhere:</span>\n<span class="k">/pre-pr</span>',why:'Team muscle memory becomes a single keystroke.'},
- {ic:'layers',t:'Skills',s:'A workflow with a trigger and a name',plain:'A folder with one SKILL.md. Teaches Claude a repeatable job — and when to reach for it. The unit of reuse.',tech:'Frontmatter: name + description. Claude reads the description to auto-trigger. The body is the instructions.',code:'<span class="c">---</span>\n<span class="k">name</span>: new-endpoint\n<span class="k">description</span>: <span class="s">"Scaffold a REST endpoint —</span>\n<span class="s">  route, handler, tests, docs. Use when adding an API."</span>\n<span class="c">---</span>\n1. Add the route  2. Write the handler\n3. Generate tests  4. Update the docs',why:'Skills live or die by the description — that is the trigger.'},
- {ic:'users',t:'Subagents',s:'Helpers that run in parallel',plain:'For big or noisy jobs, Claude spins up focused helpers. Each works in its own clean context and hands back a summary.',tech:'Dispatched via the Agent/Task tool. Three wins: context isolation, parallelism, specialization (cheaper models for cheap work).',code:'<span class="c"># parent dispatches focused workers</span>\nAgent(<span class="s">"log-parser"</span>)   <span class="c">→ chunk the log</span>\nAgent(<span class="s">"classifier"</span>)   <span class="c">→ rank errors</span>\nAgent(<span class="s">"reporter"</span>)     <span class="c">→ draft summary</span>',why:'Parallelize without flooding the main thread — spend Opus only where it earns it.'},
- {ic:'zap',t:'Hooks',s:'Automation that fires on its own',plain:'Actions the tool runs automatically on events — session start, before a command, after a tool. Whether or not Claude "remembers."',tech:'In settings.json. Events: SessionStart, PreToolUse, PostToolUse, Stop. A matcher targets tools. This is enforcement.',code:'<span class="c">// settings.json — block a dangerous cmd</span>\n<span class="k">"hooks"</span>: { <span class="k">"PreToolUse"</span>: [{\n  <span class="k">"matcher"</span>: <span class="s">"Bash(rm *)"</span>,\n  <span class="k">"hooks"</span>:[{<span class="k">"type"</span>:<span class="s">"command"</span>,\n    <span class="k">"command"</span>:<span class="s">"~/.claude/guard.sh"</span>}] }] }',why:'If it must happen every time, it goes in a hook — not in memory.'},
- {ic:'plug',t:'MCP',s:'Plug into your other tools',plain:'The Model Context Protocol lets Claude reach GitHub, Slack, Jira, a database, an internal API — and act on them.',tech:'Open standard. Add a server (local stdio or remote HTTP); it exposes tools Claude calls + data it references. Check with /mcp.',code:'<span class="c"># connect GitHub over MCP</span>\n<span class="k">claude mcp add</span> --transport http github \\\n  https://api.githubcopilot.com/mcp/\n\n<span class="c"># one loop: read issue → fix → test → PR</span>',why:'An agent’s power is what it can touch. MCP wires in your stack.'},
- {ic:'brain',t:'Memory',s:'Why every session gets smarter',plain:'CLAUDE.md is context you write; auto-memory is what Claude learns on its own. Both load at the start of every session.',tech:'CLAUDE.md at project root (+ ~/.claude for you-wide). Keep it <200 lines. Auto-memory = an index + topic files loaded on demand.',code:'<span class="c"># CLAUDE.md — loaded every session</span>\n- Use <span class="k">pnpm</span>, never npm\n- Run <span class="k">pnpm test</span> before commit\n- API errors return { code, message }',why:'The moat: a new hire’s Claude knows what your veterans’ Claude knows — day one.'}
+ {ic:'slash',t:'Slash commands',s:'Type / to run a saved action',plain:'Commands starting with "/". Built-ins control the session; custom ones encode a workflow the whole team runs by name.',tech:'Built-ins: /model, /compact, /mcp. Custom = a markdown file at .claude/commands/name.md; check it in, the team gets /name.',code:'<span class="c"># .claude/commands/pre-pr.md</span>\nRun the linter, then the unit tests.\nSummarize what changed and flag anything risky.\n\n<span class="c"># then, anywhere:</span>\n<span class="k">/pre-pr</span>',why:'Team muscle memory becomes a single keystroke.'},
+ {ic:'layers',t:'Skills',s:'A workflow with a trigger and a name',plain:'A folder with one SKILL.md. Teaches Claude a repeatable job. And when to reach for it. The unit of reuse.',tech:'Frontmatter: name + description. Claude reads the description to auto-trigger. The body is the instructions.',code:'<span class="c">---</span>\n<span class="k">name</span>: new-endpoint\n<span class="k">description</span>: <span class="s">"Scaffold a REST endpoint -</span>\n<span class="s">  route, handler, tests, docs. Use when adding an API."</span>\n<span class="c">---</span>\n1. Add the route  2. Write the handler\n3. Generate tests  4. Update the docs',why:'Skills live or die by the description; that is the trigger.'},
+ {ic:'users',t:'Subagents',s:'Helpers that run in parallel',plain:'For big or noisy jobs, Claude spins up focused helpers. Each works in its own clean context and hands back a summary.',tech:'Dispatched via the Agent/Task tool. Three wins: context isolation, parallelism, specialization (cheaper models for cheap work).',code:'<span class="c"># parent dispatches focused workers</span>\nAgent(<span class="s">"log-parser"</span>)   <span class="c">→ chunk the log</span>\nAgent(<span class="s">"classifier"</span>)   <span class="c">→ rank errors</span>\nAgent(<span class="s">"reporter"</span>)     <span class="c">→ draft summary</span>',why:'Parallelize without flooding the main thread; spend Opus only where it earns it.'},
+ {ic:'zap',t:'Hooks',s:'Automation that fires on its own',plain:'Actions the tool runs automatically on events; session start, before a command, after a tool. Whether or not Claude "remembers."',tech:'In settings.json. Events: SessionStart, PreToolUse, PostToolUse, Stop. A matcher targets tools. This is enforcement.',code:'<span class="c">// settings.json; block a dangerous cmd</span>\n<span class="k">"hooks"</span>: { <span class="k">"PreToolUse"</span>: [{\n  <span class="k">"matcher"</span>: <span class="s">"Bash(rm *)"</span>,\n  <span class="k">"hooks"</span>:[{<span class="k">"type"</span>:<span class="s">"command"</span>,\n    <span class="k">"command"</span>:<span class="s">"~/.claude/guard.sh"</span>}] }] }',why:'If it must happen every time, it goes in a hook: not in memory.'},
+ {ic:'plug',t:'MCP',s:'Plug into your other tools',plain:'The Model Context Protocol lets Claude reach GitHub, Slack, Jira, a database, an internal API. And act on them.',tech:'Open standard. Add a server (local stdio or remote HTTP); it exposes tools Claude calls + data it references. Check with /mcp.',code:'<span class="c"># connect GitHub over MCP</span>\n<span class="k">claude mcp add</span> --transport http github \\\n  https://api.githubcopilot.com/mcp/\n\n<span class="c"># one loop: read issue → fix → test → PR</span>',why:'An agent’s power is what it can touch. MCP wires in your stack.'},
+ {ic:'brain',t:'Memory',s:'Why every session gets smarter',plain:'CLAUDE.md is context you write; auto-memory is what Claude learns on its own. Both load at the start of every session.',tech:'CLAUDE.md at project root (+ ~/.claude for you-wide). Keep it <200 lines. Auto-memory = an index + topic files loaded on demand.',code:'<span class="c"># CLAUDE.md (loaded every session</span>\n- Use <span class="k">pnpm</span>, never npm\n- Run <span class="k">pnpm test</span> before commit\n- API errors return { code, message }',why:'The moat: a new hire’s Claude knows what your veterans’ Claude knows) day one.'}
 ];
 
 var ROLES=[
- {ic:'pen',t:'Writing skills',s:'draft in a specific voice, every format',ex:'A writing skill captures how a person or brand actually writes and drafts in that voice across formats. What you learn: voice is reproducible if you give it real samples and a rubric to score itself against — so it ships an edit, not a rewrite.',real:'real: shakespeare — drafts in Logan\'s voice across 6 formats, scored on a rubric'},
- {ic:'shield',t:'Auditing skills',s:'a skill that inspects other skills',ex:'An auditing skill\'s job is the system itself — it reads the other skills and memory and flags drift, dead conventions, and bloat. What you learn: this is the skill that makes compounding real; without a janitor, a skill empire rots within months.',real:'real: john-wooden / ghengis-khan / deep-clean — audit the whole empire'},
- {ic:'save',t:'Memory skills',s:'capture knowledge for future runs',ex:'A memory skill writes down what was learned so the next session inherits it — an index that loads every time plus topic files loaded on demand. What you learn: memory is the moat, but only if it stays lean; the index must be small or it eats the context window.',real:'real: the auto-memory + MEMORY.md index pattern across 40+ skills'},
- {ic:'scale',t:'Decision skills',s:'argue a call, name the tradeoff',ex:'A decision skill runs multiple voices against each other — a skeptic, an analyst, a systems-thinker — and a host names the real tradeoff instead of giving you a vibe. What you learn: structured disagreement surfaces the actual choice that a single confident answer would hide.',real:'real: family-feud — three voices argue, a host names the tradeoff'}
+ {ic:'pen',t:'Writing skills',s:'draft in a specific voice, every format',ex:'A writing skill captures how a person or brand actually writes and drafts in that voice across formats. What you learn: voice is reproducible if you give it real samples and a rubric to score itself against. So it ships an edit, not a rewrite.',real:'real: shakespeare; drafts in Logan\'s voice across 6 formats, scored on a rubric'},
+ {ic:'shield',t:'Auditing skills',s:'a skill that inspects other skills',ex:'An auditing skill\'s job is the system itself; it reads the other skills and memory and flags drift, dead conventions, and bloat. What you learn: this is the skill that makes compounding real; without a janitor, a skill empire rots within months.',real:'real: john-wooden / ghengis-khan / deep-clean; audit the whole empire'},
+ {ic:'save',t:'Memory skills',s:'capture knowledge for future runs',ex:'A memory skill writes down what was learned so the next session inherits it: an index that loads every time plus topic files loaded on demand. What you learn: memory is the moat, but only if it stays lean; the index must be small or it eats the context window.',real:'real: the auto-memory + MEMORY.md index pattern across 40+ skills'},
+ {ic:'scale',t:'Decision skills',s:'argue a call, name the tradeoff',ex:'A decision skill runs multiple voices against each other (a skeptic, an analyst, a systems-thinker) and a host names the real tradeoff instead of giving you a vibe. What you learn: structured disagreement surfaces the actual choice that a single confident answer would hide.',real:'real: family-feud: three voices argue, a host names the tradeoff'}
 ];
 
 var ANATOMY=[
- {t:'Name',s:'The skill’s identity',b:['Defaults to the folder name if unset — short, kebab-case.','How the skill is invoked, logged, and referenced by others.','Unique and stable — rename it and every callout must change.','<span class="ana-ana"><b>Like</b> naming a play in a playbook — once everyone knows it by name, you can call it without re-explaining the whole thing.</span>']},
- {t:'Description',s:'The trigger — the most important field',b:['Claude reads this to decide <b>when</b> to fire the skill.','Too vague → never triggers; too greedy → fires wrongly.','Pack it with trigger phrases and a clear "use this when…".','If a skill misbehaves, tune this first — not the body.','<span class="ana-ana"><b>Like</b> a job posting — it tells the model when to raise its hand, not how to do the work once it’s hired.</span>']},
- {t:'The body / instructions',s:'The actual recipe',b:['Numbered steps Claude follows in order once it fires.','Where the real "how" lives — phases, decision logic, checklists.','The description is the trigger; the body is the workflow.','<span class="ana-ana"><b>Like</b> a recipe — numbered steps, in order, that anyone (or any model) can follow start to finish.</span>']},
- {t:'Gotchas',s:'Failure modes learned the hard way',b:['Real problems seen in live runs — wrong path, a broken write.','Written down so the <b>next</b> run avoids the trap.','<b>Gotchas = what went wrong in real runs. Guardrails = rules set before it ran.</b>','<span class="ana-ana"><b>Like</b> a burn notice on a recipe card — "last time we cranked the heat to 400° it charred; don’t repeat it."</span>']},
- {t:'Guardrails',s:'What it must — and won’t — do',b:['Hard limits: "never modify the source file," "no external deps."','Scope boundaries that keep the skill in its lane.','<b>Gotchas = what went wrong in real runs. Guardrails = rules set before it ran.</b>','<span class="ana-ana"><b>Like</b> a kitchen rule that’s never negotiable — "no one touches the bread station before the prep list is done, period."</span>']},
- {t:'Embedded skills & callouts',s:'How skills compose',b:['A skill can invoke <b>other</b> skills — a recap that calls an audit that calls a namer.','References templates, configs, helper files by path.','Skills share state through files, not imports — loose coupling.','<span class="ana-ana"><b>Like</b> a sous-chef who has their own playbook — your skill calls theirs, and they handle their lane.</span>']},
- {t:'Memory allocation',s:'How it spends the context window',b:['Sub-files load <b>only when the skill runs</b> — the index stays small.','Subagents get fresh context, so noise never pollutes the main thread.','State is passed by writing to disk, not stuffing the conversation.','<span class="ana-ana"><b>Like</b> a tasting menu where only the current course is on the table — the kitchen holds the rest until it’s needed.</span>']},
- {t:'Frontmatter controls',s:'The switches above the body',b:['Auto-trigger vs manual: disable-model-invocation runs it only on call.','Visible vs background: user-invocable controls the / menu.','argument-hint tells callers what overrides to pass.','<span class="ana-ana"><b>Like</b> a light-switch panel — flip one toggle and the whole behavior of the room changes.</span>']},
- {t:'Sub-files, scripts & evals',s:'Everything else in the folder',b:['Templates, configs, reference docs live beside SKILL.md.','Helper scripts handle deterministic steps that shouldn’t be improvised.','Eval suites test the skill still works after an edit.','<span class="ana-ana"><b>Like</b> a recipe binder with tabs — the main card says "see sauce section," and that section loads only when you need it.</span>']},
- {t:'Versioning & iteration',s:'How it gets better over time',b:['When triggering misfires, edit the <b>description</b> first.','Track eval scores to prove an edit helped, not hurt.','A maintenance skill audits the whole set for drift.','<span class="ana-ana"><b>Like</b> tracking a recipe through edits — see every change, roll back the one that made it worse, prove the new version is better.</span>']}
+ {t:'Name',s:'The skill’s identity',b:['Defaults to the folder name if unset; short, kebab-case.','How the skill is invoked, logged, and referenced by others.','Unique and stable; rename it and every callout must change.','<span class="ana-ana"><b>Like</b> naming a play in a playbook; once everyone knows it by name, you can call it without re-explaining the whole thing.</span>']},
+ {t:'Description',s:'The trigger: the most important field',b:['Claude reads this to decide <b>when</b> to fire the skill.','Too vague → never triggers; too greedy → fires wrongly.','Pack it with trigger phrases and a clear "use this when…".','If a skill misbehaves, tune this first: not the body.','<span class="ana-ana"><b>Like</b> a job posting; it tells the model when to raise its hand, not how to do the work once it’s hired.</span>']},
+ {t:'The body / instructions',s:'The actual recipe',b:['Numbered steps Claude follows in order once it fires.','Where the real "how" lives; phases, decision logic, checklists.','The description is the trigger; the body is the workflow.','<span class="ana-ana"><b>Like</b> a recipe; numbered steps, in order, that anyone (or any model) can follow start to finish.</span>']},
+ {t:'Gotchas',s:'Failure modes learned the hard way',b:['Real problems seen in live runs; wrong path, a broken write.','Written down so the <b>next</b> run avoids the trap.','<b>Gotchas = what went wrong in real runs. Guardrails = rules set before it ran.</b>','<span class="ana-ana"><b>Like</b> a burn notice on a recipe card; "last time we cranked the heat to 400° it charred; don’t repeat it."</span>']},
+ {t:'Guardrails',s:'What it must (and won’t) do',b:['Hard limits: "never modify the source file," "no external deps."','Scope boundaries that keep the skill in its lane.','<b>Gotchas = what went wrong in real runs. Guardrails = rules set before it ran.</b>','<span class="ana-ana"><b>Like</b> a kitchen rule that’s never negotiable; "no one touches the bread station before the prep list is done, period."</span>']},
+ {t:'Embedded skills & callouts',s:'How skills compose',b:['A skill can invoke <b>other</b> skills: a recap that calls an audit that calls a namer.','References templates, configs, helper files by path.','Skills share state through files, not imports; loose coupling.','<span class="ana-ana"><b>Like</b> a sous-chef who has their own playbook: your skill calls theirs, and they handle their lane.</span>']},
+ {t:'Memory allocation',s:'How it spends the context window',b:['Sub-files load <b>only when the skill runs</b>: the index stays small.','Subagents get fresh context, so noise never pollutes the main thread.','State is passed by writing to disk, not stuffing the conversation.','<span class="ana-ana"><b>Like</b> a tasting menu where only the current course is on the table: the kitchen holds the rest until it’s needed.</span>']},
+ {t:'Frontmatter controls',s:'The switches above the body',b:['Auto-trigger vs manual: disable-model-invocation runs it only on call.','Visible vs background: user-invocable controls the / menu.','argument-hint tells callers what overrides to pass.','<span class="ana-ana"><b>Like</b> a light-switch panel; flip one toggle and the whole behavior of the room changes.</span>']},
+ {t:'Sub-files, scripts & evals',s:'Everything else in the folder',b:['Templates, configs, reference docs live beside SKILL.md.','Helper scripts handle deterministic steps that shouldn’t be improvised.','Eval suites test the skill still works after an edit.','<span class="ana-ana"><b>Like</b> a recipe binder with tabs: the main card says "see sauce section," and that section loads only when you need it.</span>']},
+ {t:'Versioning & iteration',s:'How it gets better over time',b:['When triggering misfires, edit the <b>description</b> first.','Track eval scores to prove an edit helped, not hurt.','A maintenance skill audits the whole set for drift.','<span class="ana-ana"><b>Like</b> tracking a recipe through edits; see every change, roll back the one that made it worse, prove the new version is better.</span>']}
 ];
 
 var LEARN=[
- {run:'Run 1',days:5,conf:35,call:'"Risk looks moderate today." <b>A coarse guess</b> — five days isn’t much.'},
- {run:'Run 2',days:15,conf:62,call:'"Elevated Thursday — travel plus two short nights." <b>Patterns emerging</b> from your own history.'},
- {run:'Run 3',days:30,conf:88,call:'"High Thursday — the last two times this combo showed up, the next day went badly. Move the hard work to Wednesday." <b>Personalized, evidence-backed.</b>'}
+ {run:'Run 1',days:5,conf:35,call:'"Risk looks moderate today." <b>A coarse guess</b>; five days isn’t much.'},
+ {run:'Run 2',days:15,conf:62,call:'"Elevated Thursday; travel plus two short nights." <b>Patterns emerging</b> from your own history.'},
+ {run:'Run 3',days:30,conf:88,call:'"High Thursday: the last two times this combo showed up, the next day went badly. Move the hard work to Wednesday." <b>Personalized, evidence-backed.</b>'}
 ];
 
 var PITFALLS=[
- {ic:'P',t:'Token maxxing',fix:'Use /compact and /clear; dispatch noisy work to subagents.',plain:'Long sessions and over-stuffed context blow past the window, get slower, and produce worse output as the model loses the thread.',body:'Run <b>/clear</b> between unrelated tasks and <b>/compact</b> to summarize a long session. Give the minimum context to succeed — the files plus relevant signatures, not ten files and the whole git log. Push big, noisy jobs to <b>subagents</b> so the work happens in a fresh context and only a summary comes back.',real:'A token-tracking skill (like mario) can audit what\'s eating your context and rank the fixes.'},
- {ic:'P',t:'Using the wrong model',fix:'Match the model to the job — Opus only where it earns it.',plain:'Running Opus on trivial edits burns cost and time; running Haiku on a hard refactor produces shallow work.',body:'Opus for genuinely hard reasoning and big blast-radius changes, Sonnet as the everyday default, Haiku for cheap mechanical steps and background subagents. Switch any time with <b>/model</b>. The skill is matching the engine to the difficulty — most work is Sonnet.',real:''},
- {ic:'P',t:'Not using plan mode',fix:'Shift+Tab into plan mode — read-only first on big jobs.',plain:'Firing a 20-edit refactor in one shot, then discovering the structure was wrong halfway through.',body:'For anything big, press <b>Shift+Tab</b> to enter plan mode: Claude explores read-only, writes a plan, and waits for your approval before touching anything. You catch the wrong approach before it costs you 20 edits.',real:''},
+ {ic:'P',t:'Token maxxing',fix:'Use /compact and /clear; dispatch noisy work to subagents.',plain:'Long sessions and over-stuffed context blow past the window, get slower, and produce worse output as the model loses the thread.',body:'Run <b>/clear</b> between unrelated tasks and <b>/compact</b> to summarize a long session. Give the minimum context to succeed: the files plus relevant signatures, not ten files and the whole git log. Push big, noisy jobs to <b>subagents</b> so the work happens in a fresh context and only a summary comes back.',real:'A token-tracking skill (like mario) can audit what\'s eating your context and rank the fixes.'},
+ {ic:'P',t:'Using the wrong model',fix:'Match the model to the job; Opus only where it earns it.',plain:'Running Opus on trivial edits burns cost and time; running Haiku on a hard refactor produces shallow work.',body:'Opus for genuinely hard reasoning and big blast-radius changes, Sonnet as the everyday default, Haiku for cheap mechanical steps and background subagents. Switch any time with <b>/model</b>. The skill is matching the engine to the difficulty: most work is Sonnet.',real:''},
+ {ic:'P',t:'Not using plan mode',fix:'Shift+Tab into plan mode; read-only first on big jobs.',plain:'Firing a 20-edit refactor in one shot, then discovering the structure was wrong halfway through.',body:'For anything big, press <b>Shift+Tab</b> to enter plan mode: Claude explores read-only, writes a plan, and waits for your approval before touching anything. You catch the wrong approach before it costs you 20 edits.',real:''},
  {ic:'P',t:'Reinventing skills from scratch',fix:'Start from Anthropic\'s public repo + skill-creator.',plain:'Writing every skill by hand when battle-tested ones already exist publicly.',body:'Anthropic publishes an official skills repository and an interactive <b>skill-creator</b> that builds new skills with you via Q&A. Start there, then customize. The community keeps curated lists too.',real:'',links:[['Anthropic skills repo','https://github.com/anthropics/skills'],['skill-creator','https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md'],['awesome-claude-skills (community)','https://github.com/travisvn/awesome-claude-skills']]},
- {ic:'P',t:'Falling behind the product',fix:'Build a skill that finds new releases for you.',plain:'The tool ships new features weekly; if you don\'t track them, your setup quietly goes stale.',body:'Don\'t track it by hand — build a skill that watches for new releases, summarizes what changed, and flags what to adopt. Staying current becomes a workflow, not a chore.',real:'real: anthropic-research — a weekly release tracker that researches, validates, and reports new features.'},
- {ic:'P',t:'Saving info unsafely',fix:'Use a skill that syncs + backs up your Claude config.',plain:'Your skills, memory, and settings live in files — lose them, or let them drift across machines, and the whole setup is fragile.',body:'Build a skill that backs up your Claude config (skills, memory, settings, rules) and verifies the backup synced. Your agentic workforce is only as durable as the files behind it.',real:'real: alfred — owns config backup and verifies memory sync after every pipeline run.'},
- {ic:'P',t:'Too much saved info, unorganized',fix:'Use an auditing skill to prune drift and keep memory lean.',plain:'Memory grows forever; left unmanaged it bloats the context window and stale notes start steering the model wrong.',body:'An auditing skill scans the whole system each session — flagging drift, dead conventions, and bloated memory — and keeps the index lean so it stays useful. This is the unglamorous skill that keeps the other forty healthy.',real:'real: ghengis-khan / john-wooden / deep-clean — the maintenance layer of the empire.'}
+ {ic:'P',t:'Falling behind the product',fix:'Build a skill that finds new releases for you.',plain:'The tool ships new features weekly; if you don\'t track them, your setup quietly goes stale.',body:'Don\'t track it by hand; build a skill that watches for new releases, summarizes what changed, and flags what to adopt. Staying current becomes a workflow, not a chore.',real:'real: anthropic-research: a weekly release tracker that researches, validates, and reports new features.'},
+ {ic:'P',t:'Saving info unsafely',fix:'Use a skill that syncs + backs up your Claude config.',plain:'Your skills, memory, and settings live in files; lose them, or let them drift across machines, and the whole setup is fragile.',body:'Build a skill that backs up your Claude config (skills, memory, settings, rules) and verifies the backup synced. Your agentic workforce is only as durable as the files behind it.',real:'real: alfred; owns config backup and verifies memory sync after every pipeline run.'},
+ {ic:'P',t:'Too much saved info, unorganized',fix:'Use an auditing skill to prune drift and keep memory lean.',plain:'Memory grows forever; left unmanaged it bloats the context window and stale notes start steering the model wrong.',body:'An auditing skill scans the whole system each session (flagging drift, dead conventions, and bloated memory) and keeps the index lean so it stays useful. This is the unglamorous skill that keeps the other forty healthy.',real:'real: ghengis-khan / john-wooden / deep-clean: the maintenance layer of the empire.'}
 ];
 
-// The 10 most important things — habits + takeaways merged into one curated list
+// The 10 most important things; habits + takeaways merged into one curated list
 var TEN=[
  {t:'Climb the curve: workflow → skill → agent',d:'The whole game. Take a thing you do by hand, make it a named skill, then let it decide on its own as an agent.',rem:'climb the curve.'},
- {t:'The description is the trigger',d:'Skills live or die by it — vague never fires, greedy fires wrong. When a skill misbehaves, tune this first, not the body.',rem:'describe, don’t hope.'},
- {t:'Set up CLAUDE.md early, keep it lean',d:'Run /init day one and put your build commands, conventions, and quirks there. It loads every session — stop re-explaining yourself. Keep it under ~200 lines.',rem:'write it down once.'},
- {t:'Plan before big jobs',d:'Shift+Tab into plan mode for anything large — read-only, it writes a plan, you approve, then it acts. Catch the wrong approach before it costs 20 edits.',rem:'read-only first.'},
- {t:'Be specific, give it a target',d:'Name the file and the symptom, and hand it a way to check itself — a test or a build. Don’t be the quality gate; let it close its own loop.',rem:'give it a checker.'},
- {t:'Match the model to the job',d:'Opus for genuinely hard reasoning, Sonnet for most work, Haiku for cheap mechanical steps. Switch with /model — most work is Sonnet.',rem:'spend Opus where it earns it.'},
+ {t:'The description is the trigger',d:'Skills live or die by it; vague never fires, greedy fires wrong. When a skill misbehaves, tune this first, not the body.',rem:'describe, don’t hope.'},
+ {t:'Set up CLAUDE.md early, keep it lean',d:'Run /init day one and put your build commands, conventions, and quirks there. It loads every session; stop re-explaining yourself. Keep it under ~200 lines.',rem:'write it down once.'},
+ {t:'Plan before big jobs',d:'Shift+Tab into plan mode for anything large; read-only, it writes a plan, you approve, then it acts. Catch the wrong approach before it costs 20 edits.',rem:'read-only first.'},
+ {t:'Be specific, give it a target',d:'Name the file and the symptom, and hand it a way to check itself: a test or a build. Don’t be the quality gate; let it close its own loop.',rem:'give it a checker.'},
+ {t:'Match the model to the job',d:'Opus for genuinely hard reasoning, Sonnet for most work, Haiku for cheap mechanical steps. Switch with /model: most work is Sonnet.',rem:'spend Opus where it earns it.'},
  {t:'Manage the context window',d:'/clear between unrelated tasks, /compact to summarize a long session, and push noisy work to subagents. Clutter makes worse output and burns tokens.',rem:'keep it clean.'},
- {t:'Hooks enforce; memory informs',d:'If something must happen every single time, it goes in settings.json as a hook — not in a note you hope the model reads.',rem:'settings act, memory tells.'},
- {t:'Guardrails earn autonomy',d:'Writing down the rails — autonomy tiers, scope limits, the "won’t do" list — is exactly what lets you trust it to run alone.',rem:'write the rails down.'},
+ {t:'Hooks enforce; memory informs',d:'If something must happen every single time, it goes in settings.json as a hook: not in a note you hope the model reads.',rem:'settings act, memory tells.'},
+ {t:'Guardrails earn autonomy',d:'Writing down the rails (autonomy tiers, scope limits, the "won’t do" list) is exactly what lets you trust it to run alone.',rem:'write the rails down.'},
  {t:'Maintenance is a skill',d:'Audit for drift or the empire rots in months. The unglamorous janitor skill is what makes everything else actually compound.',rem:'tend the substrate.'}
 ];
 
@@ -1586,8 +1551,8 @@ var CH=[
  {id:'kinds',n:'0x03',t:'skill_roles'},
  {id:'interview-skill',n:'→',t:'spec_first'},
  {id:'agents',n:'0x04',t:'agents'},
- {id:'loop',n:'0x05',t:'compounding'},{id:'replace',n:'0x06',t:'invisible_workload'},{id:'pitfalls',n:'0x07',t:'pitfalls'},
- {id:'habits',n:'0x08',t:'takeaways'}
+ {id:'replace',n:'0x05',t:'invisible_workload'},{id:'pitfalls',n:'0x06',t:'pitfalls'},
+ {id:'habits',n:'0x07',t:'takeaways'}
 ];
 
 /* ---------- build DOM ---------- */
@@ -1630,20 +1595,9 @@ function pickRun(i){document.querySelectorAll('.runbtn').forEach(function(b){b.c
 el('runs').addEventListener('click',function(e){var b=e.target.closest('.runbtn');if(b)pickRun(+b.dataset.i);});
 pickRun(0);
 
-/* ---------- 0x05 compounding strip — bars fill on scroll-in ---------- */
-(function(){
-  var strip=document.querySelector('.compound-strip');if(!strip)return;
-  var bars=strip.querySelectorAll('.cs-bar i');
-  var widths=[];bars.forEach(function(b){widths.push(b.style.width);b.style.width='0';});
-  var io=new IntersectionObserver(function(en){en.forEach(function(e){
-    if(e.isIntersecting){bars.forEach(function(b,i){setTimeout(function(){b.style.transition='width 1s cubic-bezier(.4,1.2,.5,1)';b.style.width=widths[i];},i*260);});io.disconnect();}
-  });},{threshold:.4});
-  io.observe(strip);
-})();
-
 /* ---------- copy takeaways ---------- */
 el('copyTake').addEventListener('click',function(){
-  var txt=TEN.map(function(t,i){return (i+1)+'. '+t.t+' — '+t.d;}).join('\n');
+  var txt=TEN.map(function(t,i){return (i+1)+'. '+t.t+'; '+t.d;}).join('\n');
   var btn=this;
   (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){btn.textContent='✓ Copied all 10';setTimeout(function(){btn.textContent='⧉ Copy all ten';},1800);}).catch(function(){
     var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');btn.textContent='✓ Copied all 10';}catch(e){btn.textContent='Copy failed';}document.body.removeChild(ta);setTimeout(function(){btn.textContent='⧉ Copy all ten';},1800);
@@ -1703,20 +1657,20 @@ if(hasGSAP&&!reduce){
     gsap.fromTo(t,{y:42,opacity:0},{y:0,opacity:1,duration:.85,ease:'power3.out',immediateRender:false,scrollTrigger:{trigger:t,start:'top 90%'}});
   });
 
-  /* takeaway cards — each fades in as it reaches the middle of the viewport */
+  /* takeaway cards - each fades in as it reaches the middle of the viewport */
   gsap.utils.toArray('#ten-list .ten').forEach(function(card){
     gsap.fromTo(card,{y:30,opacity:0},{y:0,opacity:1,duration:.7,ease:'power3.out',immediateRender:false,
       scrollTrigger:{trigger:card,start:'top 68%',toggleActions:'play none none none'}});
   });
 
   /* ============================================================
-     PINNED SCROLLYTELLING — the section freezes; your scroll drives
+     PINNED SCROLLYTELLING: the section freezes; your scroll drives
      the animation in place, then it releases and normal scroll resumes.
      3 signature moments: hero / agentic loop / pipeline.
      ============================================================ */
-  var isDesk=window.matchMedia('(min-width:1081px)').matches; /* pin only on desktop — mobile keeps simple flow */
+  var isDesk=window.matchMedia('(min-width:1081px)').matches; /* pin only on desktop - mobile keeps simple flow */
 
-  /* ---- [A] HERO PIN — the workforce wires itself up as you scroll ---- */
+  /* ---- [A] HERO PIN - the workforce wires itself up as you scroll ---- */
   if(isDesk){
     gsap.set('#hvSvg .hv-node',{opacity:0,scale:.3,transformOrigin:'center'});
     gsap.set('#hvSvg .hv-edge',{opacity:0});
@@ -1737,7 +1691,7 @@ if(hasGSAP&&!reduce){
     gsap.fromTo('#hvSvg .hv-edge',{opacity:0},{opacity:1,duration:.7,ease:'power2.out',stagger:.05,delay:.55});
   }
 
-  /* ---- [P] PATH SCRUB — the four moves light up left-to-right as you scroll module 00 ---- */
+  /* ---- [P] PATH SCRUB - the four moves light up left-to-right as you scroll module 00 ---- */
   (function(){
     var ap=el('apath');if(!ap)return;
     var anodes=ap.querySelectorAll('.anode');
@@ -1768,7 +1722,7 @@ if(hasGSAP&&!reduce){
   /* if a gsap.set hid the SVG graph before the throw, restore it */
   document.querySelectorAll('#hvSvg .hv-node, #hvSvg .hv-edge, #hvSvg .hv-cap').forEach(function(e){e.style.opacity='1';e.style.transform='none';});
 }
-/* hard failsafe — never leave content hidden.
+/* hard failsafe - never leave content hidden.
    ONLY force-shows the pinned-section pre-hidden elements when GSAP failed entirely
    (body.gsap-off). When GSAP is live, those start hidden ON PURPOSE and reveal on scroll. */
 setTimeout(function(){
