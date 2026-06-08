@@ -235,6 +235,69 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .role-inner .real{font-family:var(--mono);font-size:11px;color:var(--lime);background:var(--code-bg);border:1px solid var(--line);padding:8px 12px;border-radius:6px;display:inline-block}
 .workforce-note{margin-top:20px;padding:20px 22px;border:1px solid var(--line);border-left:3px solid var(--lime);background:rgba(125,243,138,.04);border-radius:0 8px 8px 0;font-size:1rem;color:var(--ink-soft)}.workforce-note b{color:var(--lime)}
 
+/* ====================== 04 INTERVIEW BLOCK ====================== */
+.iv-wrap{border:2px solid var(--cyan);border-radius:12px;background:rgba(91,233,224,.05);box-shadow:0 0 0 1px rgba(91,233,224,.12),0 0 48px -22px rgba(91,233,224,.35);overflow:hidden}
+.iv-head{display:flex;align-items:flex-start;gap:14px;padding:20px 22px 14px}
+.iv-badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);background:rgba(91,233,224,.16);border:1px solid rgba(91,233,224,.4);padding:5px 11px;border-radius:5px;white-space:nowrap;flex:0 0 auto;margin-top:2px}
+.iv-head-txt{flex:1;min-width:0}.iv-head-txt b{font-family:var(--disp);font-weight:700;font-size:1.05rem;letter-spacing:-.01em;color:var(--ink);display:block}.iv-head-txt span{font-size:.88rem;color:var(--ink-soft);display:block;margin-top:5px;line-height:1.55}
+.iv-head-txt code,.iv-why code,.iv-pointer code{font-family:var(--mono);font-size:.82em;color:var(--cyan);background:rgba(91,233,224,.1);padding:1px 5px;border-radius:4px}
+.iv-copy{font-family:var(--mono);font-size:11px;font-weight:600;padding:7px 15px;border-radius:6px;border:1px solid rgba(91,233,224,.5);background:rgba(91,233,224,.14);color:var(--cyan);cursor:pointer;transition:.18s;flex:0 0 auto;white-space:nowrap}
+.iv-copy:hover{background:rgba(91,233,224,.24)}.iv-copy.copied{background:var(--cyan);color:#04140a}
+.iv-why{display:flex;gap:11px;align-items:flex-start;margin:0 22px 16px;padding:13px 15px;background:rgba(91,233,224,.07);border-left:2px solid var(--cyan);border-radius:0 8px 8px 0}
+.iv-why svg{flex:0 0 auto;color:var(--cyan);margin-top:2px}.iv-why span{font-size:.86rem;color:var(--ink-soft);line-height:1.55}.iv-why b{color:var(--ink)}
+.iv-wrap>div[style*="position:relative"]{padding:0 22px 22px}
+.iv-or{display:flex;align-items:center;gap:14px;margin:26px 0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.iv-or:before,.iv-or:after{content:"";flex:1;height:1px;background:var(--line-2)}
+.iv-pointer{display:flex;gap:12px;align-items:center;padding:16px 18px;border:1px dashed var(--line-3);border-radius:10px;background:var(--panel)}
+.iv-pointer svg{flex:0 0 auto;color:#ff6b5b}.iv-pointer span{font-size:.92rem;color:var(--ink-soft);line-height:1.5}.iv-pointer b{color:var(--ink)}.iv-pointer a{color:#ff6b5b;text-decoration:none;border-bottom:1px solid rgba(255,107,91,.4)}.iv-pointer a:hover{border-bottom-color:#ff6b5b}
+
+/* ====================== 02 SCREEN-TAKEOVER ====================== */
+.reveal-trigger{display:flex;align-items:center;gap:16px;width:100%;margin-top:24px;padding:18px 22px;background:linear-gradient(100deg,rgba(125,243,138,.08),rgba(91,233,224,.05));border:1px solid var(--line);border-radius:12px;cursor:pointer;text-align:left;transition:transform .2s,border-color .2s,box-shadow .2s;font-family:inherit}
+.reveal-trigger:hover{transform:translateY(-2px);border-color:var(--lime);box-shadow:0 20px 50px -26px var(--lime-glow)}
+.reveal-trigger .rt-ic{flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--lime);color:#04140a;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.reveal-trigger .rt-txt{flex:1;min-width:0}
+.reveal-trigger .rt-txt b{font-family:var(--disp);font-weight:700;font-size:1.02rem;color:var(--ink);display:block;letter-spacing:-.01em}
+.reveal-trigger .rt-txt small{display:block;font-size:.82rem;color:var(--ink-soft);font-family:var(--mono);margin-top:3px}
+.reveal-trigger .rt-arrow{flex:0 0 auto;color:var(--lime);font-size:18px;transition:transform .2s}
+.reveal-trigger:hover .rt-arrow{transform:translateX(5px)}
+
+.takeover{position:fixed;inset:0;z-index:200;visibility:hidden;pointer-events:none}
+.takeover.open{visibility:visible;pointer-events:auto}
+.tk-backdrop{position:absolute;inset:0;background:rgba(2,4,6,.74);opacity:0;backdrop-filter:blur(3px);transition:opacity .4s}
+.takeover.open .tk-backdrop{opacity:1}
+.tk-panel{position:absolute;top:0;right:0;height:100%;width:min(680px,94vw);background:var(--bg-2);border-left:1px solid var(--line-3);box-shadow:-40px 0 80px -30px rgba(0,0,0,.7);transform:translateX(100%);transition:transform .44s cubic-bezier(.4,0,.1,1);display:flex;flex-direction:column}
+.takeover.open .tk-panel{transform:translateX(0)}
+.tk-bar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--line-2);background:var(--panel)}
+.tk-bar-l{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.tk-dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime-glow)}
+.tk-file b{color:var(--cyan)}
+.tk-close{font-family:var(--mono);font-size:12px;color:var(--ink-soft);background:transparent;border:1px solid var(--line-3);border-radius:7px;padding:6px 12px;cursor:pointer;transition:.18s;display:flex;align-items:center;gap:7px}
+.tk-close span{font-size:10px;border:1px solid var(--line-2);border-radius:4px;padding:1px 5px;color:var(--ink-faint)}
+.tk-close:hover{color:var(--ink);border-color:var(--ink-faint)}
+.tk-scroll{flex:1;overflow-y:auto;padding:30px 30px 50px}
+.tk-intro{margin-bottom:30px}
+.tk-tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}
+.tk-intro h3{font-family:var(--disp);font-weight:700;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.tk-intro p{color:var(--ink-soft);font-size:.95rem;line-height:1.6}
+.tk-intro code,.tk-note code{font-family:var(--mono);font-size:.85em;color:var(--cyan);background:rgba(91,233,224,.1);padding:1px 5px;border-radius:4px}
+.tk-block{margin-bottom:22px;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:var(--panel)}
+.tk-block.tk-dim{opacity:.92}
+.tk-pn{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);padding:11px 16px;border-bottom:1px solid var(--line-2);background:rgba(125,243,138,.05)}
+.tk-pn em{color:var(--ink-faint);font-style:normal}
+.tk-code{font-family:var(--mono);font-size:11.5px;line-height:1.7;color:var(--code-fg);background:var(--code-bg);padding:15px 16px;margin:0;overflow-x:auto;white-space:pre}
+.tk-code .c{color:var(--code-com)}.tk-code .k{color:var(--code-key)}.tk-code .s{color:var(--code-str)}.tk-code .cn{color:#F2C14E}.tk-code .ok{color:var(--lime)}
+.tk-note{font-size:.85rem;color:var(--ink-soft);line-height:1.55;padding:12px 16px 14px}
+.tk-note b{color:var(--ink)}
+.tk-li{list-style:none;margin:0;padding:14px 16px;display:flex;flex-direction:column;gap:9px}
+.tk-li li{position:relative;padding-left:18px;font-size:.86rem;color:var(--ink-soft);line-height:1.5}
+.tk-li li:before{content:"▸";position:absolute;left:0;color:var(--lime)}.tk-li b{color:var(--ink)}
+.tk-foot{margin-top:8px;padding:18px 18px 4px;border-top:1px solid var(--line-2)}
+.tk-foot p{font-size:.88rem;color:var(--ink-soft);line-height:1.6;margin-bottom:16px}.tk-foot b{color:var(--ink)}
+.tk-foot-btn{font-family:var(--mono);font-size:12px;color:var(--lime);background:rgba(125,243,138,.08);border:1px solid var(--line);border-radius:8px;padding:10px 16px;cursor:pointer;transition:.18s}
+.tk-foot-btn:hover{background:rgba(125,243,138,.16)}
+body.tk-locked{overflow:hidden}
+@media(max-width:560px){.tk-scroll{padding:22px 18px 40px}.tk-intro h3{font-size:1.4rem}}
+
 /* ====================== 03b SKILL BUILDER PROMPT ====================== */
 .sb-wrap{margin-top:36px;border:2px solid var(--red);border-radius:12px;background:rgba(255,107,91,.06);box-shadow:0 0 0 1px rgba(255,107,91,.15),0 0 48px -20px rgba(255,107,91,.3);overflow:hidden}
 .sb-teaser{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;user-select:none;transition:.18s}
@@ -331,6 +394,58 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .lbar{height:7px;border-radius:100px;background:var(--panel-2);border:1px solid var(--line-2);overflow:hidden}.lbar span{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--lime-deep),var(--lime));box-shadow:0 0 10px var(--lime-glow);transition:width .6s cubic-bezier(.34,1.4,.6,1)}
 .lcall{font-size:.92rem;color:var(--ink-soft);line-height:1.5}.lcall b{color:var(--ink)}
 
+/* ====================== 05 AGENTS — step-ladder + team ====================== */
+.ladder{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:8px 0 40px;border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:var(--panel)}
+@media(max-width:980px){.ladder{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.ladder{grid-template-columns:1fr}}
+.rung{padding:20px 18px;border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2);position:relative;transition:.2s}
+.rung:hover{background:var(--panel-2)}
+.ladder .rung:nth-child(6n){border-right:none}
+@media(max-width:980px){.ladder .rung:nth-child(6n){border-right:1px solid var(--line-2)}.ladder .rung:nth-child(3n){border-right:none}}
+@media(max-width:620px){.ladder .rung{border-right:none}}
+.rung .rn{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--lime);margin-bottom:10px}
+.rung.warn .rn{color:#FF6B5B}
+.rung .rh{font-family:var(--disp);font-weight:700;font-size:1.02rem;letter-spacing:-.01em;margin-bottom:8px;line-height:1.15}
+.rung p{font-size:.85rem;color:var(--ink-soft);line-height:1.5}.rung p b{color:var(--ink)}
+.rung.warn{background:rgba(255,107,91,.035)}
+
+.team{border:1px solid var(--line-3);border-radius:14px;background:var(--bg-2);padding:26px;box-shadow:0 0 60px -36px var(--lime-glow)}
+.team-head{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px}
+.team-head>div:first-child{flex:1;min-width:280px}
+.team-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:9px}
+.team-head h3{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:10px}
+.team-sub{font-size:.92rem;color:var(--ink-soft);line-height:1.55;max-width:60ch}.team-sub b{color:var(--ink)}
+.team-outcome{flex:0 0 auto;width:min(280px,100%);border:1px solid var(--line);border-radius:10px;padding:15px 16px;background:rgba(125,243,138,.05)}
+.to-lab{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);display:block;margin-bottom:7px}
+.to-val{font-size:.86rem;color:var(--ink-soft);line-height:1.5}.to-val b{color:var(--ink)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+@media(max-width:880px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.team-grid{grid-template-columns:1fr}}
+.agentc{padding:15px;border:1px solid var(--line-2);border-radius:9px;background:var(--panel);transition:.2s}
+.agentc:hover{border-color:var(--line-3);transform:translateY(-2px)}
+.agentc.lead{border-color:var(--lime);background:var(--panel-2)}
+.agentc.writer{border-color:var(--cyan);background:rgba(91,233,224,.05)}
+.agentc.check{border-color:rgba(255,107,91,.4)}
+.agentc .ah{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.agentc .anum{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink-soft)}
+.agentc.lead .anum{color:var(--lime)}.agentc.writer .anum{color:var(--cyan)}.agentc.check .anum{color:#FF6B5B}
+.agentc .arole{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:right}
+.agentc h4{font-family:var(--disp);font-weight:700;font-size:1.02rem;margin-bottom:6px;letter-spacing:-.01em}
+.agentc.writer h4{color:var(--cyan)}
+.agentc p{font-size:.81rem;color:var(--ink-soft);line-height:1.45}.agentc p b{color:var(--ink)}
+.team-rails{border:1px solid rgba(125,243,138,.18);border-radius:10px;background:rgba(125,243,138,.04);padding:16px 18px;margin-bottom:18px}
+.tr-lab{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);margin-bottom:11px}.tr-lab svg{color:var(--lime)}
+.team-rails ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}@media(max-width:680px){.team-rails ul{grid-template-columns:1fr}}
+.team-rails li{position:relative;padding-left:18px;font-size:.85rem;color:var(--ink-soft);line-height:1.45}.team-rails li:before{content:"▸";position:absolute;left:0;color:var(--lime)}.team-rails b{color:var(--ink)}
+.team-flow{background:var(--code-bg);border:1px solid var(--line-2);border-radius:9px;padding:16px 18px;font-family:var(--mono);font-size:11.5px;line-height:1.85;color:var(--code-fg);margin:0;overflow-x:auto;white-space:pre}
+.team-flow .c{color:var(--code-com)}.team-flow .k{color:var(--code-key)}.team-flow .cn{color:#F2C14E}.team-flow .ok{color:var(--lime)}
+
+/* ---- compounding sub-module (after loop) ---- */
+#compound .cmp-head{max-width:760px;margin-bottom:24px}
+#compound .cmp-head h3{margin-bottom:14px}
+.cmp-note{margin-top:18px;font-size:.9rem;display:flex;gap:10px;align-items:flex-start;padding:14px 16px;background:rgba(125,243,138,.05);border:1px solid rgba(125,243,138,.16);border-radius:9px}
+.cmp-note svg{flex:0 0 auto;color:var(--lime);margin-top:2px}.cmp-note b{color:var(--lime)}
+
 /* ====================== 07 LOOP — orbital diagram ====================== */
 #loop{position:relative;overflow:hidden}
 #loop .lglow{position:absolute;width:60vw;height:60vw;max-width:760px;max-height:760px;top:50%;left:8%;transform:translateY(-50%);background:radial-gradient(circle,rgba(125,243,138,.10),transparent 60%);filter:blur(30px);pointer-events:none}
@@ -350,7 +465,16 @@ pre .k{color:var(--code-key)}pre .c{color:var(--code-com)}pre .s{color:var(--cod
 .loop-ctl{display:flex;gap:10px}
 .lbtn{font-family:var(--mono);font-weight:600;font-size:12.5px;padding:11px 18px;border-radius:6px;border:1px solid var(--line-3);background:var(--panel);color:var(--ink);cursor:pointer;transition:.18s}.lbtn:hover{border-color:var(--lime);color:var(--lime)}.lbtn.pri{background:var(--lime);color:#04140a;border-color:var(--lime);box-shadow:0 0 24px -8px var(--lime-glow)}
 
-/* ====================== 08 REPLACE ====================== */
+/* ====================== 07 REPLACE — 4 examples ====================== */
+.rep4{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}@media(max-width:760px){.rep4{grid-template-columns:1fr}}
+.rep4c{padding:24px;border:1px solid var(--line-2);border-radius:11px;background:var(--panel);transition:.2s;position:relative}
+.rep4c:hover{border-color:var(--line-3);transform:translateY(-2px)}
+.rep4c .r4n{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--lime);margin-bottom:12px}
+.rep4c h3{font-family:var(--disp);font-weight:700;font-size:1.18rem;line-height:1.2;letter-spacing:-.015em;margin-bottom:11px}
+.rep4c p{font-size:.92rem;color:var(--ink-soft);line-height:1.6}
+.tt{font-family:var(--mono);font-size:.82em;color:var(--cyan);background:rgba(91,233,224,.1);border:1px solid rgba(91,233,224,.16);padding:1px 6px;border-radius:5px;white-space:nowrap}
+
+/* ====================== 08 REPLACE (legacy, unused) ====================== */
 .replace{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}@media(max-width:680px){.replace{grid-template-columns:1fr}}
 .rcol{padding:24px;border:1px solid var(--line-2);border-radius:10px;background:var(--panel)}
 .rcol.takes{border-top:2px solid var(--lime)}.rcol.keeps{border-top:2px solid var(--cyan)}
@@ -516,25 +640,21 @@ footer b{color:var(--lime-deep)}
       <div class="blocks" id="blocks-list"></div>
     </div></section>
 
-    <!-- 02 KINDS -->
-    <section class="module" id="kinds"><div class="wrap">
-      <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x02</b></span><span class="statchip"><span class="sd"></span>skill roles</span></div>
-        <h2 class="h2" data-anim="up">Skills are <span class="accent">roles in a workforce.</span></h2>
-        <p class="lede" data-anim="up">A skill can plan, write, review other skills, capture knowledge, or make a call. Tap a role to see what it teaches and a real one that proves it.</p>
-      </div>
-      <div class="roles" id="roles"></div>
-      <div class="workforce-note" data-anim="up"><b>The point ·</b> none of these is an isolated tool. A planner hands work to a writer, a writer's output gets audited, the auditor's findings get saved to memory, and a decision skill arbitrates. Wire them together and you've built an <b>agentic workforce</b> — not a chatbot.</div>
-    </div></section>
-
-    <!-- 03 ANATOMY -->
+    <!-- 02 ANATOMY -->
     <section class="module" id="anatomy"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x03</b></span><span class="statchip"><span class="sd"></span>anatomy</span></div>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x02</b></span><span class="statchip"><span class="sd"></span>anatomy</span></div>
         <h2 class="h2" data-anim="up">A skill is a file — <span class="accent">with ten moving parts.</span></h2>
-        <p class="lede" data-anim="up">One <span class="inline-code">SKILL.md</span> in a folder. Tap each part for what it does. Then build one yourself in the next chapter.</p>
+        <p class="lede" data-anim="up">One <span class="inline-code">SKILL.md</span> in a folder. Tap each part for what it does — then watch all ten come together as one real, working skill.</p>
       </div>
       <div class="blocks" id="anatomy-list"></div>
+
+      <!-- SCREEN-TAKEOVER TRIGGER -->
+      <button class="reveal-trigger" id="revealSkill" data-anim="up">
+        <span class="rt-ic">▸</span>
+        <span class="rt-txt"><b>See it as a finished skill</b><small>watch the ten parts assemble into a real, email-connected writing skill</small></span>
+        <span class="rt-arrow">→</span>
+      </button>
 
       <!-- SKILL BUILDER -->
       <div class="sb-wrap" id="sbWrap" data-anim="up">
@@ -801,7 +921,26 @@ When asked to audit an existing skill, read it fully, then check:
 - Doesn't duplicate instructions already in CLAUDE.md or another skill
 - Instructions explain why, not just what
 
-Fix issues directly, then report what changed.</pre>
+Fix issues directly, then report what changed.
+
+---
+
+## The 10 anatomy parts — the checklist every SKILL.md is graded against
+
+A complete skill accounts for all ten. Use this as the rubric when you write or audit one.
+
+01. Name              — the skill's identity. Kebab-case, stable, defaults to the folder name. Every other skill that calls this one uses this handle.
+02. Description       — the trigger, and the single most important field. Claude reads THIS (not the body) to decide when to fire. Pack it with trigger phrases + an explicit "use this when…". Tune this first when a skill misbehaves.
+03. Gotchas           — failure modes learned from real runs (wrong path, broken write, em-dashes in output). Written down so the next run avoids the trap. Distinct from guardrails: "what went wrong" vs "what's not allowed."
+04. Guardrails        — hard limits: scope, files it must never touch, actions out of bounds, "always be professional." The "won't do" list is what lets you trust it to run unattended.
+05. Embedded skills   — how skills compose: a skill can call other skills, reference templates/configs/scripts by path. Skills share state through files, not imports.
+06. Memory allocation — how it spends the context window. Three levels: metadata (always loaded), SKILL.md body (loaded on trigger), bundled resources (loaded only when needed). Subagents get fresh context.
+07. Frontmatter       — the switches above the body: disable-model-invocation for side-effect skills, user-invocable, argument-hint. Controls how and when it's callable.
+08. Body / instructions — the actual recipe: numbered, imperative steps Claude follows once it fires. Explain the WHY, not just the what. This is the workflow; the description is the trigger.
+09. Sub-files & evals  — everything else in the folder: templates, configs, reference docs, helper scripts, and eval suites that prove the skill still works after an edit.
+10. Versioning        — how it improves over time: iterate in numbered dirs, track eval scores to prove an edit helped, run description optimization last.
+
+Fill all ten and the skill is production-grade. Skip parts 03–04 (gotchas + guardrails) and it works in the demo but breaks the first time it runs unattended.</pre>
               </div>
             </div>
 
@@ -810,63 +949,238 @@ Fix issues directly, then report what changed.</pre>
       </div>
     </div></section>
 
-    <!-- 04 BUILDER -->
+    <!-- SCREEN-TAKEOVER PANEL — full writing skill, slides in from the right -->
+    <div class="takeover" id="takeover" aria-hidden="true">
+      <div class="tk-backdrop" id="tkBackdrop"></div>
+      <aside class="tk-panel" role="dialog" aria-modal="true" aria-label="A finished skill">
+        <div class="tk-bar">
+          <div class="tk-bar-l"><span class="tk-dot"></span><span class="tk-file">~/.claude/skills/<b>email-writer</b>/SKILL.md</span></div>
+          <button class="tk-close" id="tkClose" aria-label="Close">✕ <span>Esc</span></button>
+        </div>
+        <div class="tk-scroll">
+          <div class="tk-intro">
+            <div class="tk-tag">the ten parts · assembled</div>
+            <h3>One real skill, every part labeled.</h3>
+            <p>This is a complete writing skill — a real <code>SKILL.md</code> you could install today. Each block is tagged with the anatomy part it satisfies. Notice how it <b>calls another skill</b>, pulls <b>context from a teammate skill</b>, and <b>connects straight to email</b>.</p>
+          </div>
+
+          <!-- 01 NAME -->
+          <div class="tk-block"><div class="tk-pn">01 · name</div>
+            <pre class="tk-code"><span class="c">---</span>
+<span class="k">name</span>: email-writer</pre>
+            <p class="tk-note">The handle every other skill uses to call this one. Short, kebab-case, picked once.</p>
+          </div>
+
+          <!-- 02 DESCRIPTION -->
+          <div class="tk-block"><div class="tk-pn">02 · description <em>· the trigger</em></div>
+            <pre class="tk-code"><span class="k">description</span>: <span class="s">Drafts and sends professional emails in the user's voice. Pulls</span>
+  <span class="s">context from the research it's handed, drafts the message, and</span>
+  <span class="s">sends it via the email connector after approval. Use whenever the</span>
+  <span class="s">user says "email this", "draft a reply", "send the findings", or</span>
+  <span class="s">when another skill finishes work that needs to go out by email —</span>
+  <span class="s">even if they don't say "email-writer" by name.</span></pre>
+            <p class="tk-note">The single most important field. It's deliberately "pushy" — packed with trigger phrases and an explicit "use this when…" so Claude actually fires it, including when a <b>teammate skill hands off work</b>.</p>
+          </div>
+
+          <!-- 03 GOTCHAS -->
+          <div class="tk-block"><div class="tk-pn">03 · gotchas <em>· scar tissue</em></div>
+            <pre class="tk-code"><span class="c"># Gotchas — learned from real runs</span>
+<span class="c">-</span> Strip em-dashes (—). They read as AI. Use commas or rewrite.
+<span class="c">-</span> No "I hope this finds you well" / "I wanted to reach out" filler.
+<span class="c">-</span> Never send on the first draft — always surface for approval first.
+<span class="c">-</span> If the research handoff is empty, stop and ask. Don't invent facts.
+<span class="c">-</span> Match the thread's existing tone; don't reset formality mid-chain.</pre>
+            <p class="tk-note">Real failures, written down so the next run avoids them. The <b>em-dash rule</b> is here because every early draft leaked them. Gotchas are "what went wrong" — distinct from guardrails below.</p>
+          </div>
+
+          <!-- 04 GUARDRAILS -->
+          <div class="tk-block tk-dim"><div class="tk-pn">04 · guardrails <em>· the won't-do list</em></div>
+            <ul class="tk-li">
+              <li><b>Always professional</b> — no slang, no emoji unless the thread already uses them.</li>
+              <li><b>Never send without approval</b> — drafting is autonomous; sending is a surface-first action.</li>
+              <li><b>Never fabricate</b> a fact, figure, or citation. Only use what the research skill provided.</li>
+              <li><b>Stay in lane</b> — it writes and sends email. It does not edit files or make decisions for you.</li>
+            </ul>
+            <p class="tk-note">Hard limits. The "won't" list is exactly what lets it run unattended — you know the worst case is bounded.</p>
+          </div>
+
+          <!-- 05 EMBEDDED / CALLS -->
+          <div class="tk-block tk-dim"><div class="tk-pn">05 · embedded skills <em>· how it composes</em></div>
+            <pre class="tk-code"><span class="c"># Step 2 of the body: get the voice right</span>
+→ call <span class="cn">shakespeare</span> to draft in the user's voice
+   (shakespeare receives the research context this skill was handed,
+    and returns a draft scored against a voice rubric)
+→ this skill then formats it as an email and routes to the connector</pre>
+            <p class="tk-note">It doesn't reinvent voice-writing — it <b>calls shakespeare</b> inside its own workflow, passing along the context it received. Skills compose: one calls another, sharing state through what's handed between them.</p>
+          </div>
+
+          <!-- 06 MEMORY + SAVED INFO -->
+          <div class="tk-block tk-dim"><div class="tk-pn">06 · memory · saved information</div>
+            <pre class="tk-code"><span class="c"># beside SKILL.md — loaded only when this skill runs</span>
+voice-samples.md       <span class="c"># 20 of the user's real sent emails</span>
+signoff-templates.md   <span class="c"># approved closings per recipient type</span>
+sent-log.jsonl         <span class="c"># every email sent, appended each run</span></pre>
+            <p class="tk-note">Saved information lives in sub-files that load only on run, so the index stays lean. <code>sent-log.jsonl</code> means each run inherits what the last one learned — memory compounds.</p>
+          </div>
+
+          <!-- 07 EMAIL CONNECTION -->
+          <div class="tk-block"><div class="tk-pn">07 · connected to email <em>· it can act</em></div>
+            <pre class="tk-code"><span class="c"># the connector that lets it actually send</span>
+<span class="k">tools</span>: [ gmail.create_draft, gmail.send ]
+
+<span class="c"># run, end-to-end:</span>
+<span class="c">1.</span> receive research context (from a teammate skill)
+<span class="c">2.</span> call shakespeare → voiced draft
+<span class="c">3.</span> format as email, create draft
+<span class="c">4.</span> surface for approval … <span class="ok">✓ approved</span>
+<span class="c">5.</span> <span class="k">send</span>  <span class="ok">✓ sent to client@firm.com</span></pre>
+            <p class="tk-note">The reach that makes it more than a chatbot: it <b>connects straight to email</b> and completes the loop — draft, approve, send — without you leaving the chair.</p>
+          </div>
+
+          <div class="tk-foot">
+            <p>That's all ten parts in one file: a <b>name</b>, a trigger <b>description</b>, <b>gotchas</b> + <b>guardrails</b>, an <b>embedded</b> call to shakespeare, <b>memory</b> + saved info, and a live <b>email</b> connection. Parts 08–10 (body, sub-files/evals, versioning) wrap the same file — same pattern, more depth.</p>
+            <button class="tk-foot-btn" id="tkFootClose">← Back to the ten parts</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 03 KINDS (skill roles — moved below anatomy) -->
+    <section class="module" id="kinds"><div class="wrap">
+      <div class="mod-head">
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x03</b></span><span class="statchip"><span class="sd"></span>skill roles</span></div>
+        <h2 class="h2" data-anim="up">Skills are <span class="accent">roles in a workforce.</span></h2>
+        <p class="lede" data-anim="up">Now you know the ten parts — here's what skills become once you have a few. A skill can plan, write, capture knowledge, or make a call. Tap a role to see what it teaches and a real one that proves it.</p>
+      </div>
+      <div class="roles" id="roles"></div>
+      <div class="workforce-note" data-anim="up"><b>The point ·</b> none of these is an isolated tool. A planner hands work to a writer, the writer's output gets saved to memory, and a decision skill arbitrates. Wire them together and you've built an <b>agentic workforce</b> — not a chatbot.</div>
+    </div></section>
+
+    <!-- 04 BUILD A SKILL -->
     <section class="module" id="builder"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x04</b></span><span class="statchip"><span class="sd"></span>interactive · build</span></div>
-        <h2 class="h2" data-anim="up">Assemble it, <span class="accent">part by part.</span></h2>
-        <p class="lede" data-anim="up">Pick parts on the left — each opens to show <i>what to learn from it</i>, then drops into the live SKILL.md on the right. Build a minimal skill or a full-featured one.</p>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x04</b></span><span class="statchip"><span class="sd"></span>build a skill</span></div>
+        <h2 class="h2" data-anim="up">Don't write it from scratch — <span class="accent">have a skill write it.</span></h2>
+        <p class="lede" data-anim="up">You just saw the ten parts. Here's the shortcut: two skills you install once that build every future skill <i>for</i> you. Copy either one, drop it in, and describe what you want.</p>
       </div>
-      <div class="builder" data-anim="up">
-        <div class="bparts" id="bparts"></div>
-        <div class="bcode-wrap"><div class="bcode" id="bcode"><div class="ttl">SKILL.md — assembles as you add parts</div><div id="bcode-lines"><div class="placeholder" id="bplace">Pick a part on the left to begin building…</div></div></div></div>
-      </div>
-    </div></section>
 
-    <!-- 05 API -->
-    <section class="module" id="api"><div class="wrap">
-      <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x05</b></span><span class="statchip"><span class="sd"></span>integrations · mcp</span></div>
-        <h2 class="h2" data-anim="up">It can <span class="accent-c">touch your tools.</span></h2>
-        <p class="lede" data-anim="up">A skill's power is its reach. Through MCP and API calls, Claude Code can read and act on the services your team already runs — Slack, your data, GitHub.</p>
-      </div>
-      <div class="conns" data-anim="up">
-        <div class="conn"><div class="ct">messaging</div><div class="cn">Slack</div><p>Post a digest to a channel, read recent messages, react to events — turn a weekly status update into one command.</p></div>
-        <div class="conn"><div class="ct">data</div><div class="cn">Sheets · DB · API</div><p>Pull rows from a sheet, query a database, hit an internal API, transform the result, and write a clean report.</p></div>
-        <div class="conn"><div class="ct">dev</div><div class="cn">GitHub</div><p>Read an issue, write the fix, run the tests, open the PR — the whole loop, over one MCP connection.</p></div>
-      </div>
-      <div class="flow" data-anim="up"><span class="c"># connect a service over MCP, then a skill can call it</span>
-<span class="k">claude mcp add</span> --transport http github https://api.githubcopilot.com/mcp/
-<span class="k">claude mcp add</span> slack ...
-
-<span class="c"># a real data-extract → Slack flow</span>
-<span class="c"># 1.</span> pull this week's numbers from the sheet
-<span class="c"># 2.</span> diff against last week (from memory)
-<span class="c"># 3.</span> draft the summary in your voice
-<span class="c"># 4.</span> <span class="k">post</span> it to #weekly  <span class="ok">✓ sent</span></div>
-      <div class="why g" data-anim="up" style="margin-top:16px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Real example ·</b> the GWS automations and the buffett finance skill both work this way — pull data from Google Workspace / transaction feeds, transform it, and write the result somewhere useful. The slack-digest skill posts a weekly digest the same way.</span></div>
-    </div></section>
-
-    <!-- 06 SKILLS VS AGENTS -->
-    <section class="module" id="agents"><div class="wrap">
-      <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x06</b></span><span class="statchip"><span class="sd"></span>skills vs agents</span></div>
-        <h2 class="h2" data-anim="up">When a skill <span class="accent">starts deciding.</span></h2>
-        <p class="lede" data-anim="up">The most common question: what's the difference between a skill and an agent? Here it is — then what becomes possible once you cross the line.</p>
-      </div>
-      <div class="vs" data-anim="up">
-        <div class="vs-card"><div class="vl">a skill</div><h4>You trigger it</h4><p>A named workflow with a memory of how to run. You invoke it — by name or by description — and it does the same job the same way every time. It waits for you.</p><div class="tag">workflow → skill</div></div>
-        <div class="arrow">— add autonomy →</div>
-        <div class="vs-card agent"><div class="vl">an agent</div><h4>It decides for itself</h4><p>A skill that makes its own calls and dispatches other skills — runs in a loop, in parallel, on a schedule, without you in the chair. It acts, checks its work, and keeps going until done.</p><div class="tag">agent → pipeline</div></div>
-      </div>
-      <p class="lede" data-anim="up" style="margin-bottom:8px">What agents can do — three patterns most teams never reach:</p>
-      <div class="trio">
-        <div class="tcard" data-anim="up"><div class="tic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="role">maintenance</div><h3>The agent that keeps the others honest</h3><p class="ex">An agent whose whole job is to audit the system each session — flagging broken conventions, stale memory, and skills that wandered off-spec.</p><div class="pay"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Why it matters ·</b> compounding isn't automatic. Without a janitor, a skill system rots in months.</span></div></div>
-        <div class="tcard" data-anim="up"><div class="tic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l3 6a3 3 0 0 1-6 0z"/></svg></div><div class="role">decision-making</div><h3>A debate, not a vibe</h3><p class="ex">A decision agent runs three voices — a skeptic hunting the failure mode, an analyst with the numbers, a systems-thinker — then a host names the real tradeoff.</p><div class="pay"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Why it matters ·</b> turns "what do you think?" into a structured argument that surfaces the real choice.</span></div></div>
-        <div class="tcard" data-anim="up"><div class="tic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></div><div class="role">learning over time</div><h3>It gets sharper the more it runs</h3><p class="ex">An agent reads your own accumulated data and makes a call — and each run, with more history, makes a more informed one. Toggle the runs.</p>
-          <div class="learnwrap"><div class="runs" id="runs"></div><div class="lpanel" id="lpanel"></div></div>
-          <div class="pay" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Why it matters ·</b> most tools answer the same way forever. This one builds a model of <b>you</b> and compounds accuracy.</span></div>
+      <!-- INTERVIEW skill — copy/paste, self-explanatory -->
+      <div class="iv-wrap" data-anim="up">
+        <div class="iv-head">
+          <span class="iv-badge">⚑ /interview</span>
+          <div class="iv-head-txt">
+            <b>The one to install first — it makes sure you build the <i>right</i> thing.</b>
+            <span>Before any skill gets written, <code>/interview</code> asks you questions until the spec is airtight, then writes a SPEC.md you approve. It's the difference between "build me a thing" and a thing that actually does what you meant.</span>
+          </div>
+          <button class="iv-copy" id="ivCopyBtn" onclick="copyInterview()">Copy install</button>
         </div>
+        <div class="iv-why">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span><b>Why this matters more than it looks ·</b> the most expensive mistake in building with Claude isn't a bug — it's confidently building the wrong thing, then finding out 200 lines in. <code>/interview</code> front-loads the disagreement. Ten minutes of questions saves a full rebuild. It's the skill that pays for itself the fastest.</span>
+        </div>
+        <div style="position:relative">
+          <button class="sb-copy-btn" id="ivRawCopyBtn" onclick="copyInterview()" style="position:absolute;top:10px;right:10px;z-index:2">Copy SKILL.md</button>
+          <pre id="interviewRaw" style="background:var(--code-bg);border:1px solid rgba(91,233,224,.22);border-radius:8px;padding:18px;font-family:var(--mono);font-size:11px;line-height:1.75;color:var(--code-fg);overflow-x:auto;overflow-y:auto;max-height:380px;margin:0;white-space:pre">---
+name: interview
+description: Spec-driven interview before any new build, skill, or agent. Asks clarifying questions until requirements are airtight, then writes a complete SPEC.md. Use before every new build or major feature. Trigger phrases: "interview me", "spec this out", "let's plan X". Make sure to use this whenever the user says "build X", "new skill", or "new agent" without having run an interview first — even if they don't ask for it by name.
+---
+
+# Interview — spec before you build
+
+Your job: turn a vague request into a spec precise enough to build from in one pass. Never start building until the spec is approved. The cost of a wrong assumption compounds — front-load it here.
+
+## Step 1 — Read the room first
+Before asking anything, scan the conversation and any open files for answers already present. Don't ask what you can already see. Come to the interview prepared.
+
+## Step 2 — Ask until it's airtight (minimum 5 questions)
+Ask one focused round at a time. Cover:
+1. What exactly should this do? (the single sentence)
+2. Who is it for, and what do they already know?
+3. What's the input, and what's the exact output format?
+4. What are the edge cases / failure modes it must handle?
+5. What's explicitly OUT of scope this pass?
+
+Only ask what changes what you build. If an answer has an obvious default, state the default and move on — don't ask for the sake of asking.
+
+## Step 3 — Reach 99% confidence, then write the SPEC.md
+Keep going until you could build it without guessing. Then write a one-page SPEC.md:
+- Goal (one sentence)
+- Concrete, numbered requirements — each with a "done when…" line
+- Out of scope (the deferred list)
+- Open questions (with your default if unanswered)
+
+## Step 4 — Get sign-off, THEN hand off
+Surface the spec. Wait for approval. Only then pass it to the build skill (tony-stark, bob-the-builder, etc.).
+
+## Why this exists
+"Build X" tells you WHAT, never HOW. Skipping the interview feels faster and is almost always slower — you build on an assumption, the user corrects it, you rebuild. Ten questions up front is the cheapest insurance you can buy.</pre>
+        </div>
+      </div>
+
+      <div class="iv-or" data-anim="up"><span>then, to write the skill itself</span></div>
+
+      <!-- tony-stark pointer — full block lives in 0x02 -->
+      <div class="iv-pointer" data-anim="up">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span>The writer is <b>tony-stark</b> — Anthropic's official skill creator, with all ten anatomy parts baked in. Its full copy-paste install is up in <a href="#anatomy">module 0x02</a>. Install <code>/interview</code> first to scope it, then let tony-stark write the file.</span>
+      </div>
+    </div></section>
+
+    <!-- 05 AGENTS -->
+    <section class="module" id="agents"><div class="wrap wide">
+      <div class="mod-head">
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x05</b></span><span class="statchip"><span class="sd"></span>agents</span></div>
+        <h2 class="h2" data-anim="up">When a skill <span class="accent">starts deciding.</span></h2>
+        <p class="lede" data-anim="up">A skill waits for you to call it. An <b>agent</b> calls itself — it runs in a loop, dispatches other skills, checks its own work, and keeps going until the job is done. Here's how they work, why they change everything, and where they bite.</p>
+      </div>
+
+      <!-- STEP-LADDER across the screen -->
+      <div class="ladder" data-anim="up">
+        <div class="rung"><div class="rn">01</div><div class="rh">How they work</div><p>An agent runs the loop on its own: <b>perceive → decide → act → verify</b>, then again. It reads the result of what it just did and chooses the next move — no human turn in between.</p></div>
+        <div class="rung"><div class="rn">02</div><div class="rh">Why they're huge</div><p>One command replaces a morning of work. Agents run <b>in parallel</b>, <b>on a schedule</b>, and <b>unattended</b> — you review the outcome, not every step. Leverage, not just speed.</p></div>
+        <div class="rung"><div class="rn">03</div><div class="rh">Orchestration</div><p>A lead agent dispatches <b>subagents</b>, each in its own fresh context, each with one job. The lead assembles their results. This is how big work gets split without one context drowning.</p></div>
+        <div class="rung"><div class="rn">04</div><div class="rh">Shared state</div><p>Agents hand off through a <b>shared state file</b> — each reads the last one's output and writes its own. No human relays results between them; the file is the spine.</p></div>
+        <div class="rung warn"><div class="rn">05</div><div class="rh">What to be careful about</div><p>Autonomy needs rails. Set <b>autonomy tiers</b> (auto / ask-first / halt), cap <b>runaway loops</b> and token spend, and gate risky actions behind approval. An agent with no guardrails is a liability, not a hire.</p></div>
+        <div class="rung warn"><div class="rn">06</div><div class="rh">When NOT to use one</div><p>If a task is one-shot, deterministic, or higher-stakes than it is repetitive, a plain skill — or just you — is the right tool. Don't hand judgment calls to a loop.</p></div>
+      </div>
+
+      <!-- LIVE 7-AGENT RESEARCH TEAM TEMPLATE -->
+      <div class="team" data-anim="up">
+        <div class="team-head">
+          <div>
+            <div class="team-tag">live template · agent team</div>
+            <h3>A research-paper team — seven agents, one command</h3>
+            <p class="team-sub">You say <i>"research X and email me the paper."</i> A lead agent dispatches a team, enforces the guardrails, and one of them — <b>shakespeare</b> — writes it up and sends it. No handoffs by you.</p>
+          </div>
+          <div class="team-outcome"><span class="to-lab">desired outcome</span><span class="to-val">A sourced, fact-checked research paper, drafted in your voice and <b>emailed</b> — start to finish, unattended.</span></div>
+        </div>
+
+        <div class="team-grid">
+          <div class="agentc lead"><div class="ah"><span class="anum">01</span><span class="arole">orchestrator</span></div><h4>Lead</h4><p>Sets the outcome, splits the question, dispatches the team, assembles the final paper. The only one you talk to.</p></div>
+          <div class="agentc"><div class="ah"><span class="anum">02</span><span class="arole">researcher · subagent</span></div><h4>Sources</h4><p>Gathers primary sources in a fresh context. Pulls papers, filings, docs over <b>MCP connectors</b>.</p></div>
+          <div class="agentc"><div class="ah"><span class="anum">03</span><span class="arole">researcher · subagent</span></div><h4>Counter-evidence</h4><p>Runs in <b>parallel</b>, hunting the opposing case so the paper isn't one-sided.</p></div>
+          <div class="agentc"><div class="ah"><span class="anum">04</span><span class="arole">researcher · subagent</span></div><h4>Data</h4><p>Pulls the numbers — datasets, tables, figures — and normalizes them for citation.</p></div>
+          <div class="agentc"><div class="ah"><span class="anum">05</span><span class="arole">synthesizer</span></div><h4>Synthesis</h4><p>Merges all three researchers' findings through <b>shared state</b>, dedupes, and builds the outline + claim→source map.</p></div>
+          <div class="agentc writer"><div class="ah"><span class="anum">06</span><span class="arole">writer · calls shakespeare</span></div><h4>Shakespeare</h4><p><b>Receives the synthesis as context</b>, drafts the paper in your voice, then <b>connects straight to email</b> to send it. One agent calling a skill inside its role.</p></div>
+          <div class="agentc check"><div class="ah"><span class="anum">07</span><span class="arole">reviewer · gate</span></div><h4>Fact-checker</h4><p>The guardrail. Verifies every claim maps to a source and blocks the email send until it passes.</p></div>
+        </div>
+
+        <div class="team-rails">
+          <div class="tr-lab"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> guardrails the team runs inside</div>
+          <ul>
+            <li><b>Cite or cut</b> — every claim must map to a source, or it doesn't make the paper.</li>
+            <li><b>No fabrication</b> — researchers return "not found" rather than invent. The fact-checker enforces it.</li>
+            <li><b>Human-approve before send</b> — shakespeare drafts the email autonomously; the actual send is gated on your OK.</li>
+            <li><b>Professional tone, no em-dashes</b> — the writer's own guardrails carry into the paper.</li>
+          </ul>
+        </div>
+
+        <pre class="team-flow"><span class="c"># one command, seven agents, zero handoffs by you</span>
+<span class="k">lead</span> → dispatches <span class="cn">researchers ×3</span> (parallel, fresh contexts)
+       → <span class="cn">synthesizer</span> merges via shared state
+       → <span class="cn">shakespeare</span> drafts in-voice <span class="c"># receives synthesis as context</span>
+       → <span class="cn">fact-checker</span> verifies every claim  <span class="ok">✓ passed</span>
+       → shakespeare <span class="k">emails</span> the paper  <span class="ok">✓ sent</span></pre>
       </div>
     </div></section>
 
@@ -881,76 +1195,70 @@ Fix issues directly, then report what changed.</pre>
         <div class="core">repeats until the task is actually done</div>
       </div></div>
       <div data-anim="up">
-        <div class="statline"><span class="modid">module <b>0x07</b></span><span class="statchip"><span class="sd"></span>the agentic loop</span></div>
-        <h2 class="h2" style="margin:6px 0 14px">This loop is the <span class="accent">whole difference.</span></h2>
+        <div class="statline"><span class="modid">module <b>0x06</b></span><span class="statchip"><span class="sd"></span>the agentic loop</span></div>
+        <h2 class="h2" style="margin:6px 0 14px">One run is a loop. <span class="accent">Many runs compound.</span></h2>
+        <p class="lede" style="margin:0 0 14px">A chatbot does one turn and stops. An agent reads the result of what it just did, decides the next move, acts, and checks its own work — and if a test fails, it loops back. Watch one run play out, start to finish:</p>
         <div class="loop-log" id="loopLog"></div>
-        <div class="loop-ctl"><button class="lbtn pri" id="loopRun">▶ Run the loop</button><button class="lbtn" id="loopReset">Reset</button></div>
-        <p class="lede" style="margin-top:14px">A chatbot does one turn and stops. Claude Code reads the result of what it just did, decides the next move, acts, and checks its own work — and if a test fails, it loops back and tries again. You review the outcome, not every step.</p>
+        <div class="loop-ctl"><button class="lbtn pri" id="loopRun">▶ Run it once</button><button class="lbtn" id="loopReset">Reset</button></div>
       </div>
     </div></div></section>
+
+    <!-- COMPOUNDING — memory + feedback make each run better -->
+    <section class="module" id="compound"><div class="wrap">
+      <div class="cmp-head" data-anim="up">
+        <h3 class="h2">One run is a loop. <span class="accent">Every run after it compounds.</span></h3>
+        <p class="lede">A single loop finishes a task. But each run writes what it learned to <b>memory</b>, and your <b>feedback</b> tunes the next one. So the same agent, run three times on your own data, doesn't repeat itself — it gets sharper. Toggle the runs:</p>
+      </div>
+      <div class="learnwrap" data-anim="up"><div class="runs" id="runs"></div><div class="lpanel" id="lpanel"></div></div>
+      <div class="cmp-note" data-anim="up"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>Why this is the whole game ·</b> most tools answer the same way forever. An agent with memory + a feedback loop builds a model of <b>you</b> — and every run makes the next call more accurate. That's the difference between a tool you use and a teammate who learns.</span></div>
+    </div></section>
 
     <!-- 08 REPLACE -->
     <section class="module" id="replace"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x08</b></span><span class="statchip"><span class="sd"></span>what it replaces</span></div>
-        <h2 class="h2" data-anim="up">What it takes off your plate — <span class="accent">and what stays yours.</span></h2>
-        <p class="lede" data-anim="up">The honest map of the replace-able surface area. The mechanical layer of knowledge work is what an agent absorbs first; the judgment stays with you.</p>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x07</b></span><span class="statchip"><span class="sd"></span>what it replaces</span></div>
+        <h2 class="h2" data-anim="up">Four things you do every week — <span class="accent">that you'd never think to automate.</span></h2>
+        <p class="lede" data-anim="up">Not the obvious stuff. The invisible, multi-step friction a normal office worker eats without noticing — exactly what a healthy agent ecosystem absorbs when it's built right.</p>
       </div>
-      <div class="replace" data-anim="up">
-        <div class="rcol takes"><div class="rh">What it takes</div><div class="rs">the mechanical layer</div>
-          <ul><li>Scaffolding — routes, handlers, boilerplate</li><li>Writing and running tests</li><li>Drafting reports, summaries, first-pass docs</li><li>Research: gather sources, compare, cite</li><li>Parsing, formatting, data cleanup</li><li>Repetitive multi-step workflows you do by hand</li></ul></div>
-        <div class="rcol keeps"><div class="rh">What stays yours</div><div class="rs">the judgment layer</div>
-          <ul><li>Deciding what's worth building</li><li>Taste — what "good" actually looks like</li><li>The hard tradeoff calls</li><li>Reviewing and approving the output</li><li>Relationships and context only you hold</li><li>Setting the rules the agents run inside</li></ul></div>
+      <div class="rep4" data-anim="up">
+        <div class="rep4c">
+          <div class="r4n">01</div>
+          <h3>The Monday "where did everything land" reconstruction</h3>
+          <p>Every Monday you stitch together what happened across email, Slack, three docs, and a calendar to figure out where things actually stand. A <span class="tt">scheduled agent</span> runs the loop before you wake up — reads each source over its <span class="tt">MCP connectors</span>, writes a single brief to <span class="tt">shared state</span>, and hands you a starting line instead of a scavenger hunt.</p>
+        </div>
+        <div class="rep4c">
+          <div class="r4n">02</div>
+          <h3>The follow-ups you swear you'll remember</h3>
+          <p>The "circle back next week," the promised doc, the reply you owe — the threads that quietly rot because nothing tracks them. An agent with <span class="tt">compounding memory</span> remembers every open loop across sessions, surfaces what's due, and drafts the follow-up — so the dropped ball stops being a personality trait.</p>
+        </div>
+        <div class="rep4c">
+          <div class="r4n">03</div>
+          <h3>The recurring report nobody enjoys</h3>
+          <p>The weekly status, the monthly numbers, the deck that's 80% the same every time. You rebuild it by hand because the data lives in five places. A <span class="tt">subagent</span> pulls each source in its own fresh context, a lead assembles the draft, and you review the outcome — not the twelve copy-pastes that used to make it.</p>
+        </div>
+        <div class="rep4c">
+          <div class="r4n">04</div>
+          <h3>The "is this even right?" second-guess pass</h3>
+          <p>Before anything goes out, you re-check it against the rules — formatting, policy, the thing you got burned on last quarter. A reviewer agent runs that pass automatically inside an <span class="tt">autonomy tier</span> that gates the send: it checks, flags, and only releases what clears. The judgment stays yours; the tedious verification doesn't.</p>
+        </div>
       </div>
-      <p class="lede" data-anim="up" style="margin-bottom:8px">The rails that make autonomy safe:</p>
-      <div class="tiers">
-        <div class="tier" data-anim="up" style="--tc:#7DF38A"><div class="tlab">tier 1 · autonomous</div><h4>Just do it</h4><p>Reversible, low-stakes, in-scope work runs without asking — reading files, drafting, generating a report.</p><div class="eg">e.g. "summarize this folder"</div></div>
-        <div class="tier" data-anim="up" style="--tc:#5BE9E0"><div class="tlab">tier 2 · surface first</div><h4>Ask, then act</h4><p>Anything touching shared ground stops and shows you the plan first — pushing code, sending a message, deploying.</p><div class="eg">e.g. "open the PR"</div></div>
-        <div class="tier" data-anim="up" style="--tc:#FF6B5B"><div class="tlab">tier 3 · halt</div><h4>Stop &amp; escalate</h4><p>Auth failures, corrupt state, anything out of its lane — it stops fully and reports. No improvising.</p><div class="eg">e.g. a login expired</div></div>
-      </div>
-      <div class="safenote" data-anim="up"><b>"Is this safe for our code &amp; data?"</b> — You scope what it can touch (plan mode keeps it read-only until you approve, permission modes limit the surface), every edit is a reviewable diff, and risky actions can be gated by a hook. Secrets stay in your environment, not the conversation. You set the autonomy per action.</div>
+      <div class="safenote" data-anim="up"><b>"Is this safe for our code &amp; data?"</b> — You scope what it can touch (<span class="tt">plan mode</span> keeps it read-only until you approve, <span class="tt">permission modes</span> limit the surface), every edit is a reviewable diff, and risky actions can be gated by a <span class="tt">hook</span>. Secrets stay in your environment, not the conversation. You set the autonomy per action.</div>
     </div></section>
 
     <!-- 09 PITFALLS -->
     <section class="module" id="pitfalls"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x09</b></span><span class="statchip"><span class="sd"></span>pitfalls · fixes</span></div>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x08</b></span><span class="statchip"><span class="sd"></span>pitfalls · fixes</span></div>
         <h2 class="h2" data-anim="up">Every mistake has <span class="accent">a fix. Often a skill.</span></h2>
         <p class="lede" data-anim="up">The hard-won lessons. Tap any pitfall to drop down the fix — and notice how many fixes are skills you can build yourself.</p>
       </div>
       <div class="blocks" id="pitfalls-list"></div>
     </div></section>
 
-    <!-- 10 SYSTEM -->
-    <section class="module" id="system"><div class="wrap wide">
-      <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x0A</b></span><span class="statchip"><span class="sd"></span>system · assembled</span></div>
-        <h2 class="h2" data-anim="up">What the whole thing <span class="accent">looks like running.</span></h2>
-        <p class="lede" data-anim="up">Everything above, wired together. One real pipeline — <span class="inline-code">optimize-week</span> — chains five agents through shared state, end to end, with no human relaying results between them.</p>
-      </div>
-      <div class="sys" data-anim="up">
-        <div class="syslabel">one command · five agents · zero handoffs</div>
-        <div class="flowrail" id="flowrail">
-          <div class="fstage"><div class="fsdot"><b>1</b></div><h5>Forecast</h5><p>A learning agent reads weeks of history and forecasts the week ahead.</p><span class="fio">writes →<br>shared state</span></div>
-          <div class="fstage"><div class="fsdot"><b>2</b></div><h5>Schedule</h5><p>Reads the forecast, plans the week's sessions around it.</p><span class="fio">reads forecast<br>writes schedule</span></div>
-          <div class="fstage"><div class="fsdot"><b>3</b></div><h5>Plan</h5><p>A planning agent builds the detailed plan against the schedule.</p><span class="fio">reads schedule<br>writes plan</span></div>
-          <div class="fstage"><div class="fsdot"><b>4</b></div><h5>Provision</h5><p>Generates the grocery list and inputs the plan needs.</p><span class="fio">reads plan<br>writes list</span></div>
-          <div class="fstage"><div class="fsdot"><b>5</b></div><h5>Commit</h5><p>Writes the whole thing to the calendar — sequentially, safely.</p><span class="fio">reads all<br>writes calendar</span></div>
-        </div>
-        <div class="sysspine"><span class="chip">pipeline-state.json</span><p>The shared spine — every agent reads the last one's output and writes its own. No human relays results between them.</p></div>
-      </div>
-      <div class="proof" data-anim="up">
-        <div class="pstat"><div class="pn">40+</div><div class="pt">skills on shared memory, audited against drift by a maintenance agent</div></div>
-        <div class="pstat"><div class="pn">5</div><div class="pt">agents coordinated through one state file, no manual handoffs</div></div>
-        <div class="pstat"><div class="pn">1</div><div class="pt">command runs the whole pipeline — what used to be a morning of work</div></div>
-      </div>
-      <div class="why g" data-anim="up" style="margin-top:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span><b>This is real.</b> Not a hypothetical — it's the actual system behind this field guide: a health-agent ecosystem, GWS digest automations, and a morning brief, all built skill by skill on the same substrate. You can build the same way.</span></div>
-    </div></section>
-
-    <!-- 11 THE TEN -->
+    <!-- 09 THE TEN -->
     <section class="module" id="habits"><div class="wrap">
       <div class="mod-head">
-        <div class="statline" data-anim="up"><span class="modid">module <b>0x0B</b></span><span class="statchip"><span class="sd"></span>takeaways</span></div>
+        <div class="statline" data-anim="up"><span class="modid">module <b>0x09</b></span><span class="statchip"><span class="sd"></span>takeaways</span></div>
         <h2 class="h2" data-anim="up">If you remember <span class="accent">ten things.</span></h2>
         <p class="lede" data-anim="up">The whole field guide, compressed to the ten that actually change how you work. Each one: the point, and the line to remember it by.</p>
       </div>
@@ -1011,6 +1319,25 @@ function toggleSB(){
   var open=wrap.classList.toggle('open');
   tog.textContent=open?'Collapse ↑':'Expand →';
 }
+function copyInterview(){
+  var src=document.getElementById('interviewRaw');
+  var raw=src.innerText||src.textContent;
+  navigator.clipboard.writeText(raw).then(function(){
+    ['ivCopyBtn','ivRawCopyBtn'].forEach(function(id){var b=document.getElementById(id);if(b){var t=b.textContent;b.textContent='Copied ✓';b.classList.add('copied');setTimeout(function(){b.textContent=t;b.classList.remove('copied');},2200);}});
+  });
+}
+
+/* ---------- screen-takeover skill panel ---------- */
+(function(){
+  var tk=document.getElementById('takeover');if(!tk)return;
+  var trigger=document.getElementById('revealSkill');
+  function open(){tk.classList.add('open');tk.setAttribute('aria-hidden','false');document.body.classList.add('tk-locked');tk.querySelector('.tk-scroll').scrollTop=0;}
+  function close(){tk.classList.remove('open');tk.setAttribute('aria-hidden','true');document.body.classList.remove('tk-locked');}
+  if(trigger)trigger.addEventListener('click',open);
+  var c1=document.getElementById('tkClose'),c2=document.getElementById('tkFootClose'),bd=document.getElementById('tkBackdrop');
+  [c1,c2,bd].forEach(function(e){if(e)e.addEventListener('click',close);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&tk.classList.contains('open'))close();});
+})();
 
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var hasGSAP=window.gsap&&window.ScrollTrigger;
@@ -1029,7 +1356,6 @@ var BLOCKS=[
 var ROLES=[
  {ic:'scale',t:'Planning skills',s:'turn a goal into a sequenced plan',ex:'A planning skill takes a fuzzy objective and produces an ordered, dependency-aware plan — then can hand each step to other skills. What you learn building one: the hard part isn\'t the plan, it\'s defining "done" precisely enough that the steps are verifiable.',real:'real: optimize-week — chains 5 agents to plan a full week'},
  {ic:'pen',t:'Writing skills',s:'draft in a specific voice, every format',ex:'A writing skill captures how a person or brand actually writes and drafts in that voice across formats. What you learn: voice is reproducible if you give it real samples and a rubric to score itself against — so it ships an edit, not a rewrite.',real:'real: shakespeare — drafts in Logan\'s voice across 6 formats, scored on a rubric'},
- {ic:'shield',t:'Auditing skills',s:'a skill that inspects other skills',ex:'An auditing skill\'s job is the system itself — it reads the other skills and memory and flags drift, dead conventions, and bloat. What you learn: this is the skill that makes compounding real; without a janitor, a skill empire rots within months.',real:'real: john-wooden / ghengis-khan / deep-clean — audit the whole empire'},
  {ic:'save',t:'Memory skills',s:'capture knowledge for future runs',ex:'A memory skill writes down what was learned so the next session inherits it — an index that loads every time plus topic files loaded on demand. What you learn: memory is the moat, but only if it stays lean; the index must be small or it eats the context window.',real:'real: the auto-memory + MEMORY.md index pattern across 40+ skills'},
  {ic:'scale',t:'Decision skills',s:'argue a call, name the tradeoff',ex:'A decision skill runs multiple voices against each other — a skeptic, an analyst, a systems-thinker — and a host names the real tradeoff instead of giving you a vibe. What you learn: structured disagreement surfaces the actual choice that a single confident answer would hide.',real:'real: family-feud — three voices argue, a host names the tradeoff'}
 ];
@@ -1088,10 +1414,10 @@ var TEN=[
 ];
 
 var CH=[
- {id:'path',n:'0x00',t:'start_here'},{id:'blocks',n:'0x01',t:'building_blocks'},{id:'kinds',n:'0x02',t:'skill_roles'},
- {id:'anatomy',n:'0x03',t:'anatomy'},{id:'builder',n:'0x04',t:'first_skill'},{id:'api',n:'0x05',t:'integrations'},
- {id:'agents',n:'0x06',t:'skills_vs_agents'},{id:'loop',n:'0x07',t:'agentic_loop'},{id:'replace',n:'0x08',t:'what_it_replaces'},
- {id:'pitfalls',n:'0x09',t:'pitfalls'},{id:'system',n:'0x0A',t:'real_system'},{id:'habits',n:'0x0B',t:'takeaways'}
+ {id:'path',n:'0x00',t:'start_here'},{id:'blocks',n:'0x01',t:'building_blocks'},{id:'anatomy',n:'0x02',t:'anatomy'},
+ {id:'kinds',n:'0x03',t:'skill_roles'},{id:'builder',n:'0x04',t:'build_a_skill'},{id:'agents',n:'0x05',t:'agents'},
+ {id:'loop',n:'0x06',t:'agentic_loop'},{id:'replace',n:'0x07',t:'what_it_replaces'},{id:'pitfalls',n:'0x08',t:'pitfalls'},
+ {id:'habits',n:'0x09',t:'takeaways'}
 ];
 
 /* ---------- build DOM ---------- */
@@ -1129,33 +1455,7 @@ function accClick(e){var h=e.target.closest('[data-acc]');if(!h)return;var b=h.p
 /* ---------- role cards ---------- */
 el('roles').addEventListener('click',function(e){var h=e.target.closest('[data-rrole]');if(!h)return;var c=h.parentElement,body=c.querySelector('.role-body');var o=c.classList.toggle('open');body.style.maxHeight=o?body.scrollHeight+'px':'0';});
 
-/* ---------- 04 interactive builder ---------- */
-(function(){
-  var parts=el('bparts'),codeHost=el('bcode-lines'),place=el('bplace');
-  parts.innerHTML=BUILD.map(function(b,i){
-    return '<div class="bpart" data-i="'+i+'"><div class="bp-h"><div class="bp-n">'+(i+1)+'</div><div class="bp-t"><b>'+b.n+'</b><small>'+b.sub+'</small></div><div class="bp-arrow">'+SV('<polyline points="9 18 15 12 9 6"/>',16)+'</div></div><div class="bp-lesson">'+b.lesson.map(function(p){return '<p>'+p+'</p>';}).join('')+'<button class="bp-add" data-add="'+i+'">+ Add to SKILL.md</button></div></div>';
-  }).join('');
-  var allLines='';
-  BUILD.forEach(function(b,i){allLines+=b.lines.map(function(l){return '<div class="ln" data-part="'+i+'">'+(l||'&nbsp;')+'</div>';}).join('');});
-  codeHost.insertAdjacentHTML('beforeend',allLines);
-  var added={};
-  function selectPart(i){
-    parts.classList.add('has-sel');
-    parts.querySelectorAll('.bpart').forEach(function(p){var pi=+p.dataset.i;p.classList.toggle('on',pi===i);});
-  }
-  function addPart(i){
-    added[i]=true;
-    if(place)place.style.display='none';
-    codeHost.querySelectorAll('.ln[data-part="'+i+'"]').forEach(function(l){l.classList.add('show');});
-    parts.querySelector('.bpart[data-i="'+i+'"]').classList.add('added');
-    var btn=parts.querySelector('.bp-add[data-add="'+i+'"]');if(btn){btn.textContent='✓ Added';btn.classList.add('in');}
-  }
-  parts.addEventListener('click',function(e){
-    var add=e.target.closest('[data-add]');
-    if(add){e.stopPropagation();addPart(+add.dataset.add);return;}
-    var p=e.target.closest('.bpart');if(p)selectPart(+p.dataset.i);
-  });
-})();
+/* ---------- 04 old part-by-part builder removed (replaced by 0x02 anatomy takeover) ---------- */
 
 /* ---------- 06 learning toggle ---------- */
 function pickRun(i){document.querySelectorAll('.runbtn').forEach(function(b){b.classList.toggle('on',+b.dataset.i===i);});var l=LEARN[i];el('lpanel').innerHTML='<div class="lk">Data behind the call</div><div class="lmeter"><div class="lr"><span>'+l.days+' days</span><span>'+Math.round(l.days/30*100)+'%</span></div><div class="lbar"><span style="width:'+(l.days/30*100)+'%"></span></div></div><div class="lk">Confidence</div><div class="lmeter"><div class="lr"><span>how sure it is</span><span>'+l.conf+'%</span></div><div class="lbar"><span style="width:'+l.conf+'%"></span></div></div><div class="lk">The call it makes</div><div class="lcall">'+l.call+'</div>';}
@@ -1249,7 +1549,7 @@ if(hasGSAP&&!reduce){
   gsap.fromTo('#hvSvg .hv-edge',{opacity:0},{opacity:1,duration:.7,ease:'power2.out',stagger:.05,delay:.55});
   /* light one-shot reveals on normal-scroll modules (NOT the 3 pinned ones) */
   gsap.utils.toArray('.module [data-anim="up"]').forEach(function(t){
-    if(t.closest('#loop')||t.closest('#system'))return; /* pinned sections handle their own */
+    if(t.closest('#loop'))return; /* pinned section handles its own */
     gsap.fromTo(t,{y:42,opacity:0},{y:0,opacity:1,duration:.85,ease:'power3.out',immediateRender:false,scrollTrigger:{trigger:t,start:'top 90%'}});
   });
 
@@ -1307,27 +1607,6 @@ if(hasGSAP&&!reduce){
     }
   })();
 
-  /* ---- [C] SYSTEM PIN — the 5-agent pipeline energizes left-to-right as you scroll ---- */
-  (function(){
-    var sys=el('system');if(!sys)return;
-    var stages=sys.querySelectorAll('#flowrail .fstage');
-    if(isDesk){
-      gsap.set(stages,{opacity:.25,y:16});
-      gsap.set('#flowrail .fsdot',{boxShadow:'0 0 0 4px rgba(125,243,138,.04)'});
-      var sysTl=gsap.timeline({scrollTrigger:{
-        trigger:'#system',start:'top top',end:'+=130%',scrub:.7,pin:true,pinSpacing:true,anticipatePin:1
-      }});
-      stages.forEach(function(st,i){
-        sysTl.to(st,{opacity:1,y:0,duration:.5,ease:'power2.out'},i*.7)
-             .to(st.querySelector('.fsdot'),{boxShadow:'0 0 0 4px rgba(125,243,138,.09),0 0 28px -4px rgba(125,243,138,.7)',duration:.4},i*.7);
-      });
-      sysTl.from('.sysspine',{opacity:0,y:18,duration:.5},stages.length*.7)
-           .from('.proof .pstat',{opacity:0,y:20,stagger:.14,duration:.5},stages.length*.7+.3);
-    }else{
-      gsap.fromTo(stages,{y:30,opacity:0},{y:0,opacity:1,duration:.65,ease:'power3.out',stagger:.13,immediateRender:false,scrollTrigger:{trigger:'#flowrail',start:'top 80%'}});
-    }
-  })();
-
   ScrollTrigger.refresh();
   window.addEventListener('load',function(){ScrollTrigger.refresh();});
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){ScrollTrigger.refresh();});}
@@ -1347,7 +1626,7 @@ if(hasGSAP&&!reduce){
 setTimeout(function(){
   document.querySelectorAll('[data-anim]').forEach(function(e){e.style.opacity='1';e.style.transform='none';});
   if(document.body.classList.contains('gsap-off')){
-    document.querySelectorAll('#hvSvg .hv-node, #hvSvg .hv-edge, #hvSvg .hv-cap, #flowrail .fstage').forEach(function(e){e.style.opacity='1';e.style.transform='none';});
+    document.querySelectorAll('#hvSvg .hv-node, #hvSvg .hv-edge, #hvSvg .hv-cap').forEach(function(e){e.style.opacity='1';e.style.transform='none';});
   }
 },2600);
 </script>
