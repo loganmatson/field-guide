@@ -566,9 +566,27 @@
               </div>
             </div>
 
+            <div class="tier" style="background:linear-gradient(135deg,rgba(79,224,245,.08),transparent);border-left:3px solid var(--cyan)">
+              <div class="tlab" style="color:var(--cyan)"><span>The third ring — context, the session's live working memory</span><span class="pill" style="background:rgba(79,224,245,.18);color:var(--cyan)">this session only</span></div>
+              <p style="color:var(--ink-soft);font-size:14px;margin-bottom:10px;line-height:1.5">Persistent memory (above) lives on disk forever. But within a single session there's a second, faster kind of memory: the <b style="color:var(--cyan)">context window</b> — everything Claude is holding <i>right now</i> in this conversation. It's where the loaded files, your messages, and Claude's replies all live while you work. Two things to know about it:</p>
+              <div class="loadrow">
+                <div class="ic">📏</div>
+                <div class="lt"><div class="ln">It's finite</div><div class="ld">The window has a ceiling. Everything loaded this session — files, history, replies — shares that space. It's working memory, not storage; close the session and it's gone (which is why the on-disk layers above exist).</div></div>
+              </div>
+              <div class="loadrow">
+                <div class="ic">🗜️</div>
+                <div class="lt"><div class="ln">When it fills, it <b>compacts</b></div><div class="ld">Rather than forgetting or cutting off, Claude <b>summarizes</b> the older part of the conversation into a compact form and keeps going — so a long session doesn't hit a wall. You can steer what survives a compaction with a rule (e.g. "always preserve the list of files changed and any in-progress task"). The summary carries forward; the work continues uninterrupted.</div></div>
+              </div>
+            </div>
+
+            <div class="analogy" style="margin:12px 0 0;border-left-color:var(--cyan)">
+              <div class="ae">🧠</div>
+              <div class="at">Think of it as <b>desk vs. filing cabinet.</b> The context window is the desk — fast, limited, cleared each day. The on-disk layers are the filing cabinet — slower to reach for, but permanent. Compaction is tidying the desk mid-task: it sweeps the clutter into a neat summary so there's room to keep working, without throwing anything important away.</div>
+            </div>
+
             <div class="proof">
               <span class="ptag">Verified live, this session</span>
-              In one real workspace, the <span class="path">rules/</span> folder held <b>5</b> files — but the project's <span class="path">CLAUDE.md</span> linked only <b>3</b> of them, and only those 3 loaded; the other 2 sat unread on disk. The memory index pointed to <b>47</b> fact files, and <b>zero</b> of them loaded until one was needed. That's the whole trick: a lightweight index always on, a deep archive pulled just-in-time — so memory can grow for months without ever filling the window.
+              In one real workspace, the <span class="path">rules/</span> folder held <b>5</b> files — but the project's <span class="path">CLAUDE.md</span> linked only <b>3</b> of them, and only those 3 loaded; the other 2 sat unread on disk. The memory index pointed to <b>47</b> fact files, and <b>zero</b> of them loaded until one was needed. That's the whole trick: a lightweight index always on, a deep archive pulled just-in-time, and a context window that compacts itself when full — so memory can grow for months without ever filling the window.
             </div>
 
             <div class="oops" style="margin-top:12px">
