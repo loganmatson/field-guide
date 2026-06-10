@@ -121,6 +121,32 @@
   .plan-table tr:last-child td{border-bottom:none}
   .plan-table td:first-child{font-weight:600;color:var(--ink)}
 
+  /* memory layer tabs */
+  .mem-intro{color:var(--ink-soft);font-size:15.5px;margin:2px 0 14px}
+  .ladder{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:6px 0 18px}
+  .ladder .rung{background:var(--bg-2);border:1px solid var(--hair);border-radius:13px;padding:13px 14px;position:relative}
+  .ladder .rung .rl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .ladder .rung .rt{font-weight:700;font-size:14.5px;line-height:1.2;margin-bottom:3px}
+  .ladder .rung .rp{font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+  .ladder .rung.l1{border-left:3px solid var(--seafoam)}
+  .ladder .rung.l2{border-left:3px solid var(--teal)}
+  .ladder .rung.l3{border-left:3px solid var(--coral)}
+  @media(max-width:620px){.ladder{grid-template-columns:1fr}}
+  .tabs{display:flex;gap:6px;margin:6px 0 0;flex-wrap:wrap}
+  .tab-btn{background:var(--bg-2);border:1px solid var(--hair);color:var(--ink-soft);font-family:var(--sans);font-weight:600;font-size:13.5px;padding:9px 15px;border-radius:11px 11px 0 0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .16s,color .16s,border-color .16s;border-bottom:none}
+  .tab-btn .tn{font-family:var(--mono);font-size:11px;width:18px;height:18px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(21,48,43,.08);color:var(--ink-faint);flex-shrink:0}
+  .tab-btn:hover{color:var(--ink)}
+  .tab-btn.on{background:var(--card);color:var(--ink);border-color:var(--hair-2)}
+  .tab-btn.on.a1 .tn{background:var(--seafoam);color:#0c241e}
+  .tab-btn.on.a2 .tn{background:var(--teal);color:#fff}
+  .tab-btn.on.a3 .tn{background:var(--coral);color:#fff}
+  .tab-panel{display:none;background:var(--card);border:1px solid var(--hair-2);border-radius:0 14px 14px 14px;padding:18px 20px}
+  .tab-panel.on{display:block;animation:fadein .3s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .tab-panel .ph{font-family:var(--serif);font-weight:600;font-size:18.5px;display:flex;align-items:center;gap:9px;margin-bottom:3px}
+  .tab-panel .peff{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:12px;letter-spacing:.03em}
+  .tab-panel .peff b{color:var(--teal-deep)}
+
   /* FAQ */
   .section-h{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.02em;margin:46px 0 6px;display:flex;align-items:center;gap:11px}
   .section-sub{color:var(--ink-soft);margin-bottom:18px;font-size:16px}
@@ -469,32 +495,102 @@ Cite your sources.</pre>
         <div class="phase-meta">
           <div class="pl">Level 6</div>
           <h2>Memory</h2>
-          <div class="sum">Each person turns on memory + sets a permanent profile once.</div>
+          <div class="sum">Three stacking layers — individual, declared, and shared team memory.</div>
         </div>
         <div class="chev">›</div>
       </div>
       <div class="phase-body"><div class="phase-inner">
-        <div class="step">
-          <div class="sh"><span class="sb">6.1</span> Individual memory (each person, once)</div>
-          <p><span class="path">Settings → Capabilities → Memory → On</span>. Claude builds a running summary of each person — role, preferences, how they like to work — carried across every session.</p>
+        <p class="mem-intro">"Memory" in CoWork is three separate things, and they stack. Each layer costs a little more effort and pays back more in return — climb as far as your team needs. Start at Layer 1; most teams want all three.</p>
+
+        <div class="ladder">
+          <div class="rung l1"><div class="rl">Layer 1 · 30 seconds</div><div class="rt">Individual Memory</div><div class="rp">Claude remembers each person across sessions. One toggle.</div></div>
+          <div class="rung l2"><div class="rl">Layer 2 · 2 minutes</div><div class="rt">Global Instructions</div><div class="rp">A permanent profile — who you are, how to work with you.</div></div>
+          <div class="rung l3"><div class="rl">Layer 3 · automatic</div><div class="rt">Project Memory</div><div class="rp">Shared team memory that builds itself as you use the project.</div></div>
         </div>
-        <div class="step">
-          <div class="sh"><span class="sb">6.2</span> Global Instructions (each person, once)</div>
-          <p><span class="path">Settings → CoWork → Global Instructions</span>. A permanent anchor loaded before every session. Run this short interview with each teammate, then paste the filled-in template:</p>
-          <div class="code">
-            <button class="copy" type="button">Copy</button>
-            <pre>I am a [role] at [company].
+
+        <div class="tabs" role="tablist">
+          <button class="tab-btn on a1" data-tab="cm1" type="button"><span class="tn">1</span> Individual Memory</button>
+          <button class="tab-btn a2" data-tab="cm2" type="button"><span class="tn">2</span> Global Instructions</button>
+          <button class="tab-btn a3" data-tab="cm3" type="button"><span class="tn">3</span> Project Memory</button>
+        </div>
+
+        <!-- TAB 1 -->
+        <div class="tab-panel on" id="cm1">
+          <div class="ph">🧠 Individual Memory</div>
+          <div class="peff">Effort: <b>30 seconds, once</b> · Payoff: Claude stops forgetting who you are between chats</div>
+          <p style="color:var(--ink-soft);font-size:15px;margin-bottom:6px">When this is on, Claude keeps a running summary of each person — their role, what they're working on, how they like answers formatted — and carries it into every future session. No more re-introducing yourself every morning.</p>
+          <div class="step">
+            <div class="sh"><span class="sb">1</span> Turn it on</div>
+            <p>Open <b>claude.ai</b> → profile photo (top right) → <span class="path">Settings → Capabilities → Memory</span> → toggle <b>On</b>.</p>
+          </div>
+          <div class="step">
+            <div class="sh"><span class="sb">2</span> Tell it what to remember (optional)</div>
+            <p>You don't have to do anything — it learns as you go. But you can seed it: just say in a chat, <i>"Remember that I always want options before you take action,"</i> and it files that away.</p>
+          </div>
+          <div class="step">
+            <div class="sh"><span class="sb">3</span> Review or clear it anytime</div>
+            <p>Back in <span class="path">Settings → Capabilities → Memory</span> you can read everything Claude has remembered and delete any item. Nothing is hidden — it's your summary, you control it.</p>
+          </div>
+          <div class="tip">
+            <button class="tip-btn" type="button">💡 When to use this</button>
+            <div class="tip-body"><div class="inner">Every single person on the team should flip this on day one. It's the lowest-effort, highest-return setting in the whole product — the difference between an assistant that knows you and one that meets you fresh every time.</div></div>
+          </div>
+        </div>
+
+        <!-- TAB 2 -->
+        <div class="tab-panel" id="cm2">
+          <div class="ph">📌 Global Instructions</div>
+          <div class="peff">Effort: <b>2 minutes, once</b> · Payoff: a permanent profile loaded before every session, forever</div>
+          <p style="color:var(--ink-soft);font-size:15px;margin-bottom:6px">Where Individual Memory is what Claude <i>noticed</i>, Global Instructions are what you <i>declared</i>. It's a short, standing brief — your role, your rules, your house style — pinned to the top of every conversation you start. This is the layer that makes Claude feel like it works for <i>you</i>.</p>
+          <div class="step">
+            <div class="sh"><span class="sb">1</span> Open Global Instructions</div>
+            <p><span class="path">Settings → CoWork → Global Instructions</span>. (On some plans it lives under <span class="path">Settings → Profile → Personal Preferences</span> — same thing, different label.)</p>
+          </div>
+          <div class="step">
+            <div class="sh"><span class="sb">2</span> Fill in the template</div>
+            <p>Run this short interview with yourself (or each teammate), then paste the filled-in version. Keep it under ~8 lines — it loads every time, so tight beats long:</p>
+            <div class="code">
+              <button class="copy" type="button">Copy</button>
+              <pre>I am a [role] at [company].
 I primarily work with [document types].
 Never [the thing] without checking with me first.
 Format responses as [bullets / short / paragraphs].
 Always flag [legal/regulatory language] for human review.
 When drafting, assume the audience is [who].
 Always present options before taking action.</pre>
+            </div>
+          </div>
+          <div class="step">
+            <div class="sh"><span class="sb">3</span> Save and test</div>
+            <p>Save, then open a fresh chat and ask something normal. You should feel the difference immediately — it answers in your format, in your voice, without being told.</p>
+          </div>
+          <div class="tip">
+            <button class="tip-btn" type="button">💡 When to use this</button>
+            <div class="tip-body"><div class="inner">Set it once when you onboard, and revisit it only when your role or rules change. Think of Layer 1 as the memory that grows on its own, and Layer 2 as the constitution you write by hand — the non-negotiables that should never drift.</div></div>
           </div>
         </div>
-        <div class="step">
-          <div class="sh"><span class="sb">6.3</span> Project memory (automatic)</div>
-          <p>Nothing to set up. Claude builds shared memory inside each project as the team uses it. After a few weeks, the project remembers common questions and recurring workflows — visible to everyone.</p>
+
+        <!-- TAB 3 -->
+        <div class="tab-panel" id="cm3">
+          <div class="ph">🤝 Project Memory</div>
+          <div class="peff">Effort: <b>nothing — automatic</b> · Payoff: the team's shared knowledge compounds the more you use it</div>
+          <p style="color:var(--ink-soft);font-size:15px;margin-bottom:6px">Layers 1 and 2 are personal. This one is shared. Inside the team Project you built in Phase 4, Claude quietly builds a <b>collective memory</b> — the recurring questions, the patterns, the answers that worked. Everyone on the project benefits from what everyone else has already taught it.</p>
+          <div class="step">
+            <div class="sh"><span class="sb">1</span> There's nothing to switch on</div>
+            <p>It's built into shared Projects. As long as your team works <i>inside</i> the shared Project (Phase 4), Claude accumulates project memory automatically. The work <i>is</i> the setup.</p>
+          </div>
+          <div class="step">
+            <div class="sh"><span class="sb">2</span> Give it a few weeks</div>
+            <p>Early on, it's thin. After the team has run real work through the project, it starts to anticipate — surfacing the right template, recalling how you handled a similar case last month, answering the FAQ before anyone asks.</p>
+          </div>
+          <div class="step">
+            <div class="sh"><span class="sb">3</span> Keep the sensitive stuff out</div>
+            <p>Because this memory is shared with everyone on the project, treat it like a shared drive: anything that lands in the project can inform answers for the whole team. Great for playbooks and templates — not the place for one client's confidential file. (See the FAQ on confidential data.)</p>
+          </div>
+          <div class="analogy" style="margin:14px 0 0">
+            <div class="ae">🌱</div>
+            <div class="at">Project Memory is the layer that <b>compounds.</b> Layers 1 and 2 are set-and-forget. This one gets <i>better</i> the more your team uses it — the newest hire inherits months of the team's accumulated context the day they join the project.</div>
+          </div>
         </div>
       </div></div>
     </section>
@@ -547,6 +643,10 @@ Always present options before taking action.</pre>
       <div class="faq-a"><div class="inner">They live in your workspace's Project Knowledge, scoped to whoever the Project is shared with. Build team artifacts <i>inside</i> the shared Project — that's the only path to proper team sharing with access scoping. A file in a personal session isn't shareable until it's moved into the shared Project.</div></div>
     </div>
     <div class="faq">
+      <div class="faq-q"><span class="qm">🧠</span> Where does memory actually live — and is confidential client data safe? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner"><b>Individual Memory</b> and <b>Global Instructions</b> (Layers 1–2) are tied to each person's account in your workspace, not shared. <b>Project Memory</b> (Layer 3) is shared with everyone on that Project — so scope sharing deliberately. <b>One gotcha to flag for any team handling confidential files:</b> if your company syncs Desktop/Documents to <b>OneDrive or Microsoft Teams/SharePoint</b>, any files you stage locally before uploading may sync to your corporate cloud — a separate copy outside Claude. That's usually fine, but if you coach or advise clients under confidentiality, confirm your IT/data-handling policy first, and keep one client's sensitive material out of a Project shared with the whole team. The rule of thumb: shared Project = shared with the team; personal session = just you.</div></div>
+    </div>
+    <div class="faq">
       <div class="faq-q"><span class="qm">🔍</span> How do my teammates actually find the shared skills and project? <span class="fc">+</span></div>
       <div class="faq-a"><div class="inner"><b>Skills:</b> type <span class="path">/</span> in any chat — pushed skills just appear in the list, no setup needed (see step 3.4). <b>Shared project:</b> it shows up in the left sidebar under <span class="path">Projects</span>, named whatever you called it (see step 4.5). Both require nothing on the teammate's end beyond having Skills turned on for their account — if either is missing, it's almost always a visibility toggle on the admin side, not something broken for that person.</div></div>
     </div>
@@ -597,6 +697,17 @@ document.querySelectorAll('.why-btn').forEach(b => {
 });
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+/* ---- memory layer tabs ---- */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const wrap = btn.closest('.phase-inner') || document;
+    wrap.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+    wrap.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+    btn.classList.add('on');
+    wrap.querySelector('#' + btn.dataset.tab).classList.add('on');
+  });
 });
 
 /* ---- copy buttons ---- */

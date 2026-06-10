@@ -137,6 +137,65 @@
     .flow .arrow{transform:rotate(90deg);padding:4px 0}
   }
 
+  /* memory layer ladder + tabs */
+  .mem-intro{color:var(--ink-soft);font-size:15.5px;margin:2px 0 14px}
+  .ladder{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:6px 0 18px}
+  .ladder .rung{background:var(--card-2);border:1px solid var(--hair);border-radius:13px;padding:13px 14px}
+  .ladder .rung .rl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+  .ladder .rung .rt{font-weight:700;font-size:14.5px;line-height:1.2;margin-bottom:3px}
+  .ladder .rung .rp{font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+  .ladder .rung.l1{border-left:3px solid var(--mint)}
+  .ladder .rung.l2{border-left:3px solid var(--indigo)}
+  .ladder .rung.l3{border-left:3px solid var(--violet)}
+  @media(max-width:620px){.ladder{grid-template-columns:1fr}}
+  .tabs{display:flex;gap:6px;margin:6px 0 0;flex-wrap:wrap}
+  .tab-btn{background:var(--card-2);border:1px solid var(--hair);color:var(--ink-soft);font-family:var(--sans);font-weight:600;font-size:13.5px;padding:9px 15px;border-radius:11px 11px 0 0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .16s,color .16s,border-color .16s;border-bottom:none}
+  .tab-btn .tn{font-family:var(--mono);font-size:11px;width:18px;height:18px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(234,238,255,.08);color:var(--ink-faint);flex-shrink:0}
+  .tab-btn:hover{color:var(--ink)}
+  .tab-btn.on{background:var(--bg-2);color:var(--ink);border-color:var(--hair-2)}
+  .tab-btn.on.a1 .tn{background:var(--mint);color:#04140F}
+  .tab-btn.on.a2 .tn{background:var(--indigo);color:#fff}
+  .tab-btn.on.a3 .tn{background:var(--violet);color:#1a1030}
+  .tab-panel{display:none;background:var(--bg-2);border:1px solid var(--hair-2);border-radius:0 14px 14px 14px;padding:18px 20px}
+  .tab-panel.on{display:block;animation:fadein .3s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .tab-panel .ph{font-family:var(--serif);font-weight:600;font-size:18.5px;display:flex;align-items:center;gap:9px;margin-bottom:3px}
+  .tab-panel .peff{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:12px;letter-spacing:.03em}
+  .tab-panel .peff b{color:var(--mint)}
+  .filetree{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);background:#070B1C;border:1px solid rgba(124,140,255,.22);border-radius:12px;padding:14px 16px;margin:12px 0;line-height:1.7;white-space:pre;overflow-x:auto}
+  .filetree .fdir{color:var(--cyan)}
+  .filetree .ffile{color:var(--mint)}
+  .filetree .fcm{color:var(--ink-faint)}
+
+  /* under-the-hood: two-tier load diagram */
+  .hood{margin:16px 0 2px}
+  .hood-toggle{width:100%;text-align:left;background:rgba(176,140,255,.1);border:1px solid rgba(176,140,255,.3);color:var(--violet);font-family:var(--mono);font-size:12.5px;font-weight:500;padding:11px 15px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .16s}
+  .hood-toggle:hover{background:rgba(176,140,255,.16)}
+  .hood-toggle .hc{transition:transform .26s;margin-left:auto}
+  .hood.open .hc{transform:rotate(90deg)}
+  .hood-body{max-height:0;overflow:hidden;transition:max-height .45s ease}
+  .hood.open .hood-body{max-height:1600px}
+  .hood-inner{padding:16px 2px 2px}
+  .tier{border-radius:14px;padding:15px 16px;margin:11px 0;border:1px solid var(--hair)}
+  .tierA{background:linear-gradient(135deg,rgba(92,242,200,.07),rgba(124,140,255,.05));border-left:3px solid var(--mint)}
+  .tierB{background:linear-gradient(135deg,rgba(176,140,255,.08),transparent);border-left:3px solid var(--violet)}
+  .tier .tlab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .tierA .tlab{color:var(--mint)}
+  .tierB .tlab{color:var(--violet)}
+  .tier .tlab .pill{font-size:9.5px;padding:2px 8px;border-radius:99px;letter-spacing:.06em}
+  .tierA .tlab .pill{background:rgba(92,242,200,.18);color:var(--mint)}
+  .tierB .tlab .pill{background:rgba(176,140,255,.2);color:var(--violet)}
+  .loadrow{display:flex;align-items:flex-start;gap:11px;padding:8px 0;border-top:1px solid var(--hair)}
+  .loadrow:first-of-type{border-top:none}
+  .loadrow .ic{font-family:var(--mono);font-size:13px;flex-shrink:0;width:20px;text-align:center}
+  .loadrow .lt{flex:1;min-width:0}
+  .loadrow .lt .ln{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:500}
+  .loadrow .lt .ld{font-size:13px;color:var(--ink-soft);margin-top:1px;line-height:1.4}
+  .loadrow .lt .ln b{color:var(--cyan)}
+  .proof{background:var(--card-2);border:1px solid var(--hair);border-radius:12px;padding:13px 15px;margin:12px 0 0;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .proof b{color:var(--mint)}
+  .proof .ptag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px}
+
   .section-h{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.02em;margin:46px 0 6px;display:flex;align-items:center;gap:11px}
   .section-sub{color:var(--ink-soft);margin-bottom:18px;font-size:16px}
 
@@ -199,8 +258,9 @@
       <a href="#install"><span class="pn">1</span>Install the CLI</a>
       <a href="#vscode"><span class="pn">2</span>VS Code extension</a>
       <a href="#first"><span class="pn">3</span>First project</a>
-      <a href="#github"><span class="pn">4</span>GitHub integration</a>
-      <a href="#team"><span class="pn">5</span>Run it on a team</a>
+      <a href="#memory"><span class="pn">4</span>Memory</a>
+      <a href="#github"><span class="pn">5</span>GitHub integration</a>
+      <a href="#team"><span class="pn">6</span>Run it on a team</a>
       <a href="#faq"><span class="pn">·</span>FAQ</a>
       <a href="#checklist"><span class="pn">✓</span>You're set up</a>
     </div>
@@ -341,9 +401,188 @@
       </div>
     </section>
 
+    <!-- MEMORY -->
+    <section class="section" id="memory">
+      <div class="stag">Step 4 · The one people get wrong</div>
+      <h2>Memory — how Claude Code remembers</h2>
+      <p class="lead">There's no cloud "brain" to configure. In Claude Code, memory is just files on your machine — which means you own it, and it works offline. It comes in three stacking layers.</p>
+
+      <div class="analogy" style="margin:14px 0">
+        <div class="ae">🗂️</div>
+        <div class="at">The mental model people get wrong: they picture memory as a database in the cloud. It's the opposite. <b>A folder on your disk is the memory.</b> Whatever lives in that folder, Claude can see — and nothing leaves your machine except what's needed to answer the task in front of it.</div>
+      </div>
+
+      <p class="mem-intro">Three layers, each more powerful than the last. Climb as far as you want — Layer 1 needs zero setup, Layer 3 builds itself over time.</p>
+
+      <div class="ladder">
+        <div class="rung l1"><div class="rl">Layer 1 · zero setup</div><div class="rt">The folder is the memory</div><div class="rp">Point Claude at a folder; its files are the working context.</div></div>
+        <div class="rung l2"><div class="rl">Layer 2 · one file</div><div class="rt">CLAUDE.md</div><div class="rp">A standing brief that loads every session — who you are, the rules.</div></div>
+        <div class="rung l3"><div class="rl">Layer 3 · self-building</div><div class="rt">Auto-memory</div><div class="rp">Claude writes its own memory files and recalls them across sessions.</div></div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab-btn on a1" data-tab="ccm1" type="button"><span class="tn">1</span> The folder</button>
+        <button class="tab-btn a2" data-tab="ccm2" type="button"><span class="tn">2</span> CLAUDE.md</button>
+        <button class="tab-btn a3" data-tab="ccm3" type="button"><span class="tn">3</span> Auto-memory</button>
+      </div>
+
+      <!-- TAB 1 -->
+      <div class="tab-panel on" id="ccm1">
+        <div class="ph">📁 The project folder <i>is</i> the memory</div>
+        <div class="peff">Effort: <b>none — make a folder</b> · Payoff: durable context with zero configuration</div>
+        <p style="color:var(--ink-soft);font-size:15px;margin-bottom:6px">This is the whole foundation. When Claude Code runs inside a folder, everything in it — your files, notes, prior work — is the working memory. Close your laptop, reopen tomorrow, point Claude at the same folder, and it picks up right where you left off, because the files are still there.</p>
+        <div class="step">
+          <div class="sh"><span class="sb">1</span> Make a folder</div>
+          <p>Anywhere you like — your Desktop is fine. Name it for the work, e.g. a folder for one client, one project, or one area of your business.</p>
+          <div class="term">
+            <button class="copy" type="button">Copy</button>
+            <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">terminal</span></div>
+            <pre><span class="pr">$</span> mkdir ~/Desktop/MyProject
+<span class="pr">$</span> cd ~/Desktop/MyProject</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">2</span> Drop your context in</div>
+          <p>Put whatever Claude should know into the folder — reference docs, your templates, notes, past work. These files become the context it reads before answering.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">3</span> Open it and start</div>
+          <p>In VS Code: <span class="path">File → Open Folder</span> → pick it. Or in the terminal, run <span class="path">claude</span> from inside the folder. That's it — the folder is now the brain.</p>
+        </div>
+        <div class="oops">
+          <div class="oe">⚠️</div>
+          <div class="ot"><b>Common mistake:</b> thinking you need a database or an account setting. You don't. The folder <i>is</i> the memory. One folder per project keeps each one's context clean and separate.</div>
+        </div>
+      </div>
+
+      <!-- TAB 2 -->
+      <div class="tab-panel" id="ccm2">
+        <div class="ph">📋 CLAUDE.md — the file that makes it "remember who you are"</div>
+        <div class="peff">Effort: <b>one file, a few minutes</b> · Payoff: persistent identity loaded on every single run</div>
+        <p style="color:var(--ink-soft);font-size:15px;margin-bottom:6px">A plain text file named <span class="path">CLAUDE.md</span> in your folder. Claude Code reads it automatically at the start of every session — so it never forgets your role, your rules, or your house style. This is the one file that survives forever and makes the agent feel like it works for you.</p>
+        <div class="step">
+          <div class="sh"><span class="sb">1</span> Create CLAUDE.md in your folder</div>
+          <p>Just a markdown file at the root of the folder. Claude finds it on its own — no setting to flip.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">2</span> Fill in this starter template</div>
+          <p>Adapt it to you. Keep it tight — it loads every time, so signal beats volume:</p>
+          <div class="term">
+            <button class="copy" type="button">Copy</button>
+            <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">CLAUDE.md</span></div>
+            <pre><span class="cm"># Who I am</span>
+- I'm a [role] and this folder is for [what this project is]
+- My audience / clients are [who]
+
+<span class="cm"># How to work with me</span>
+- Always show me options before taking an action
+- Format answers as [short / bullets / full prose]
+- Flag anything [legal/regulatory/confidential] for my review
+
+<span class="cm"># House rules</span>
+- Never [the thing] without asking first
+- Match the voice and structure of my existing files</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">3</span> Save and test</div>
+          <p>Save it, then ask Claude something normal. It should answer in your format and respect your rules without being reminded — that's CLAUDE.md doing its job.</p>
+        </div>
+        <div class="tip">
+          <button class="tip-btn" type="button">💡 When to use this vs. Layer 1</button>
+          <div class="tip-body"><div class="inner">Layer 1 (the folder) gives Claude your <i>material</i>. Layer 2 (CLAUDE.md) gives it your <i>instructions</i> — the standing rules that apply no matter what you're working on. On a team, commit CLAUDE.md to the repo and every teammate inherits the same setup automatically (that's Step 6).</div></div>
+        </div>
+      </div>
+
+      <!-- TAB 3 -->
+      <div class="tab-panel" id="ccm3">
+        <div class="ph">🌱 Auto-memory — the memory that writes itself</div>
+        <div class="peff">Effort: <b>set a directory once</b> · Payoff: Claude learns across sessions and compounds over time</div>
+        <p style="color:var(--ink-soft);font-size:15px;margin-bottom:6px">This is the real differentiator from a wrapped chatbot. Beyond reading your files, Claude Code can <b>write its own memory</b> — saving durable facts to disk during one session and recalling them in the next. Over weeks it accumulates a knowledge base about your work that you never had to type.</p>
+        <div class="step">
+          <div class="sh"><span class="sb">1</span> How it's structured</div>
+          <p>Memory lives as one fact per file inside a <span class="path">memory/</span> folder, with a <span class="path">MEMORY.md</span> index that loads each session. Claude reads the index to know what it already knows, then opens the specific file when a fact is relevant:</p>
+          <div class="filetree"><span class="fdir">MyProject/</span>
+├── <span class="ffile">CLAUDE.md</span>          <span class="fcm"># Layer 2 — your standing rules</span>
+└── <span class="fdir">memory/</span>
+    ├── <span class="ffile">MEMORY.md</span>      <span class="fcm"># the index — one line per fact</span>
+    ├── <span class="ffile">client-acme-prefs.md</span>
+    ├── <span class="ffile">project-q3-goals.md</span>
+    └── <span class="ffile">feedback-tone.md</span>  <span class="fcm"># Claude wrote these itself</span></div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">2</span> Turn it on</div>
+          <p>Point Claude at a memory directory once. The simplest way: add a line to your <span class="path">CLAUDE.md</span> telling it to maintain memory, and create the folder:</p>
+          <div class="term">
+            <button class="copy" type="button">Copy</button>
+            <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="ttl">terminal</span></div>
+            <pre><span class="pr">$</span> mkdir memory
+<span class="cm"># then add to CLAUDE.md:</span>
+<span class="cm"># "Maintain a persistent memory in ./memory/ —</span>
+<span class="cm">#  one fact per file, indexed in MEMORY.md.</span>
+<span class="cm">#  Save durable facts; recall them each session."</span></pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">3</span> Let it build</div>
+          <p>Now, when something is worth remembering — a client's preference, a decision you made, feedback you gave — Claude writes it to a memory file and notes it in the index. Next session, it reads the index first and already knows. You can open any file and read, edit, or delete what it saved; it's all plain text you control.</p>
+        </div>
+        <div class="analogy" style="margin:14px 0 0">
+          <div class="ae">📈</div>
+          <div class="at">This is the layer that <b>compounds.</b> A chatbot starts cold every time. With auto-memory, month three is dramatically better than week one — the agent has quietly built a file cabinet of everything it has learned about your work, and every file is yours to read.</div>
+        </div>
+
+        <!-- UNDER THE HOOD -->
+        <div class="hood">
+          <button class="hood-toggle" type="button"><span class="hc">›</span> Under the hood — what actually loads, and when <span style="opacity:.7">(the part his AI coach doesn't do)</span></button>
+          <div class="hood-body"><div class="hood-inner">
+            <p style="color:var(--ink-soft);font-size:14.5px;margin-bottom:4px">The reason this scales without blowing up the context window is a deliberate two-tier split. Some things load <b>automatically, every session</b>. The expensive details load <b>only when they become relevant.</b></p>
+
+            <div class="tier tierA">
+              <div class="tlab"><span>Tier A — injected at session start</span><span class="pill">always loaded</span></div>
+              <div class="loadrow">
+                <div class="ic">📄</div>
+                <div class="lt"><div class="ln">CLAUDE.md <span style="color:var(--ink-faint)">(global + project)</span></div><div class="ld">Full contents, stacked. This file is the <b>switchboard</b> — whatever it links gets pulled in with it.</div></div>
+              </div>
+              <div class="loadrow">
+                <div class="ic">📐</div>
+                <div class="lt"><div class="ln">rules/*.md <span style="color:var(--ink-faint)">— how to behave</span></div><div class="ld">Loaded <i>because</i> CLAUDE.md imports them. Cut the link and a rule stops loading. (A separate harness layer may also inject its own bundle — see the proof below.)</div></div>
+              </div>
+              <div class="loadrow">
+                <div class="ic">🗂️</div>
+                <div class="lt"><div class="ln">MEMORY.md <span style="color:var(--ink-faint)">— the index only</span></div><div class="ld">Who you are / what you're working on — but tagged as <b>background context</b>, "true when written," not as a command. Memory can drift, so it's read, then verified before acting on.</div></div>
+              </div>
+              <div class="loadrow">
+                <div class="ic">⏱️</div>
+                <div class="lt"><div class="ln">Session reminder</div><div class="ld">Today's date, your account, the working folder, the available skills — and the MEMORY.md index a second time.</div></div>
+              </div>
+            </div>
+
+            <div class="tier tierB">
+              <div class="tlab"><span>Tier B — opened on demand, mid-session</span><span class="pill">loaded only if relevant</span></div>
+              <div class="loadrow">
+                <div class="ic">🌱</div>
+                <div class="lt"><div class="ln">memory/&lt;specific-fact&gt;.md</div><div class="ld">The individual fact files behind the index stay on disk. Claude reads the index to know <i>what it knows</i>, then opens a single file only when that fact actually comes up. The index is the cheap pointer; the facts are the expensive payload, fetched just-in-time.</div></div>
+              </div>
+            </div>
+
+            <div class="proof">
+              <span class="ptag">Verified live, this session</span>
+              In one real workspace, the <span class="path">rules/</span> folder held <b>5</b> files — but the project's <span class="path">CLAUDE.md</span> linked only <b>3</b> of them, and only those 3 loaded; the other 2 sat unread on disk. The memory index pointed to <b>47</b> fact files, and <b>zero</b> of them loaded until one was needed. That's the whole trick: a lightweight index always on, a deep archive pulled just-in-time — so memory can grow for months without ever filling the window.
+            </div>
+
+            <div class="oops" style="margin-top:12px">
+              <div class="oe">💡</div>
+              <div class="ot"><b>Why this beats a fixed prompt:</b> a wrapped chatbot stuffs everything it "knows" into one static system prompt — it doesn't grow, and eventually it overflows. This split lets the knowledge base expand indefinitely on disk while only the relevant slice ever enters the conversation.</div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
     <!-- GITHUB -->
     <section class="section" id="github">
-      <div class="stag">Step 4 · The big one</div>
+      <div class="stag">Step 5 · The big one</div>
       <h2>GitHub integration</h2>
       <p class="lead">This is where Claude Code goes from "handy" to "part of the team." It reads your history, works in branches, and reviews pull requests.</p>
 
@@ -360,7 +599,7 @@
       </div>
 
       <div class="step">
-        <div class="sh"><span class="sb">4.1</span> Make sure your repo is a git repo</div>
+        <div class="sh"><span class="sb">5.1</span> Make sure your repo is a git repo</div>
         <p>If you cloned it from GitHub, it already is. If not, initialize it once:</p>
         <div class="reveal">
           <button class="reveal-btn" type="button"><span class="rc">›</span> Show command — init git</button>
@@ -375,7 +614,7 @@
       </div>
 
       <div class="step">
-        <div class="sh"><span class="sb">4.2</span> Let Claude work in branches</div>
+        <div class="sh"><span class="sb">5.2</span> Let Claude work in branches</div>
         <p>Ask Claude to make a change and it can create a branch, commit its work, and push — so your main branch stays clean. You review the branch before merging, exactly like a teammate's PR.</p>
         <div class="whap">
           <button class="whap-btn" type="button"><span class="wc">›</span> Why branches matter here</button>
@@ -384,7 +623,7 @@
       </div>
 
       <div class="step">
-        <div class="sh"><span class="sb">4.3</span> Code review on pull requests</div>
+        <div class="sh"><span class="sb">5.3</span> Code review on pull requests</div>
         <p>Connect Claude Code to GitHub and it can review open PRs — leaving inline comments on specific lines, catching bugs, and suggesting fixes. It reads the surrounding code and git history, so its comments are about <i>your</i> codebase, not generic advice.</p>
         <div class="tip">
           <button class="tip-btn" type="button">💡 Tip — start with review, not writing</button>
@@ -399,11 +638,11 @@
 
     <!-- TEAM -->
     <section class="section" id="team">
-      <div class="stag">Step 5</div>
+      <div class="stag">Step 6</div>
       <h2>Run Claude Code on a team</h2>
       <p class="lead">The trick to a team setup: everyone inherits the same instructions automatically, straight from the repo.</p>
       <div class="step">
-        <div class="sh"><span class="sb">5.1</span> Add a shared <span class="path">CLAUDE.md</span></div>
+        <div class="sh"><span class="sb">6.1</span> Add a shared <span class="path">CLAUDE.md</span></div>
         <p>Drop a <span class="path">CLAUDE.md</span> file in the root of your repo. Claude Code reads it automatically on every run. Put your conventions, architecture notes, and do/don't rules in it — and because it's committed to the repo, <b>every teammate gets the same setup for free.</b></p>
         <div class="term">
           <button class="copy" type="button">Copy</button>
@@ -416,7 +655,7 @@
         </div>
       </div>
       <div class="step">
-        <div class="sh"><span class="sb">5.2</span> Folder-level instructions</div>
+        <div class="sh"><span class="sb">6.2</span> Folder-level instructions</div>
         <p>You can add a <span class="path">CLAUDE.md</span> inside specific folders too — handy for a monorepo where each package has its own rules. Claude reads the closest one to whatever it's working on.</p>
       </div>
       <div class="analogy" style="margin:14px 0 0">
@@ -441,13 +680,17 @@
       <div class="faq-a"><div class="inner">Yes — that's the point of the committed <span class="path">CLAUDE.md</span>. Everyone runs their own Claude Code locally, but they all inherit the same project instructions from the repo, so the team works to one consistent standard.</div></div>
     </div>
     <div class="faq">
+      <div class="faq-q"><span class="qm">🧠</span> Where does memory actually live — and is confidential data safe? <span class="fc">+</span></div>
+      <div class="faq-a"><div class="inner">All three memory layers are <b>plain files on your own machine</b> — the folder, <span class="path">CLAUDE.md</span>, and the <span class="path">memory/</span> directory. Nothing is stored in a Claude "cloud brain"; only the slices needed to answer a given task are sent to the model. That's a feature if you handle confidential work — your context stays under your control. <b>One gotcha to flag:</b> if your company syncs your Desktop or Documents to <b>OneDrive or Microsoft Teams/SharePoint</b>, your project folder (and its memory files) may sync to your corporate cloud — a copy outside Claude. Usually fine, but if you advise clients under confidentiality, keep that folder somewhere that <i>isn't</i> auto-synced, or confirm your firm's data-handling policy first.</div></div>
+    </div>
+    <div class="faq">
       <div class="faq-q"><span class="qm">🔐</span> Is my code sent to Anthropic? <span class="fc">+</span></div>
       <div class="faq-a"><div class="inner">Relevant code is sent to the model to answer your request, the same way any AI coding tool works. On business plans your code isn't used to train models, and there are admin controls for teams. For exact terms, point to Anthropic's data-handling docs — and check whether your org wants the business/enterprise tier for tighter guarantees.</div></div>
     </div>
 
     <!-- CHECKLIST -->
     <h2 class="section-h" id="checklist">✓ You're set up</h2>
-    <p class="section-sub">Tick each one as you go. Five greens means you're ready to build.</p>
+    <p class="section-sub">Tick each one as you go. Six greens means you're ready to build.</p>
     <div class="checklist">
       <h3>Launch checklist</h3>
       <p class="cp">From install to your first GitHub-connected change.</p>
@@ -455,7 +698,8 @@
       <div class="check" data-k="2"><div class="box">✓</div><div class="ctxt">My API key is connected (saved in my shell profile)</div></div>
       <div class="check" data-k="3"><div class="box">✓</div><div class="ctxt">The VS Code extension is installed and a folder is open</div></div>
       <div class="check" data-k="4"><div class="box">✓</div><div class="ctxt">I've run my first task and approved a diff</div></div>
-      <div class="check" data-k="5"><div class="box">✓</div><div class="ctxt">My GitHub repo is connected (and has a CLAUDE.md if it's a team)</div></div>
+      <div class="check" data-k="5"><div class="box">✓</div><div class="ctxt">My project folder has a CLAUDE.md (and a memory/ folder if I want it learning over time)</div></div>
+      <div class="check" data-k="6"><div class="box">✓</div><div class="ctxt">My GitHub repo is connected (and shares the CLAUDE.md if it's a team)</div></div>
       <div class="done-banner" id="doneBanner">🎉 You're live. Go describe your first real task.</div>
     </div>
 
@@ -479,6 +723,20 @@ document.querySelectorAll('.reveal-btn').forEach(b => b.addEventListener('click'
 document.querySelectorAll('.whap-btn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
 document.querySelectorAll('.tip-btn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
 document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('open')));
+
+/* under-the-hood toggle */
+document.querySelectorAll('.hood-toggle').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
+
+/* memory layer tabs */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const wrap = btn.closest('.section') || document;
+    wrap.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+    wrap.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+    btn.classList.add('on');
+    wrap.querySelector('#' + btn.dataset.tab).classList.add('on');
+  });
+});
 
 document.querySelectorAll('.copy').forEach(btn => {
   btn.addEventListener('click', () => {
