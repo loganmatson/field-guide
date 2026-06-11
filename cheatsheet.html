@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Claude Code">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1a1814">
-<title>Claude Code · A Working Reference · PumaCap</title>
+<title>Claude Code · A Working Reference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1067,7 +1068,7 @@ footer.foot .mid {
   <div class="topbar-inner">
     <div>
       <div class="brand">Claude Code<span class="colon">:</span></div>
-      <div class="brand-sub">a working reference for the PumaCap team</div>
+      <div class="brand-sub">a working reference for your team</div>
     </div>
     <div class="meta">Summer 2026 &nbsp;/&nbsp; <span class="vol">No. 01</span></div>
   </div>
@@ -1369,7 +1370,7 @@ See @docs/api-contracts.md before touching the trade API.<button class="copy">co
 <footer class="foot">
   <span>Calibrated Density &nbsp;·&nbsp; vol. 01</span>
   <span class="mid">A reference, not a manual &nbsp;·&nbsp; keep it on your desk</span>
-  <span>PumaCap Summer 2026</span>
+  <span>A Field Guide · Summer 2026</span>
 </footer>
 
 <script>
@@ -1763,10 +1764,10 @@ function renderRecipes() {
 
   document.querySelectorAll(".tried").forEach(btn => {
     const id = btn.dataset.tried;
-    if (localStorage.getItem("pumacap-tried-" + id) === "1") btn.classList.add("done");
+    if (localStorage.getItem("fieldguide-tried-" + id) === "1") btn.classList.add("done");
     btn.addEventListener("click", () => {
       const isDone = btn.classList.toggle("done");
-      localStorage.setItem("pumacap-tried-" + id, isDone ? "1" : "0");
+      localStorage.setItem("fieldguide-tried-" + id, isDone ? "1" : "0");
     });
   });
 }

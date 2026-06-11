@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code — Build Menu</title>
+<title>Claude Code · Build Menu</title>
 <style>
   :root{
     --ink:#0f1419; --paper:#f4f1ea; --card:#fffdf8; --line:#d9d2c4;
@@ -124,9 +125,9 @@
 <body>
 <header>
   <div class="wrap">
-    <div class="eyebrow">Claude Code · Live Build Session</div>
+    <div class="eyebrow">Claude Code · Session 2 · Live Build Material</div>
     <h1>The Build Menu</h1>
-    <p>Eight things we can build together right now. Pick whatever's most useful to your world — each card shows the effort, where it goes next, and the exact steps.</p>
+    <p>Eight things we can build together in a working session. Pick whatever's most useful to your world; each card shows the effort, where it goes next, and the exact steps.</p>
     <div class="legend">
       <span><i class="dot d-easy"></i> Quick win — a few minutes</span>
       <span><i class="dot d-med"></i> Build — a short working session</span>
@@ -162,15 +163,15 @@ const BUILDS = [
     why:"Shows the platform is genuinely extensible — Anthropic ships first-party tooling you build on top of.",
     expand:"Becomes the on-ramp to every other build: once skill-creator is in, building skills #2, #6, #7 is one command each.",
     steps:[
-      {t:"Open Claude Code in a clean project folder.", c:"cd ~/pumacap-demo && claude"},
+      {t:"Open Claude Code in a clean project folder.", c:"cd ~/claude-demo && claude"},
       {t:"See what skills are available.", c:"What skills do I currently have available?"},
       {t:"Install the official skill-creator skill.", c:"Install the skill-creator skill from Anthropic so I can author my own skills."},
       {t:"Confirm it loaded.", c:"Confirm skill-creator is installed and show me what it does."},
       {t:"Explain the skill format in plain English.", c:"Using skill-creator, explain in plain English what a SKILL.md file is and what the frontmatter does."},
       {t:"See what makes a skill trigger reliably.", c:"What makes a skill description trigger reliably? Give me the rules skill-creator follows."},
-      {t:"Scaffold a throwaway skill to see the shape.", c:"Use skill-creator to scaffold a simple skill called 'hello-pumacap' that greets the user. Show me the files it creates."},
+      {t:"Scaffold a throwaway skill to see the shape.", c:"Use skill-creator to scaffold a simple skill called 'hello-team' that greets the user. Show me the files it creates."},
       {t:"Read the generated SKILL.md.", c:"Show me the SKILL.md it generated and walk me through each section."},
-      {t:"Trigger the new skill to prove it works.", c:"Run the hello-pumacap skill."},
+      {t:"Trigger the new skill to prove it works.", c:"Run the hello-team skill."},
       {t:"Close the loop on what just happened.", c:"Summarize what we just did: what skill-creator is, and how I'd use it to build a real skill for my firm."}
     ]
   },
@@ -201,14 +202,14 @@ const BUILDS = [
     expand:"Grows into a full memory tree — one file per client, per strategy, per regulation — that every future agent reads automatically.",
     steps:[
       {t:"Explain the goal.", c:"I want to set up persistent memory so Claude remembers facts about my firm across sessions. Explain how memory works here first."},
-      {t:"Create the memory index.", c:"Create a MEMORY.md file and add a fact: 'PumaCap manages $1B+ AUM across [strategies], reports to [regulator].'"},
+      {t:"Create the memory index.", c:"Create a MEMORY.md file and add a fact: 'Our firm manages [AUM] across [strategies], reports to [regulator].'"},
       {t:"Add a structured fact file.", c:"Create a separate memory file for our largest client with three facts about their mandate and constraints."},
       {t:"Link it from the index.", c:"Add a one-line pointer to that client file in MEMORY.md."},
       {t:"Add a preference.", c:"Save a preference: 'Always format compliance summaries as a 4-field table.'"},
       {t:"Show the structure.", c:"Show me the full memory directory and what's in each file."},
       {t:"Quit and restart the session.", c:"/exit"},
       {t:"Reopen Claude Code.", c:"claude"},
-      {t:"Test recall.", c:"What do you remember about PumaCap and our largest client?"},
+      {t:"Test recall.", c:"What do you remember about our firm and our largest client?"},
       {t:"Frame it.", c:"Summarize how this replaces tribal knowledge that today only lives in my staff's heads."}
     ]
   },
@@ -298,7 +299,7 @@ const BUILDS = [
       {t:"Explain the format.", c:"I want to run a decision through a panel of agents that argue different angles, then a host who synthesizes the real tradeoff — not a single opinion. Explain how this works."},
       {t:"Name the panel.", c:"Set up three panelists: a devil's-advocate (finds the failure mode), a data analyst (base rates and numbers only), and a systems-thinker (what this decision is part of)."},
       {t:"Add the host.", c:"Add a host whose only job is to name the actual tradeoff the panel disagreed on — never to pick a side."},
-      {t:"Pose a real decision.", c:"Run the panel on: 'Should PumaCap [a real, non-sensitive decision]?'"},
+      {t:"Pose a real decision.", c:"Run the panel on: 'Should we [a real, non-sensitive decision]?'"},
       {t:"Let each panelist speak.", c:"Have each panelist make its strongest independent argument before anyone responds."},
       {t:"Force the clash.", c:"Now have them respond to each other's strongest point — where do they actually disagree?"},
       {t:"Host synthesis.", c:"Host: what is the real tradeoff being chosen here, in one sentence?"},
@@ -313,7 +314,7 @@ const BUILDS = [
     why:"The most mechanical thing a dev shop does ten times a day — handed to an agent. You review the green diff; the agent does the loop. That's the difference between a tool and a teammate.",
     expand:"The pattern is the loop, not the language — swap `make test` for `dotnet test` and it works in a .NET/C# shop unchanged. Point it at your own codebase and it learns it.",
     steps:[
-      {t:"Open the pre-built demo folder.", c:"cd ~/'Desktop/AI Work/Engagements/PumaCap/C++' && ls"},
+      {t:"Open the pre-built demo folder.", c:"cd ~/demos/cpp-pipeline && ls"},
       {t:"Show the spec: a test file is the answer, written as code.", c:"Open tests/order_parser_test.cpp and explain it to me — it says an order line 'BUY 10 AAPL 250C @ 3.45' should parse into six fields."},
       {t:"Show the code is still a stub.", c:"Open src/order_parser.cpp and confirm it currently ignores its input and returns a failed parse."},
       {t:"Run the suite — watch it go RED.", c:"make test"},
@@ -324,7 +325,7 @@ const BUILDS = [
       {t:"Mode B — harden it with edge cases you'd forget.", c:"Now point yourself at parse_order and 'harden this': write edge-case tests for empty string, lowercase side, missing price, bad option type, and whole-dollar premium. Compile and run them."},
       {t:"Frame it + the bridge.", c:"Summarize: I never ran the compiler or read a failure — you owned the loop. Now explain how this same loop runs unchanged in a .NET shop with dotnet test, and how we'd point it at the parser my team actually maintains."}
     ],
-    fallback:"Pre-built + pre-tested in Engagements/PumaCap/C++/. If the live loop stalls: `make solution` = instant GREEN. If the agent/network is down: paste src/order_parser.solution.cpp into order_parser.cpp → make test → GREEN. RED→GREEN transcript captured in sample-run.md."
+    fallback:"Pre-built + pre-tested in your prepared demo folder. If the live loop stalls: `make solution` = instant GREEN. If the agent/network is down: paste src/order_parser.solution.cpp into order_parser.cpp → make test → GREEN. RED→GREEN transcript captured in sample-run.md."
   },
   {
     n:"10", title:"Capstone — A Back-Office in a Box", diff:"hard", mins:30, impact:5,
