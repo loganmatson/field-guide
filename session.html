@@ -281,6 +281,17 @@
   .ex-tease{color:var(--violet-2);text-decoration:none;font-weight:600}
   .ex-tease:hover{color:var(--cyan)}
 
+  /* ===== robot bridge ===== */
+  .robot-card{display:flex;align-items:flex-start;gap:28px;margin:44px auto 0;max-width:660px;text-align:left;background:rgba(124,92,255,.06);border:1px solid rgba(124,92,255,.22);border-radius:18px;padding:32px 34px}
+  .robot-icon{flex-shrink:0;filter:drop-shadow(0 0 14px rgba(54,224,200,.3))}
+  .robot-name{font-family:var(--mono);font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+  .robot-desc{color:var(--ink-soft);font-size:15px;line-height:1.65;margin:0}
+  .robot-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .r-chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:7px;background:rgba(54,224,200,.08);border:1px solid rgba(54,224,200,.25);color:rgba(54,224,200,.8)}
+  .bridge-arrow{font-size:2rem;color:rgba(124,92,255,.4);margin-top:36px;animation:bobDown 1.8s ease-in-out infinite}
+  @keyframes bobDown{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+  @media(max-width:600px){.robot-card{flex-direction:column;align-items:center;text-align:center}.robot-text{text-align:left}.robot-chips{justify-content:center}}
+
   /* ===== close ===== */
   .close-ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:36px}
 
@@ -804,6 +815,47 @@
   </div>
 </div>
 
+<!-- ================= Skill-Creator Bridge ================= -->
+<section class="exercise" id="skill-creator-bridge" style="min-height:72vh;padding:80px 26px 60px">
+  <div class="ex-inner">
+    <div class="kick" data-drift>the builder's builder</div>
+    <h2 class="stitle" data-drift>If I could only build <span class="acc">one robot</span> first&hellip;</h2>
+    <p class="sbody" data-drift>Imagine building 1,000 robots. Each one does exactly one thing well. The first one I'd build wouldn't be the chef, the analyst, or the scheduler. <b>It would be the robot that builds robots.</b> Get that one right and every skill you make after is faster, sharper, and more consistent than anything you'd write cold.</p>
+
+    <div class="robot-card" data-drift>
+      <div class="robot-icon" aria-hidden="true">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="22" width="36" height="28" rx="6" fill="rgba(124,92,255,.15)" stroke="rgba(124,92,255,.6)" stroke-width="1.5"/>
+          <rect x="28" y="16" width="16" height="8" rx="3" fill="rgba(124,92,255,.2)" stroke="rgba(124,92,255,.5)" stroke-width="1.5"/>
+          <line x1="36" y1="16" x2="36" y2="8" stroke="rgba(124,92,255,.5)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="36" cy="6" r="2.5" fill="rgba(54,224,200,.8)"/>
+          <circle cx="27" cy="34" r="4" fill="rgba(54,224,200,.25)" stroke="rgba(54,224,200,.7)" stroke-width="1.5"/>
+          <circle cx="45" cy="34" r="4" fill="rgba(54,224,200,.25)" stroke="rgba(54,224,200,.7)" stroke-width="1.5"/>
+          <path d="M29 42 Q36 47 43 42" stroke="rgba(238,241,246,.5)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <rect x="10" y="26" width="8" height="14" rx="3" fill="rgba(124,92,255,.1)" stroke="rgba(124,92,255,.4)" stroke-width="1.5"/>
+          <rect x="54" y="26" width="8" height="14" rx="3" fill="rgba(124,92,255,.1)" stroke="rgba(124,92,255,.4)" stroke-width="1.5"/>
+          <rect x="24" y="50" width="8" height="12" rx="2" fill="rgba(124,92,255,.1)" stroke="rgba(124,92,255,.4)" stroke-width="1.5"/>
+          <rect x="40" y="50" width="8" height="12" rx="2" fill="rgba(124,92,255,.1)" stroke="rgba(124,92,255,.4)" stroke-width="1.5"/>
+          <circle cx="27" cy="34" r="2" fill="rgba(54,224,200,.9)"/>
+          <circle cx="45" cy="34" r="2" fill="rgba(54,224,200,.9)"/>
+        </svg>
+      </div>
+      <div class="robot-text">
+        <div class="robot-name">skill-creator</div>
+        <p class="robot-desc">The skill that ships in the box with Claude Code. You describe what you want it to do, it interviews you, then it writes the SKILL.md. It is the only skill you will ever build from scratch.</p>
+        <div class="robot-chips">
+          <span class="r-chip">ships pre-installed</span>
+          <span class="r-chip">interviews you first</span>
+          <span class="r-chip">writes the file for you</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="sbody" style="margin-top:36px" data-drift>The exercise below uses it. Before you build anything, you will watch it explain itself. Then you will use it to build your first real skill.</p>
+    <div class="bridge-arrow" aria-hidden="true">&#8595;</div>
+  </div>
+</section>
+
 <!-- ================= Exercise ================= -->
 <section class="exercise" id="exercise">
   <div class="ex-inner">
@@ -876,9 +928,9 @@
         <div class="ex-part"><span class="ex-part-tag">part b</span><h4>Your first skill is the interviewer</h4></div>
         <ol class="ex-steps">
           <li class="ex-step"><span class="ex-n">3</span><div><b>Commission it.</b> Say:
-            <div class="ex-say"><span>Create a skill document called interview for this project. Requirements: before any new project, it interviews me with at least 10 questions, asked one at a time as multiple-choice where possible. The questions adapt to my previous answers, no fixed script. It reads the conversation for context first. It asks where I want the output. It only writes a final SPEC once it is 99% confident. Format it so I can paste it into this project's instructions.</span><button class="ex-copy" onclick="copySay(this)">copy</button></div>
+            <div class="ex-say"><span>Create a skill document called interview. Requirements: before any new project, it interviews me with at least 10 questions, asked one at a time as multiple-choice where possible. The questions adapt to my previous answers, no fixed script. It reads the conversation for context first. It asks where I want the output. It only writes a final SPEC once it is 99% confident. Write it in SKILL.md format so I can save it and reuse it anywhere.</span><button class="ex-copy" onclick="copySay(this)">copy</button></div>
           </div></li>
-          <li class="ex-step"><span class="ex-n">4</span><div><b>Install it.</b> Paste the result into the project's instructions (Project knowledge or custom instructions).</div></li>
+          <li class="ex-step"><span class="ex-n">4</span><div><b>Save it.</b> Paste the result into this project's instructions (Project knowledge or custom instructions). <span style="color:var(--ink-faint);font-size:13px">On Claude Code? It belongs at <code>~/.claude/skills/interview/SKILL.md</code> so it works everywhere, not just one project.</span></div></li>
           <li class="ex-step"><span class="ex-n">5</span><div><b>Fire it.</b>
             <div class="fire-chips">
               <span class="entry-chip">In the project? New chat: "interview me about my next project."</span>
