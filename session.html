@@ -65,6 +65,22 @@
   .act-pin .scene:first-child{opacity:1}
 
   /* the ladder: huge concept word, definition, example, analogy */
+  /* ===== mental model ===== */
+  .mm-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;margin:0 auto;text-align:left}
+  .mm-card{border-radius:16px;padding:28px 30px;transition:transform .3s}
+  .mm-bad{background:rgba(255,255,255,.03);border:1px solid rgba(238,241,246,.1)}
+  .mm-good{background:rgba(124,92,255,.1);border:1px solid rgba(124,92,255,.35);box-shadow:0 0 40px -16px rgba(124,92,255,.4)}
+  .mm-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+  .mm-bad .mm-role{color:var(--ink-faint)}
+  .mm-good .mm-role{color:var(--cyan)}
+  .mm-title{font-family:var(--serif);font-weight:600;font-size:clamp(1.3rem,2.4vw,1.7rem);margin-bottom:12px;letter-spacing:-.02em}
+  .mm-bad .mm-title{color:rgba(238,241,246,.6)}
+  .mm-good .mm-title{color:var(--ink)}
+  .mm-card p{font-size:15px;line-height:1.65;color:var(--ink-soft);margin:0}
+  .mm-bridge{margin-top:36px;font-size:16px;color:var(--ink-faint)}
+  .mm-bridge b{color:var(--ink-soft)}
+  @media(max-width:620px){.mm-split{grid-template-columns:1fr}}
+
   .scene.lad .kick b{color:var(--lad)}
   .lad-word{font-family:var(--serif);font-weight:600;letter-spacing:-.04em;line-height:.95;font-size:clamp(4rem,13.5vw,11.5rem);background:linear-gradient(100deg,var(--lad),color-mix(in srgb,var(--lad) 45%,#fff));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 34px color-mix(in srgb,var(--lad) 38%,transparent))}
   .lad-def{margin:20px auto 0;max-width:620px;color:var(--ink);font-size:clamp(17px,2vw,21px);line-height:1.55;font-weight:500}
@@ -350,6 +366,28 @@
         <div class="kick">act 1 · <b>the hook</b></div>
         <h1 class="stitle"><span class="acc">Stop <i>renting</i> your effort.</span><br>Start compounding it.</h1>
         <p class="sbody">The status update, the reformatted report, the email about the meeting: effort you re-spend every week and keep nothing from. <b>Rented effort evaporates. Configured effort compounds.</b> Do the work once, teach it, and it keeps paying every week after. This session is about making the switch.</p>
+      </div>
+    </section>
+
+    <!-- MENTAL MODEL : sous-chef two-panel -->
+    <section class="scene" id="mental-model">
+      <div class="inner">
+        <div class="kick">act 1 · <b>the mental model</b></div>
+        <h1 class="stitle">A sous-chef who <span class="acc">knows your kitchen.</span></h1>
+        <p class="sbody" style="margin-bottom:40px">The fastest way to explain the whole thing to anyone. Thirty seconds.</p>
+        <div class="mm-split">
+          <div class="mm-card mm-bad">
+            <div class="mm-role">Every other AI tool</div>
+            <div class="mm-title">The visiting chef</div>
+            <p>Walks into a kitchen they have never seen, answers one question, and leaves. Tomorrow you start over from zero. A blank slate, every single conversation.</p>
+          </div>
+          <div class="mm-card mm-good">
+            <div class="mm-role">Claude Code</div>
+            <div class="mm-title">Your sous-chef</div>
+            <p>Remembers the pantry. Knows last week's rule. Knows which knife is sharp. Shows up in your folder every day and gets faster each week, because the kitchen is always the same.</p>
+          </div>
+        </div>
+        <p class="mm-bridge">The ladder below is just names for <b>how deep the kitchen goes.</b></p>
       </div>
     </section>
 
@@ -1196,9 +1234,9 @@ var ladderActive=false,ladderT=0,ACT1_SCENES=document.querySelectorAll('#act1 .s
 function act1Update(p){
   hookP=p;
   ladderActive=p>0.001&&p<0.999;
-  /* scenes: hook, 5 rungs, transition; map progress to a 0..4 rung float */
+  /* scenes: hook, mental-model, 5 rungs, transition; offset by 2 to reach rung 1 */
   var sceneFloat=p*(ACT1_SCENES-1);
-  ladderT=Math.max(0,Math.min(4,sceneFloat-1));
+  ladderT=Math.max(0,Math.min(4,sceneFloat-2));
 }
 
 /* act 3: the gap graph draws during scene 1 */

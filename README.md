@@ -12,7 +12,6 @@ A short, guided set on what Claude is, how to set it up, and how to build with i
 |------|------------|------|
 | 🏠 Hub (start here) | The card index — pick your path | https://loganmatson.github.io/field-guide/home.html |
 | 🎬 Session 1 | 30-min live talk + first skill exercise | https://loganmatson.github.io/field-guide/session.html |
-| 01 · Why Claude | The case for configuring once and reusing | https://loganmatson.github.io/field-guide/index.html |
 | 02 · Find Your Setup | A 60-second quiz that routes you to the right guide | https://loganmatson.github.io/field-guide/quiz.html |
 | → Set Up CoWork | Interactive team-admin setup (7 phases, tips, FAQ, checklist) | https://loganmatson.github.io/field-guide/cowork.html |
 | → Set Up Claude Code | Interactive developer setup (CLI, VS Code, GitHub, team) | https://loganmatson.github.io/field-guide/claude-code.html |
@@ -24,7 +23,7 @@ A short, guided set on what Claude is, how to set it up, and how to build with i
 
 [session.html](https://loganmatson.github.io/field-guide/session.html) is a cinematic, presentation-grade page built to drive a 30–35 minute live session:
 
-- **Act 1** — Concept ladder: Workflows → Skills → Agents → Pipelines → Empire, one pinned frame per rung
+- **Act 1** — 30-second mental model (sous-chef two-panel), then concept ladder: Workflows → Skills → Agents → Pipelines → Empire, one pinned frame per rung
 - **Act 2** — Three proofs: the health pipeline maze (animated SVG), the writing skill before/after, and the agent run log
 - **Act 3** — Why it matters, the widening gap, two paths (CoWork / Claude Code)
 - **The exercise** — introduces `skill-creator` with a robot analogy (if you were building 1,000 robots, the first you'd build is the one that builds robots), then walks through a two-part exercise: watch it explain itself, then use it to commission your first real skill saved to `~/.claude/skills/`
@@ -49,7 +48,6 @@ Both setup guides are fully interactive: collapsible sections, copy-to-clipboard
 ```
 home.html          Hub — card index, links out to loganmatson.com
 session.html       Session 1 — cinematic 30-min talk + skill exercise
-index.html         Part 01 — Why Claude
 quiz.html          Part 02 — Find Your Setup (scored router)
 cowork.html        Setup guide — teams (CoWork admin)
 claude-code.html   Setup guide — developers (Claude Code)
@@ -62,6 +60,7 @@ Pure static HTML + vanilla JS — no build step, no dependencies. Every page car
 
 ## Changelog
 
+- **2026-06-12** — Added 30-second mental model scene (sous-chef two-panel) to `session.html` between hook and concept ladder. Removed `index.html` (Why Claude) from the live site; stored locally. Added `skill-creator` robot analogy section above the exercise.
 - **2026-06-12** — Added `skill-creator` robot analogy section to `session.html`: if you were building 1,000 robots and each did one thing well, the first you'd build is the one that builds robots. Tightened CoWork exercise step to save skills to `~/.claude/skills/` globally rather than paste into project instructions.
 - **2026-06-11** — Headers locked, proof order swapped (maze → writing → run log), stats row added, exercise rebuilt as instructive two-parter, two-paths visual added.
 - **2026-06-10** — New `session.html`: cinematic Session 1 page with Three.js background, concept ladder, three proof sections, skeptic scoreboard, and timed exercise. Repositioned `business.html` as Session 2. Journey-reordered `home.html`. Full de-brand sweep.
