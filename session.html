@@ -97,21 +97,44 @@
   .caption{margin-top:48px;text-align:center;position:relative;z-index:2}
   .caption .cap-line{display:inline-block;font-family:var(--serif);font-weight:600;font-size:clamp(1.25rem,2.4vw,1.8rem);letter-spacing:-.01em;color:var(--ink);border-top:1px solid var(--hair);padding-top:22px}
   .caption .cap-line .acc{color:var(--cyan)}
+  .proof-segue{margin-top:22px;text-align:center;position:relative;z-index:2;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink-faint)}
 
-  /* ===== Proof 1: big-symbol maze ===== */
-  .maze-flow{position:relative;max-width:980px;margin:0 auto;padding:0 16px}
+  /* ===== Proof 1: research tree ===== */
+  .maze-flow{position:relative;max-width:1040px;margin:0 auto;padding:0 16px}
   .maze-flow svg{width:100%;height:auto;display:block}
-  .mz-path{fill:none;stroke:var(--cyan);stroke-width:3.5;stroke-linecap:round;filter:drop-shadow(0 0 8px rgba(54,224,200,.55))}
-  .mz-track{fill:none;stroke:rgba(238,241,246,.07);stroke-width:3.5;stroke-linecap:round}
-  .mz-node{opacity:0;transform:translateY(14px) scale(.92);transform-origin:center;transform-box:fill-box;transition:opacity .5s ease,transform .5s ease}
+  /* connector lines: cyan main, amber rerun */
+  .rc-line{fill:none;stroke:rgba(54,224,200,.18);stroke-width:2.5;stroke-linecap:round}
+  .rc-line.live{stroke:var(--cyan);filter:drop-shadow(0 0 6px rgba(54,224,200,.5))}
+  /* amber dashed up-arc from Risk Scout to Technical */
+  .rc-line.rerun-track{fill:none;stroke:rgba(255,180,60,.12);stroke-width:2;stroke-linecap:round;stroke-dasharray:6 5}
+  .rc-line.rerun-live{stroke:#FFB43C;filter:drop-shadow(0 0 6px rgba(255,180,60,.55));stroke-dasharray:6 5}
+  /* nodes */
+  .mz-node{opacity:0;transition:opacity .45s ease,transform .45s ease;transform:translateY(10px) scale(.93);transform-origin:center;transform-box:fill-box}
   .mz-node.on{opacity:1;transform:translateY(0) scale(1)}
-  .mz-node circle.core{fill:#0C0E13;stroke:var(--hair-2);stroke-width:1.6}
+  .mz-node circle.core{fill:#0C0E13;stroke:rgba(238,241,246,.12);stroke-width:1.6;transition:stroke .4s ease,filter .4s ease}
   .mz-node.on circle.core{stroke:var(--cyan)}
-  .mz-emoji{font-size:44px}
-  .mz-name{font-family:var(--sans);font-weight:700;font-size:26px;fill:var(--ink)}
-  .mz-role{font-family:var(--sans);font-weight:500;font-size:16.5px;fill:var(--ink-soft)}
-  .mz-file{font-family:var(--mono);font-size:13px;fill:var(--cyan);opacity:.85}
-  .mz-band{font-family:var(--mono);font-size:13px;letter-spacing:.26em;fill:var(--ink-faint)}
+  .mz-node.rerun circle.core{stroke:#FFB43C!important;filter:drop-shadow(0 0 10px rgba(255,180,60,.5))}
+  .mz-emoji{font-size:38px}
+  .mz-name{font-family:var(--sans);font-weight:700;font-size:22px;fill:var(--ink)}
+  .mz-role{font-family:var(--sans);font-weight:500;font-size:14px;fill:var(--ink-soft)}
+  /* speech bubbles: hidden by default, spotlight crossfade driven by JS */
+  .mz-say{font-family:var(--mono);font-size:14px;fill:rgba(54,224,200,.92);font-style:italic;opacity:0;transition:opacity .3s ease}
+  .mz-say.say-on{opacity:1}
+  .mz-file{font-family:var(--mono);font-size:11px;fill:var(--cyan);opacity:.8}
+  .mz-band{font-family:var(--mono);font-size:11px;letter-spacing:.22em;fill:var(--ink-faint)}
+  .mz-warn{font-family:var(--mono);font-size:11px;fill:#FFB43C;opacity:0;transition:opacity .5s}
+  .mz-warn.on{opacity:1}
+  /* file labels hidden until their phase fires */
+  text.mz-file[id]{opacity:0;transition:opacity .4s}
+  /* RE-RUN amber pill on Technical */
+  .mz-badge{font-family:var(--mono);font-size:10px;letter-spacing:.08em;fill:#08090C;font-weight:700}
+  #rcRerunBadge{opacity:0;transition:opacity .35s ease}
+  #rcRerunBadge.on{opacity:1}
+  /* Synthesizer Excel tracker tab */
+  #rcExcelTab{opacity:0;transition:opacity .4s ease}
+  #rcExcelTab.on{opacity:1}
+  .mz-xl-h{font-family:var(--mono);font-size:14px;font-weight:700;fill:#2BD48F}
+  .mz-xl-b{font-family:var(--mono);font-size:12px;fill:rgba(43,212,143,.78)}
   .maze-stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px;position:relative;z-index:2}
   .stat-chip{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--cyan);background:rgba(54,224,200,.07);border:1px solid rgba(54,224,200,.3);border-radius:9px;padding:8px 14px}
   .maze-ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:2}
@@ -490,108 +513,176 @@
 
 <!-- ================= ACT 2 : proofs ================= -->
 
-<!-- Proof 1: health pipeline maze -->
+<!-- Proof 1: 8-agent research pipeline -->
 <section class="proof" id="proof1">
   <div class="phead">
     <div class="kick" data-drift>act 2 · <b>proof 1 of 3</b></div>
-    <h2 class="stitle" data-drift><span class="acc">One command</span> runs an entire pipeline.</h2>
-    <p class="sbody" data-drift>Every month a wearable spits out a raw CSV of my health data. One command dispatches <b>seven subagents</b>: a cleaner, four analysts running in parallel, a merge, and a report builder. Scroll, and watch the path.</p>
+    <h2 class="stitle" data-drift>One question. <span class="acc">Eight agents.</span></h2>
+    <p class="sbody" data-drift>Type a research question. An orchestrator fans out to four specialists in parallel. A risk scout reads what came back and catches a gap, so it re-fires only the one agent that needs to go deeper. A synthesizer merges the corrected briefs. Then a writer turns the output into a brief in your voice, using your writing skill. Scroll through the path.</p>
   </div>
 
   <div class="maze-flow" id="mazeFlow">
-    <svg viewBox="0 0 900 1450" preserveAspectRatio="xMidYMid meet" aria-label="Whoop pipeline: cleaner, four parallel analysts, merge, outputs, shared memory">
-      <path id="mzTrack" class="mz-track" d="M120 84 Q300 60 450 170 Q480 320 240 440 H660 Q700 560 660 680 H240 Q210 800 450 900 Q500 1010 240 1130 H660 Q700 1240 450 1320"/>
-      <path id="mzPath" class="mz-path" d="M120 84 Q300 60 450 170 Q480 320 240 440 H660 Q700 560 660 680 H240 Q210 800 450 900 Q500 1010 240 1130 H660 Q700 1240 450 1320"/>
+    <!--
+      Layout (viewBox 0 0 1000 1440):
+      Row 1  y=90    Orchestrator                  cx=500
+      Row 2  y=293   4 researchers (no Fact-Check) cx=120,360,640,880
+      Row 3  y=560   Risk Scout  (amber up-arc to Technical, pinned rerun)
+      Row 4  y=790   Synthesizer                   cx=500
+      Row 5  y=1060  Writer  (WRITER · USES /WRITING SKILL band)
+      Row 6  y=1300  topic.md + Memory             cx=300, cx=700
+    -->
+    <svg id="rcSvg" viewBox="0 0 1000 1440" preserveAspectRatio="xMidYMid meet"
+         aria-label="8-agent research pipeline: orchestrator fans to 4 researchers, a risk scout re-fires the Technical agent, a synthesizer merges the briefs, a writer uses the writing skill, brief and memory out">
 
-      <text class="mz-band" x="450" y="320" text-anchor="middle">FOUR ANALYSTS · RUN IN PARALLEL</text>
+      <!-- ======= CONNECTOR LINES (drawn in order by JS) ======= -->
+      <!-- Phase A: orch → 4 researchers (one query.json label per line) -->
+      <line id="rc0" class="rc-line" x1="500" y1="138" x2="120" y2="251"/>
+      <line id="rc1" class="rc-line" x1="500" y1="138" x2="360" y2="251"/>
+      <line id="rc2" class="rc-line" x1="500" y1="138" x2="640" y2="251"/>
+      <line id="rc3" class="rc-line" x1="500" y1="138" x2="880" y2="251"/>
+      <text class="mz-file" x="290" y="200" text-anchor="middle" id="rcLbl0">query.json</text>
+      <text class="mz-file" x="395" y="200" text-anchor="middle" id="rcLbl1">query.json</text>
+      <text class="mz-file" x="610" y="200" text-anchor="middle" id="rcLbl2">query.json</text>
+      <text class="mz-file" x="715" y="200" text-anchor="middle" id="rcLbl3">query.json</text>
 
-      <!-- start file -->
-      <g class="mz-node" data-cx="120" data-cy="84">
-        <text class="mz-emoji" x="120" y="100" text-anchor="middle">📁</text>
-        <text class="mz-file" x="120" y="140" text-anchor="middle">physiological_cycles.csv</text>
-        <text class="mz-role" x="120" y="166" text-anchor="middle">raw export, in</text>
-      </g>
+      <!-- Phase E: 4 researchers → Risk Scout (draw down as you scroll into the pin) -->
+      <line id="rc5" class="rc-line" x1="120" y1="335" x2="468" y2="516"/>
+      <line id="rc6" class="rc-line" x1="360" y1="335" x2="486" y2="516"/>
+      <line id="rc7" class="rc-line" x1="640" y1="335" x2="514" y2="516"/>
+      <line id="rc8" class="rc-line" x1="880" y1="335" x2="532" y2="516"/>
+      <text class="mz-file" x="640" y="430" text-anchor="middle" id="rcLbl4">*-brief.json ×4</text>
 
-      <!-- cleaner -->
-      <g class="mz-node" data-cx="450" data-cy="170">
-        <circle class="core" cx="450" cy="170" r="52"/>
-        <text class="mz-emoji" x="450" y="186" text-anchor="middle">🧼</text>
-        <text class="mz-name" x="450" y="252" text-anchor="middle">Data Cleaner</text>
-        <text class="mz-role" x="450" y="278" text-anchor="middle">normalizes the raw export</text>
-        <text class="mz-file" x="660" y="130" text-anchor="middle">→ whoop-clean.csv</text>
-      </g>
+      <!-- amber dashed up-arc: Risk Scout top → Technical bottom, bowing right -->
+      <path id="rcArc" class="rc-line rerun-track" d="M 500 512 C 580 440 610 380 640 337"/>
 
-      <!-- four analysts -->
-      <g class="mz-node" data-cx="240" data-cy="440">
-        <circle class="core" cx="240" cy="440" r="52"/>
-        <text class="mz-emoji" x="240" y="456" text-anchor="middle">📊</text>
-        <text class="mz-name" x="240" y="522" text-anchor="middle">Stats</text>
-        <text class="mz-role" x="240" y="548" text-anchor="middle">baselines every metric</text>
-      </g>
-      <g class="mz-node" data-cx="660" data-cy="440">
-        <circle class="core" cx="660" cy="440" r="52"/>
-        <text class="mz-emoji" x="660" y="456" text-anchor="middle">📈</text>
-        <text class="mz-name" x="660" y="522" text-anchor="middle">Regression</text>
-        <text class="mz-role" x="660" y="548" text-anchor="middle">finds what predicts recovery</text>
-      </g>
-      <g class="mz-node" data-cx="660" data-cy="680">
-        <circle class="core" cx="660" cy="680" r="52"/>
-        <text class="mz-emoji" x="660" y="696" text-anchor="middle">📓</text>
-        <text class="mz-name" x="660" y="762" text-anchor="middle">Journal</text>
-        <text class="mz-role" x="660" y="788" text-anchor="middle">reads the daily notes</text>
-      </g>
-      <g class="mz-node" data-cx="240" data-cy="680">
-        <circle class="core" cx="240" cy="680" r="52"/>
-        <text class="mz-emoji" x="240" y="696" text-anchor="middle">⚖️</text>
-        <text class="mz-name" x="240" y="762" text-anchor="middle">Dose-Response</text>
-        <text class="mz-role" x="240" y="788" text-anchor="middle">how much strain is too much</text>
-      </g>
+      <!-- Phase F: Risk Scout → Synthesizer (after rerun resolves) -->
+      <line id="rc9" class="rc-line" x1="500" y1="608" x2="500" y2="742"/>
+      <text class="mz-file" x="592" y="688" id="rcLbl8">checked-briefs.json</text>
 
-      <!-- merge -->
-      <g class="mz-node" data-cx="450" data-cy="900">
-        <circle class="core" cx="450" cy="900" r="52"/>
-        <text class="mz-emoji" x="450" y="916" text-anchor="middle">🔗</text>
-        <text class="mz-name" x="450" y="982" text-anchor="middle">Merge</text>
-        <text class="mz-role" x="450" y="1008" text-anchor="middle">one picture from four analysts</text>
-      </g>
+      <!-- Phase G: synth → writer -->
+      <line id="rc10" class="rc-line" x1="500" y1="838" x2="500" y2="982"/>
+      <text class="mz-file" x="592" y="912" id="rcLbl5">synthesis.json</text>
 
-      <!-- outputs -->
-      <g class="mz-node" data-cx="240" data-cy="1130">
-        <circle class="core" cx="240" cy="1130" r="52"/>
-        <text class="mz-emoji" x="240" y="1146" text-anchor="middle">📄</text>
-        <text class="mz-name" x="240" y="1212" text-anchor="middle">The Brief</text>
-        <text class="mz-role" x="240" y="1238" text-anchor="middle">13-page PDF</text>
-      </g>
-      <g class="mz-node" data-cx="660" data-cy="1130">
-        <circle class="core" cx="660" cy="1130" r="52"/>
-        <text class="mz-emoji" x="660" y="1146" text-anchor="middle">🖥️</text>
-        <text class="mz-name" x="660" y="1212" text-anchor="middle">The Scorecard</text>
-        <text class="mz-role" x="660" y="1238" text-anchor="middle">interactive HTML</text>
+      <!-- Phase I: writer → outputs -->
+      <line id="rc14" class="rc-line" x1="500" y1="1108" x2="300" y2="1252"/>
+      <line id="rc15" class="rc-line" x1="500" y1="1108" x2="700" y2="1252"/>
+      <text class="mz-file" x="330" y="1190" text-anchor="middle" id="rcLbl6">topic.md</text>
+      <text class="mz-file" x="720" y="1190" text-anchor="middle" id="rcLbl7">memory updated</text>
+
+      <!-- ======= BAND LABELS ======= -->
+      <text class="mz-band" x="500" y="232" text-anchor="middle">4 RESEARCHERS · RUN IN PARALLEL</text>
+      <text class="mz-band" x="500" y="996" text-anchor="middle">WRITER · USES /WRITING SKILL</text>
+
+      <!-- ======= NODES ======= -->
+
+      <!-- N0: Orchestrator -->
+      <g class="mz-node" id="rcN0">
+        <circle class="core" cx="500" cy="90" r="48"/>
+        <text class="mz-emoji" x="500" y="106" text-anchor="middle">🧭</text>
+        <text class="mz-name" x="500" y="162" text-anchor="middle">Orchestrator</text>
+        <text class="mz-role" x="500" y="184" text-anchor="middle">routes the question</text>
+        <text class="mz-say"  x="572" y="96" text-anchor="start">"Dispatching 4 researchers."</text>
       </g>
 
-      <!-- shared memory -->
-      <g class="mz-node" data-cx="450" data-cy="1320">
-        <circle class="core" cx="450" cy="1320" r="52"/>
-        <text class="mz-emoji" x="450" y="1336" text-anchor="middle">🧠</text>
-        <text class="mz-name" x="450" y="1402" text-anchor="middle">Shared Memory</text>
-        <text class="mz-role" x="450" y="1428" text-anchor="middle">this month's baselines saved · next run starts smarter</text>
+      <!-- N1-N4: 4 parallel researchers (News, Academic, Technical, Market) -->
+      <g class="mz-node" id="rcN1">
+        <circle class="core" cx="120" cy="293" r="42"/>
+        <text class="mz-emoji" x="120" y="307" text-anchor="middle">📰</text>
+        <text class="mz-name" x="120" y="360" text-anchor="middle">News</text>
+        <text class="mz-role" x="120" y="379" text-anchor="middle">live web</text>
+        <text class="mz-say"  x="120" y="401" text-anchor="middle">"14 stories · 3 flagged high signal"</text>
       </g>
+      <g class="mz-node" id="rcN2">
+        <circle class="core" cx="360" cy="293" r="42"/>
+        <text class="mz-emoji" x="360" y="307" text-anchor="middle">🎓</text>
+        <text class="mz-name" x="360" y="360" text-anchor="middle">Academic</text>
+        <text class="mz-role" x="360" y="379" text-anchor="middle">peer-reviewed</text>
+        <text class="mz-say"  x="360" y="401" text-anchor="middle">"3 papers · 1 directly relevant"</text>
+      </g>
+      <g class="mz-node" id="rcN3">
+        <circle class="core" cx="640" cy="293" r="42"/>
+        <text class="mz-emoji" x="640" y="307" text-anchor="middle">⚙️</text>
+        <text class="mz-name" x="640" y="360" text-anchor="middle">Technical</text>
+        <text class="mz-role" x="640" y="379" text-anchor="middle">implementation</text>
+        <text class="mz-say"  x="640" y="401" text-anchor="middle">"3 gaps · no production examples found"</text>
+        <!-- amber RE-RUN pill, revealed during the pinned rerun beat -->
+        <g id="rcRerunBadge">
+          <rect x="580" y="247" width="120" height="22" rx="6" fill="#FFB43C"/>
+          <text class="mz-badge" x="640" y="262" text-anchor="middle">RE-RUN</text>
+        </g>
+        <!-- updated bubble shown after rerun resolves (JS swaps which is visible) -->
+        <text class="mz-say" id="rcSayTechFix" x="640" y="419" text-anchor="middle">"Gap resolved. 2 prod references found."</text>
+      </g>
+      <g class="mz-node" id="rcN4">
+        <circle class="core" cx="880" cy="293" r="42"/>
+        <text class="mz-emoji" x="880" y="307" text-anchor="middle">📣</text>
+        <text class="mz-name" x="880" y="360" text-anchor="middle">Market</text>
+        <text class="mz-role" x="880" y="379" text-anchor="middle">signals</text>
+        <text class="mz-say"  x="880" y="401" text-anchor="middle">"Funding Q1 2026 · 3 press hits this week"</text>
+      </g>
+
+      <!-- N7: Risk Scout (reads the briefs, fires the rerun) -->
+      <g class="mz-node" id="rcN7">
+        <circle class="core" cx="500" cy="560" r="48"/>
+        <text class="mz-emoji" x="500" y="576" text-anchor="middle">⚠️</text>
+        <text class="mz-name" x="500" y="632" text-anchor="middle">Risk Scout</text>
+        <text class="mz-role" x="500" y="654" text-anchor="middle">gap analysis</text>
+        <text class="mz-say"  x="572" y="566" text-anchor="start">"Technical brief: 1 gap needs re-check."</text>
+      </g>
+
+      <!-- N6: Synthesizer -->
+      <g class="mz-node" id="rcN6">
+        <circle class="core" cx="500" cy="790" r="48"/>
+        <text class="mz-emoji" x="500" y="806" text-anchor="middle">🔗</text>
+        <text class="mz-name" x="500" y="862" text-anchor="middle">Synthesizer</text>
+        <text class="mz-role" x="500" y="884" text-anchor="middle">merges 4 briefs</text>
+        <text class="mz-say"  x="572" y="796" text-anchor="start">"1 conflict flagged · confidence: high"</text>
+        <!-- Excel tracker tab: synthesizer logs the numbers it finds into a sheet -->
+        <g id="rcExcelTab">
+          <rect x="150" y="752" width="196" height="76" rx="10" fill="rgba(43,212,143,.07)" stroke="rgba(43,212,143,.45)" stroke-width="1.4"/>
+          <text class="mz-xl-h" x="168" y="778" text-anchor="start">📊 tracker.xlsx</text>
+          <text class="mz-xl-b" x="168" y="798" text-anchor="start">funding · counts · dates</text>
+          <text class="mz-xl-b" x="168" y="815" text-anchor="start">logged to the sheet, cell by cell</text>
+        </g>
+      </g>
+
+      <!-- N8: Writer -->
+      <g class="mz-node" id="rcN8">
+        <circle class="core" cx="500" cy="1060" r="48"/>
+        <text class="mz-emoji" x="500" y="1076" text-anchor="middle">✍️</text>
+        <text class="mz-name" x="500" y="1132" text-anchor="middle">Writer</text>
+        <text class="mz-role" x="500" y="1154" text-anchor="middle">formats the brief</text>
+        <text class="mz-say"  x="572" y="1066" text-anchor="start">"Using /writing skill · your voice · your structure."</text>
+      </g>
+
+      <!-- N9: topic.md output -->
+      <g class="mz-node" id="rcN9">
+        <circle class="core" cx="300" cy="1300" r="42"/>
+        <text class="mz-emoji" x="300" y="1316" text-anchor="middle">📋</text>
+        <text class="mz-name" x="300" y="1368" text-anchor="middle">topic.md</text>
+        <text class="mz-role" x="300" y="1387" text-anchor="middle">research brief · yours</text>
+      </g>
+
+      <!-- N10: memory -->
+      <g class="mz-node" id="rcN10">
+        <circle class="core" cx="700" cy="1300" r="42"/>
+        <text class="mz-emoji" x="700" y="1316" text-anchor="middle">🧠</text>
+        <text class="mz-name" x="700" y="1368" text-anchor="middle">Memory</text>
+        <text class="mz-role" x="700" y="1387" text-anchor="middle">sources saved · next run smarter</text>
+      </g>
+
     </svg>
-
-    <div class="maze-stats" data-drift>
-      <span class="stat-chip">7 subagents</span>
-      <span class="stat-chip">4 run in parallel</span>
-      <span class="stat-chip">17 baselines written to memory</span>
-      <span class="stat-chip">1 command typed</span>
-    </div>
-
-    <div class="maze-ctas" id="mazeCtas" data-drift>
-      <a class="btn btn-pri" href="whoop-report-jun-26.html" target="_blank" rel="noopener">See the actual scorecard →</a>
-      <a class="btn btn-ghost" href="https://loganmatson.github.io/health-agent-ecosystem" target="_blank" rel="noopener">See the ecosystem →</a>
-    </div>
   </div>
 
-  <div class="caption" data-drift><span class="cap-line">This runs once a month. <span class="acc">I type one command.</span></span></div>
+  <div class="maze-stats" data-drift>
+    <span class="stat-chip">8 agents</span>
+    <span class="stat-chip">From Hours to Minutes</span>
+    <span class="stat-chip">1 targeted re-run</span>
+    <span class="stat-chip">1 command typed</span>
+  </div>
+
+  <div class="caption" data-drift><span class="cap-line">The model knows which agent got it wrong. <span class="acc">Only that one re-runs.</span></span></div>
+  <p class="proof-segue" data-drift>The writing skill is the next proof.</p>
 </section>
 
 <!-- Proof 2: the writing assembly line -->
@@ -1260,37 +1351,165 @@ function buildDrift(){
   });
 }
 
-/* ================= Proof 1: big maze ================= */
+/* ================= Proof 1: 8-agent research tree ================= */
 function buildMaze(){
-  var path=el('mzPath');
-  var nodes=document.querySelectorAll('.mz-node');
-  var len=path.getTotalLength();
-  path.style.strokeDasharray=len;
-  path.style.strokeDashoffset=len;
+  /* One pinned, scroll-scrubbed timeline for all of Proof 1.
+     The whole pipeline (orchestrator, researchers, the Risk Scout rerun, the
+     synthesizer, writer, outputs) maps to a single 0..1 progress so nothing
+     depends on the pin spacer shifting a second trigger's start/end.
+     Connector dasharrays are scrubbed; nodes toggle .on; bubbles spotlight-crossfade. */
 
-  /* find each node's fraction along the path by nearest sample */
-  var SAMPLES=240,pts=[];
-  for(var s=0;s<=SAMPLES;s++){pts.push(path.getPointAtLength(len*s/SAMPLES));}
-  nodes.forEach(function(n){
-    var cx=parseFloat(n.getAttribute('data-cx')),cy=parseFloat(n.getAttribute('data-cy'));
-    var best=0,bd=1e12;
-    for(var s2=0;s2<=SAMPLES;s2++){
-      var dx=pts[s2].x-cx,dy=pts[s2].y-cy,d=dx*dx+dy*dy;
-      if(d<bd){bd=d;best=s2;}
-    }
-    n.dataset.at=(best/SAMPLES).toFixed(3);
+  /* helpers ---------------------------------------------------------------- */
+  function lineLen(l){return l.__len||(l.__len=l.getTotalLength());}
+  function drawLine(id,on,amber){
+    var l=el(id);if(!l)return;
+    if(on){l.style.strokeDashoffset='0';l.classList.add(amber?'rerun-live':'live');}
+    else{l.style.strokeDashoffset=lineLen(l);l.classList.remove('live','rerun-live');}
+  }
+  function showNode(id,on){var n=el(id);if(n)n.classList.toggle('on',on);}
+  function showFile(id,on){var t=el(id);if(t)t.style.opacity=on?'0.8':'0';}
+  /* spotlight: the named bubble is the only researcher bubble lit */
+  var RESEARCH_SAY={rcN1:0,rcN2:0,rcN3:0,rcN4:0};
+  function bubble(nodeId,on){
+    var n=el(nodeId);if(!n)return;
+    var say=n.querySelector('.mz-say');if(say)say.classList.toggle('say-on',on);
+  }
+
+  /* prep all connector lines: measure, dash, hide */
+  document.querySelectorAll('#rcSvg line.rc-line, #rcSvg path.rc-line').forEach(function(l){
+    var len=l.getTotalLength();l.__len=len;
+    l.style.strokeDasharray=len;l.style.strokeDashoffset=len;
   });
 
-  function setProgress(p){
-    path.style.strokeDashoffset=len*(1-p);
-    nodes.forEach(function(n){n.classList.toggle('on',p>=parseFloat(n.dataset.at)-0.01);});
-    mazePull=p>0&&p<1?1:0;
+  /* partial line draw: 0..1 fraction of a connector, synced to scroll */
+  function drawLineP(id,frac,amber){
+    var l=el(id);if(!l)return;
+    frac=Math.max(0,Math.min(1,frac));
+    var len=lineLen(l);
+    l.style.strokeDashoffset=len*(1-frac);
+    l.classList.toggle(amber?'rerun-live':'live', frac>0.02);
   }
-  if(!cinematic){setProgress(1);return;}
+  /* map a global progress p across [a,b] into a local 0..1 */
+  function seg(p,a,b){return Math.max(0,Math.min(1,(p-a)/(b-a)));}
+
+  /* ---- final / non-cinematic state (everything visible) ------------------ */
+  function showAll(){
+    ['rc0','rc1','rc2','rc3','rc5','rc6','rc7','rc8','rc9','rc10','rc14','rc15'].forEach(function(id){drawLine(id,true,false);});
+    ['rcN0','rcN1','rcN2','rcN3','rcN4','rcN7','rcN6','rcN8','rcN9','rcN10'].forEach(function(id){showNode(id,true);});
+    ['rcLbl0','rcLbl1','rcLbl2','rcLbl3','rcLbl4','rcLbl5','rcLbl6','rcLbl7','rcLbl8'].forEach(function(id){showFile(id,true);});
+    ['rcN0','rcN1','rcN2','rcN3','rcN4','rcN7','rcN6','rcN8'].forEach(function(id){bubble(id,true);});
+    /* rerun resolved: show the fixed bubble, hide the original Technical bubble */
+    var origSay=el('rcN3').querySelector('.mz-say');if(origSay)origSay.classList.remove('say-on');
+    el('rcSayTechFix').classList.add('say-on');
+    el('rcRerunBadge').classList.remove('on');
+    el('rcN3').classList.remove('rerun');
+    el('rcExcelTab').classList.add('on');
+  }
+  if(!cinematic){showAll();return;}
+
+  /* ====================================================================== */
+  /* ONE continuous pinned timeline drives the whole pipeline.              */
+  /* Mapping all phases to a single 0..1 progress avoids the pin-spacer     */
+  /* distorting any second trigger's start/end, so nothing fires late.     */
+  /*                                                                        */
+  /*  .00-.30  Orchestrator → 4 researchers reveal one by one              */
+  /*  .30-.42  4 collect lines draw DOWN into Risk Scout + Risk Scout in   */
+  /*  .42-.50  Risk Scout bubble: "1 gap needs re-check"                   */
+  /*  .50-.62  amber arc draws UP to Technical                             */
+  /*  .62-.74  Technical RE-RUN: amber border + badge + bubble swap        */
+  /*  .74-.80  arc fades, Technical clears back to cyan                    */
+  /*  .80-.86  Risk Scout → Synthesizer line + Synthesizer in             */
+  /*  .86-.92  Synth → Writer line + Writer in                            */
+  /*  .92-1.0  Writer → outputs + topic.md + Memory                       */
+
+  var arc=el('rcArc'), arcLen=arc.getTotalLength();
+
+  /* researcher reveal steps (line fully drawn, node + spotlight bubble) */
+  var RES=[
+    {at:0.04, line:'rc0', node:'rcN1', file:'rcLbl0'},
+    {at:0.10, line:'rc1', node:'rcN2', file:'rcLbl1'},
+    {at:0.16, line:'rc2', node:'rcN3', file:'rcLbl2'},
+    {at:0.22, line:'rc3', node:'rcN4', file:'rcLbl3'}
+  ];
+  var COLLECT=['rc5','rc6','rc7','rc8'];
+
+  function setProgress(p){
+    mazePull=p>0&&p<1?1:0;
+
+    /* --- Orchestrator (always first) --- */
+    showNode('rcN0', true);
+
+    /* --- 4 researchers, fan lines + spotlight bubbles (.00-.28) --- */
+    var litRes=-1;
+    RES.forEach(function(r,i){
+      var on=p>=r.at;
+      drawLine(r.line,on,false);
+      showFile(r.file,on);
+      showNode(r.node,on);
+      if(on)litRes=i;
+    });
+    /* orchestrator bubble lit until first researcher lands; then spotlight moves */
+    bubble('rcN0', p>=0.0 && litRes<0);
+    RES.forEach(function(r,i){bubble(r.node, p>=r.at && i===litRes && p<0.28);});
+
+    /* --- collect lines draw down into Risk Scout (.28-.38) --- */
+    var cf=seg(p,0.28,0.38);
+    COLLECT.forEach(function(id){drawLineP(id,cf,false);});
+    showFile('rcLbl4', cf>0.05);
+    /* Risk Scout fades in as the briefs arrive */
+    showNode('rcN7', p>=0.34);
+
+    /* --- Risk Scout bubble (.38-.46) --- */
+    bubble('rcN7', p>=0.40 && p<0.56);
+
+    /* --- amber arc draws up to Technical (.46-.55) --- */
+    var af=seg(p,0.46,0.55);
+    arc.style.strokeDashoffset=arcLen*(1-af);
+    arc.classList.toggle('rerun-live', af>0.02 && p<0.68);
+
+    /* --- Technical rerun: badge + amber border + bubble swap (.55-.64) --- */
+    var rerunActive=p>=0.55 && p<0.66;
+    el('rcN3').classList.toggle('rerun', rerunActive);
+    el('rcRerunBadge').classList.toggle('on', p>=0.55 && p<0.68);
+    /* original Technical bubble is owned by the RES spotlight loop above;
+       the fixed "Gap resolved" bubble lights once the rerun resolves */
+    el('rcSayTechFix').classList.toggle('say-on', p>=0.58 && p<0.74);
+
+    /* --- arc fades, Technical clears to cyan (.64-.68) --- */
+    if(p>=0.68){arc.classList.remove('rerun-live');el('rcN3').classList.remove('rerun');el('rcRerunBadge').classList.remove('on');}
+
+    /* --- Risk Scout → Synthesizer (.68-.78) --- */
+    drawLineP('rc9', seg(p,0.66,0.76), false);
+    showFile('rcLbl8', p>=0.70);
+    showNode('rcN6', p>=0.72);
+    bubble('rcN6', p>=0.73);
+    /* Excel tracker tab fades in just after the synthesizer lands */
+    el('rcExcelTab').classList.toggle('on', p>=0.74);
+
+    /* --- Synthesizer → Writer (.78-.88) --- */
+    drawLineP('rc10', seg(p,0.78,0.86), false);
+    showFile('rcLbl5', p>=0.80);
+    showNode('rcN8', p>=0.84);
+    bubble('rcN8', p>=0.85);
+
+    /* --- Writer → outputs (.88-1.0) --- */
+    var of=seg(p,0.88,0.99);
+    drawLineP('rc14', of, false);
+    drawLineP('rc15', of, false);
+    showFile('rcLbl6', of>0.1);
+    showFile('rcLbl7', of>0.1);
+    showNode('rcN9', p>=0.92);
+    showNode('rcN10', p>=0.95);
+  }
+
+  /* full-size scroll-through: the tall diagram stays at its natural size and
+     the timeline scrubs as it passes the viewport. No pin, no shrink.
+     end:'bottom 75%' completes the timeline early so the back half is not
+     stranded far down the page. */
   ScrollTrigger.create({
-    trigger:'#mazeFlow',start:'top 72%',end:'bottom 68%',scrub:0.6,
+    trigger:'#mazeFlow', start:'top 80%', end:'bottom 75%', scrub:0.7,
     onUpdate:function(self){setProgress(self.progress);},
-    onLeave:function(){mazePull=0;},onLeaveBack:function(){mazePull=0;}
+    onLeave:function(){mazePull=0;}, onLeaveBack:function(){mazePull=0;}
   });
 }
 
