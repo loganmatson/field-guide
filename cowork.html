@@ -159,6 +159,18 @@
   .faq.open .faq-a{max-height:360px}
   .faq-a .inner{padding:0 20px 18px;color:var(--ink-soft);font-size:15px}
 
+  /* per-step FAQ */
+  .step-faq{margin-top:22px;border-top:1px solid var(--hair);padding-top:18px}
+  .step-faq .sfh{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+  .step-faq .sfh::before{content:"🙋"}
+  .step-faq .faq{background:var(--bg-2);margin:8px 0}
+  .step-faq .faq-q{font-size:15px;padding:14px 17px}
+  .step-faq .faq-q .qm{font-size:17px}
+  .step-faq .faq.open .faq-a{max-height:480px}
+  .step-faq .faq-a .inner{padding:0 17px 16px;font-size:14.5px}
+  .faq-next{display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding:10px 12px;background:rgba(31,169,143,.10);border:1px solid color-mix(in srgb,var(--teal) 40%,transparent);border-radius:10px;font-size:13.5px;color:var(--ink)}
+  .faq-next b{color:var(--teal-deep);font-weight:600;white-space:nowrap}
+
   /* checklist */
   .checklist{background:linear-gradient(160deg,#fff,#F2FBF8);border:1px solid var(--hair);border-radius:22px;padding:26px 26px 22px;margin-top:18px;box-shadow:var(--shadow)}
   .checklist h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:4px}
@@ -293,9 +305,33 @@
           <div class="sh"><span class="sb">1.3</span> Set up SSO / domain capture <span style="font-weight:500;color:var(--ink-faint);font-size:13px">(recommended)</span></div>
           <p><span class="path">Settings → Security → Domain Capture</span>. Enter your company email domain (e.g. <span class="path">yourcompany.com</span>). Anyone who signs up with that domain gets auto-joined — no shadow accounts. If you use Google Workspace or Microsoft 365, enable <b>SSO</b> here too.</p>
         </div>
+        <div class="step">
+          <div class="sh"><span class="sb">1.4</span> Decide if Public projects should exist at all <span style="font-weight:500;color:var(--ink-faint);font-size:13px">(recommended if you handle sensitive data)</span></div>
+          <p><span class="path">Organization settings → Data and privacy</span> → find <b>Public projects</b> and toggle it off. (Primary Owner / Owner only.) This doesn't turn off sharing — it just removes the "visible to the whole org" option. People can still share a project with specific named teammates; they just can't make one browsable by everyone.</p>
+          <div class="tip">
+            <button class="tip-btn" type="button">💡 Tip — what actually changes</button>
+            <div class="tip-body"><div class="inner">Flip this off and any existing org-wide ("Public") projects convert to <b>Private</b> automatically — nothing is deleted, nobody loses access they already had. New projects default to private-by-invite instead of org-browsable. Fully reversible from the same toggle later.</div></div>
+          </div>
+        </div>
         <div class="why">
           <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
-          <div class="why-body"><div class="inner">Domain capture is the difference between a tidy org and a mess. Without it, people sign up with personal emails, create their own little orgs, and your team data scatters. Capture the domain once and everyone lands in the same place automatically.</div></div>
+          <div class="why-body"><div class="inner">Domain capture is the difference between a tidy org and a mess. Without it, people sign up with personal emails, create their own little orgs, and your team data scatters. Capture the domain once and everyone lands in the same place automatically. Deciding on Public projects now does the same job for visibility: it's much easier to start locked-down and open up deliberately than to discover six months in that a sensitive project was browsable by the whole company.</div></div>
+        </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🙅</span> I don't see an Admin section — am I stuck? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">It means you're not the account owner yet. Ask whoever first created the Claude account to grant you admin, or contact <span class="path">support.claude.com</span>. Nothing else in this guide works until you're an admin.<div class="faq-next"><b>Next →</b> Once you have admin access, confirm the Team plan is active (1.2).</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🌐</span> Do I have to set up SSO and domain capture now? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">It's recommended, not required. You can invite people manually and add domain capture later — but doing it now prevents shadow accounts where teammates sign up with personal emails and scatter your data into separate orgs.<div class="faq-next"><b>Next →</b> Whether or not you enable SSO, decide on Public projects (1.4), then invite the team.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🔓</span> If I turn off Public projects, do I lose anything? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">No. Existing org-wide projects convert to Private automatically — nothing is deleted and nobody loses access they already had. People can still share with specific named teammates; they just can't make a project browsable by the whole company. Fully reversible later.<div class="faq-next"><b>Next →</b> Move on to inviting your team in Level 2.</div></div></div>
+          </div>
         </div>
       </div></div>
     </section>
@@ -331,6 +367,22 @@
         <div class="why">
           <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
           <div class="why-body"><div class="inner">Inviting people is what turns a personal account into a team. But the seat and cap choices here are also your budget guardrails — set them now and you never get a surprise bill later.</div></div>
+        </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🪑</span> Standard or Premium seat — how do I decide? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Start almost everyone on Standard; it covers CoWork, Chat, Projects, and Skills. Give Premium (higher limits, priority access) only to the handful of people who'll use it heavily every day. You can change a seat later if someone outgrows it.<div class="faq-next"><b>Next →</b> Assign seats, then set spending caps in 2.2.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">💸</span> Will one heavy user blow the budget? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Not if you set a per-user cap under <span class="path">Billing → Spending Controls</span>. By default usage is pooled org-wide; a per-user cap stops any single person from burning the whole team's budget.<div class="faq-next"><b>Next →</b> With caps set, turn on Skills org-wide in Level 3.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">📧</span> A teammate didn't get their invite. <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Check the email was entered correctly and look in their spam. You can resend from <span class="path">Settings → Members</span>. If your domain capture is on (1.3), they may be able to just sign up with their work email and auto-join instead.<div class="faq-next"><b>Next →</b> Once everyone's in, move to turning on Skills.</div></div></div>
+          </div>
         </div>
       </div></div>
     </section>
@@ -382,6 +434,22 @@
           <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
           <div class="why-body"><div class="inner">Skills are where a generic assistant becomes <i>your team's</i> assistant. Pushing them top-down means everyone gets the same vetted, tested workflows — no rogue prompts, no "it works on my machine."</div></div>
         </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🆚</span> Should people build their own skills or should I push them? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">For a team, push from the top. You build and vet a skill once, mark it <b>Visible to Organization</b>, and it appears in everyone's <span class="path">/</span> menu automatically — no rogue versions. Let power users build their own only after the shared set is in place.<div class="faq-next"><b>Next →</b> Build your first skill with the Skill Creator (3.3).</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🛠️</span> I'm not technical — can I actually make a skill? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Yes. The built-in Skill Creator runs a guided interview and writes the whole skill for you — no code. Good first two: a Document Review skill and a Drafting Assistant. Both are safe, high-value, and show the team what "good" looks like.<div class="faq-next"><b>Next →</b> After building it, set it Visible to Organization, then build the shared Project.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">👻</span> A teammate can't see the skill I pushed. <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Two usual causes: their account has <span class="path">Settings → Capabilities → Skills</span> turned off (their fix), or the skill isn't marked <b>Visible to Organization</b> yet (your admin-side fix). Check the org toggle first — most "missing skill" reports trace back to it.<div class="faq-next"><b>Next →</b> Confirm visibility, then move on to the shared Project in Level 4.</div></div></div>
+          </div>
+        </div>
       </div></div>
     </section>
 
@@ -422,20 +490,51 @@ Cite your sources.</pre>
           </div>
         </div>
         <div class="step">
-          <div class="sh"><span class="sb">4.4</span> Share it with the team</div>
-          <p>Inside the project → <span class="path">Settings (gear) → Visibility</span> → change <b>Personal → Shared with Team</b>. Now everyone sees it in their sidebar and inherits the knowledge + instructions automatically.</p>
+          <div class="sh"><span class="sb">4.4</span> Decide who can see it</div>
+          <p>Inside the project → click <span class="path">Share</span> (next to the project name). Under <b>General access</b> you have two choices:</p>
+          <ul class="clean">
+            <li><b>Only people invited</b> (Private) — the default. Nobody sees it until you add them by name or email, one at a time or pasted in bulk.</li>
+            <li><b>Everyone at [your org]</b> (Public) — anyone in the organization can find it in the Team tab and start using it. (Only available if your admin hasn't disabled it — see step 1.4.)</li>
+          </ul>
+          <p>When you invite someone to a private project, pick their permission level: <b>Can view</b> (use it, chat in it, can't change it) or <b>Can edit</b> (can modify the project's knowledge and instructions — for everyone on it). Default to <b>Can view</b> unless someone genuinely needs to maintain it.</p>
         </div>
         <div class="step">
-          <div class="sh"><span class="sb">4.5</span> What your teammates will see</div>
-          <p>Tell the team: open <b>claude.ai</b> (or the desktop app) → left sidebar → <span class="path">Projects</span>. The shared project shows up there alongside any personal ones — look for the name you gave it (e.g. <span class="path">Compliance Workflows 2026</span>). Click in, and every chat started from inside it automatically reads the Project Knowledge and follows the custom instructions. No copying files, no re-explaining context — it's just already briefed.</p>
+          <div class="sh"><span class="sb">4.5</span> The real pattern most teams need: several private projects, not one shared one</div>
+          <p>"Shared with the whole org" is rarely what you actually want. The far more common need is sharing <i>this</i> project with <i>these specific people</i> — one client engagement, a sensitive workflow, a subset of the team — without opening it to everyone else. Decide each project's audience on purpose:</p>
           <ul class="clean">
-            <li>Don't see it in the sidebar? Confirm with the admin that its visibility is set to <b>Shared with Team</b>, not <b>Personal</b> — that's the most common reason it's missing.</li>
-            <li>Anything a teammate adds inside the shared project (files, notes) becomes visible to the whole team — that's the point, but worth saying out loud before someone drops something sensitive in there.</li>
+            <li><b>Org-wide knowledge</b> (general policies, templates everyone uses) → Public, or Private shared with the whole team.</li>
+            <li><b>Team-specific work</b> (one department's workflows) → Private, invite just that team.</li>
+            <li><b>Narrow or sensitive work</b> (one client, one engagement, a handful of people) → Private, invite only those names, and lean toward <b>Can view</b> over <b>Can edit</b>.</li>
+          </ul>
+          <p>Same feature, three different invite lists — most orgs end up running several private projects side by side rather than one project shared with everyone.</p>
+        </div>
+        <div class="step">
+          <div class="sh"><span class="sb">4.6</span> What your teammates will see</div>
+          <p>If it's Public (or Private and shared with the whole team), it shows up under <span class="path">Projects</span> in the left sidebar — look for the name you gave it (e.g. <span class="path">Compliance Workflows 2026</span>). If it's Private and you invited specific people, it lands in <i>their</i> <span class="path">Projects → Shared with you</span> tab instead, and they get an email the moment you add them. Either way, every chat started from inside it automatically reads the Project Knowledge and follows the custom instructions.</p>
+          <ul class="clean">
+            <li>Don't see it anywhere? Confirm you were actually added to the invite list (for Private) or that it's set to Public — that's the most common reason it's missing.</li>
+            <li>Project Knowledge (files, notes) is visible to everyone who has access — that's the point. <b>Chats are not</b> — conversations inside the project stay private to whoever started them unless that person separately clicks Share on that chat. Worth saying out loud before someone assumes otherwise.</li>
           </ul>
         </div>
         <div class="why">
           <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
           <div class="why-body"><div class="inner">This is the heart of a team setup. Without a shared project, every person is teaching Claude from zero. With it, the newest hire's Claude is as well-briefed as the founder's — instantly.</div></div>
+        </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🗂️</span> One big shared project, or several? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Usually several. "Shared with the whole org" is rarely what you want — most teams run a few private projects side by side: org-wide knowledge open to everyone, team-specific work invited to that team, and sensitive or single-client work locked to a handful of names. Same feature, three different invite lists.<div class="faq-next"><b>Next →</b> Decide each project's audience on purpose (4.5), then set guardrails in Level 5.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">👁️</span> Can teammates see each other's chats inside the project? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">No. Project Knowledge (files, notes, instructions) is shared with everyone who has access — that's the point. But <b>chats stay private</b> to whoever started them unless that person separately clicks Share on the chat. Worth saying out loud before someone assumes otherwise.<div class="faq-next"><b>Next →</b> Confirm sharing is set how you want, then lock the guardrails.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">✏️</span> Can view vs. can edit — which should I give? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Default to <b>Can view</b> (use it, chat in it, can't change it). Reserve <b>Can edit</b> for the one or two people who genuinely maintain the project's knowledge and instructions — edits there change it for everyone on the project.<div class="faq-next"><b>Next →</b> Set permissions, then enforce Ask mode in Level 5.</div></div></div>
+          </div>
         </div>
       </div></div>
     </section>
@@ -484,6 +583,22 @@ Cite your sources.</pre>
         <div class="why">
           <button class="why-btn" type="button"><span class="wc">›</span> Why does this step matter?</button>
           <div class="why-body"><div class="inner">This is the line that lets you say "we use AI" <i>and</i> "we know exactly what it does, and we can prove it." For any team handling sensitive data, that sentence is the whole point.</div></div>
+        </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🏢</span> We have no MDM — can I still enforce Ask mode? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Yes, just less centrally. With MDM (Intune, Jamf) you push <span class="path">managed-mcp.json</span> to every machine and it's fully enforced. Without it, have each person create the file manually, or forward step 5.1 to your IT contact to roll out.<div class="faq-next"><b>Next →</b> However you deploy it, verify on one machine before rolling out (5.2).</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">⚙️</span> What do those two config lines actually do? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner"><span class="path">disableBypassPermissionsMode</span> stops employees from switching off the approval prompts; <span class="path">disableAutoMode</span> grays out Auto mode entirely so Ask mode is the only option. Together: nothing touches your data without a human clicking "approve."<div class="faq-next"><b>Next →</b> Confirm Auto mode is grayed out on a test machine, then roll out.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">✅</span> How do I know it actually worked? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Check one machine before rolling out to everyone: the skill menu shows your pushed skills, Auto mode is grayed out, and the shared project is visible. If all three look right, you're safe to deploy team-wide.<div class="faq-next"><b>Next →</b> Verified? Set up the three memory layers in Level 6.</div></div></div>
+          </div>
         </div>
       </div></div>
     </section>
@@ -610,6 +725,22 @@ Always present options before taking action.</pre>
             <div class="tip-body"><div class="inner">For day-to-day work you won't think about this — it just works. It only matters to understand the distinction: the conversation is temporary and self-managing; <b>Memory, Global Instructions, and the shared Project are the durable layers</b> that make sure nothing important depends on a single chat staying open.</div></div>
           </div>
         </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🧠</span> Three memory layers — which do we actually need? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Most teams want all three, but climb only as far as you need. Layer 1 (Individual Memory) is a 30-second toggle every person should flip day one. Layer 2 (Global Instructions) is a 2-minute standing brief. Layer 3 (Project Memory) builds itself automatically inside the shared Project — no setup.<div class="faq-next"><b>Next →</b> Have everyone turn on Individual Memory, then connect your tools in Level 7.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🔐</span> Is shared Project Memory safe for confidential work? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Treat it like a shared drive: anything in the project can inform answers for everyone on it. Great for playbooks and templates — not the place for one client's confidential file. Keep sensitive material in a separate, tightly-invited project (see Phase 4 and the data-handling FAQ below).<div class="faq-next"><b>Next →</b> Set the boundary with your team, then wire in connectors.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">📭</span> Why didn't Claude remember something from yesterday? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">A single chat's context window resets when you start a new chat — that's working memory, not storage. The durable layers carry things over: check that Individual Memory is on and that the work happened inside the shared Project. You can also review and edit what's remembered under <span class="path">Settings → Capabilities → Memory</span>.<div class="faq-next"><b>Next →</b> Confirm the durable layers are on, then move to connectors.</div></div></div>
+          </div>
+        </div>
       </div></div>
     </section>
 
@@ -641,6 +772,22 @@ Always present options before taking action.</pre>
           <button class="tip-btn" type="button">💡 Tip — don't connect everything at once</button>
           <div class="tip-body"><div class="inner">Start with the one tool the team lives in (usually Drive or Slack). Get comfortable, then add more. Every connector you add is a door — open them deliberately, one at a time.</div></div>
         </div>
+
+        <div class="step-faq">
+          <div class="sfh">Questions on this step</div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🚪</span> Which connector should we turn on first? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Just one: the tool your team actually lives in, usually Google Drive or Slack. Get comfortable with how Claude uses it, then add more. Every connector is a door — open them deliberately, one at a time, not all at once.<div class="faq-next"><b>Next →</b> Connect that first tool, then run the launch checklist below.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🔑</span> Do I authorize connectors for the whole team? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">You enable each connector org-wide under <span class="path">Settings → Integrations</span>, but each person authorizes their <i>own</i> account on first use — so Claude only ever sees the Drive or Gmail that individual already has access to. No one inherits anyone else's files.<div class="faq-next"><b>Next →</b> Enable the connectors you need, then confirm setup with the checklist.</div></div></div>
+          </div>
+          <div class="faq">
+            <div class="faq-q"><span class="qm">🏛️</span> Microsoft 365 shop — is that covered? <span class="fc">+</span></div>
+            <div class="faq-a"><div class="inner">Yes — there's a Microsoft 365 connector for SharePoint, Outlook, and Teams, alongside the Google and Slack ones. Turn on whichever stack your team runs on.<div class="faq-next"><b>Next →</b> You're done — run the launch checklist to confirm everything's live.</div></div></div>
+          </div>
+        </div>
       </div></div>
     </section>
 
@@ -662,7 +809,7 @@ Always present options before taking action.</pre>
     </div>
     <div class="faq">
       <div class="faq-q"><span class="qm">🧠</span> Where does memory actually live — and is confidential client data safe? <span class="fc">+</span></div>
-      <div class="faq-a"><div class="inner"><b>Individual Memory</b> and <b>Global Instructions</b> (Layers 1–2) are tied to each person's account in your workspace, not shared. <b>Project Memory</b> (Layer 3) is shared with everyone on that Project — so scope sharing deliberately. <b>One gotcha to flag for any team handling confidential files:</b> if your company syncs Desktop/Documents to <b>OneDrive or Microsoft Teams/SharePoint</b>, any files you stage locally before uploading may sync to your corporate cloud — a separate copy outside Claude. That's usually fine, but if you coach or advise clients under confidentiality, confirm your IT/data-handling policy first, and keep one client's sensitive material out of a Project shared with the whole team. The rule of thumb: shared Project = shared with the team; personal session = just you.</div></div>
+      <div class="faq-a"><div class="inner"><b>Individual Memory</b> and <b>Global Instructions</b> (Layers 1–2) are tied to each person's account in your workspace, not shared. <b>Project Memory</b> (Layer 3) is shared with everyone who has access to that Project — and "everyone" might mean the whole org, a handful of named people, or just one collaborator, depending on how you scoped it in step 4.4. <b>One gotcha to flag for any team handling confidential files:</b> if your company syncs Desktop/Documents to <b>OneDrive or Microsoft Teams/SharePoint</b>, any files you stage locally before uploading may sync to your corporate cloud — a separate copy outside Claude. That's usually fine, but if you coach or advise clients under confidentiality, confirm your IT/data-handling policy first, and keep one client's sensitive material in a Private project invited only to the people who actually need it. The rule of thumb: a Project's memory is shared with whoever's on its invite list — choose that list deliberately, every time.</div></div>
     </div>
     <div class="faq">
       <div class="faq-q"><span class="qm">🔍</span> How do my teammates actually find the shared skills and project? <span class="fc">+</span></div>
