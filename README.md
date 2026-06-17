@@ -23,10 +23,12 @@ A short, guided set on what Claude is, how to set it up, and how to build with i
 
 [session.html](https://loganmatson.github.io/field-guide/session.html) is a cinematic, presentation-grade page built to drive a 30–35 minute live session:
 
+- **TL;DR popup** — a dismissible 30-second summary card that docks on the right edge (bottom-center on smaller screens) with a jump-to-the-exercise CTA, for cold scanners who want the gist before scrolling
 - **Act 1** — 30-second mental model (sous-chef two-panel), then concept ladder: Workflows → Skills → Agents → Pipelines → Empire, one pinned frame per rung
-- **Act 2** — Three proofs: the health pipeline maze (animated SVG), the writing skill before/after, and the agent run log
+- **Act 2** — Three proofs: the research pipeline maze (animated SVG, opens with a real-world "understand something new by Monday" anchor), the writing skill before/after, and the agent run log
 - **Act 3** — Why it matters, the widening gap, two paths (CoWork / Claude Code)
-- **The exercise** — introduces `skill-creator` with a robot analogy (if you were building 1,000 robots, the first you'd build is the one that builds robots), then walks through a two-part exercise: watch it explain itself, then use it to commission your first real skill saved to `~/.claude/skills/`
+- **Skeptic scoreboard** — the "just a better Copilot" myth is answered with a side-by-side comparison (Copilot: *you drive* every line vs. Claude Code: *it drives* the whole task), not just a claim
+- **The exercise** — introduces `skill-creator` with a robot analogy (if you were building 1,000 robots, the first you'd build is the one that builds robots), then walks through a two-part exercise: watch it explain itself, then use it to commission your first real skill saved to `~/.claude/skills/`. Includes a copy-paste rescue `SKILL.md` so a live build never dies on a misfire
 - **Close** — CTA to Session 2 (business.html)
 
 Scroll acts as the clicker. Dual-purpose: skimmable for live pacing, readable solo afterward.
@@ -60,6 +62,7 @@ Pure static HTML + vanilla JS — no build step, no dependencies. Every page car
 
 ## Changelog
 
+- **2026-06-17** — Refined both session pages from a review pass. `session.html`: added a dismissible 30-second TL;DR popup docked on the right edge (bottom-center on narrow screens, with a re-open handle); reframed Proof 1 to open with a real-world "understand something new by Monday" anchor before the diagram; rebuilt the "just a better Copilot" answer as a balanced *you drive / it drives* side-by-side; added a readability scrim behind the pinned Act scenes so copy stays legible over the drifting particle field; added a copy-paste rescue `SKILL.md` to the exercise. `business.html`: added an inbound "from Session 1" bridge under the hero (you built `/interview`, here's where it lives), and reframed the six-building-blocks lede to call out **hooks** and **MCP** as the two capabilities Copilot has no answer for, with a per-card badge.
 - **2026-06-12** — Added 30-second mental model scene (sous-chef two-panel) to `session.html` between hook and concept ladder. Removed `index.html` (Why Claude) from the live site; stored locally. Added `skill-creator` robot analogy section above the exercise.
 - **2026-06-12** — Added `skill-creator` robot analogy section to `session.html`: if you were building 1,000 robots and each did one thing well, the first you'd build is the one that builds robots. Tightened CoWork exercise step to save skills to `~/.claude/skills/` globally rather than paste into project instructions.
 - **2026-06-11** — Headers locked, proof order swapped (maze → writing → run log), stats row added, exercise rebuilt as instructive two-parter, two-paths visual added.
