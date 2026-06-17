@@ -62,6 +62,12 @@
   .act-pin .stage{height:100vh;position:relative;overflow:hidden}
   .act-pin .scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:72px 7vw 40px;opacity:0}
   .act-pin .scene .inner{position:relative;z-index:2;max-width:980px;width:100%;margin:0 auto}
+  /* readability scrim: keeps scene copy legible over the drifting particle field */
+  .act-pin .scene .inner::before{content:"";position:absolute;z-index:-1;inset:-8% -10%;
+    background:radial-gradient(ellipse 70% 60% at 50% 48%,rgba(6,7,11,.78) 0%,rgba(6,7,11,.52) 46%,rgba(6,7,11,0) 78%);
+    filter:blur(8px);pointer-events:none}
+  .act-pin .scene .sbody{color:#C9D0DD}
+  .act-pin .scene .sbody b{color:#fff}
   .act-pin .scene:first-child{opacity:1}
 
   /* the ladder: huge concept word, definition, example, analogy */
@@ -143,6 +149,50 @@
   .btn-pri:hover{transform:translateY(-2px);box-shadow:0 16px 40px -18px var(--violet)}
   .btn-ghost{color:var(--ink);background:rgba(255,255,255,.03);border:1px solid var(--hair-2)}
   .btn-ghost:hover{transform:translateY(-2px);border-color:var(--cyan);color:var(--cyan)}
+
+  /* ===== TL;DR side pop-up (30-second read, docks on the right) ===== */
+  .tldr{position:fixed;top:50%;right:22px;transform:translateY(-50%) translateX(calc(100% + 30px));z-index:60;width:300px;
+        opacity:0;transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .5s ease;pointer-events:none}
+  .tldr.show{transform:translateY(-50%) translateX(0);opacity:1;pointer-events:auto}
+  .tldr.dismissed{transform:translateY(-50%) translateX(calc(100% + 30px));opacity:0;pointer-events:none}
+  .tldr-inner{position:relative;background:linear-gradient(165deg,var(--panel-2,#161A23),var(--panel));border:1px solid var(--hair-2);border-radius:18px;padding:22px 22px 24px;
+              box-shadow:0 40px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(124,92,255,.12),inset 0 1px 0 rgba(255,255,255,.04)}
+  .tldr-close{position:absolute;top:11px;right:12px;width:24px;height:24px;border:0;border-radius:7px;background:rgba(255,255,255,.04);color:var(--ink-faint);
+              font-size:15px;line-height:1;cursor:pointer;transition:background .2s,color .2s}
+  .tldr-close:hover{background:rgba(255,255,255,.09);color:var(--ink)}
+  .tldr-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:13px;padding-right:24px}
+  .tldr-tag b{color:var(--cyan);font-weight:500}
+  .tldr-pitch{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;line-height:1.16;font-size:1.18rem;color:var(--ink)}
+  .tldr-pitch .acc{background:linear-gradient(100deg,var(--violet-2),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tldr-mini{display:flex;align-items:center;justify-content:center;gap:7px;font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);margin:18px 0 4px}
+  .tldr-mini .tn{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .tldr-mini .td{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;border:1px solid var(--hair-2);background:var(--bg-2)}
+  .tldr-mini .tn:nth-child(1) .td{border-color:color-mix(in srgb,var(--violet) 45%,transparent)}
+  .tldr-mini .tn:nth-child(3) .td{border-color:color-mix(in srgb,var(--violet-2) 45%,transparent)}
+  .tldr-mini .tn:nth-child(5) .td{border-color:color-mix(in srgb,var(--cyan) 45%,transparent)}
+  .tldr-mini .ta{color:var(--ink-faint);font-size:13px;align-self:flex-start;margin-top:8px}
+  .tldr-cta{margin-top:16px}
+  .tldr-cta .btn{width:100%;justify-content:center;font-size:13.5px;padding:11px 16px}
+  /* re-open handle once dismissed */
+  .tldr-reopen{position:fixed;top:50%;right:0;transform:translateY(-50%) translateX(100%);z-index:59;
+               background:var(--panel-2,#161A23);border:1px solid var(--hair-2);border-right:0;border-radius:10px 0 0 10px;
+               color:var(--ink-soft);font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+               writing-mode:vertical-rl;padding:14px 7px;cursor:pointer;opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s,color .2s}
+  .tldr-reopen.show{transform:translateY(-50%) translateX(0);opacity:1}
+  .tldr-reopen:hover{color:var(--cyan)}
+  @media(max-width:1180px){
+    .tldr{top:auto;bottom:18px;right:50%;transform:translate(50%,calc(100% + 30px));width:min(92vw,440px)}
+    .tldr.show{transform:translate(50%,0)}
+    .tldr.dismissed{transform:translate(50%,calc(100% + 30px))}
+    .tldr-reopen{top:auto;bottom:18px;right:14px;transform:translateY(calc(100% + 30px));writing-mode:horizontal-tb;border-radius:10px;border-right:1px solid var(--hair-2)}
+    .tldr-reopen.show{transform:translateY(0)}
+  }
+  @media(max-width:520px){
+    .tldr-mini{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .tldr,.tldr-reopen{transition:opacity .3s ease}
+  }
 
   /* ===== Proof 2: mission-control run log ===== */
   .ign{max-width:760px;margin:0 auto 54px;padding:18px 24px;background:var(--panel);border:1px solid var(--hair-2);border-radius:14px;font-family:var(--mono);font-size:clamp(18px,2.6vw,26px);color:var(--ink);display:flex;align-items:center;gap:12px}
@@ -232,6 +282,23 @@
   .sk-tag{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
   .sk-fact p{color:var(--ink-soft);font-size:20px;line-height:1.6;text-align:left}
   .sk-fact b{color:var(--ink)}
+  /* Copilot vs Claude Code micro side-by-side (inside the first sk-fact) */
+  .cp-split{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:14px;border:1px solid var(--hair-2);border-radius:14px;overflow:hidden;background:var(--bg-2)}
+  .cp-col{padding:20px 22px}
+  .cp-col+.cp-col{border-left:1px solid var(--hair)}
+  .cp-col.cp-good{background:rgba(54,224,200,.045);box-shadow:inset 3px 0 0 color-mix(in srgb,var(--cyan) 55%,transparent)}
+  .cp-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid var(--hair)}
+  .cp-h{font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--ink-soft)}
+  .cp-col.cp-good .cp-h{color:var(--ink)}
+  .cp-sub{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+  .cp-col.cp-good .cp-sub{color:var(--cyan)}
+  .cp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .cp-list li{display:flex;gap:11px;align-items:flex-start;font-size:14px;line-height:1.45;color:var(--ink-soft)}
+  .cp-col.cp-good .cp-list li{color:var(--ink)}
+  .cp-list .who{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;width:38px;padding-top:2px;color:var(--ink-faint)}
+  .cp-col.cp-good .cp-list .who{color:var(--cyan)}
+  .cp-loop{margin-top:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink-faint);display:flex;align-items:center;gap:7px}
+  @media(max-width:620px){.cp-split{grid-template-columns:1fr}.cp-col+.cp-col{border-left:0;border-top:1px solid var(--hair)}.cp-col.cp-good{box-shadow:inset 0 3px 0 color-mix(in srgb,var(--cyan) 55%,transparent)}}
   .sk-ledger{margin-top:44px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;min-height:34px}
   .sk-row{font-family:var(--mono);font-size:13px;display:flex;gap:7px;align-items:center;border:1px solid var(--hair);border-radius:9px;padding:8px 13px;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
   .sk-row.done{opacity:1;transform:translateY(0);border-color:rgba(54,224,200,.35)}
@@ -310,6 +377,17 @@
   .ex-anatomy li::before{content:"○";position:absolute;left:0;color:var(--ink-faint);transition:color .4s}
   .ex-anatomy.complete li{color:var(--ink-soft)}
   .ex-anatomy.complete li::before{content:"✓";color:var(--cyan)}
+  /* rescue / fallback block */
+  .ex-rescue{border-top:1px solid var(--hair);margin-top:6px}
+  .ex-rescue summary{list-style:none;cursor:pointer;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-soft);padding:18px 28px;display:flex;align-items:center;gap:10px;transition:color .2s}
+  .ex-rescue summary::-webkit-details-marker{display:none}
+  .ex-rescue summary:hover{color:var(--cyan)}
+  .ex-rescue .rescue-i{color:var(--ember)}
+  .ex-rescue[open] summary{color:var(--ink)}
+  .rescue-body{padding:0 28px 26px}
+  .rescue-body p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:14px}
+  .rescue-body .ex-say span{white-space:pre-wrap}
+  .rescue-note{margin-top:14px;color:var(--ink-faint)!important;font-size:13.5px!important}
   .ex-foot{margin-top:16px;font-size:13px;color:var(--ink-faint);line-height:1.6}
   .ex-entry{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
   .entry-chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft);background:rgba(238,241,246,.04);border:1px solid var(--hair-2);border-radius:9px;padding:8px 13px}
@@ -378,6 +456,24 @@
   <span class="mk"><b>session 01</b> · a field guide</span>
   <a href="home.html">home →</a>
 </div>
+
+<!-- ================= TL;DR side pop-up (30-second read) ================= -->
+<aside class="tldr" id="tldrCard" aria-label="The 30-second version">
+  <div class="tldr-inner">
+    <button class="tldr-close" id="tldrClose" aria-label="Dismiss the summary">✕</button>
+    <div class="tldr-tag">the 30-second version</div>
+    <div class="tldr-pitch">Do the work once, teach it, and it <span class="acc">runs every week after.</span> Everything below is proof.</div>
+    <div class="tldr-mini" aria-hidden="true">
+      <span class="tn"><span class="td">📝</span>workflow</span>
+      <span class="ta">→</span>
+      <span class="tn"><span class="td">🧩</span>skill</span>
+      <span class="ta">→</span>
+      <span class="tn"><span class="td">🤖</span>agent</span>
+    </div>
+    <div class="tldr-cta"><a class="btn btn-pri" href="#exercise" id="tldrJump">Build your first skill ↓</a></div>
+  </div>
+</aside>
+<button class="tldr-reopen" id="tldrReopen" aria-label="Show the 30-second version">tl;dr</button>
 
 <!-- ================= ACT 1 : pinned crossfade group ================= -->
 <div class="act-pin" id="act1">
@@ -518,7 +614,7 @@
   <div class="phead">
     <div class="kick" data-drift>act 2 · <b>proof 1 of 3</b></div>
     <h2 class="stitle" data-drift>One question. <span class="acc">Eight agents.</span></h2>
-    <p class="sbody" data-drift>Type a research question. An orchestrator fans out to four specialists in parallel. A risk scout reads what came back and catches a gap, so it re-fires only the one agent that needs to go deeper. A synthesizer merges the corrected briefs. Then a writer turns the output into a brief in your voice, using your writing skill. Scroll through the path.</p>
+    <p class="sbody" data-drift>You need to understand something new by Monday: a market, a vendor, a regulation. Normally that is a day of open tabs. Here you type one research question instead. An orchestrator fans out to four specialists in parallel. A risk scout reads what came back and catches a gap, so it re-fires only the one agent that needs to go deeper. A synthesizer merges the corrected briefs. Then a writer turns the output into a brief in your voice, using your writing skill. Scroll through the path.</p>
   </div>
 
   <div class="maze-flow" id="mazeFlow">
@@ -875,7 +971,31 @@
     <div class="sk-stage">
       <div class="sk-pair">
         <div class="sk-myth">"It's just a better Copilot."</div>
-        <div class="sk-fact"><span class="sk-tag">actually</span><p>Copilot autocompletes the line you are typing. This takes the <b>whole task</b> and does it end to end while you do something else. Speed versus leverage.</p></div>
+        <div class="sk-fact"><span class="sk-tag">actually</span>
+          <div class="cp-split">
+            <div class="cp-col">
+              <div class="cp-head"><span class="cp-h">Copilot</span><span class="cp-sub">you drive</span></div>
+              <ul class="cp-list">
+                <li><span class="who">you</span>open the file</li>
+                <li><span class="who">you</span>start the function</li>
+                <li><span class="who">it</span>suggests the next line</li>
+                <li><span class="who">you</span>accept, then keep typing</li>
+              </ul>
+              <div class="cp-loop">↻ every line, all day</div>
+            </div>
+            <div class="cp-col cp-good">
+              <div class="cp-head"><span class="cp-h">Claude Code</span><span class="cp-sub">it drives</span></div>
+              <ul class="cp-list">
+                <li><span class="who">it</span>reads the ticket</li>
+                <li><span class="who">it</span>writes the handler</li>
+                <li><span class="who">it</span>runs the tests, fixes what failed</li>
+                <li><span class="who">it</span>opens the pull request</li>
+              </ul>
+              <div class="cp-loop">✓ you review the diff</div>
+            </div>
+          </div>
+          <p style="margin-top:14px;font-size:16px;color:var(--ink-faint)">Speed versus leverage. You watched it run twice already.</p>
+        </div>
       </div>
       <div class="sk-pair">
         <div class="sk-myth">"It forgets everything between chats."</div>
@@ -990,7 +1110,7 @@
   <div class="ex-inner">
     <div class="kick" data-drift>the exercise · <b>your turn</b></div>
     <h2 class="stitle" data-drift>Build <span class="acc">your own</span> first working skill.</h2>
-    <p class="sbody" data-drift>Two moves. First you <b>watch</b> a skill that already ships in the box explain itself, so you see what one is. Then the first skill you ever make is <b>the one that interviews you</b> before every build. Ten minutes, and it is yours for good.</p>
+    <p class="sbody" data-drift>Two moves. First you <b>watch</b> a skill that already ships in the box explain itself, so you see what one is. Then the first skill you ever make is <b>the one that interviews you</b> before every build. Why this one first? It is the gate every future skill passes through. Get it right once and everything you build after it starts from a clean spec instead of a vague idea. Ten minutes, and it is yours for good.</p>
 
     <div class="ex-box" data-drift>
       <div class="ex-tabs">
@@ -1059,7 +1179,7 @@
           <li class="ex-step"><span class="ex-n">3</span><div><b>Commission it.</b> Say:
             <div class="ex-say"><span>Create a skill document called interview. Requirements: before any new project, it interviews me with at least 10 questions, asked one at a time as multiple-choice where possible. The questions adapt to my previous answers, no fixed script. It reads the conversation for context first. It asks where I want the output. It only writes a final SPEC once it is 99% confident. Write it in SKILL.md format so I can save it and reuse it anywhere.</span><button class="ex-copy" onclick="copySay(this)">copy</button></div>
           </div></li>
-          <li class="ex-step"><span class="ex-n">4</span><div><b>Save it.</b> Paste the result into this project's instructions (Project knowledge or custom instructions). <span style="color:var(--ink-faint);font-size:13px">On Claude Code? It belongs at <code>~/.claude/skills/interview/SKILL.md</code> so it works everywhere, not just one project.</span></div></li>
+          <li class="ex-step"><span class="ex-n">4</span><div><b>Save it.</b> Two places, pick one: the project's <b>Project knowledge</b> panel (Add text, paste it in), or your <b>custom instructions</b> if you want it on every chat. <span style="color:var(--ink-faint);font-size:13px">Stuck? Just paste it into the chat and say "remember this skill for this project." On Claude Code it belongs at <code>~/.claude/skills/interview/SKILL.md</code> so it works everywhere, not just one project.</span></div></li>
           <li class="ex-step"><span class="ex-n">5</span><div><b>Fire it.</b>
             <div class="fire-chips">
               <span class="entry-chip">In the project? New chat: "interview me about my next project."</span>
@@ -1069,6 +1189,26 @@
         </ol>
         <p class="ex-foot">Same skill, no terminal. Session 2 takes this further: <a class="ex-tease" href="business.html">give it memory →</a></p>
       </div>
+
+      <details class="ex-rescue">
+        <summary><span class="rescue-i">⛑</span> If the build misfires: paste this and keep going</summary>
+        <div class="rescue-body">
+          <p>Auth hiccup, a timeout, a model that wanders? You never lose the demo. This is a complete, working <code>interview</code> skill. Paste it where step 4 told you, then fire it. Each line is one part of the anatomy.</p>
+          <div class="ex-say"><span># save as ~/.claude/skills/interview/SKILL.md (or paste into Project knowledge)
+---
+name: interview
+description: Use before any new build, skill, or agent. Interviews the user, then writes a SPEC.
+---
+# Interview
+Before writing anything, interview the user about what they want to build.
+1. Read the conversation above for context first. Do not re-ask what you already know.
+2. Ask at least 10 questions, ONE at a time, and adapt each question to the last answer. No fixed script.
+3. Track your own confidence (0-100%). Keep asking until you hit 99%.
+4. Ask where the output should be saved. Offer 2-3 likely paths.
+5. Only then write a SPEC.md. Never start building during the interview. Spec only.</span><button class="ex-copy" onclick="copySay(this)">copy</button></div>
+          <p class="rescue-note">That is the whole skill. A name, a description that says when to fire, numbered steps, and one hard limit. Everything else you build follows the same shape.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -1680,6 +1820,24 @@ function exTab(which){
   el('tabCW').classList.toggle('on',which==='cw');
   if(hasGSAP){ScrollTrigger.refresh();}
 }
+(function(){
+  var card=document.getElementById('tldrCard');
+  var reopen=document.getElementById('tldrReopen');
+  var closeBtn=document.getElementById('tldrClose');
+  var j=document.getElementById('tldrJump');
+  function open(){if(!card)return;card.classList.remove('dismissed');card.classList.add('show');if(reopen)reopen.classList.remove('show');}
+  function dismiss(){if(!card)return;card.classList.remove('show');card.classList.add('dismissed');if(reopen)reopen.classList.add('show');}
+  // slide in after the page settles
+  setTimeout(open,1100);
+  if(closeBtn)closeBtn.addEventListener('click',dismiss);
+  if(reopen)reopen.addEventListener('click',open);
+  if(j)j.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.getElementById('exercise');
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    dismiss();
+  });
+})();
 function copySay(btn){
   var span=btn.parentElement.querySelector('span');
   var text=span.innerText||span.textContent;
