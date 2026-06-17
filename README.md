@@ -43,7 +43,7 @@ Part 02 is a **scored quiz** ([quiz.html](https://loganmatson.github.io/field-gu
 
 If your answers point both ways, the quiz shows both guides with the stronger match highlighted. You can also jump straight to either guide from the Hub.
 
-Both setup guides are fully interactive: collapsible sections, copy-to-clipboard commands, tip pills, inline FAQs, and a launch checklist.
+Both setup guides are fully interactive: collapsible sections, copy-to-clipboard commands, tip pills, and a launch checklist. **Every step carries its own FAQ** — 2–3 likely questions per step, each with a direct answer and a "what to do next" line that points to the following step — on top of the global FAQ at the bottom of each guide.
 
 ## Structure
 
@@ -62,6 +62,7 @@ Pure static HTML + vanilla JS — no build step, no dependencies. Every page car
 
 ## Changelog
 
+- **2026-06-17** — Added per-step FAQ blocks to both setup guides. Each step in `claude-code.html` (Install, VS Code, First project, Memory, GitHub, Team) and each phase in `cowork.html` (Admin, Invite, Skills, Shared project, Guardrails, Memory, Connectors) now ends with 2–3 likely questions — each answered, with a "what to do next" line pointing to the following step. Reuses the existing accordion FAQ pattern in a scoped `.step-faq` variant.
 - **2026-06-17** — Refined both session pages from a review pass. `session.html`: added a dismissible 30-second TL;DR popup docked on the right edge (bottom-center on narrow screens, with a re-open handle); reframed Proof 1 to open with a real-world "understand something new by Monday" anchor before the diagram; rebuilt the "just a better Copilot" answer as a balanced *you drive / it drives* side-by-side; added a readability scrim behind the pinned Act scenes so copy stays legible over the drifting particle field; added a copy-paste rescue `SKILL.md` to the exercise. `business.html`: added an inbound "from Session 1" bridge under the hero (you built `/interview`, here's where it lives), and reframed the six-building-blocks lede to call out **hooks** and **MCP** as the two capabilities Copilot has no answer for, with a per-card badge.
 - **2026-06-12** — Added 30-second mental model scene (sous-chef two-panel) to `session.html` between hook and concept ladder. Removed `index.html` (Why Claude) from the live site; stored locally. Added `skill-creator` robot analogy section above the exercise.
 - **2026-06-12** — Added `skill-creator` robot analogy section to `session.html`: if you were building 1,000 robots and each did one thing well, the first you'd build is the one that builds robots. Tightened CoWork exercise step to save skills to `~/.claude/skills/` globally rather than paste into project instructions.
