@@ -209,6 +209,18 @@
   .faq.open .faq-a{max-height:360px}
   .faq-a .inner{padding:0 20px 18px;color:var(--ink-soft);font-size:15px}
 
+  /* per-step FAQ */
+  .step-faq{margin-top:22px;border-top:1px solid var(--hair);padding-top:18px}
+  .step-faq .sfh{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+  .step-faq .sfh::before{content:"🙋"}
+  .step-faq .faq{background:var(--bg-2);margin:8px 0}
+  .step-faq .faq-q{font-size:15px;padding:14px 17px}
+  .step-faq .faq-q .qm{font-size:17px}
+  .step-faq .faq.open .faq-a{max-height:460px}
+  .step-faq .faq-a .inner{padding:0 17px 16px;font-size:14.5px}
+  .faq-next{display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding:10px 12px;background:rgba(124,140,255,.08);border:1px solid color-mix(in srgb,var(--indigo) 35%,transparent);border-radius:10px;font-size:13.5px;color:var(--ink)}
+  .faq-next b{color:var(--indigo);font-weight:600;white-space:nowrap}
+
   /* checklist */
   .checklist{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--hair);border-radius:22px;padding:26px 26px 22px;margin-top:18px;box-shadow:var(--shadow)}
   .checklist h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:4px}
@@ -354,6 +366,22 @@
           <div class="tip-body"><div class="inner">Set <span class="path">ANTHROPIC_API_KEY</span> in your shell profile (<span class="path">~/.zshrc</span> on Mac) and you'll never have to paste it again — every new terminal picks it up automatically.</div></div>
         </div>
       </div>
+
+      <div class="step-faq">
+        <div class="sfh">Questions on this step</div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🚫</span> <span class="path">npm: command not found</span> — what now? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">npm ships with Node.js, so this means Node isn't installed (or isn't on your PATH). Install the LTS build from <span class="path">nodejs.org</span>, close and reopen your terminal, then run <span class="path">node --version</span> again.<div class="faq-next"><b>Next →</b> Once the version prints, run the install command in 1.2.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🔑</span> Do I have to pay before I can run anything? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">You need an Anthropic account and an API key, and API usage is billed by the token — but a first project costs cents. If your org has a Team or Enterprise plan, ask your admin for access instead of using a personal key.<div class="faq-next"><b>Next →</b> Create a key at <span class="path">console.anthropic.com</span>, then start Claude with <span class="path">claude</span> (step 1.3).</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🍎</span> I'm on Windows — does this still work? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Yes. The npm command is identical. On Windows the smoothest path is WSL (Windows Subsystem for Linux) or any terminal where Node is installed; the shell profile is <span class="path">~/.bashrc</span> rather than <span class="path">~/.zshrc</span>.<div class="faq-next"><b>Next →</b> With <span class="path">claude</span> running, move on to the VS Code extension.</div></div></div>
+        </div>
+      </div>
     </section>
 
     <!-- VSCODE -->
@@ -377,6 +405,22 @@
         <button class="tip-btn" type="button">💡 Tip — which should I use?</button>
         <div class="tip-body"><div class="inner">Use the VS Code extension while you're learning — the inline diffs make it obvious what Claude is doing. Drop to the terminal for long-running tasks and when you're working over SSH on a remote machine.</div></div>
       </div>
+
+      <div class="step-faq">
+        <div class="sfh">Questions on this step</div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🔌</span> The extension installed but the panel is empty. <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">The extension needs the CLI it talks to. Confirm <span class="path">claude</span> runs in your terminal (step 1), then reload VS Code (<span class="path">Cmd/Ctrl+Shift+P → Reload Window</span>). The panel wakes up once it finds the CLI.<div class="faq-next"><b>Next →</b> With the panel live, open your project folder (2.2).</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">📁</span> Do I have to open a folder, or can I point at one file? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Open the whole project folder. Claude works from the folder you open as its context — a single file gives it no surrounding code to reason about. Pick the repo root unless you have a reason to scope it tighter.<div class="faq-next"><b>Next →</b> Folder open? You're ready to run your first real task in step 3.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🤔</span> Should I use JetBrains / another IDE instead? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">There's a JetBrains plugin too, and the terminal works in any editor. The flow is the same everywhere: ask, review the diff, approve. Use whatever you already live in.<div class="faq-next"><b>Next →</b> Whichever editor you chose, head to your first end-to-end task.</div></div></div>
+        </div>
+      </div>
     </section>
 
     <!-- FIRST PROJECT -->
@@ -398,6 +442,22 @@
       <div class="oops">
         <div class="oe">⚠️</div>
         <div class="ot"><b>Common mistake:</b> approving a big diff without reading it. Start small. Read every diff for your first few tasks until you trust the pattern — then you can move faster.</div>
+      </div>
+
+      <div class="step-faq">
+        <div class="sfh">Questions on this step</div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">↩️</span> I approved a change and it broke something. <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Nothing is permanent. If the folder is a git repo, <span class="path">git checkout .</span> reverts unstaged edits and <span class="path">git stash</span> sets them aside. You can also just ask Claude to undo what it did — it knows what it changed.<div class="faq-next"><b>Next →</b> Roll back, then re-ask with a smaller, more specific request.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🎯</span> It did too much / changed files I didn't mean. <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Scope the ask. Name the file or feature ("only in <span class="path">settings.tsx</span>"), and use plan mode so it shows what it intends before touching anything. Smaller asks produce diffs you can actually read.<div class="faq-next"><b>Next →</b> Once you trust the review loop, set up memory so it stops re-asking the same context.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">▶️</span> Can it run my tests and dev server, or just edit? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">It can run commands — tests, the dev server, a build — and read the output to fix what fails, each time with your approval. It's the full loop, not just a text editor.<div class="faq-next"><b>Next →</b> Move to memory so each new session starts knowing your project.</div></div></div>
+        </div>
       </div>
     </section>
 
@@ -596,6 +656,22 @@
           </div></div>
         </div>
       </div>
+
+      <div class="step-faq">
+        <div class="sfh">Questions on this step</div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">📝</span> What do I actually put in <span class="path">CLAUDE.md</span>? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">The rules a new teammate would need on day one: language and style conventions, architecture notes, what never to touch, and how you want it to ask before big changes. Keep it under ~200 lines so it stays cheap to load every session.<div class="faq-next"><b>Next →</b> Commit the file so it travels with the repo, then wire up GitHub in step 5.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🌱</span> Do I need Layer 3 (auto-memory) to start? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">No. Layer 1 (the folder) needs zero setup and Layer 2 is one file. Auto-memory is worth turning on once you're running often enough that re-explaining context gets annoying. Climb the ladder only as far as you need.<div class="faq-next"><b>Next →</b> Start with a CLAUDE.md; add auto-memory later when the repetition bites.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🔒</span> Is any of this memory sent to a cloud? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">The memory itself is plain files on your disk — nothing lives in a Claude "cloud brain." Only the slice needed for the current task is sent to the model. (If you handle confidential work, see the data-handling question in the FAQ at the bottom about synced folders.)<div class="faq-next"><b>Next →</b> With memory in place, connect GitHub so Claude works in branches and PRs.</div></div></div>
+        </div>
+      </div>
     </section>
 
     <!-- GITHUB -->
@@ -652,6 +728,22 @@
           <div class="ot"><b>Common mistake:</b> giving Claude access to a repo without committing your current work first. Commit or stash what you have before a big task, so you always have a clean point to roll back to.</div>
         </div>
       </div>
+
+      <div class="step-faq">
+        <div class="sfh">Questions on this step</div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🔗</span> How does Claude actually connect to GitHub? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Two ways: locally it works through git in your repo (it commits and pushes branches you approve), and for PR review you add the GitHub connection so it can read pull requests and leave inline comments. Use the <span class="path">gh</span> CLI or the GitHub MCP server to wire it up.<div class="faq-next"><b>Next →</b> Confirm your repo has a remote (5.1), then let Claude work in a branch.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🛡️</span> Will it push to <span class="path">main</span> on its own? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">No. It works in a branch and you review before merging, exactly like a teammate's PR. Nothing reaches <span class="path">main</span> without your approval, and branch protection rules on GitHub still apply.<div class="faq-next"><b>Next →</b> Review the branch, merge what you like, then standardize the team in step 6.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">👋</span> What's the safest way to introduce this to my team? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Start with PR review, not writing. As a reviewer Claude only comments — it never merges — so the whole team gets value immediately while trust builds. Let it write code directly once people are comfortable.<div class="faq-next"><b>Next →</b> Set up a shared <span class="path">CLAUDE.md</span> so everyone reviews to one standard.</div></div></div>
+        </div>
+      </div>
     </section>
 
     <!-- TEAM -->
@@ -679,6 +771,22 @@
       <div class="analogy" style="margin:14px 0 0">
         <div class="ae">📋</div>
         <div class="at">A committed <span class="path">CLAUDE.md</span> is your team's <b>shared playbook.</b> New hire clones the repo and their Claude already knows the house style — no onboarding doc to read, no tribal knowledge to absorb.</div>
+      </div>
+
+      <div class="step-faq">
+        <div class="sfh">Questions on this step</div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🪪</span> Does each teammate need their own account? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Yes — everyone runs their own Claude Code locally with their own access, but they all inherit the same committed <span class="path">CLAUDE.md</span>. One shared playbook, individual seats. On Team/Enterprise plans an admin manages access centrally.<div class="faq-next"><b>Next →</b> Commit the shared file, then have each teammate pull and run.</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">🗂️</span> Which <span class="path">CLAUDE.md</span> wins if I have several? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">The closest one to whatever Claude is working on. A repo-root file sets the baseline; a folder-level file layers package-specific rules on top — ideal for a monorepo where each package has its own conventions.<div class="faq-next"><b>Next →</b> Add folder-level files only where a package genuinely differs (6.2).</div></div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><span class="qm">📏</span> How do we keep the shared file from getting bloated? <span class="fc">+</span></div>
+          <div class="faq-a"><div class="inner">Treat it like code: keep it under ~200 lines, review changes in PRs, and prune rules that no longer apply. A lean playbook loads fast every session; a sprawling one quietly eats the context window.<div class="faq-next"><b>Next →</b> You're set up — run the launch checklist below to confirm.</div></div></div>
+        </div>
       </div>
     </section>
 
