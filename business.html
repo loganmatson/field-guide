@@ -162,6 +162,10 @@ body.railslim .wrap.wide{max-width:1400px}
 @media(max-width:980px){#hero .grid{grid-template-columns:1fr;gap:42px}#hero{min-height:auto;padding-top:30px}}
 .boot{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.04em;display:flex;align-items:center;gap:10px;margin-bottom:22px}
 .boot .ok{color:var(--lime)}
+.from-s1{font-size:14.5px;line-height:1.6;color:var(--ink-soft);border-left:2px solid var(--lime);padding:10px 0 10px 16px;margin:0 0 22px;max-width:560px}
+.from-s1 .fs-tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--lime);margin-right:8px}
+.from-s1 code{font-family:var(--mono);font-size:13px;color:var(--cyan);background:rgba(91,233,224,.08);padding:1px 6px;border-radius:5px}
+.bb-beat{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 45%,transparent);background:rgba(242,193,78,.07);padding:5px 11px;border-radius:7px;margin-bottom:16px}
 #heroTitle{font-family:var(--disp);font-weight:700;font-size:clamp(2.7rem,6.6vw,5rem);line-height:1.0;letter-spacing:-.035em;margin:0 0 22px}
 #heroTitle .gl{color:var(--lime);text-shadow:0 0 34px var(--lime-glow)}
 .lede.big{font-size:clamp(1.05rem,1.5vw,1.24rem);max-width:52ch;color:var(--ink-soft)}
@@ -682,6 +686,7 @@ footer b{color:var(--lime-deep)}
       <div class="grid">
         <div>
           <div class="boot" data-anim="up"><span class="ok">●</span> loading session-02.working-agenda <span class="ok">✓ ready</span></div>
+          <div class="from-s1" data-anim="up"><span class="fs-tag">// from session 01</span> You built <code>/interview</code> in the session. Here is where it lives in the bigger system, and the other five blocks it plugs into.</div>
           <h1 id="heroTitle">Build an <span class="gl">agentic</span><br>workforce.</h1>
           <p class="lede big" data-anim="up">Start with one task you repeat by hand. End with a system that plans, writes, audits itself, and remembers. This is the depth behind everything you watched run in the session, and the agenda for <b>Session 2</b>: a working session where we build it on one of your real workflows, together.</p>
           <div class="hero-cta" data-anim="up"><a class="btn btn-pri" href="#path">▶ Open the agenda</a><a class="btn btn-ghost" href="#start">Your first hour</a></div>
@@ -735,7 +740,7 @@ footer b{color:var(--lime-deep)}
       <div class="mod-head">
         <div class="statline" data-anim="up"><span class="modid">module <b>0x01</b></span><span class="statchip"><span class="sd"></span>building blocks</span></div>
         <h2 class="h2" data-anim="up">The whole system is <span class="accent">six building blocks.</span></h2>
-        <p class="lede" data-anim="up">Tap any block: plain-English first, then the exact code an engineer can trust.</p>
+        <p class="lede" data-anim="up">Tap any block: plain-English first, then the exact code an engineer can trust. Two of these are why this is not a faster autocomplete. <b>Hooks</b> make automation fire on its own, every time, whether or not anyone remembers. <b>MCP</b> lets it reach into GitHub, Slack, or your database and act. That is the line between a tool that suggests and a system that does.</p>
       </div>
       <div class="blocks" id="blocks-list"></div>
     </div></section>
@@ -1560,7 +1565,8 @@ var CH=[
 function accBlock(b,ic,extra){return '<div class="block"><div class="block-h" data-acc><div class="bic'+(ic.g?' g':'')+'">'+ic.html+'</div><div class="bt"><b>'+b.t+'</b><small'+(b.fix?' class="fix"':'')+'>'+(b.fix||b.s)+'</small></div><div class="chev">'+SV('<polyline points="6 9 12 15 18 9"/>',20)+'</div></div><div class="block-body"><div class="block-inner">'+extra+'</div></div></div>';}
 
 el('blocks-list').innerHTML=BLOCKS.map(function(b){
-  var inner='<div class="bb-grid"><div><div class="bb-lab">In plain English</div><p>'+b.plain+'</p></div><div><div class="bb-lab">For the engineer</div><p>'+b.tech+'</p></div></div><pre>'+b.code+'</pre><div class="why">'+SV('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',15)+'<span><b>Why it matters · </b>'+b.why+'</span></div>';
+  var beat=(b.t==='Hooks'||b.t==='MCP')?'<div class="bb-beat">Copilot has no answer for this one.</div>':'';
+  var inner=beat+'<div class="bb-grid"><div><div class="bb-lab">In plain English</div><p>'+b.plain+'</p></div><div><div class="bb-lab">For the engineer</div><p>'+b.tech+'</p></div></div><pre>'+b.code+'</pre><div class="why">'+SV('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',15)+'<span><b>Why it matters · </b>'+b.why+'</span></div>';
   return accBlock(b,{html:SV(IC[b.ic],20)},inner);
 }).join('');
 
