@@ -208,6 +208,108 @@ nav .row{display:flex;align-items:center;justify-content:space-between;height:58
 .marquee{overflow:hidden;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:22px 0;background:rgba(255,255,255,.015);position:relative;z-index:5}
 .mq{display:flex;width:max-content}.mq span{display:flex;align-items:center;font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.3rem);color:var(--ink-faint);white-space:nowrap}.mq span i{color:var(--neon-2);font-style:normal;font-family:var(--mono);font-size:.78rem;margin:0 30px;font-weight:600}
 
+/* ===== PART BREAK - About the model ===== */
+.partbreak{position:relative;z-index:5;padding:clamp(70px,11vh,140px) 0 clamp(20px,3vh,40px);border-top:1px solid var(--hair)}
+.pb-row{text-align:center;max-width:760px;margin:0 auto}
+.pb-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--neon-2);padding:7px 16px;border:1px solid var(--hair-2);border-radius:100px;background:var(--neon-wash);margin-bottom:22px}
+.pb-title{font-family:var(--serif);font-weight:600;letter-spacing:-.03em;line-height:1;font-size:clamp(2.6rem,7vw,5.4rem);margin-bottom:18px}
+.pb-sub{color:var(--ink-soft);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.5;max-width:56ch;margin:0 auto 26px}
+.pb-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.pb-chips span{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft);padding:8px 15px;border:1px solid var(--hair);border-radius:100px;background:var(--panel)}
+
+/* ===== ACT 8 - models + permissions : two interactive dials ===== */
+.csub-lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--neon-2);margin-bottom:14px}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:clamp(34px,5vw,56px)}
+@media(max-width:820px){.dials{grid-template-columns:1fr}}
+.dial{padding:clamp(26px,3.4vw,40px);border-radius:22px;background:var(--panel);border:1px solid var(--hair);position:relative;overflow:hidden}
+.dial::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% -10%,var(--neon-wash),transparent 60%);pointer-events:none}
+
+/* the brain: a 2-stop arc gauge */
+.brain-gauge{position:relative;width:100%;max-width:300px;margin:6px auto 4px;aspect-ratio:2/1.12}
+.brain-gauge svg{width:100%;height:auto;display:block;overflow:visible}
+.bg-track{fill:none;stroke:var(--hair-2);stroke-width:10;stroke-linecap:round}
+.bg-fill{fill:none;stroke:url(#brainGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dasharray .55s cubic-bezier(.16,1,.3,1)}
+.bg-needle{transform-origin:100px 92px;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+.bg-needle line{stroke:var(--ink);stroke-width:3.5;stroke-linecap:round}
+.bg-hub{fill:var(--neon)}
+.brain-stops{display:flex;justify-content:space-between;margin-top:-6px}
+.bstop{flex:1;text-align:center;cursor:pointer;padding:8px 4px;border-radius:12px;transition:.25s}
+.bstop:hover{background:rgba(255,255,255,.04)}
+.bstop .bname{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--ink-faint);transition:.3s;line-height:1}
+.bstop.on .bname{color:var(--ink)}
+.bstop .blab{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-faint);margin-top:3px}.bstop.on .blab{color:var(--neon-2)}
+.dial-read{margin-top:18px;padding-top:18px;border-top:1px solid var(--hair);min-height:88px}
+.dial-read .drk{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:7px}
+.dial-read p{font-size:.97rem;color:var(--ink-soft);line-height:1.5}
+.dfade{animation:rfade .5s cubic-bezier(.16,1,.3,1)}
+
+/* the leash: a 3-notch slider that loosens */
+.leash{position:relative;margin:22px 0 6px;padding:0 6px}
+.leash-line{position:relative;height:4px;border-radius:4px;background:var(--hair-2);margin:34px 8px 0}
+.leash-fill{position:absolute;top:0;left:0;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--neon),var(--cyan));transition:width .5s cubic-bezier(.16,1,.3,1);box-shadow:0 0 12px var(--neon)}
+.leash-notches{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%)}
+.lnotch{width:18px;height:18px;border-radius:50%;background:var(--panel-2);border:2px solid var(--hair-2);cursor:pointer;transition:.3s;position:relative}
+.lnotch:hover{border-color:var(--neon-2)}
+.lnotch.on{background:var(--neon);border-color:#fff;box-shadow:0 0 0 5px var(--neon-wash)}
+.lnotch.done{border-color:var(--cyan)}
+.leash-labels{display:flex;justify-content:space-between;margin-top:14px}
+.llab{flex:1;text-align:center;cursor:pointer}
+.llab:first-child{text-align:left}.llab:last-child{text-align:right}
+.llab .lcmd{font-family:var(--mono);font-size:11px;color:var(--ink-faint);transition:.3s}
+.llab.on .lcmd{color:var(--neon-2)}
+.llab .lname{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--ink-faint);transition:.3s;display:block;margin-top:2px}.llab.on .lname{color:var(--ink)}
+.leash-hint{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:10px}
+
+/* ===== ACT 9 - token cost : cartoon see-saw ===== */
+.beam-wrap{margin-top:clamp(40px,6vw,72px);display:flex;flex-direction:column;align-items:center}
+.beam-stage{position:relative;width:100%;max-width:780px;height:clamp(280px,40vw,360px)}
+/* the rigid see-saw: plank + both riders share one rotation around the pivot */
+.seesaw{position:absolute;left:50%;bottom:62px;width:min(92%,680px);transform:translateX(-50%) rotate(-9deg);transform-origin:50% 50%;transition:transform 1s cubic-bezier(.34,1.4,.5,1)}
+.plank{position:absolute;left:0;right:0;top:50%;height:14px;margin-top:-7px;border-radius:8px;background:linear-gradient(90deg,var(--neon),var(--neon-2),var(--cyan));box-shadow:0 0 22px -4px var(--neon)}
+.plank::before,.plank::after{content:"";position:absolute;top:50%;width:2px;height:50px;background:var(--hair-2);transform:translateY(-2px)}
+.plank::before{left:14%}.plank::after{right:14%}
+.rider{position:absolute;bottom:7px;width:clamp(96px,16vw,128px);text-align:center}
+.rider.left{left:1%}.rider.right{right:1%}
+/* counter-rotate riders so the figures stay upright while the plank tilts */
+.seesaw .rider{transform:rotate(9deg);transform-origin:bottom center;transition:transform 1s cubic-bezier(.34,1.4,.5,1)}
+.toon{width:100%;height:auto;display:block;filter:drop-shadow(0 12px 24px rgba(0,0,0,.45))}
+.rider-tag{margin-top:8px}
+.rider-tag b{display:block;font-family:var(--serif);font-size:clamp(1.1rem,2vw,1.5rem);font-weight:600;line-height:1}
+.rider-tag span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--neon-2)}
+.rider.right .rider-tag span{color:var(--cyan)}
+.pivot-tri{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-bottom:54px solid var(--neon-deep);filter:drop-shadow(0 10px 30px var(--neon-wash));z-index:-1}
+.beam-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;margin-top:14px}
+@media(max-width:680px){.beam-cards{grid-template-columns:1fr}}
+.bcard{padding:clamp(22px,3vw,32px);border-radius:20px;background:var(--panel);border:1px solid var(--hair)}
+.bcard.b{background:linear-gradient(160deg,rgba(124,92,255,.16),rgba(54,224,200,.06));border-color:var(--hair-2)}
+.bcard .bcmode{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--neon-2);margin-bottom:12px}
+.bcard p{font-size:1rem;color:var(--ink-soft);line-height:1.52}
+.bcard .bcrep{font-size:.92rem;color:var(--ink-faint);line-height:1.45;padding-top:14px;margin-top:14px;border-top:1px solid var(--hair)}
+
+/* ===== ACT 10 - file tabs ===== */
+.filetabs{margin-top:clamp(34px,5vw,56px);border-radius:18px;overflow:hidden;background:var(--code-bg);box-shadow:0 40px 90px -30px #000,0 0 0 1px var(--hair)}
+.ft-bar{display:flex;align-items:stretch;background:rgba(255,255,255,.03);border-bottom:1px solid var(--hair)}
+.ft-tab{display:flex;align-items:center;gap:9px;padding:14px 20px;font-family:var(--mono);font-size:12.5px;color:var(--code-com);cursor:pointer;border-right:1px solid var(--hair);transition:.25s;position:relative}
+.ft-tab:hover{color:var(--code-fg)}
+.ft-tab.on{color:var(--ink);background:var(--code-bg)}
+.ft-tab.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--neon),var(--cyan))}
+.ft-tab .ftdot{width:9px;height:9px;border-radius:3px;background:var(--neon)}
+.ft-tab:nth-child(2) .ftdot{background:var(--cyan)}
+.ft-meta{margin-left:auto;display:flex;align-items:center;padding:0 18px;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint)}
+@media(max-width:560px){.ft-meta{display:none}}
+.ft-body{padding:clamp(24px,3.2vw,38px);font-family:var(--mono);font-size:16px;line-height:1.95;color:var(--code-fg);min-height:260px}
+.ft-pane{display:none}.ft-pane.on{display:block;animation:rfade .45s cubic-bezier(.16,1,.3,1)}
+.ft-split{display:grid;grid-template-columns:1.35fr .85fr;gap:clamp(24px,4vw,52px);align-items:start}
+@media(max-width:760px){.ft-split{grid-template-columns:1fr;gap:24px}}
+.ft-line{white-space:pre-wrap}
+.ft-body .cmnt{color:var(--code-com)}.ft-body .key{color:var(--code-key)}.ft-body .str{color:var(--code-str)}
+.ft-bullets{list-style:none;display:flex;flex-direction:column;gap:14px;font-family:var(--sans);padding-top:4px}
+.ft-bullets li{position:relative;padding-left:22px;font-size:1.02rem;line-height:1.45;color:var(--ink-soft)}
+.ft-bullets li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--cyan);transform:rotate(45deg)}
+.ft-bullets li b{color:var(--neon-2)}
+@media(max-width:760px){.ft-bullets{border-top:1px solid var(--hair);padding-top:20px}}
+.ft-foot{margin-top:22px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--sans);font-size:1rem;color:var(--ink-soft);line-height:1.5}.ft-foot b{color:var(--neon-2)}
+
 /* ===== ACT 5 - ladder, scroll-scrubbed sequential ===== */
 .ladder{display:flex;flex-direction:column;margin-top:clamp(34px,5vw,56px)}
 .rung{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(20px,3vw,32px) 0;border-bottom:1px solid var(--hair);will-change:transform,opacity}
@@ -431,10 +533,166 @@ footer{padding:40px 0;text-align:center;font-family:var(--mono);font-size:11px;c
   </div>
 </div></section>
 
-<!-- ===== ACT 8 - objections pinned crossfade ===== -->
+<!-- ===== PART BREAK - About the model ===== -->
+<section class="partbreak"><div class="wrap">
+  <div class="pb-row" data-anim="up">
+    <div class="pb-tag">Part Two</div>
+    <h2 class="pb-title">About the <span class="accent">model.</span></h2>
+    <p class="pb-sub">The next three sections are the logistics: which brain you pick, how much it costs to run, and the two files that make it yours.</p>
+    <div class="pb-chips"><span>08 · The dials</span><span>09 · The cost</span><span>10 · The memory</span></div>
+  </div>
+</div></section>
+
+<!-- ===== ACT 8 - models + permissions ===== -->
+<section id="control" class="act" style="padding-top:clamp(40px,6vh,80px)"><div class="wrap">
+  <div class="kick" data-anim="up">08 · The two dials you control</div>
+  <h2 class="hl" data-anim="up">Pick the <span class="accent">brain.</span> Set the <span class="accent">leash.</span></h2>
+  <p class="sub" data-anim="up">Two simple choices decide how it behaves: which model thinks for you, and how much it’s allowed to do on its own.</p>
+  <div class="dials">
+    <!-- THE BRAIN: arc gauge, 2 stops -->
+    <div class="dial" data-anim="fly-l">
+      <div class="csub-lab">The brain · how smart, how costly</div>
+      <div class="brain-gauge">
+        <svg viewBox="0 0 200 112" role="img" aria-label="Model dial">
+          <defs><linearGradient id="brainGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#36E0C8"/><stop offset="1" stop-color="#7C5CFF"/></linearGradient></defs>
+          <path class="bg-track" d="M16 92 A84 84 0 0 1 184 92"/>
+          <path class="bg-fill" id="bgFill" d="M16 92 A84 84 0 0 1 184 92"/>
+          <g class="bg-needle" id="bgNeedle"><line x1="100" y1="92" x2="100" y2="24"/></g>
+          <circle class="bg-hub" cx="100" cy="92" r="7"/>
+        </svg>
+      </div>
+      <div class="brain-stops" id="brainStops"></div>
+      <div class="dial-read" id="brainRead"></div>
+    </div>
+    <!-- THE LEASH: 3-notch loosening slider -->
+    <div class="dial" data-anim="fly-r">
+      <div class="csub-lab">The leash · how much it can do alone</div>
+      <div class="leash">
+        <div class="leash-line"><div class="leash-fill" id="leashFill"></div>
+          <div class="leash-notches" id="leashNotches"></div>
+        </div>
+        <div class="leash-labels" id="leashLabels"></div>
+        <div class="leash-hint"><span>short leash · safe</span><span>long leash · fast</span></div>
+      </div>
+      <div class="dial-read" id="leashRead"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== ACT 9 - token cost: skill vs agent ===== -->
+<section id="cost" class="act"><div class="wrap">
+  <div class="kick" data-anim="up">09 · What it costs to run</div>
+  <h2 class="hl" data-anim="up">An <span class="accent">intern</span> or a <span class="accent">consultant.</span></h2>
+  <p class="sub" data-anim="up">You pay in tokens, and the price tracks the autonomy. A skill follows instructions; an agent makes its own calls. One is cheap and easy to change. The other costs more and does more.</p>
+  <div class="beam-wrap" data-anim="up">
+    <div class="beam-stage">
+      <!-- the whole plank + both riders rotate as one rigid see-saw -->
+      <div class="seesaw" id="seesaw">
+        <div class="plank"></div>
+        <!-- INTERN rider (light, lifts up): stick figure ON a sticker badge -->
+        <div class="rider left">
+          <svg viewBox="0 0 130 170" class="toon" aria-label="Intern stick figure on a badge">
+            <!-- stick figure sitting on top -->
+            <g class="stick" stroke="#EEF1F6" stroke-width="6" stroke-linecap="round" fill="none">
+              <circle cx="65" cy="26" r="15" fill="#10131A"/>
+              <line x1="65" y1="41" x2="65" y2="78"/>
+              <line x1="65" y1="52" x2="42" y2="64"/>
+              <line x1="65" y1="52" x2="88" y2="64"/>
+              <line x1="65" y1="78" x2="48" y2="96"/>
+              <line x1="65" y1="78" x2="82" y2="96"/>
+            </g>
+            <!-- face dots -->
+            <circle cx="60" cy="24" r="2.6" fill="#EEF1F6"/><circle cx="70" cy="24" r="2.6" fill="#EEF1F6"/>
+            <!-- sticker badge underneath -->
+            <rect x="20" y="100" width="90" height="58" rx="16" fill="#36E0C8" stroke="#0B5A50" stroke-width="5"/>
+            <text x="65" y="132" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="18" font-weight="700" fill="#063b35">SKILL</text>
+            <text x="65" y="149" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9.5" letter-spacing="1" fill="#0a4a42">$ · LIGHT</text>
+          </svg>
+        </div>
+        <!-- CONSULTANT rider (heavy, sinks): bigger stick figure on a heavier badge -->
+        <div class="rider right">
+          <svg viewBox="0 0 130 170" class="toon" aria-label="Consultant stick figure on a badge">
+            <g class="stick" stroke="#EEF1F6" stroke-width="6.5" stroke-linecap="round" fill="none">
+              <circle cx="65" cy="24" r="16" fill="#10131A"/>
+              <line x1="65" y1="40" x2="65" y2="80"/>
+              <line x1="65" y1="52" x2="40" y2="62"/>
+              <line x1="65" y1="52" x2="90" y2="62"/>
+              <line x1="65" y1="80" x2="47" y2="98"/>
+              <line x1="65" y1="80" x2="83" y2="98"/>
+            </g>
+            <circle cx="59" cy="22" r="2.8" fill="#EEF1F6"/><circle cx="71" cy="22" r="2.8" fill="#EEF1F6"/>
+            <!-- little tie to read 'consultant' -->
+            <path d="M65 40 l-5 8 l5 22 l5 -22 z" fill="#36E0C8"/>
+            <rect x="14" y="100" width="102" height="62" rx="16" fill="#7C5CFF" stroke="#2A1A8C" stroke-width="5"/>
+            <text x="65" y="133" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="17" font-weight="700" fill="#fff">AGENT</text>
+            <text x="65" y="151" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9.5" letter-spacing="1" fill="#E4DCFF">$$$ · HEAVY</text>
+          </svg>
+        </div>
+      </div>
+      <div class="pivot-tri"></div>
+    </div>
+    <div class="beam-cards">
+      <div class="bcard"><div class="bcmode">Cheaper · easy to change</div><p>A skill is just instructions — a saved recipe the model follows. It runs in one pass, so it costs less, and you change its behavior by editing a file.</p><div class="bcrep">Low cost, fast iteration. Edit a line and the next run behaves differently.</div></div>
+      <div class="bcard b"><div class="bcmode">Pricier · better output</div><p>An agent decides on its own and dispatches other skills, often running many turns. That autonomy produces stronger results, but it burns more tokens and is harder to steer mid-flight.</p><div class="bcrep">Higher cost, higher ceiling. You pay for judgment and autonomy, not just one answer.</div></div>
+    </div>
+  </div>
+  <div class="callout" data-anim="up" style="margin-top:clamp(28px,4vw,40px)"><b>The rule of thumb · </b>start with a skill. Reach for an agent only when the job needs real judgment and the better output is worth the extra cost.</div>
+</div></section>
+
+<!-- ===== ACT 10 - CLAUDE.md + MEMORY.md ===== -->
+<section id="setup" class="act"><div class="wrap">
+  <div class="kick" data-anim="up">10 · The <b>memory</b> that makes it yours</div>
+  <h2 class="hl" data-anim="up">Two files turn it <span class="accent">personal.</span></h2>
+  <p class="sub" data-anim="up">The difference between a generic assistant and one that knows your world is two plain files in your project. You write them once; it reads them every time.</p>
+  <div class="filetabs" data-anim="up">
+    <div class="ft-bar">
+      <div class="ft-tab on" data-t="0"><span class="ftdot"></span>CLAUDE.md</div>
+      <div class="ft-tab" data-t="1"><span class="ftdot"></span>MEMORY.md</div>
+      <div class="ft-meta">~/your-project/.claude</div>
+    </div>
+    <div class="ft-body">
+      <div class="ft-pane on" data-p="0">
+        <div class="ft-split">
+          <div class="ft-code">
+            <div class="ft-line"><span class="cmnt"># CLAUDE.md — the rulebook it reads every session</span></div>
+            <div class="ft-line"><span class="key">Tone:</span> direct, no filler. Skip the preamble.</div>
+            <div class="ft-line"><span class="key">Always:</span> run the test suite before you say it's done.</div>
+            <div class="ft-line"><span class="key">Never:</span> touch <span class="str">.env</span> or push to <span class="str">main</span> without asking.</div>
+            <div class="ft-line"><span class="key">Stack:</span> TypeScript, our conventions, our file layout.</div>
+          </div>
+          <ul class="ft-bullets">
+            <li>Your standing instructions, written once.</li>
+            <li>Read at the <b>start of every session</b>.</li>
+            <li>So you stop repeating yourself.</li>
+          </ul>
+        </div>
+        <div class="ft-foot"><b>How you want it to work · </b>your rulebook. Set it once; it stops needing to be told.</div>
+      </div>
+      <div class="ft-pane" data-p="1">
+        <div class="ft-split">
+          <div class="ft-code">
+            <div class="ft-line"><span class="cmnt"># MEMORY.md — what it's learned, carried forward</span></div>
+            <div class="ft-line"><span class="key">- </span>The Q3 report pulls from the <span class="str">analytics</span> DB.</div>
+            <div class="ft-line"><span class="key">- </span>Client prefers Friday sends; never Monday.</div>
+            <div class="ft-line"><span class="key">- </span>Last refactor: auth moved to middleware — it worked.</div>
+            <div class="ft-line"><span class="key">- </span>You go by your first name in client copy.</div>
+          </div>
+          <ul class="ft-bullets">
+            <li>The facts that <b>carry forward</b>.</li>
+            <li>Updates itself as you work.</li>
+            <li>Each session starts smarter than the last.</li>
+          </ul>
+        </div>
+        <div class="ft-foot"><b>What it's learned about you · </b>its notebook. Facts that compound, run after run.</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== ACT 11 - objections pinned crossfade ===== -->
 <section id="objections"><div class="obj-pin"><div class="wrap">
   <div class="obj-head">
-    <div class="kick">08 · The fair questions</div>
+    <div class="kick">11 · The fair questions</div>
     <h2 class="hl">What a skeptic <span class="accent">asks first.</span></h2>
   </div>
   <div class="obj-stack" id="objStack"></div>
@@ -443,7 +701,7 @@ footer{padding:40px 0;text-align:center;font-family:var(--mono);font-size:11px;c
 
 <!-- ===== ACT 9 - build your first skill ===== -->
 <section id="help" class="act"><div class="wrap">
-  <div class="kick" data-anim="up"><b>09</b> · Build your first skill</div>
+  <div class="kick" data-anim="up"><b>12</b> · Build your first skill</div>
   <h2 class="hl" data-anim="up">Now build your <span class="accent">first skill.</span></h2>
   <p class="sub" data-anim="up">You don't start with a forty-skill empire. You start with one thing you do every week. Here's the whole path.</p>
   <div class="help-grid" id="helpGrid"></div>
@@ -500,7 +758,9 @@ var LADDER=[
 var OBJ=[
  {q:'We already pay for Copilot / autocomplete.',a:'Autocomplete makes you faster at typing the same code. This is delegation: it does the task end to end while you do something else. Different category: speed vs. leverage.'},
  {q:'What if it does something wrong?',a:'Control is built in. Plan mode keeps it read-only until you approve, permission modes scope what it can touch, every edit is a reviewable diff, and risky actions can be gated by a hook. You set the autonomy per action.'},
- {q:'Will it still work in six months, or rot?',a:'It rots only if nobody tends the substrate. The same system that builds skills can audit them for drift. Maintenance is itself a skill: the part most teams skip, and the part I set up.'}
+ {q:'Will it still work in six months, or rot?',a:'It rots only if nobody tends the substrate. The same system that builds skills can audit them for drift. Maintenance is itself a skill: the part most teams skip, and the part I set up.'},
+ {q:'Does it train on our data?',a:'Depends on the plan. On the consumer Pro plan, conversations can be used to improve the model. On Team and Enterprise, they are not: your prompts and files are not used for training. For any company work, that’s the plan you want, and the one I set up.'},
+ {q:'Where does it store my data?',a:'On your machine, in your project. Memory and conventions live in a plain <b>.claude</b> folder right inside your repo, in readable files you own. Nothing is locked in a vendor cloud. It reads your local files to do the work, and what it remembers is a file you can open, edit, or delete.'}
 ];
 var HELP=[
  {n:'Step 01',t:'Get set up',d:'Install it, sign in, and get it running in the tools you already use.',link:'quiz.html',linktext:'Open Part 2 · Setup →'},
@@ -509,6 +769,18 @@ var HELP=[
  {n:'Step 04',t:'Run it, then build the next',d:'Now it runs itself. The second skill is cheaper than the first, the third cheaper still. That\'s the compounding curve, starting.'}
 ];
 var MQ=['skills','agents','memory','pipelines','it does the work','compounding','built for anyone','runs at 3am'];
+
+/* ----- models (dial stops, left→right = lighter→heavier) ----- */
+var MODELS=[
+ {name:'Sonnet',lab:'fast + cheap',read:'The everyday workhorse. Fast, cheap enough to run all day, and strong enough for the vast majority of tasks. Most work should run here.'},
+ {name:'Opus',lab:'deep + costly',read:'The most capable model. Reach for it on hard, ambiguous, high-stakes work — architecture, tricky debugging, final review. Slower and pricier per turn, but it gets the call right.'}
+];
+/* ----- permissions (leash notches, short→long) ----- */
+var PERMS=[
+ {name:'Plan',cd:'--plan',read:'Read-only. It investigates and writes up a plan, but changes nothing until you approve. The safe way to point it at unfamiliar code.'},
+ {name:'Ask',cd:'--ask',read:'The default. It pauses for your yes before it edits a file or runs a command. You stay in the loop on every action.'},
+ {name:'Bypass',cd:'--bypass',read:'Full autonomy. It runs end to end without stopping to ask. Fastest, for work you trust it to own — paired with plan mode and reviewable diffs so nothing is a surprise.'}
+];
 
 /* ---------- build DOM ---------- */
 el('chips').innerHTML=RANGE.map(function(r,i){return '<button class="chip'+(i===0?' on':'')+'" data-i="'+i+'"><span class="cd"></span><b>'+r.chip+'</b><span class="prog"></span></button>';}).join('');
@@ -547,6 +819,43 @@ el('helpGrid').innerHTML=HELP.map(function(h){return '<'+(h.link?'a href="'+h.li
 el('mq').innerHTML=(function(){var one=MQ.map(function(w){return '<i>'+w+'</i>·';}).join('');return '<span>'+one+'</span><span>'+one+'</span>';})();
 el('objStack').innerHTML=OBJ.map(function(o,i){return '<div class="objpane" data-p="'+i+'"><div class="qn">Q'+(i+1)+' · the fair question</div><div class="q">'+o.q+'</div><div class="a">'+o.a+'</div></div>';}).join('');
 el('objDots').innerHTML=OBJ.map(function(o,i){return '<i class="'+(i===0?'on':'')+'"></i>';}).join('');
+
+/* ----- THE BRAIN dial: 2-stop arc gauge ----- */
+el('brainStops').innerHTML=MODELS.map(function(m,i){return '<div class="bstop'+(i===0?' on':'')+'" data-i="'+i+'"><div class="bname">'+m.name+'</div><div class="blab">'+m.lab+'</div></div>';}).join('');
+var BG_LEN=0;(function(){var f=el('bgFill');if(f&&f.getTotalLength){BG_LEN=f.getTotalLength();f.style.strokeDasharray=BG_LEN+' '+BG_LEN;f.style.strokeDashoffset=BG_LEN;}})();
+function setBrain(i){
+  var stops=document.querySelectorAll('.bstop');for(var k=0;k<stops.length;k++)stops[k].classList.toggle('on',k===i);
+  /* needle: -78deg (left) → +78deg (right) across the 2 stops */
+  var ang=-78+(i/(MODELS.length-1))*156;
+  var nd=el('bgNeedle');if(nd)nd.style.transform='rotate('+ang+'deg)';
+  var f=el('bgFill');if(f&&BG_LEN){var frac=0.5+(i/(MODELS.length-1))*0.5;f.style.strokeDasharray=(BG_LEN*frac)+' '+BG_LEN;f.style.strokeDashoffset='0';}
+  el('brainRead').innerHTML='<div class="dfade"><div class="drk">'+MODELS[i].name+' · '+MODELS[i].lab+'</div><p>'+MODELS[i].read+'</p></div>';
+}
+document.getElementById('brainStops').addEventListener('click',function(e){var s=e.target.closest('.bstop');if(s)setBrain(+s.dataset.i);});
+setBrain(0);
+
+/* ----- THE LEASH: 3-notch loosening slider ----- */
+el('leashNotches').innerHTML=PERMS.map(function(p,i){return '<div class="lnotch'+(i===0?' on':'')+'" data-i="'+i+'"></div>';}).join('');
+el('leashLabels').innerHTML=PERMS.map(function(p,i){return '<div class="llab'+(i===0?' on':'')+'" data-i="'+i+'"><span class="lcmd">'+p.cd+'</span><span class="lname">'+p.name+'</span></div>';}).join('');
+function setLeash(i){
+  var n=document.querySelectorAll('.lnotch'),l=document.querySelectorAll('.llab');
+  for(var k=0;k<n.length;k++){n[k].classList.toggle('on',k===i);n[k].classList.toggle('done',k<i);l[k].classList.toggle('on',k===i);}
+  el('leashFill').style.width=(i/(PERMS.length-1)*100)+'%';
+  el('leashRead').innerHTML='<div class="dfade"><div class="drk">'+PERMS[i].cd+' · '+PERMS[i].name+'</div><p>'+PERMS[i].read+'</p></div>';
+}
+function leashClick(e){var t=e.target.closest('[data-i]');if(t)setLeash(+t.dataset.i);}
+el('leashNotches').addEventListener('click',leashClick);
+el('leashLabels').addEventListener('click',leashClick);
+setLeash(0);
+
+/* ----- file tabs (Act 10) ----- */
+(function(){
+  var tabs=document.querySelectorAll('.ft-tab'),panes=document.querySelectorAll('.ft-pane');
+  document.querySelector('.ft-bar').addEventListener('click',function(e){
+    var t=e.target.closest('.ft-tab');if(!t)return;var i=+t.dataset.t;
+    for(var k=0;k<tabs.length;k++){tabs[k].classList.toggle('on',k===i);panes[k].classList.toggle('on',k===i);}
+  });
+})();
 
 /* split hero title into words for stagger */
 (function(){
@@ -605,11 +914,15 @@ if(hasGSAP&&!reduce){
   gsap.utils.toArray('[data-anim="up"]').forEach(function(t){
     gsap.from(t,{y:60,opacity:0,duration:1.05,ease:'power3.out',scrollTrigger:{trigger:t,start:'top 78%'}});
   });
-  /* split cards fly in from the sides in 3D */
-  gsap.from('[data-anim="fly-l"]',{xPercent:-30,rotationY:35,z:-300,opacity:0,duration:1.2,ease:'power3.out',transformPerspective:1200,scrollTrigger:{trigger:'.split',start:'top 75%'}});
-  gsap.from('[data-anim="fly-r"]',{xPercent:30,rotationY:-35,z:-300,opacity:0,duration:1.2,ease:'power3.out',transformPerspective:1200,scrollTrigger:{trigger:'.split',start:'top 75%'}});
+  /* cards fly in from the sides in 3D - per-element trigger so every split/grid animates */
+  gsap.utils.toArray('[data-anim="fly-l"]').forEach(function(t){
+    gsap.from(t,{xPercent:-30,rotationY:35,z:-300,opacity:0,duration:1.2,ease:'power3.out',transformPerspective:1200,scrollTrigger:{trigger:t,start:'top 80%'}});
+  });
+  gsap.utils.toArray('[data-anim="fly-r"]').forEach(function(t){
+    gsap.from(t,{xPercent:30,rotationY:-35,z:-300,opacity:0,duration:1.2,ease:'power3.out',transformPerspective:1200,scrollTrigger:{trigger:t,start:'top 80%'}});
+  });
   /* props rise staggered */
-  gsap.from('[data-anim="rise"]',{y:90,opacity:0,duration:1,ease:'power3.out',stagger:.14,scrollTrigger:{trigger:'.props',start:'top 80%'}});
+  gsap.from('.props [data-anim="rise"]',{y:90,opacity:0,duration:1,ease:'power3.out',stagger:.14,scrollTrigger:{trigger:'.props',start:'top 80%'}});
   /* giant stat numbers scale + scrub a touch of parallax */
   gsap.utils.toArray('[data-anim="pop"]').forEach(function(t){
     gsap.from(t,{scale:.55,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:t,start:'top 82%'}});
@@ -640,6 +953,18 @@ if(hasGSAP&&!reduce){
     });
     /* stagger the bottom agent boxes in */
     gsap.from('.oc-obox',{y:40,opacity:0,duration:.8,ease:'power3.out',stagger:.14,scrollTrigger:{trigger:'.oc-others',start:'top 88%'}});
+  })();
+
+  /* ===== ACT 9: cartoon see-saw drops the heavier consultant when it scrolls in ===== */
+  (function(){
+    var saw=el('seesaw');if(!saw)return;
+    /* start level, then tip so the heavier (costlier) consultant on the right sinks */
+    gsap.set(saw,{xPercent:-50,rotation:0});
+    gsap.set('.seesaw .rider',{rotation:0});
+    ScrollTrigger.create({trigger:'.beam-stage',start:'top 74%',once:true,onEnter:function(){
+      gsap.to(saw,{xPercent:-50,rotation:-9,duration:1.2,ease:'elastic.out(1,.55)',delay:.2});
+      gsap.to('.seesaw .rider',{rotation:9,duration:1.2,ease:'elastic.out(1,.55)',delay:.2});
+    }});
   })();
 
   /* ===== marquee drifts with scroll velocity ===== */
